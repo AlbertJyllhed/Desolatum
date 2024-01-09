@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgs173x0vqtuf"]
+
+[ext_resource type="PackedScene" uid="uid://bnlr5jhs05d5q" path="res://scenes/props/crystal_cluster.tscn" id="1_64bq6"]
+[ext_resource type="Shader" path="res://resources/shaders/hit_flash_component.gdshader" id="2_4vpr2"]
+[ext_resource type="PackedScene" uid="uid://qmi7ca5nrbxa" path="res://particles/ore_particles.tscn" id="2_odqxl"]
+[ext_resource type="Resource" uid="uid://b1thw765u4i2v" path="res://resources/Data/ore_drop_list.tres" id="3_ykhx0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5m5it"]
+resource_local_to_scene = true
+shader = ExtResource("2_4vpr2")
+shader_parameter/lerp_percent = 0.0
+
+[node name="OreCluster" instance=ExtResource("1_64bq6")]
+
+[node name="HealthComponent" parent="." index="0"]
+blood_particles = ExtResource("2_odqxl")
+
+[node name="HitFlashComponent" parent="." index="1"]
+hit_flash_material = SubResource("ShaderMaterial_5m5it")
+
+[node name="DropComponent" parent="." index="2"]
+max_drop_amount = 2
+drop_list = ExtResource("3_ykhx0")
+
+[node name="Sprite2D" parent="." index="3"]
+frame = 2
+
+[node name="Shadow" parent="." index="4"]
+position = Vector2(0, 6)
+frame = 2
+
+[editable path="Hurtbox"]

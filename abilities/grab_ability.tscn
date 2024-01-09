@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://chhjvpoed48xd"]
+
+[ext_resource type="Script" path="res://abilities/grab_ability.gd" id="1_s6lks"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75h2k"]
+radius = 16.0
+
+[node name="GrabAbility" type="Node2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_s6lks")
+
+[node name="GrabArea" type="Area2D" parent="."]
+position = Vector2(24, 0)
+collision_layer = 256
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_75h2k")
+
+[node name="Sprite2D" type="Sprite2D" parent="GrabArea"]
+
+[connection signal="area_entered" from="GrabArea" to="." method="_on_vacuum_area_area_entered"]
+[connection signal="area_exited" from="GrabArea" to="." method="_on_vacuum_area_area_exited"]

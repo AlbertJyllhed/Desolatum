@@ -1,0 +1,70 @@
+[gd_scene load_steps=16 format=3 uid="uid://dppypmv1g8ltw"]
+
+[ext_resource type="PackedScene" uid="uid://fd0y7pt4y18o" path="res://ui/transition_screen.tscn" id="1_1sta1"]
+[ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_pcpu5"]
+[ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="1_ug1p5"]
+[ext_resource type="PackedScene" uid="uid://bbwms5jmwtqvg" path="res://ui/weapon_inventory_ui.tscn" id="2_ijf85"]
+[ext_resource type="PackedScene" uid="uid://c66muf3s83t44" path="res://ui/health_ui.tscn" id="3_52guf"]
+[ext_resource type="PackedScene" uid="uid://lvds6lc4b1aw" path="res://ui/ammo_ui.tscn" id="4_5c7jh"]
+[ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="5_8esq8"]
+[ext_resource type="PackedScene" uid="uid://dinoa4adlhusc" path="res://ui/energy_ui.tscn" id="6_7snri"]
+[ext_resource type="Script" path="res://level_generator.gd" id="6_i4xld"]
+[ext_resource type="TileSet" uid="uid://dvovn2blbggvj" path="res://resources/lava_tileset.tres" id="7_q8r5o"]
+[ext_resource type="Resource" uid="uid://bkqlhlpfwtkme" path="res://resources/Data/cave_prop_list.tres" id="9_ovvkf"]
+[ext_resource type="PackedScene" uid="uid://jpwvtwbpum65" path="res://managers/enemy_manager.tscn" id="9_vqxnk"]
+[ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://game_camera.tscn" id="9_xvp4w"]
+[ext_resource type="Resource" uid="uid://dnphk7ey0fush" path="res://resources/Data/cave_crate_list.tres" id="11_lpmal"]
+[ext_resource type="PackedScene" uid="uid://bsxlqymr4tsek" path="res://managers/upgrade_manager.tscn" id="11_qu7oo"]
+
+[node name="MagmaLevel" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." groups=["ui_layer"]]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("1_pcpu5")]
+visible = false
+
+[node name="FPSCounter" parent="CanvasLayer" instance=ExtResource("5_8esq8")]
+
+[node name="WeaponInventoryUI" parent="CanvasLayer" instance=ExtResource("2_ijf85")]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource("3_52guf")]
+
+[node name="AmmoUI" parent="CanvasLayer" instance=ExtResource("4_5c7jh")]
+
+[node name="EnergyUI" parent="CanvasLayer" instance=ExtResource("6_7snri")]
+
+[node name="Cursor" parent="CanvasLayer" instance=ExtResource("1_ug1p5")]
+
+[node name="TransitionScreen" parent="CanvasLayer" instance=ExtResource("1_1sta1")]
+fade_on_ready = true
+
+[node name="LevelGenerator" type="Node" parent="." node_paths=PackedStringArray("tilemap", "enemy_manager")]
+script = ExtResource("6_i4xld")
+tilemap = NodePath("../TileMap")
+enemy_manager = NodePath("../EnemyManager")
+prop_list = ExtResource("9_ovvkf")
+crate_list = ExtResource("11_lpmal")
+walker_turn_chance = 0.1
+room_chance = 0.25
+
+[node name="EnemyManager" parent="." instance=ExtResource("9_vqxnk")]
+
+[node name="UpgradeManager" parent="." instance=ExtResource("11_qu7oo")]
+
+[node name="GameCamera" parent="." instance=ExtResource("9_xvp4w")]
+
+[node name="TileMap" type="TileMap" parent="." groups=["tilemap_layer"]]
+texture_filter = 1
+tile_set = ExtResource("7_q8r5o")
+format = 2
+layer_0/name = "base_layer"
+layer_1/name = "shadow_layer"
+layer_1/tile_data = PackedInt32Array()
+
+[node name="BaseLayer" type="Node2D" parent="." groups=["base_layer"]]
+y_sort_enabled = true
+
+[node name="ForegroundLayer" type="Node2D" parent="." groups=["foreground_layer"]]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.603922, 0.298039, 0.317647, 1)

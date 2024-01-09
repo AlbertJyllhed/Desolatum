@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjr7oeqn3k70j"]
+
+[ext_resource type="Script" path="res://abilities/teleport_ability.gd" id="1_rtiud"]
+[ext_resource type="PackedScene" uid="uid://brmporqq1ov78" path="res://abilities/teleporter.tscn" id="2_f6ewg"]
+
+[node name="TeleportAbility" type="Node2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_rtiud")
+teleporter_scene = ExtResource("2_f6ewg")
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(24, 0)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

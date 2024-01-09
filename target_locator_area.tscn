@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhoelwsp2sndg"]
+
+[ext_resource type="Script" path="res://target_locator_area.gd" id="1_dospk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_813f1"]
+radius = 128.0
+
+[node name="TargetLocatorArea" type="Area2D"]
+collision_layer = 4
+collision_mask = 16386
+script = ExtResource("1_dospk")
+
+[node name="ResetTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_813f1")
+
+[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]

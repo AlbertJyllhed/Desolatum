@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://nxxjyq4p3axr"]
+
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="1_5ri6a"]
+[ext_resource type="PackedScene" uid="uid://ydba4c4ulab5" path="res://components/mouse_follow_component.tscn" id="2_bd2mf"]
+[ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="2_kabrn"]
+
+[node name="Rocket" instance=ExtResource("1_5ri6a")]
+explosion_scene = ExtResource("2_kabrn")
+speed = 100
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 3
+
+[node name="MouseFollowComponent" parent="." index="4" node_paths=PackedStringArray("projectile") instance=ExtResource("2_bd2mf")]
+projectile = NodePath("..")
+turn_speed = 2.0
+
+[editable path="Hitbox"]

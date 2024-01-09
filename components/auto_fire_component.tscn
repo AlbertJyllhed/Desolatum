@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://w4snfyux8ecm"]
+
+[ext_resource type="Script" path="res://components/auto_fire_component.gd" id="1_ba72n"]
+
+[node name="AutoFireComponent" type="Node"]
+script = ExtResource("1_ba72n")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

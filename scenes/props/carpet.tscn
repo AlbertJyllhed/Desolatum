@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://loyfc1ludqk"]
+
+[ext_resource type="Texture2D" uid="uid://clhqilb2d1nwg" path="res://assets/textures/carpet.png" id="1_dud3v"]
+
+[node name="Carpet" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -9
+texture = ExtResource("1_dud3v")

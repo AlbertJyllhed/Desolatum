@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://cw7ctomhgalqj"]
+
+[ext_resource type="Script" path="res://resources/weapon_item.gd" id="1_b2pva"]
+[ext_resource type="PackedScene" uid="uid://vswiudpdclwa" path="res://components/weapons/burst_rifle.tscn" id="2_klt3a"]
+
+[resource]
+script = ExtResource("1_b2pva")
+type = 0
+weapon_scene = ExtResource("2_klt3a")
+id = "burst_rifle"
+name = "Burst Rifle"
+description = "Fires short bursts of bullets in quick succession"
+amount = 1
+pickup_type = 0
+drop_weight = 1

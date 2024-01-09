@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://bq3lkkalp320y"]
+
+[ext_resource type="Texture2D" uid="uid://cwyg1eimxsk8t" path="res://assets/textures/teleporter.png" id="1_as2ex"]
+[ext_resource type="Script" path="res://scenes/props/teleport_platform.gd" id="1_qb2ld"]
+[ext_resource type="Texture2D" uid="uid://buki388m3x6sn" path="res://assets/textures/teleport_orb.png" id="2_n6610"]
+[ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="4_2qrbl"]
+
+[sub_resource type="Animation" id="Animation_3g8d8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orb:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fxeyv"]
+resource_name = "activated"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orb:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3jrt"]
+_data = {
+"RESET": SubResource("Animation_3g8d8"),
+"activated": SubResource("Animation_fxeyv")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1bvx"]
+radius = 24.0
+
+[node name="TeleportPlatform" type="Node2D"]
+script = ExtResource("1_qb2ld")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -9
+texture = ExtResource("1_as2ex")
+
+[node name="Orb" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+position = Vector2(0, -8)
+texture = ExtResource("2_n6610")
+hframes = 6
+
+[node name="PointLight2D" type="PointLight2D" parent="Orb"]
+blend_mode = 2
+texture = ExtResource("4_2qrbl")
+texture_scale = 0.4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x3jrt")
+}
+autoplay = "activated"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_s1bvx")
+disabled = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

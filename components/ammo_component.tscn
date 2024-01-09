@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3vb0c3uyj7qk"]
+
+[ext_resource type="Script" path="res://components/ammo_component.gd" id="1_qq7ou"]
+[ext_resource type="AudioStream" uid="uid://fncrlvt5xl87" path="res://sounds/outofammo.ogg" id="2_kl51q"]
+
+[node name="AmmoComponent" type="Node"]
+script = ExtResource("1_qq7ou")
+reload_time = 1.0
+
+[node name="NoAmmoSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_kl51q")
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyprq52yeqpvf"]
+
+[ext_resource type="Script" path="res://components/health_component.gd" id="1_pncg7"]
+[ext_resource type="PackedScene" uid="uid://decmbpipp0rbw" path="res://particles/particles.tscn" id="2_7w16o"]
+
+[node name="HealthComponent" type="Node"]
+script = ExtResource("1_pncg7")
+blood_particles = ExtResource("2_7w16o")

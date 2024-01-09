@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsu0qwh6vyytv"]
+
+[ext_resource type="Script" path="res://enemy_spawner.gd" id="1_8pwds"]
+[ext_resource type="Texture2D" uid="uid://rv2ksim5ij72" path="res://assets/textures/enemy_bullet.png" id="2_w51qw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kcdd5"]
+radius = 8.0
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_8pwds")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_w51qw")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4096
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_kcdd5")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://db6qgn0lifipy"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_g54el"]
+[ext_resource type="PackedScene" uid="uid://cw6reupfolow" path="res://scenes/projectiles/big_bullet.tscn" id="2_i2lxk"]
+[ext_resource type="PackedScene" uid="uid://b63err5lwk6fn" path="res://components/single_fire_component.tscn" id="2_rcp6m"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="3_5nbty"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="3_cx8mp"]
+[ext_resource type="AudioStream" uid="uid://dhit7yl2a8iat" path="res://sounds/shotgun2.ogg" id="3_eslak"]
+[ext_resource type="AudioStream" uid="uid://4hyf8sd4of5i" path="res://sounds/shotgun3.ogg" id="4_q5kyh"]
+[ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="7_medf8"]
+
+[node name="Shotgun" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_g54el")]
+firing_component = NodePath("SingleFireComponent")
+weapon_component = NodePath("GunComponent")
+ammo_component = NodePath("AmmoComponent")
+recoil = 0.4
+power = 4.0
+
+[node name="SingleFireComponent" parent="." index="0" instance=ExtResource("2_rcp6m")]
+
+[node name="GunComponent" parent="." index="1" instance=ExtResource("3_5nbty")]
+position = Vector2(12, 0)
+projectile = ExtResource("2_i2lxk")
+projectile_deviation = 0.0
+projectiles = Array[float]([-25.0, -12.5, 0.0, 12.5, 25.0])
+
+[node name="AudioPlayerComponent#AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
+stream = ExtResource("3_eslak")
+
+[node name="AudioPlayerComponent#AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="1"]
+stream = ExtResource("4_q5kyh")
+
+[node name="AmmoComponent" parent="." index="2" instance=ExtResource("7_medf8")]
+max_ammo = 6
+reload_time = 0.5
+
+[node name="WeaponSprite" parent="." index="3"]
+texture = ExtResource("3_cx8mp")
+hframes = 4
+vframes = 4
+frame = 2
+
+[node name="MuzzleFlash" parent="." index="4"]
+position = Vector2(-2, 0)
+
+[editable path="GunComponent"]

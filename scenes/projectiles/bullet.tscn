@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6ufte2a8nymb"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/bullet.gd" id="1_kamfy"]
+[ext_resource type="Texture2D" uid="uid://dj7gtv40h4sih" path="res://assets/textures/bullet.png" id="2_5sqda"]
+[ext_resource type="PackedScene" uid="uid://27y255pv8iog" path="res://particles/bullet_impact.tscn" id="2_yijoo"]
+[ext_resource type="PackedScene" path="res://components/areas/hitbox.tscn" id="3_uw4q1"]
+[ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="4_dth2l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e8gli"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nswy4"]
+radius = 3.0
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_kamfy")
+impact_scene = ExtResource("2_yijoo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5sqda")
+hframes = 5
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e8gli")
+
+[node name="Hitbox" parent="." instance=ExtResource("3_uw4q1")]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_nswy4")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.1, 0.1)
+blend_mode = 2
+texture = ExtResource("4_dth2l")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+
+[editable path="Hitbox"]

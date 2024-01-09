@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8c1nb11i1802"]
+
+[ext_resource type="Texture2D" uid="uid://xadi28i86w54" path="res://assets/textures/energy_ui.png" id="1_dsb5h"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_vj8qh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qy5p1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_82wur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3is5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35ht6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j2q2h"]
+
+[node name="UpgradeSelection" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 0
+
+[node name="UpgradeButton" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qy5p1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_82wur")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b3is5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_35ht6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j2q2h")
+icon = ExtResource("1_dsb5h")
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.054902, 1, 0.4, 1)
+theme_override_fonts/font = ExtResource("2_vj8qh")
+text = "100E"
+horizontal_alignment = 1

@@ -1,0 +1,357 @@
+[gd_scene load_steps=19 format=3 uid="uid://dtj1g3ic3lc5c"]
+
+[ext_resource type="Script" path="res://level_exit.gd" id="1_rky0g"]
+[ext_resource type="Texture2D" uid="uid://ck35c8gs1kprw" path="res://assets/textures/elevator_top.png" id="3_ehtuk"]
+[ext_resource type="Texture2D" uid="uid://btqyps7stx4w5" path="res://assets/textures/elevator_floor.png" id="3_k4hac"]
+[ext_resource type="Texture2D" uid="uid://cpm4akb3f8psg" path="res://assets/textures/elevator_front.png" id="3_lyrlu"]
+[ext_resource type="Texture2D" uid="uid://bukb47ow4hg00" path="res://assets/textures/elevator_door.png" id="4_ggopr"]
+[ext_resource type="Texture2D" uid="uid://dpfjthdghi8wo" path="res://assets/textures/elevator_platform.png" id="6_4nsvb"]
+[ext_resource type="Texture2D" uid="uid://cgwdvg4sxpcs1" path="res://assets/textures/elevator_pit.png" id="7_860ep"]
+[ext_resource type="PackedScene" uid="uid://dmscnycflbbi8" path="res://components/areas/tile_remover_area.tscn" id="8_x2q8r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l20ai"]
+size = Vector2(32, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhkad"]
+size = Vector2(6, 32)
+
+[sub_resource type="Animation" id="Animation_brplg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Elevator/FrontPivot/Door:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Elevator:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Elevator/FrontPivot/Front:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Elevator/FrontPivot/Door:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Elevator/FrontPivot/Door:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Elevator/FrontPivot/Front:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Elevator/Floor:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Elevator/Top:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_kvay4"]
+resource_name = "close_doors"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Elevator/FrontPivot/Door:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_transition"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_pr65e"]
+resource_name = "descend"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Elevator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -24), Vector2(0, -8), Vector2(0, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Elevator/FrontPivot/Front:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Elevator/FrontPivot/Door:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Elevator/FrontPivot/Door:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Elevator/FrontPivot/Front:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Elevator/Floor:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Elevator/Top:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-9]
+}
+
+[sub_resource type="Animation" id="Animation_h2y3h"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Elevator/FrontPivot/Door:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 0]
+}
+
+[sub_resource type="Animation" id="Animation_lpkg8"]
+resource_name = "open_doors"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Elevator/FrontPivot/Door:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iwi2r"]
+_data = {
+"RESET": SubResource("Animation_brplg"),
+"close_doors": SubResource("Animation_kvay4"),
+"descend": SubResource("Animation_pr65e"),
+"idle": SubResource("Animation_h2y3h"),
+"open_doors": SubResource("Animation_lpkg8")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utpxb"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_canbw"]
+size = Vector2(80, 80)
+
+[node name="LevelExit" type="StaticBody2D"]
+script = ExtResource("1_rky0g")
+
+[node name="FrontWall" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_l20ai")
+
+[node name="BackWall" type="CollisionShape2D" parent="."]
+position = Vector2(0, -23)
+shape = SubResource("RectangleShape2D_l20ai")
+
+[node name="LeftWall" type="CollisionShape2D" parent="."]
+position = Vector2(-13, -8)
+shape = SubResource("RectangleShape2D_rhkad")
+
+[node name="RightWall" type="CollisionShape2D" parent="."]
+position = Vector2(13, -8)
+shape = SubResource("RectangleShape2D_rhkad")
+
+[node name="Elevator" type="Node2D" parent="."]
+position = Vector2(0, -24)
+
+[node name="Floor" type="Sprite2D" parent="Elevator"]
+z_index = -9
+position = Vector2(0, 16)
+texture = ExtResource("3_k4hac")
+
+[node name="FrontPivot" type="Node2D" parent="Elevator"]
+y_sort_enabled = true
+position = Vector2(0, 32)
+
+[node name="Door" type="Sprite2D" parent="Elevator/FrontPivot"]
+position = Vector2(0, -6)
+texture = ExtResource("4_ggopr")
+hframes = 5
+
+[node name="Front" type="Sprite2D" parent="Elevator/FrontPivot"]
+position = Vector2(0, -8)
+texture = ExtResource("3_lyrlu")
+
+[node name="Top" type="Sprite2D" parent="Elevator"]
+z_index = 10
+texture = ExtResource("3_ehtuk")
+
+[node name="Platform" type="Sprite2D" parent="."]
+z_index = -8
+position = Vector2(0, -8)
+texture = ExtResource("6_4nsvb")
+
+[node name="Pit" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(0, -8)
+texture = ExtResource("7_860ep")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_iwi2r")
+}
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(0, -12)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+shape = SubResource("RectangleShape2D_utpxb")
+
+[node name="TileRemoverArea" parent="." instance=ExtResource("8_x2q8r")]
+
+[node name="CollisionShape2D" parent="TileRemoverArea" index="0"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_canbw")
+
+[connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_body_entered"]
+
+[editable path="TileRemoverArea"]

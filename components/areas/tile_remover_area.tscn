@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmscnycflbbi8"]
+
+[ext_resource type="Script" path="res://components/areas/tile_remover_area.gd" id="1_631lx"]
+
+[node name="TileRemoverArea" type="Area2D"]
+script = ExtResource("1_631lx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

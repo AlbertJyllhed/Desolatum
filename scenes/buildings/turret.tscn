@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvouwx0ctslr4"]
+
+[ext_resource type="Script" path="res://scenes/buildings/turret.gd" id="1_latmh"]
+[ext_resource type="Texture2D" uid="uid://dk30qefkmbkpx" path="res://assets/textures/turret.png" id="1_xg2jb"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="3_h2v3f"]
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="4_1e520"]
+[ext_resource type="PackedScene" uid="uid://bhoelwsp2sndg" path="res://target_locator_area.tscn" id="4_4teee"]
+[ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="5_1ce5n"]
+
+[node name="Turret" type="Node2D"]
+script = ExtResource("1_latmh")
+cooldown = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xg2jb")
+
+[node name="GunComponent" parent="." instance=ExtResource("3_h2v3f")]
+projectile = ExtResource("4_1e520")
+projectile_deviation = 0.0
+projectile_speed = 600.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
+stream = ExtResource("5_1ce5n")
+
+[node name="TargetLocatorArea" parent="." instance=ExtResource("4_4teee")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="TargetLocatorArea" to="." method="_on_target_locator_area_body_entered"]
+[connection signal="body_exited" from="TargetLocatorArea" to="." method="_on_target_locator_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="GunComponent"]

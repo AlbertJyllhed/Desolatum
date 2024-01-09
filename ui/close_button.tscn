@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca1yr76wl3rdy"]
+
+[ext_resource type="StyleBox" uid="uid://cdrfue6yrrq8m" path="res://resources/styles/close_button_style_normal.tres" id="1_fvatt"]
+[ext_resource type="StyleBox" uid="uid://6hqq17ffcst0" path="res://resources/styles/close_button_style_highlighted.tres" id="2_8paa2"]
+[ext_resource type="StyleBox" uid="uid://sud2mt28mcg8" path="res://resources/styles/close_button_style_pressed.tres" id="3_57db4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q8wpc"]
+
+[node name="CloseButton" type="Button"]
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_styles/normal = ExtResource("1_fvatt")
+theme_override_styles/hover = ExtResource("2_8paa2")
+theme_override_styles/pressed = ExtResource("3_57db4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q8wpc")

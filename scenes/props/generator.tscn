@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://cp2pu6pn5wy7b"]
+
+[ext_resource type="Texture2D" uid="uid://djrsjwo8vbc62" path="res://assets/textures/generator.png" id="1_khnjn"]
+[ext_resource type="Script" path="res://scenes/props/generator.gd" id="1_v00vw"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_3cvn6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4jar"]
+size = Vector2(32, 16)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vl3l"]
+light_mode = 1
+
+[node name="Generator" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 129
+collision_mask = 512
+script = ExtResource("1_v00vw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_khnjn")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_q4jar")
+
+[node name="Label" type="Label" parent="."]
+z_index = 11
+material = SubResource("CanvasItemMaterial_7vl3l")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -48.0
+offset_right = 43.5
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_3cvn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

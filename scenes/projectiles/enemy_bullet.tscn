@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://do8m8t61t4wko"]
+
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="1_pc4bw"]
+[ext_resource type="Texture2D" uid="uid://rv2ksim5ij72" path="res://assets/textures/enemy_bullet.png" id="2_j8knr"]
+
+[node name="EnemyBullet" instance=ExtResource("1_pc4bw")]
+speed = 200.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_j8knr")
+hframes = 1
+vframes = 1
+
+[node name="Hitbox" parent="." index="2"]
+collision_layer = 64
+collision_mask = 8
+
+[editable path="Hitbox"]

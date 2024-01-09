@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvkq0ml6ssv2r"]
+
+[ext_resource type="PackedScene" uid="uid://decmbpipp0rbw" path="res://particles/particles.tscn" id="1_7h747"]
+[ext_resource type="Texture2D" uid="uid://bjos6a7nm4ipd" path="res://assets/textures/particles.png" id="2_1jhs8"]
+[ext_resource type="AudioStream" uid="uid://bckkdt30amobv" path="res://sounds/crystal_break.wav" id="2_s1nhs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2f1nu"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_bj5xi"]
+offsets = PackedFloat32Array(0.740741, 0.815789)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1lpga"]
+gradient = SubResource("Gradient_bj5xi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_173nt"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 10, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 75.0
+damping_max = 100.0
+color_ramp = SubResource("GradientTexture1D_1lpga")
+anim_offset_max = 1.0
+
+[node name="CrystalParticles" instance=ExtResource("1_7h747")]
+modulate = Color(0.054902, 1, 0.4, 1)
+material = SubResource("CanvasItemMaterial_2f1nu")
+amount = 8
+process_material = SubResource("ParticleProcessMaterial_173nt")
+texture = ExtResource("2_1jhs8")
+
+[node name="AudioStreamPlayer2D" parent="." index="0"]
+stream = ExtResource("2_s1nhs")

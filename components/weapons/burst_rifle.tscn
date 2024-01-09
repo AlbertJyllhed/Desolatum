@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://vswiudpdclwa"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_k0mvi"]
+[ext_resource type="PackedScene" uid="uid://dcrdtvgh6el3y" path="res://components/burst_fire_component.tscn" id="2_65cqg"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="3_7redu"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="3_j7dlf"]
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="4_cvtrb"]
+[ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="5_ca5mk"]
+[ext_resource type="AudioStream" uid="uid://cr6ertvl6ct1l" path="res://sounds/minigun2.ogg" id="5_w05xi"]
+[ext_resource type="AudioStream" uid="uid://1j7iqgaes5tt" path="res://sounds/minigun3.ogg" id="6_xs8d5"]
+[ext_resource type="AudioStream" uid="uid://qqour2nnb8tt" path="res://sounds/minigun.ogg" id="7_c00x0"]
+
+[node name="BurstRifle" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_k0mvi")]
+firing_component = NodePath("BurstFireComponent")
+weapon_component = NodePath("GunComponent")
+ammo_component = NodePath("AmmoComponent")
+
+[node name="BurstFireComponent" parent="." index="0" instance=ExtResource("2_65cqg")]
+burst_interval = 0.1
+cooldown = 0.5
+
+[node name="GunComponent" parent="." index="1" instance=ExtResource("3_7redu")]
+position = Vector2(12, 0)
+projectile = ExtResource("4_cvtrb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
+stream = ExtResource("5_w05xi")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="1"]
+stream = ExtResource("6_xs8d5")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="2"]
+stream = ExtResource("7_c00x0")
+
+[node name="AmmoComponent" parent="." index="2" instance=ExtResource("5_ca5mk")]
+max_ammo = 15
+
+[node name="WeaponSprite" parent="." index="3"]
+texture = ExtResource("3_j7dlf")
+hframes = 4
+vframes = 4
+frame = 11
+
+[node name="MuzzleFlash" parent="." index="4"]
+position = Vector2(-2, 0)
+
+[editable path="GunComponent"]

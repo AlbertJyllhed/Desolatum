@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d317ad4npxokr"]
+
+[ext_resource type="Script" path="res://components/areas/velocity_damage_area.gd" id="1_t4ktp"]
+
+[node name="VelocityDamageArea" type="Area2D"]
+collision_layer = 2048
+collision_mask = 2049
+script = ExtResource("1_t4ktp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

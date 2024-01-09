@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://swwht6df18ty"]
+
+[ext_resource type="Script" path="res://components/areas/rock_fall_area.gd" id="1_rg1xd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i7nok"]
+radius = 20.0
+
+[sub_resource type="Gradient" id="Gradient_5w5dx"]
+offsets = PackedFloat32Array(0.723684, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qqdd1"]
+gradient = SubResource("Gradient_5w5dx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7shsj"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 20, 0)
+damping_max = 10.0
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_qqdd1")
+turbulence_noise_scale = 10.0
+
+[node name="RockFallArea" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_rg1xd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i7nok")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.188235, 0.152941, 0.14902, 1)
+position = Vector2(0, -16)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_7shsj")
+lifetime = 1.5
+explosiveness = 0.1
+randomness = 0.4
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

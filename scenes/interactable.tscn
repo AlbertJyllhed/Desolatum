@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw7ihnd7xa1bu"]
+
+[ext_resource type="Script" path="res://scenes/interactable.gd" id="1_jbu5j"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="1_u85up"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fb0j5"]
+light_mode = 1
+
+[node name="Interactable" type="StaticBody2D"]
+script = ExtResource("1_jbu5j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+z_index = 11
+material = SubResource("CanvasItemMaterial_fb0j5")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -48.0
+offset_right = 43.5
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_u85up")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

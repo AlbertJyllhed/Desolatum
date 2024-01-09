@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://cucr1u8b2jgp6"]
+
+[ext_resource type="Script" path="res://components/weapons/pickaxe.gd" id="1_6qotg"]
+[ext_resource type="PackedScene" uid="uid://c4acitghbf4a4" path="res://components/audio_player_component.tscn" id="2_vp6os"]
+[ext_resource type="PackedScene" uid="uid://oa6or8gdpdly" path="res://components/melee_weapon_component.tscn" id="2_y852r"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="3_rbpnj"]
+[ext_resource type="AudioStream" uid="uid://b1no86fo8mucp" path="res://sounds/pickaxe/swish-1.wav" id="3_yxnf3"]
+[ext_resource type="AudioStream" uid="uid://bi6vejoa5pywu" path="res://sounds/pickaxe/swish-2.wav" id="4_3piud"]
+[ext_resource type="AudioStream" uid="uid://beh6unceatsxf" path="res://sounds/pickaxe/swish-3.wav" id="5_b36gy"]
+[ext_resource type="AudioStream" uid="uid://um5a4c6t4s7b" path="res://sounds/pickaxe/swish-4.wav" id="6_ckuc1"]
+[ext_resource type="AudioStream" uid="uid://d0ncw55h4lkgs" path="res://sounds/pickaxe/swish-5.wav" id="7_yoml1"]
+[ext_resource type="AudioStream" uid="uid://dn5y3w5qh8nlo" path="res://sounds/pickaxe/swish-6.wav" id="8_2gs4g"]
+
+[sub_resource type="Animation" id="Animation_py2df"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_inmik"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(6, 2), Vector2(6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.44346, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4wo6"]
+_data = {
+"RESET": SubResource("Animation_py2df"),
+"attack": SubResource("Animation_inmik")
+}
+
+[node name="Pickaxe" type="Node2D"]
+script = ExtResource("1_6qotg")
+
+[node name="AudioPlayerComponent" parent="." instance=ExtResource("2_vp6os")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("3_yxnf3")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("4_3piud")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("5_b36gy")
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("6_ckuc1")
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("7_yoml1")
+
+[node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("8_2gs4g")
+
+[node name="MeleeWeaponComponent" parent="." instance=ExtResource("2_y852r")]
+
+[node name="WeaponSprite" type="Sprite2D" parent="."]
+position = Vector2(6, 0)
+texture = ExtResource("3_rbpnj")
+hframes = 4
+vframes = 4
+frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b4wo6")
+}

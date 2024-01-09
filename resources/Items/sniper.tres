@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://blcgon54sn8fq"]
+
+[ext_resource type="Script" path="res://resources/weapon_item.gd" id="1_f5uuc"]
+[ext_resource type="PackedScene" uid="uid://djfuy53268svc" path="res://components/weapons/sniper.tscn" id="2_u1twh"]
+
+[resource]
+script = ExtResource("1_f5uuc")
+type = 0
+weapon_scene = ExtResource("2_u1twh")
+id = "sniper"
+name = "Sniper"
+description = "Fast, piercing, high damage"
+amount = 1
+pickup_type = 0
+drop_weight = 1

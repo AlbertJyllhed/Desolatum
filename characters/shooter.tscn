@@ -1,0 +1,170 @@
+[gd_scene load_steps=27 format=3 uid="uid://cmk65fhyhnleo"]
+
+[ext_resource type="Script" path="res://characters/enemy_entity.gd" id="1_bxf68"]
+[ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/health_component.tscn" id="3_ogho8"]
+[ext_resource type="PackedScene" uid="uid://4pkuotplcb2p" path="res://states/state_machine.tscn" id="3_qk5vs"]
+[ext_resource type="PackedScene" uid="uid://d1fic30u18k03" path="res://states/idle.tscn" id="4_lq2jm"]
+[ext_resource type="PackedScene" uid="uid://d0m7vblybubk2" path="res://components/hit_flash_component.tscn" id="4_odbpm"]
+[ext_resource type="Shader" path="res://resources/shaders/hit_flash_component.gdshader" id="5_1kpml"]
+[ext_resource type="PackedScene" uid="uid://r1gcjlte6h4r" path="res://states/attack.tscn" id="5_fltsi"]
+[ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="5_jppiw"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="7_yxttg"]
+[ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/drop_component.tscn" id="8_qlxh0"]
+[ext_resource type="Texture2D" uid="uid://dhrg6kxv2f6m3" path="res://assets/textures/shooter.png" id="9_eguxq"]
+[ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="9_ufchb"]
+[ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="9_ygfaw"]
+[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://enemy_weapon_base.tscn" id="12_e0gli"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="13_w5fm3"]
+[ext_resource type="PackedScene" uid="uid://do8m8t61t4wko" path="res://scenes/projectiles/enemy_bullet.tscn" id="14_34qlw"]
+[ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="15_jj6uj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ws6g"]
+resource_local_to_scene = true
+shader = ExtResource("5_1kpml")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oswts"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8l2uy"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ypde8"]
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_fgw64"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_u44gq"]
+resource_name = "walk_right"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gnwo6"]
+_data = {
+"RESET": SubResource("Animation_fgw64"),
+"walk_right": SubResource("Animation_u44gq")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hbleb"]
+radius = 128.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bqvji"]
+radius = 8.0
+
+[node name="Shooter" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1025
+motion_mode = 1
+script = ExtResource("1_bxf68")
+max_speed = 60
+acceleration = 200.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("weapon", "timer") instance=ExtResource("3_qk5vs")]
+weapon = NodePath("../EnemyWeaponBase")
+timer = NodePath("../Timer")
+
+[node name="Idle" parent="StateMachine" instance=ExtResource("4_lq2jm")]
+
+[node name="Wander" parent="StateMachine" instance=ExtResource("5_jppiw")]
+
+[node name="Attack" parent="StateMachine" instance=ExtResource("5_fltsi")]
+cooldown = 0.6
+next_state = "Wander"
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_ogho8")]
+max_health = 2.0
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_odbpm")]
+health_component = NodePath("../HealthComponent")
+hit_flash_material = SubResource("ShaderMaterial_4ws6g")
+
+[node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_qlxh0")]
+max_drop_amount = 2
+drop_chance = 0.2
+health_component = NodePath("../HealthComponent")
+drop_list = ExtResource("9_ufchb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_oswts")
+position = Vector2(0, -8)
+texture = ExtResource("9_eguxq")
+hframes = 7
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.294118)
+z_index = -1
+material = SubResource("CanvasItemMaterial_8l2uy")
+scale = Vector2(1, 0.25)
+texture = ExtResource("7_yxttg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_ypde8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gnwo6")
+}
+autoplay = "walk_right"
+
+[node name="EnemyWeaponBase" parent="." node_paths=PackedStringArray("weapon_component") instance=ExtResource("12_e0gli")]
+position = Vector2(0, -8)
+weapon_component = NodePath("GunComponent")
+
+[node name="CollisionShape2D" parent="EnemyWeaponBase/AttackArea" index="1"]
+shape = SubResource("CircleShape2D_hbleb")
+
+[node name="GunComponent" parent="EnemyWeaponBase" instance=ExtResource("13_w5fm3")]
+projectile = ExtResource("14_34qlw")
+projectile_deviation = 0.2
+projectile_speed = 200.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="EnemyWeaponBase/GunComponent/AudioPlayerComponent" index="0"]
+stream = ExtResource("15_jj6uj")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_ygfaw")]
+position = Vector2(0, -8)
+collision_layer = 16
+collision_mask = 32
+health_component = NodePath("../HealthComponent")
+damage_tick_delay = 0.1
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_bqvji")
+
+[node name="DisableTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[editable path="EnemyWeaponBase"]
+[editable path="EnemyWeaponBase/AttackArea"]
+[editable path="EnemyWeaponBase/GunComponent"]
+[editable path="Hurtbox"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://beytfaoiggt82"]
+
+[ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="2_ltkkn"]
+[ext_resource type="Texture2D" uid="uid://xadi28i86w54" path="res://assets/textures/energy_ui.png" id="3_pimwv"]
+
+[node name="UpgradePreview" type="HBoxContainer"]
+offset_right = 58.0
+offset_bottom = 26.0
+
+[node name="UpgradeButton" parent="." instance=ExtResource("2_ltkkn")]
+layout_mode = 2
+text = ""
+icon = ExtResource("3_pimwv")

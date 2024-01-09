@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://b65heswqtiwf4"]
+
+[ext_resource type="Texture2D" uid="uid://b1rs7po8xij5l" path="res://assets/textures/laser.png" id="1_ka6lw"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_ny4mh"]
+[ext_resource type="Script" path="res://scenes/projectiles/laser.gd" id="2_kcna3"]
+[ext_resource type="PackedScene" path="res://components/areas/hitbox.tscn" id="2_tcifq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w43og"]
+
+[node name="Laser" type="Line2D"]
+points = PackedVector2Array(0, 0)
+width = 0.0
+texture = ExtResource("1_ka6lw")
+texture_mode = 2
+script = ExtResource("2_kcna3")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(400, 0)
+
+[node name="Hitbox" parent="." instance=ExtResource("2_tcifq")]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_w43og")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+blend_mode = 2
+texture = ExtResource("1_ny4mh")
+
+[editable path="Hitbox"]

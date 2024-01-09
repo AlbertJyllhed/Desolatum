@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://othtdwxul6oi"]
+
+[ext_resource type="Texture2D" uid="uid://bgk1jt8re2q17" path="res://assets/textures/energy.png" id="1_e8a0r"]
+[ext_resource type="Script" path="res://resources/item.gd" id="1_n0edb"]
+
+[resource]
+script = ExtResource("1_n0edb")
+id = "energy"
+name = "Energy"
+description = "Used to charge up your guns"
+icon = ExtResource("1_e8a0r")
+amount = 1
+pickup_type = 1
+drop_weight = 60

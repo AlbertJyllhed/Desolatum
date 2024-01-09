@@ -1,0 +1,211 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0kmp3178vt22"]
+
+[ext_resource type="Script" path="res://ui/upgrade_ui.gd" id="1_qujqf"]
+[ext_resource type="StyleBox" uid="uid://dlx8yjq27v8n" path="res://resources/styles/down_button_style_normal.tres" id="3_0a0m2"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_m5sqj"]
+[ext_resource type="StyleBox" uid="uid://cpy48x8fpnrgm" path="res://resources/styles/down_button_style_highlighted.tres" id="4_3pdot"]
+[ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="4_6brrq"]
+[ext_resource type="StyleBox" uid="uid://b5fqvkm8gscjr" path="res://resources/styles/down_button_style_pressed.tres" id="5_epe2b"]
+[ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="5_r1j6g"]
+[ext_resource type="PackedScene" uid="uid://b8c1nb11i1802" path="res://ui/upgrade_button.tscn" id="6_xyfon"]
+[ext_resource type="PackedScene" uid="uid://ca1yr76wl3rdy" path="res://ui/close_button.tscn" id="8_hnqjv"]
+[ext_resource type="PackedScene" uid="uid://dp3f3i4sy2s3a" path="res://ui/powering_screen.tscn" id="10_8ighy"]
+
+[node name="UpgradeUI" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qujqf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.294118)
+
+[node name="CloseButton" parent="." instance=ExtResource("8_hnqjv")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -37.0
+offset_top = 18.0
+offset_right = -21.0
+offset_bottom = 34.0
+grow_horizontal = 0
+
+[node name="DownButton" parent="." instance=ExtResource("8_hnqjv")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -37.0
+offset_top = 36.0
+offset_right = -21.0
+offset_bottom = 52.0
+grow_horizontal = 0
+theme_override_styles/normal = ExtResource("3_0a0m2")
+theme_override_styles/hover = ExtResource("4_3pdot")
+theme_override_styles/pressed = ExtResource("5_epe2b")
+
+[node name="Upgrades" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SelectionScreen" type="NinePatchRect" parent="Upgrades"]
+layout_mode = 2
+offset_left = 39.0
+offset_top = 18.0
+offset_right = 159.0
+offset_bottom = 138.0
+grow_vertical = 2
+texture = ExtResource("4_6brrq")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Upgrades/SelectionScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Upgrades/SelectionScreen/CenterContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Button" parent="Upgrades/SelectionScreen/CenterContainer/GridContainer" instance=ExtResource("5_r1j6g")]
+layout_mode = 2
+text = "Suit"
+
+[node name="Button6" parent="Upgrades/SelectionScreen/CenterContainer/GridContainer" instance=ExtResource("5_r1j6g")]
+layout_mode = 2
+text = "Tether"
+
+[node name="Button2" parent="Upgrades/SelectionScreen/CenterContainer/GridContainer" instance=ExtResource("5_r1j6g")]
+layout_mode = 2
+text = "Turret"
+
+[node name="Button3" parent="Upgrades/SelectionScreen/CenterContainer/GridContainer" instance=ExtResource("5_r1j6g")]
+layout_mode = 2
+text = "Drone"
+
+[node name="Button4" parent="Upgrades/SelectionScreen/CenterContainer/GridContainer" instance=ExtResource("5_r1j6g")]
+layout_mode = 2
+text = "Mine"
+
+[node name="Button5" parent="Upgrades/SelectionScreen/CenterContainer/GridContainer" instance=ExtResource("5_r1j6g")]
+layout_mode = 2
+text = "Mini-TP"
+
+[node name="UpgradeScreen" type="NinePatchRect" parent="Upgrades"]
+layout_mode = 2
+offset_left = 161.0
+offset_top = 18.0
+offset_right = 281.0
+offset_bottom = 138.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("4_6brrq")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Upgrades/UpgradeScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Upgrades/UpgradeScreen/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Upgrades/UpgradeScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.054902, 1, 0.4, 1)
+theme_override_fonts/font = ExtResource("3_m5sqj")
+text = "Upgrade Suit"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Upgrades/UpgradeScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
+
+[node name="UpgradeButton" parent="Upgrades/UpgradeScreen/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("6_xyfon")]
+layout_mode = 2
+
+[node name="UpgradeButton2" parent="Upgrades/UpgradeScreen/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("6_xyfon")]
+layout_mode = 2
+
+[node name="UpgradeButton3" parent="Upgrades/UpgradeScreen/CenterContainer/VBoxContainer/GridContainer" instance=ExtResource("6_xyfon")]
+layout_mode = 2
+
+[node name="PoweringScreen" parent="." instance=ExtResource("10_8ighy")]
+layout_mode = 1
+
+[node name="DescriptionScreen" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = 140.0
+offset_right = -39.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_6brrq")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 1.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="DescriptionScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.054902, 1, 0.4, 1)
+theme_override_fonts/font = ExtResource("3_m5sqj")
+text = "Description Text"
+autowrap_mode = 3
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="DownButton" to="." method="_on_down_button_pressed"]
+[connection signal="fully_powered" from="PoweringScreen" to="." method="_on_powering_screen_fully_powered"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc68l5n4im6qh"]
+
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="1_8in61"]
+[ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="2_8oiji"]
+
+[node name="ImpactGrenade" instance=ExtResource("1_8in61")]
+explosion_scene = ExtResource("2_8oiji")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 8
+
+[editable path="Hitbox"]

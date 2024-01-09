@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://hm3wwqimeisn"]
+
+[ext_resource type="Script" path="res://ui/fps_counter.gd" id="1_3j0cj"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_bjpbq"]
+
+[node name="FPSCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3j0cj")
+
+[node name="Label" type="Label" parent="."]
+process_mode = 3
+layout_mode = 1
+offset_left = 2.0
+offset_top = -4.0
+offset_right = 29.0
+offset_bottom = 14.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_bjpbq")
+text = "100"

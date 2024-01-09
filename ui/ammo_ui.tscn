@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://lvds6lc4b1aw"]
+
+[ext_resource type="Script" path="res://ui/ammo_ui.gd" id="1_kvr2m"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="2_eir2b"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_ikkyb"]
+
+[node name="AmmoUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_kvr2m")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -15.0
+offset_right = 41.0
+offset_bottom = -1.0
+grow_vertical = 0
+mouse_filter = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_eir2b")
+texture_progress = ExtResource("2_eir2b")
+tint_under = Color(0.176471, 0.286275, 0.298039, 1)
+tint_progress = Color(0.054902, 1, 0.4, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -22.0
+offset_right = 41.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_ikkyb")
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1

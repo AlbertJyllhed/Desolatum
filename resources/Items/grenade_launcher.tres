@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://c4au6yw5sn535"]
+
+[ext_resource type="Script" path="res://resources/weapon_item.gd" id="1_ve34f"]
+[ext_resource type="PackedScene" uid="uid://de01xm3v2666m" path="res://components/weapons/grenade_launcher.tscn" id="3_r6tdf"]
+
+[resource]
+script = ExtResource("1_ve34f")
+type = 0
+weapon_scene = ExtResource("3_r6tdf")
+id = "launcher"
+name = "Grenade Launcher"
+description = "Shoots powerful explosive shells"
+amount = 1
+pickup_type = 0
+drop_weight = 1

@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmpfnekve57gk"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_3px2c"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="2_5actq"]
+[ext_resource type="AudioStream" uid="uid://qqour2nnb8tt" path="res://sounds/minigun.ogg" id="2_cm2p7"]
+[ext_resource type="PackedScene" uid="uid://w4snfyux8ecm" path="res://components/auto_fire_component.tscn" id="2_jro13"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="3_0sixg"]
+[ext_resource type="AudioStream" uid="uid://cr6ertvl6ct1l" path="res://sounds/minigun2.ogg" id="3_sjou5"]
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="4_6n8gg"]
+[ext_resource type="AudioStream" uid="uid://1j7iqgaes5tt" path="res://sounds/minigun3.ogg" id="4_dwp4e"]
+[ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="8_4u4g7"]
+
+[node name="AutomaticRifle" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_3px2c")]
+firing_component = NodePath("AutoFireComponent")
+weapon_component = NodePath("GunComponent")
+ammo_component = NodePath("AmmoComponent")
+recoil = 0.2
+
+[node name="AutoFireComponent" parent="." index="0" instance=ExtResource("2_jro13")]
+cooldown = 0.1
+
+[node name="GunComponent" parent="." index="1" instance=ExtResource("3_0sixg")]
+position = Vector2(12, 0)
+projectile = ExtResource("4_6n8gg")
+projectile_deviation = 0.2
+
+[node name="AudioPlayerComponent#AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
+stream = ExtResource("3_sjou5")
+
+[node name="AudioPlayerComponent#AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="1"]
+stream = ExtResource("4_dwp4e")
+
+[node name="AudioPlayerComponent#AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="2"]
+stream = ExtResource("2_cm2p7")
+
+[node name="AmmoComponent" parent="." index="2" instance=ExtResource("8_4u4g7")]
+max_ammo = 25
+reload_time = 2.0
+
+[node name="WeaponSprite" parent="." index="3"]
+texture = ExtResource("2_5actq")
+hframes = 4
+vframes = 4
+frame = 1
+
+[node name="MuzzleFlash" parent="." index="4"]
+position = Vector2(-2, 0)
+
+[editable path="GunComponent"]

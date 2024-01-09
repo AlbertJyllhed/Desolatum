@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DropList" load_steps=3 format=3 uid="uid://crwfn1mp6vq2w"]
+
+[ext_resource type="Resource" uid="uid://othtdwxul6oi" path="res://resources/Items/energy.tres" id="1_r5kpb"]
+[ext_resource type="Script" path="res://resources/Data/drop_list.gd" id="1_vvg13"]
+
+[resource]
+script = ExtResource("1_vvg13")
+items = Array[Resource("res://resources/item.gd")]([ExtResource("1_r5kpb")])

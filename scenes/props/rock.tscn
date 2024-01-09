@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbjc1fqd8prky"]
+
+[ext_resource type="Texture2D" uid="uid://dpf64uklusfx1" path="res://assets/textures/rocks.png" id="1_pdld5"]
+[ext_resource type="Script" path="res://scenes/props/random_prop_sprite.gd" id="2_mr3ht"]
+
+[node name="Rock" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("shadow")]
+texture = ExtResource("1_pdld5")
+hframes = 4
+vframes = 3
+script = ExtResource("2_mr3ht")
+shadow = NodePath("../Shadow")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.294118)
+z_index = -1
+position = Vector2(0, 10)
+texture = ExtResource("1_pdld5")
+flip_v = true
+hframes = 4
+vframes = 3

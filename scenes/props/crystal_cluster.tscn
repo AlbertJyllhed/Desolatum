@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://bnlr5jhs05d5q"]
+
+[ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/health_component.tscn" id="1_obhpf"]
+[ext_resource type="PackedScene" uid="uid://cvkq0ml6ssv2r" path="res://particles/crystal_particles.tscn" id="2_1vlld"]
+[ext_resource type="PackedScene" uid="uid://d0m7vblybubk2" path="res://components/hit_flash_component.tscn" id="2_snb1w"]
+[ext_resource type="Shader" path="res://resources/shaders/hit_flash_component.gdshader" id="3_860a5"]
+[ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/drop_component.tscn" id="4_acsrj"]
+[ext_resource type="Resource" uid="uid://b1no0ih8wftu2" path="res://resources/Data/crystal_drop_list.tres" id="6_mjiww"]
+[ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="7_2gmy8"]
+[ext_resource type="Texture2D" uid="uid://dpf64uklusfx1" path="res://assets/textures/rocks.png" id="7_tbf51"]
+[ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="11_q6mtn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5m5it"]
+resource_local_to_scene = true
+shader = ExtResource("3_860a5")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mhcwa"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3rcse"]
+radius = 8.0
+
+[node name="CrystalCluster" type="StaticBody2D"]
+collision_layer = 1024
+collision_mask = 6
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_obhpf")]
+blood_particles = ExtResource("2_1vlld")
+max_health = 2.0
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("2_snb1w")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_5m5it")
+
+[node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_acsrj")]
+max_drop_amount = 3
+health_component = NodePath("../HealthComponent")
+drop_list = ExtResource("6_mjiww")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("7_tbf51")
+hframes = 4
+vframes = 3
+frame = 3
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.294118)
+z_index = -1
+position = Vector2(0, 4)
+texture = ExtResource("7_tbf51")
+flip_v = true
+hframes = 4
+vframes = 3
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_mhcwa")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_2gmy8")]
+collision_layer = 16
+collision_mask = 32
+health_component = NodePath("../HealthComponent")
+damage_tick_delay = 0.1
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_3rcse")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.1, 0.1)
+blend_mode = 2
+texture = ExtResource("11_q6mtn")
+
+[editable path="Hurtbox"]

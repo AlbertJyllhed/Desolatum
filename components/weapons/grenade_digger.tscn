@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://iofr7dg8131w"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_txx2a"]
+[ext_resource type="PackedScene" uid="uid://dcrdtvgh6el3y" path="res://components/burst_fire_component.tscn" id="2_h3p16"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="3_dbugt"]
+[ext_resource type="PackedScene" uid="uid://bc68l5n4im6qh" path="res://scenes/projectiles/impact_grenade.tscn" id="3_i4oyw"]
+
+[node name="GrenadeDigger" node_paths=PackedStringArray("firing_component") instance=ExtResource("1_txx2a")]
+firing_component = NodePath("BurstFireComponent")
+
+[node name="BurstFireComponent" parent="." index="0" instance=ExtResource("2_h3p16")]
+burst_interval = 0.1
+
+[node name="AmmoComponent" parent="." index="1"]
+max_ammo = 3
+reload_time = 2.0
+
+[node name="ShootingComponent" parent="." index="4"]
+projectile = ExtResource("3_i4oyw")
+
+[node name="WeaponSprite" parent="." index="5"]
+texture = ExtResource("3_dbugt")
+hframes = 4
+vframes = 4
+frame = 12
+
+[node name="MuzzleFlash" parent="." index="6"]
+position = Vector2(-4, 0)

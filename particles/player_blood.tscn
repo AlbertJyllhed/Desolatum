@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://cerdil3sbcduq"]
+
+[ext_resource type="AudioStream" uid="uid://c47r8hjnj0s8w" path="res://sounds/male_ouch.wav" id="1_th6ly"]
+
+[sub_resource type="Gradient" id="Gradient_bj5xi"]
+offsets = PackedFloat32Array(0.740741, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1lpga"]
+gradient = SubResource("Gradient_bj5xi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gy4qu"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 10, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 75.0
+damping_max = 100.0
+scale_min = 2.0
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_1lpga")
+
+[sub_resource type="Animation" id="Animation_xpnx4"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d52yx"]
+_data = {
+"default": SubResource("Animation_xpnx4")
+}
+
+[node name="PlayerBlood" type="GPUParticles2D"]
+modulate = Color(0.760784, 0.113725, 0.27451, 1)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_gy4qu")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_th6ly")
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_d52yx")
+}

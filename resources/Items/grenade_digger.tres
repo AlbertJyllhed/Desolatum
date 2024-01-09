@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://dy1gbvjht2apg"]
+
+[ext_resource type="Script" path="res://resources/weapon_item.gd" id="1_aynr8"]
+[ext_resource type="PackedScene" uid="uid://iofr7dg8131w" path="res://components/weapons/grenade_digger.tscn" id="2_upvof"]
+
+[resource]
+script = ExtResource("1_aynr8")
+type = 0
+weapon_scene = ExtResource("2_upvof")
+id = "grenade_digger"
+name = "Grenade Digger"
+description = "Shoots a burst of grenades, useful for excavating."
+amount = 1
+pickup_type = 0
+drop_weight = 1

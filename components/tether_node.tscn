@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8h8q16gs2wqd"]
+
+[ext_resource type="Script" path="res://components/tether_node.gd" id="1_myjgd"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_yqreb"]
+[ext_resource type="Resource" uid="uid://xtr2dyq32x00" path="res://resources/Items/tether.tres" id="2_5l3ft"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_ta773"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01w7j"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjp2q"]
+light_mode = 1
+
+[node name="TetherNode" type="StaticBody2D"]
+collision_layer = 128
+collision_mask = 512
+script = ExtResource("1_myjgd")
+item = ExtResource("2_5l3ft")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.054902, 1, 0.4, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_yqreb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_01w7j")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+default_color = Color(0.054902, 1, 0.4, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+
+[node name="Label" type="Label" parent="."]
+z_index = 11
+material = SubResource("CanvasItemMaterial_hjp2q")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -48.0
+offset_right = 43.5
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_ta773")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

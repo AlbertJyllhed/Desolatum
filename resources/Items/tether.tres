@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://xtr2dyq32x00"]
+
+[ext_resource type="Script" path="res://resources/item.gd" id="1_bgy3y"]
+
+[resource]
+script = ExtResource("1_bgy3y")
+id = "tether"
+name = "Tether"
+description = "Used to connect to the portal"
+amount = 1
+pickup_type = 0
+drop_weight = 1

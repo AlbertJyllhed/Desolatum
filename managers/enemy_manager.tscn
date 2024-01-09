@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://jpwvtwbpum65"]
+
+[ext_resource type="Script" path="res://managers/enemy_manager.gd" id="1_7gyjg"]
+[ext_resource type="Resource" uid="uid://d488fpt75ddv" path="res://resources/Data/cave_enemy_list.tres" id="2_owjkg"]
+
+[node name="EnemyManager" type="Node"]
+script = ExtResource("1_7gyjg")
+enemy_list = ExtResource("2_owjkg")
+max_enemies = 12
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

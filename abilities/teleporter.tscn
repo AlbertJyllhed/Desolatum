@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://brmporqq1ov78"]
+
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_04fvh"]
+[ext_resource type="Script" path="res://abilities/teleporter.gd" id="1_hll5s"]
+[ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="2_8ysvi"]
+
+[node name="Teleporter" type="Node2D"]
+script = ExtResource("1_hll5s")
+explosion_scene = ExtResource("2_8ysvi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_04fvh")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx6w1u7ew5ale"]
+
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="1_h6whd"]
+[ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="2_ptrf8"]
+[ext_resource type="PackedScene" uid="uid://q08pms06yfom" path="res://components/projectile_slowdown_component.tscn" id="3_2bw2q"]
+[ext_resource type="PackedScene" uid="uid://l0g0un5pxytx" path="res://components/projectile_timer_component.tscn" id="4_wa6nn"]
+
+[node name="Grenade" instance=ExtResource("1_h6whd")]
+explosion_scene = ExtResource("2_ptrf8")
+bounces = 100
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 8
+
+[node name="ProjectileSlowdownComponent" parent="." index="4" node_paths=PackedStringArray("projectile") instance=ExtResource("3_2bw2q")]
+projectile = NodePath("..")
+
+[node name="ProjectileTimerComponent" parent="." index="5" node_paths=PackedStringArray("projectile") instance=ExtResource("4_wa6nn")]
+wait_time = 2.0
+projectile = NodePath("..")
+
+[editable path="Hitbox"]

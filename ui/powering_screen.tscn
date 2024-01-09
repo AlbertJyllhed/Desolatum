@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp3f3i4sy2s3a"]
+
+[ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_f5147"]
+[ext_resource type="Script" path="res://ui/powering_screen.gd" id="2_gsng6"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_pftnv"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="3_dwl0s"]
+[ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="4_stvf5"]
+
+[node name="PoweringScreen" type="NinePatchRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = -72.0
+offset_right = 121.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_f5147")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("2_gsng6")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.054902, 1, 0.4, 1)
+theme_override_fonts/font = ExtResource("2_pftnv")
+text = "Teleporter Power"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+max_value = 64.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 4
+stretch_margin_right = 2
+stretch_margin_bottom = 4
+texture_under = ExtResource("3_dwl0s")
+texture_progress = ExtResource("3_dwl0s")
+tint_under = Color(0, 0.427451, 0.490196, 1)
+tint_progress = Color(0.054902, 1, 0.4, 1)
+
+[node name="Button" parent="CenterContainer/VBoxContainer" instance=ExtResource("4_stvf5")]
+layout_mode = 2
+text = "Charge"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="button_down" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_button_up"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

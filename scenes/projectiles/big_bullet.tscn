@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw6reupfolow"]
+
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="1_yfcny"]
+[ext_resource type="PackedScene" uid="uid://l0g0un5pxytx" path="res://components/projectile_timer_component.tscn" id="2_a8swa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qjv10"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vgpvj"]
+radius = 8.0
+
+[node name="BigBullet" instance=ExtResource("1_yfcny")]
+speed = 300
+bounces = 2
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.5, 1.5)
+frame = 2
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_qjv10")
+
+[node name="Hitbox" parent="." index="2"]
+damage = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_vgpvj")
+
+[node name="PointLight2D" parent="." index="3"]
+scale = Vector2(0.15, 0.15)
+
+[node name="ProjectileTimerComponent" parent="." index="4" node_paths=PackedStringArray("projectile") instance=ExtResource("2_a8swa")]
+wait_time = 0.5
+projectile = NodePath("..")
+
+[editable path="Hitbox"]

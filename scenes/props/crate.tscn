@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq87ij4ablqce"]
+
+[ext_resource type="PackedScene" uid="uid://bw7ihnd7xa1bu" path="res://scenes/interactable.tscn" id="1_exaca"]
+[ext_resource type="Script" path="res://scenes/props/crate.gd" id="2_7rrcl"]
+[ext_resource type="Texture2D" uid="uid://dd8lohixt503u" path="res://assets/textures/crate.png" id="2_xw88l"]
+[ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/drop_component.tscn" id="3_kfu6f"]
+[ext_resource type="Resource" uid="uid://drxaut0ndjcw" path="res://resources/Data/crate_drop_list.tres" id="4_cpapd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxusn"]
+size = Vector2(12, 8)
+
+[node name="Crate" instance=ExtResource("1_exaca")]
+y_sort_enabled = true
+collision_layer = 128
+collision_mask = 512
+script = ExtResource("2_7rrcl")
+
+[node name="DropComponent" parent="." index="0" instance=ExtResource("3_kfu6f")]
+drop_list = ExtResource("4_cpapd")
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(0, -8)
+texture = ExtResource("2_xw88l")
+hframes = 2
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_gxusn")

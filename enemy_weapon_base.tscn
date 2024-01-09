@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://chu6wx510d7q7"]
+
+[ext_resource type="Script" path="res://enemy_weapon_base.gd" id="1_8bn8n"]
+[ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="2_3lq11"]
+[ext_resource type="PackedScene" uid="uid://bhoelwsp2sndg" path="res://target_locator_area.tscn" id="2_hkxeg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fboq7"]
+radius = 24.0
+
+[node name="EnemyWeaponBase" type="Node2D"]
+script = ExtResource("1_8bn8n")
+
+[node name="AttackArea" parent="." instance=ExtResource("2_hkxeg")]
+
+[node name="CollisionShape2D" parent="AttackArea" index="1"]
+shape = SubResource("CircleShape2D_fboq7")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="TargetLocatorRay" parent="." instance=ExtResource("2_3lq11")]
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+
+[editable path="AttackArea"]

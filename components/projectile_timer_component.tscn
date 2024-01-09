@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://l0g0un5pxytx"]
+
+[ext_resource type="Script" path="res://components/projectile_timer_component.gd" id="1_1ub3m"]
+
+[node name="ProjectileTimerComponent" type="Timer"]
+one_shot = true
+autostart = true
+script = ExtResource("1_1ub3m")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

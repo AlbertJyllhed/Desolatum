@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://jmqh7mkm5qki"]
+
+[ext_resource type="Script" path="res://components/tile_remover_ray.gd" id="1_erhg7"]
+[ext_resource type="Script" path="res://components/audio_player_component.gd" id="2_n3b1r"]
+[ext_resource type="AudioStream" uid="uid://b7fikh63a7wqf" path="res://sounds/pickaxe/pickaxe_1.wav" id="3_jdo0i"]
+[ext_resource type="AudioStream" uid="uid://crmpye4yr16ym" path="res://sounds/pickaxe/pickaxe_2.wav" id="4_ke7oq"]
+[ext_resource type="AudioStream" uid="uid://c4g7vjnsbndvs" path="res://sounds/pickaxe/pickaxe_3.wav" id="5_qxhol"]
+[ext_resource type="AudioStream" uid="uid://75x5tcc81nja" path="res://sounds/pickaxe/pickaxe_4.wav" id="6_r0uw4"]
+
+[node name="TileRemoverRay" type="RayCast2D"]
+target_position = Vector2(24, 0)
+script = ExtResource("1_erhg7")
+
+[node name="AudioPlayerComponent" type="Node" parent="."]
+script = ExtResource("2_n3b1r")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("3_jdo0i")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("4_ke7oq")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("5_qxhol")
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("6_r0uw4")

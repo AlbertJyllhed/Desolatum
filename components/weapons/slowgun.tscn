@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbadiqrby3c8s"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_l6rbb"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="2_5fskb"]
+[ext_resource type="PackedScene" uid="uid://cg2acvobf2bpm" path="res://scenes/projectiles/slow_bullet.tscn" id="2_7hlvu"]
+[ext_resource type="PackedScene" uid="uid://b63err5lwk6fn" path="res://components/single_fire_component.tscn" id="2_s8xwr"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="3_srdh4"]
+[ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="5_es0y4"]
+[ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="5_r7wcq"]
+
+[node name="Slowgun" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_l6rbb")]
+firing_component = NodePath("SingleFireComponent")
+weapon_component = NodePath("GunComponent")
+ammo_component = NodePath("AmmoComponent")
+
+[node name="SingleFireComponent" parent="." index="0" instance=ExtResource("2_s8xwr")]
+
+[node name="GunComponent" parent="." index="1" instance=ExtResource("3_srdh4")]
+position = Vector2(11, 0)
+projectile = ExtResource("2_7hlvu")
+projectile_deviation = 0.0
+projectile_speed = 100.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
+stream = ExtResource("5_r7wcq")
+
+[node name="AmmoComponent" parent="." index="2" instance=ExtResource("5_es0y4")]
+max_ammo = 3
+
+[node name="WeaponSprite" parent="." index="3"]
+texture = ExtResource("2_5fskb")
+hframes = 4
+vframes = 4
+frame = 8
+
+[node name="MuzzleFlash" parent="." index="4"]
+position = Vector2(-4, 0)
+
+[editable path="GunComponent"]

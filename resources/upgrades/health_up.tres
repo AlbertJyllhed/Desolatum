@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=3 format=3 uid="uid://wtoq1hamm28h"]
+
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_au0w3"]
+[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_t3h7b"]
+
+[resource]
+script = ExtResource("1_t3h7b")
+icon = ExtResource("1_au0w3")
+id = "health_up"
+name = "Health Booster"
+description = "Permanently adds +1 extra health"
+amount = 1

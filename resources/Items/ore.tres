@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bayy7fbn27s3h"]
+
+[ext_resource type="Texture2D" uid="uid://bqnh7dfp5lu1j" path="res://assets/textures/ore.png" id="1_1c5a1"]
+[ext_resource type="Script" path="res://resources/item.gd" id="1_ydvio"]
+
+[resource]
+script = ExtResource("1_ydvio")
+id = "ore"
+name = "Ore"
+description = "A hard metal ore often used as building material"
+icon = ExtResource("1_1c5a1")
+amount = 1
+pickup_type = 1
+drop_weight = 80

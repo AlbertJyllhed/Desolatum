@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://nifrx1inco4m"]
+
+[ext_resource type="Texture2D" uid="uid://b8u3tcn0s8w22" path="res://assets/textures/debris.png" id="1_nb1e2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p1cxr"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_5rtt0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.147541, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5heyb"]
+curve = SubResource("Curve_5rtt0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_abdwt"]
+particle_flag_disable_z = true
+spread = 25.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+angular_velocity_min = 10.0
+angular_velocity_max = 300.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 180.0
+scale_curve = SubResource("CurveTexture_5heyb")
+color = Color(0.776471, 0.776471, 0.776471, 0.392157)
+anim_offset_max = 1.0
+
+[sub_resource type="Animation" id="Animation_h01e8"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bv8lw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_82tb1"]
+_data = {
+"RESET": SubResource("Animation_bv8lw"),
+"default": SubResource("Animation_h01e8")
+}
+
+[node name="Debris" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_p1cxr")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_abdwt")
+texture = ExtResource("1_nb1e2")
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_82tb1")
+}

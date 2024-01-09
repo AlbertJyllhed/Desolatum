@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://chna2rf27ovx5"]
+
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="1_2vd6v"]
+[ext_resource type="PackedScene" uid="uid://bec4mimet22ja" path="res://components/bounce_counter_component.tscn" id="2_yunsf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_chct2"]
+radius = 6.0
+
+[node name="BouncerBullet" instance=ExtResource("1_2vd6v")]
+bounces = 1
+piercing = true
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 7
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_chct2")
+
+[node name="BounceCounterComponent" parent="." index="4" node_paths=PackedStringArray("projectile") instance=ExtResource("2_yunsf")]
+projectile = NodePath("..")
+
+[editable path="Hitbox"]

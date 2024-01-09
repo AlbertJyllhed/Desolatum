@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1b1potv7cdv8"]
+
+[ext_resource type="Script" path="res://states/state.gd" id="1_xkabt"]
+
+[node name="State" type="Node"]
+script = ExtResource("1_xkabt")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0e50x30owl14"]
+
+[ext_resource type="Texture2D" uid="uid://byb4u8pnhh4j4" path="res://assets/textures/mining_light.png" id="1_a4hx5"]
+[ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="2_0dfyv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lyjix"]
+radius = 80.0
+
+[node name="MiningLight" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_a4hx5")
+
+[node name="Light" type="PointLight2D" parent="."]
+blend_mode = 2
+texture = ExtResource("2_0dfyv")
+texture_scale = 0.6
+
+[node name="Area2D" type="Area2D" parent="Light"]
+collision_layer = 2048
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/Area2D"]
+shape = SubResource("CircleShape2D_lyjix")

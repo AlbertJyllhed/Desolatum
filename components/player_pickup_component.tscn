@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://g7y551vhlf7b"]
+
+[ext_resource type="Script" path="res://components/player_pickup_component.gd" id="1_p8huo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_smwqk"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2si14"]
+radius = 16.0
+
+[node name="PlayerPickupComponent" type="Node2D"]
+script = ExtResource("1_p8huo")
+
+[node name="AttractArea" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttractArea"]
+shape = SubResource("CircleShape2D_smwqk")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_2si14")
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]
+[connection signal="body_exited" from="PickupArea" to="." method="_on_pickup_area_body_exited"]

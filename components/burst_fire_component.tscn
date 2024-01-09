@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcrdtvgh6el3y"]
+
+[ext_resource type="Script" path="res://components/burst_fire_component.gd" id="1_2g60f"]
+
+[node name="BurstFireComponent" type="Node"]
+script = ExtResource("1_2g60f")
+max_bursts = 3
+burst_interval = 0.05
+
+[node name="CooldownTimer" type="Timer" parent="."]
+
+[node name="BurstTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="BurstTimer" to="." method="_on_burst_timer_timeout"]
