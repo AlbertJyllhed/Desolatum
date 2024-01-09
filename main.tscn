@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cig1m1a15gbdi"]
+[gd_scene load_steps=17 format=3 uid="uid://cig1m1a15gbdi"]
 
 [ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_02rur"]
 [ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="1_3ye1g"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://bkqlhlpfwtkme" path="res://resources/Data/cave_prop_list.tres" id="9_65bfq"]
 [ext_resource type="Resource" uid="uid://dnphk7ey0fush" path="res://resources/Data/cave_crate_list.tres" id="11_uf5hk"]
 [ext_resource type="PackedScene" uid="uid://bsxlqymr4tsek" path="res://managers/upgrade_manager.tscn" id="11_v1m61"]
+[ext_resource type="PackedScene" uid="uid://b4gv7qo8wn3yq" path="res://pathfinding_grid.tscn" id="12_wr64s"]
 
 [node name="Main" type="Node"]
 
@@ -49,6 +50,9 @@ max_steps_until_turn = 6
 max_walkers = 4
 max_level_size = 400
 
+[node name="PathfindingGrid" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("12_wr64s")]
+tilemap = NodePath("../TileMap")
+
 [node name="EnemyManager" parent="." instance=ExtResource("9_0twqc")]
 
 [node name="UpgradeManager" parent="." instance=ExtResource("11_v1m61")]
@@ -58,9 +62,11 @@ max_level_size = 400
 [node name="TileMap" type="TileMap" parent="." groups=["tilemap_layer"]]
 texture_filter = 1
 tile_set = ExtResource("6_6bgfl")
+navigation_visibility_mode = 1
 format = 2
 layer_0/name = "base_layer"
 layer_1/name = "shadow_layer"
+layer_1/navigation_enabled = false
 layer_1/tile_data = PackedInt32Array()
 
 [node name="BaseLayer" type="Node2D" parent="." groups=["base_layer"]]

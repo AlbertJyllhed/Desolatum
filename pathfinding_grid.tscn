@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4gv7qo8wn3yq"]
+
+[ext_resource type="Script" path="res://pathfinding_grid.gd" id="1_bbqox"]
+
+[node name="PathfindingGrid" type="Node"]
+script = ExtResource("1_bbqox")
+debug_mode = true

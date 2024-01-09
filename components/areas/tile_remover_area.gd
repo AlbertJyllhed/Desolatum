@@ -26,6 +26,7 @@ func _on_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_inde
 	tilemap.set_cell(1, coordinate, none, Vector2i.ZERO)
 	update_neighbors(coordinate)
 	collision_shape.set_deferred("disabled", true)
+	GameEvents.navigation_updated.emit(coordinate, false)
 	
 	var ore_type = tile_data.get_custom_data("ore_type")
 	if ore_type == 0:

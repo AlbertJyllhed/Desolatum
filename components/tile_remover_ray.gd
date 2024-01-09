@@ -31,6 +31,7 @@ func _physics_process(_delta):
 	tilemap.set_cell(1, tile_position, none, Vector2i.ZERO)
 	update_neighbors(tile_position)
 	enabled = false
+	GameEvents.navigation_updated.emit(tile_position, false)
 	
 	var ore_type = tile_data.get_custom_data("ore_type")
 	if ore_type == 0:

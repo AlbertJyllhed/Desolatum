@@ -250,10 +250,10 @@ func populate_level():
 	
 	#place enemy spawners
 	for spawner_position in spawner_positions:
-		var spawner_instance = spawner_scene.instantiate() as EnemySpawner
-		base_layer.add_child(spawner_instance)
-		spawner_instance.global_position = spawner_position * 16 + offset
-		enemy_manager.add_spawner(spawner_instance)
+		#var spawner_instance = spawner_scene.instantiate() as EnemySpawner
+		#base_layer.add_child(spawner_instance)
+		#spawner_instance.global_position = spawner_position * 16 + offset
+		#enemy_manager.add_spawner(spawner_instance)
 		
 		#place dust particles
 		var dust_instance = dust_scene.instantiate() as Node2D

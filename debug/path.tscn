@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckykbvatpqspl"]
+
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_ascil"]
+
+[node name="Path" type="Sprite2D"]
+modulate = Color(0, 0, 1, 0.294118)
+z_index = 100
+texture = ExtResource("1_ascil")

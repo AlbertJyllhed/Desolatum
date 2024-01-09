@@ -205,6 +205,7 @@ texture = ExtResource("8_a1x2w")
 
 [resource]
 physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
 custom_data_layer_0/name = "ore_type"
 custom_data_layer_0/type = 2
 sources/3 = SubResource("TileSetAtlasSource_483t1")
