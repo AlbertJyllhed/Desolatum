@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvouwx0ctslr4"]
+[gd_scene load_steps=11 format=3 uid="uid://bvouwx0ctslr4"]
 
 [ext_resource type="Script" path="res://scenes/buildings/turret.gd" id="1_latmh"]
 [ext_resource type="Texture2D" uid="uid://dk30qefkmbkpx" path="res://assets/textures/turret.png" id="1_xg2jb"]
@@ -6,13 +6,27 @@
 [ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="4_1e520"]
 [ext_resource type="PackedScene" uid="uid://bhoelwsp2sndg" path="res://target_locator_area.tscn" id="4_4teee"]
 [ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="5_1ce5n"]
+[ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="7_f3brc"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="8_fbfku"]
 
-[node name="Turret" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_lcbqk"]
+radius = 4.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1ko08"]
+light_mode = 1
+
+[node name="Turret" type="StaticBody2D"]
+collision_layer = 128
+collision_mask = 512
 script = ExtResource("1_latmh")
-cooldown = 2.0
+max_ammo = 120
+cooldown = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xg2jb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lcbqk")
 
 [node name="GunComponent" parent="." instance=ExtResource("3_h2v3f")]
 projectile = ExtResource("4_1e520")
@@ -26,8 +40,31 @@ stream = ExtResource("5_1ce5n")
 collision_layer = 2
 collision_mask = 4
 
+[node name="TargetLocatorRay" parent="." instance=ExtResource("7_f3brc")]
+collision_mask = 17
+
 [node name="Timer" type="Timer" parent="."]
-autostart = true
+
+[node name="Label" type="Label" parent="."]
+z_index = 11
+material = SubResource("CanvasItemMaterial_1ko08")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -48.0
+offset_right = 43.5
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("8_fbfku")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [connection signal="body_entered" from="TargetLocatorArea" to="." method="_on_target_locator_area_body_entered"]
 [connection signal="body_exited" from="TargetLocatorArea" to="." method="_on_target_locator_area_body_exited"]

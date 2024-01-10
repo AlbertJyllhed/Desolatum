@@ -4,4 +4,3 @@
 
 [node name="PathfindingGrid" type="Node"]
 script = ExtResource("1_bbqox")
-debug_mode = true

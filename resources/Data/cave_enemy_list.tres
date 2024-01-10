@@ -1,12 +1,9 @@
-[gd_resource type="Resource" script_class="EnemyList" load_steps=6 format=3 uid="uid://d488fpt75ddv"]
+[gd_resource type="Resource" script_class="EnemyList" load_steps=3 format=3 uid="uid://d488fpt75ddv"]
 
-[ext_resource type="PackedScene" uid="uid://i6v6n4ihl0yl" path="res://characters/enemy.tscn" id="1_q1fq4"]
-[ext_resource type="PackedScene" uid="uid://caksua2fynbvo" path="res://characters/juvenile.tscn" id="2_4riie"]
-[ext_resource type="PackedScene" uid="uid://cmk65fhyhnleo" path="res://characters/shooter.tscn" id="3_vx6g5"]
+[ext_resource type="PackedScene" uid="uid://be6ojx14xn6p6" path="res://characters/hunter.tscn" id="2_rmvib"]
 [ext_resource type="Script" path="res://resources/Data/enemy_list.gd" id="4_l52ie"]
-[ext_resource type="PackedScene" uid="uid://pilwyjays5u2" path="res://characters/exploder.tscn" id="4_msc8t"]
 
 [resource]
 script = ExtResource("4_l52ie")
-enemy_scenes = Array[PackedScene]([ExtResource("1_q1fq4"), ExtResource("2_4riie"), ExtResource("3_vx6g5"), ExtResource("4_msc8t")])
-weights = Array[int]([3, 1, 2, 1])
+enemy_scenes = Array[PackedScene]([ExtResource("2_rmvib")])
+weights = Array[int]([3])

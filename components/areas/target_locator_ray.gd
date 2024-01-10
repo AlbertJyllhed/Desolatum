@@ -1,18 +1,18 @@
 extends RayCast2D
 class_name TargetLocatorRay
 
-var player_node : Node2D
+var target : Node2D
 
 
-func _ready():
-	player_node = get_tree().get_first_node_in_group("player")
+func set_target(new_target : Node2D):
+	target = new_target
 
 
 func has_target() -> bool:
-	if not player_node:
+	if not target:
 		return false
 	
-	target_position = player_node.global_position - owner.global_position
+	target_position = target.global_position - global_position
 	force_raycast_update()
 	
 	if get_collider() is TileMap:

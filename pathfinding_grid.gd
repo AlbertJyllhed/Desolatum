@@ -1,4 +1,5 @@
 extends Node
+class_name PathfindingGrid
 
 @export var tilemap : TileMap
 @export var debug_mode : bool

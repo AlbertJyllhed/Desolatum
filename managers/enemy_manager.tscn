@@ -6,7 +6,9 @@
 [node name="EnemyManager" type="Node"]
 script = ExtResource("1_7gyjg")
 enemy_list = ExtResource("2_owjkg")
-max_enemies = 12
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DifficultyTimer" type="Timer" parent="."]
+one_shot = true

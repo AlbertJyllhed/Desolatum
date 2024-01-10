@@ -12,6 +12,11 @@ signal finished
 var attack_vector : Vector2
 
 
+func _ready():
+	var player = get_tree().get_first_node_in_group("player")
+	target_locator_ray.set_target(player)
+
+
 func attack():
 	if not weapon_component:
 		print("Error: no weapon component attached!")

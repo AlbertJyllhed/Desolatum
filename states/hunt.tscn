@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://j5fmpojrs1ek"]
+
+[ext_resource type="Script" path="res://states/hunt.gd" id="1_84e3t"]
+
+[node name="Hunt" type="Node"]
+script = ExtResource("1_84e3t")

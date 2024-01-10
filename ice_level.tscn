@@ -67,4 +67,4 @@ y_sort_enabled = true
 [node name="ForegroundLayer" type="Node2D" parent="." groups=["foreground_layer"]]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.227451, 0.466667, 0.690196, 1)
+color = Color(0.133333, 0.305882, 0.470588, 1)

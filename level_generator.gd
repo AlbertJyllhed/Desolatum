@@ -40,15 +40,18 @@ var rooms = []
 
 @export var prop_chance : float = 0.1
 @export var crate_amount : int = 4
+
 var used_positions = []
 var crate_positions = []
 var prop_positions = []
 var spawner_positions = []
 
+var base_layer : Node2D
 var noise : FastNoiseLite
 
 
 func _ready():
+	base_layer = get_tree().get_first_node_in_group("base_layer")
 	noise = FastNoiseLite.new()
 	#noise.TYPE_SIMPLEX
 	noise.frequency = 0.2
@@ -86,6 +89,7 @@ func create_floors():
 			#find potential positions for props
 			if randf() <= prop_chance:
 				get_random_tile_position(position, prop_positions)
+				get_ground_without_neighbors(prop_positions, 1)
 			
 			#check if we are going to destroy a walker
 			if randf() < walker_destroy_chance and walkers.size() > 1:
@@ -137,6 +141,16 @@ func get_room_tiles(room):
 			room_tiles.append(new_step)
 	
 	return room_tiles
+
+
+func get_end_room():
+	var end_room = rooms.front()
+	var starting_position = map.front()
+	for room in rooms:
+		if starting_position.distance_to(room.position) > starting_position.distance_to(end_room.position):
+			end_room = room
+	
+	return end_room
 
 
 func create_walls():
@@ -205,28 +219,21 @@ func create_ore():
 
 
 func populate_level():
-	var base_layer = get_tree().get_first_node_in_group("base_layer")
 	var offset = Vector2(8, 8)
 	
 	#place the player
-	var player = player_scene.instantiate()
-	base_layer.add_child(player)
-	player.global_position = rooms.front().position * 16
+	var player = create_instance(player_scene, rooms.front().position)
 	var limits = tilemap.get_used_rect()
 	player.setup_camera(limits.position, limits.end)
 	player.setup_inventory()
 	
 	#place the teleporter
-	var teleporter = teleporter_scene.instantiate()
-	base_layer.add_child(teleporter)
-	teleporter.global_position = rooms.front().position * 16
+	create_instance(teleporter_scene, rooms.front().position)
 	for tile in get_room_tiles(rooms.front()):
 		used_positions.append(tile)
 	
 	#place the generator
-	var generator = generator_scene.instantiate()
-	base_layer.add_child(generator)
-	generator.global_position = get_end_room().position * 16
+	create_instance(generator_scene, get_end_room().position)
 	for tile in get_room_tiles(get_end_room()):
 		used_positions.append(tile)
 	
@@ -235,9 +242,7 @@ func populate_level():
 		var crate_position = crate_positions.pick_random()
 		crate_list.setup()
 		var crate_scene = crate_list.spawn_table.pick_item()
-		var crate_instance = crate_scene.instantiate()
-		base_layer.add_child(crate_instance)
-		crate_instance.global_position = crate_position * 16 + offset
+		create_instance(crate_scene, crate_position, offset)
 		crate_positions.erase(crate_position)
 	
 	#var handled_tiles = get_ground_without_neighbors()
@@ -250,42 +255,31 @@ func populate_level():
 	
 	#place enemy spawners
 	for spawner_position in spawner_positions:
-		#var spawner_instance = spawner_scene.instantiate() as EnemySpawner
-		#base_layer.add_child(spawner_instance)
-		#spawner_instance.global_position = spawner_position * 16 + offset
-		#enemy_manager.add_spawner(spawner_instance)
+		var spawner_instance = create_instance(spawner_scene, spawner_position, offset)
+		enemy_manager.add_spawner(spawner_instance)
 		
 		#place dust particles
-		var dust_instance = dust_scene.instantiate() as Node2D
-		base_layer.add_child(dust_instance)
-		dust_instance.global_position = spawner_position * 16 + offset
+		create_instance(dust_scene, spawner_position, offset)
 	
 	#place props
 	for prop_position in prop_positions:
 		prop_list.setup()
 		var prop_scene = prop_list.spawn_table.pick_item()
-		var prop_instance = prop_scene.instantiate() as Node2D
-		base_layer.add_child(prop_instance)
-		prop_instance.global_position = prop_position * 16 + offset
+		create_instance(prop_scene, prop_position, offset)
 	
 	var random_room = rooms.pick_random()
 	for tile in get_room_tiles(random_room):
 		if used_positions.has(tile):
 			return
 	
-	var car_instance = car_scene.instantiate() as Node2D
-	base_layer.add_child(car_instance)
-	car_instance.global_position = random_room.position * 16
+	create_instance(car_scene, random_room.position)
 
 
-func get_end_room():
-	var end_room = rooms.front()
-	var starting_position = map.front()
-	for room in rooms:
-		if starting_position.distance_to(room.position) > starting_position.distance_to(end_room.position):
-			end_room = room
-	
-	return end_room
+func create_instance(scene : PackedScene, position : Vector2, offset : Vector2 = Vector2.ZERO) -> Node2D:
+	var instance = scene.instantiate()
+	base_layer.add_child(instance)
+	instance.global_position = position * 16 + offset
+	return instance
 
 
 func get_random_tile_position(position, tile_locations):
@@ -294,12 +288,10 @@ func get_random_tile_position(position, tile_locations):
 		return
 	
 	#check how close the position is to the start and end of the map
-	var start_room_position = rooms.front().position
-	if position.distance_to(start_room_position) < 4:
+	if position.distance_to(rooms.front().position) < 4:
 		return
 	
-	var end_room_position = get_end_room().position
-	if position.distance_to(end_room_position) < 4:
+	if position.distance_to(get_end_room().position) < 4:
 		return
 	
 	#check previous tile positions, if they are too close chose another
@@ -311,16 +303,13 @@ func get_random_tile_position(position, tile_locations):
 	used_positions.append(position)
 
 
-func get_ground_without_neighbors():
-	var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
-	for tile in ground_tiles:
+func get_ground_without_neighbors(tile_locations, allowed_neighbors : int = 0):
+	for tile in tile_locations:
 		var neighbors = tilemap.get_surrounding_cells(tile)
 		var neighbor_count = 0
 		for neighbor in neighbors:
 			if tilemap.get_cell_source_id(0, neighbor) != ground:
 				neighbor_count += 1
 			
-			if neighbor_count > 1:
-				ground_tiles.erase(tile)
-	
-	return ground_tiles
+			if neighbor_count > allowed_neighbors:
+				tile_locations.erase(tile)

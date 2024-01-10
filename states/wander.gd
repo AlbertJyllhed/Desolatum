@@ -5,8 +5,8 @@ extends EnemyState
 @export var max_update_time : float = 3.0
 
 
-func body_entered(body):
-	state_machine.transition_to("Chase", {"target" : body})
+#func body_entered(body):
+	#state_machine.transition_to("Chase", {"target" : body})
 
 
 func timeout():

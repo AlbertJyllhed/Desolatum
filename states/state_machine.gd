@@ -3,7 +3,8 @@ class_name StateMachine
 
 signal transitioned(state_name)
 
-@export var targeting_area : TargetLocatorArea
+#@export var targeting_area : TargetLocatorArea
+@export var target_locator_ray : TargetLocatorRay
 @export var weapon : EnemyWeaponBase
 @export var timer : Timer
 
@@ -14,9 +15,13 @@ func _ready():
 	for child in get_children():
 		child.state_machine = self
 	
-	if targeting_area:
-		targeting_area.body_entered.connect(on_target_body_entered)
-		targeting_area.body_exited.connect(on_target_body_exited)
+	#if targeting_area:
+		#targeting_area.body_entered.connect(on_target_body_entered)
+		#targeting_area.body_exited.connect(on_target_body_exited)
+	
+	if target_locator_ray:
+		var target = get_tree().get_first_node_in_group("player")
+		target_locator_ray.set_target(target)
 	
 	if weapon:
 		weapon.has_target.connect(on_attack_entered)
@@ -28,16 +33,16 @@ func _ready():
 	current_state.enter()
 
 
-func _physics_process(delta):
-	current_state.physics_update(delta)
+#func _physics_process(delta):
+	#current_state.physics_update(delta)
 
 
-func on_target_body_entered(body):
-	current_state.body_entered(body)
+#func on_target_body_entered(body):
+	#current_state.body_entered(body)
 
 
-func on_target_body_exited(body):
-	current_state.body_exited(body)
+#func on_target_body_exited(body):
+	#current_state.body_exited(body)
 
 
 func on_attack_entered():

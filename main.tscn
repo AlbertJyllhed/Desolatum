@@ -47,10 +47,8 @@ enemy_manager = NodePath("../EnemyManager")
 prop_list = ExtResource("9_65bfq")
 crate_list = ExtResource("11_uf5hk")
 max_steps_until_turn = 6
-max_walkers = 4
-max_level_size = 400
 
-[node name="PathfindingGrid" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("12_wr64s")]
+[node name="PathfindingGrid" parent="." node_paths=PackedStringArray("tilemap") groups=["pathfinding"] instance=ExtResource("12_wr64s")]
 tilemap = NodePath("../TileMap")
 
 [node name="EnemyManager" parent="." instance=ExtResource("9_0twqc")]
@@ -75,4 +73,4 @@ y_sort_enabled = true
 [node name="ForegroundLayer" type="Node2D" parent="." groups=["foreground_layer"]]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.462745, 0.392157, 0.309804, 1)
+color = Color(0.266667, 0.254902, 0.223529, 1)

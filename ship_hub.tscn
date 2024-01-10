@@ -88,4 +88,4 @@ rotation = 0.349066
 [node name="ForegroundLayer" type="Node2D" parent="." groups=["foreground_layer"]]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.309804, 0.435294, 0.505882, 1)
+color = Color(0.568627, 0.705882, 0.784314, 1)
