@@ -4,7 +4,6 @@ class_name LevelGenerator
 const player_scene = preload("res://characters/player.tscn")
 const teleporter_scene = preload("res://scenes/props/teleport_platform.tscn")
 const generator_scene = preload("res://scenes/props/generator.tscn")
-#const crate_scene = preload("res://scenes/props/shop.tscn")
 const spawner_scene = preload("res://enemy_spawner.tscn")
 const car_scene = preload("res://scenes/props/car.tscn")
 const dust_scene = preload("res://particles/dust.tscn")
@@ -38,7 +37,7 @@ var map : Array[Vector2]
 @export var max_room_size_y : int = 2
 var rooms = []
 
-@export var prop_chance : float = 0.1
+var prop_chance : float = 0.1
 @export var crate_amount : int = 4
 
 var used_positions = []

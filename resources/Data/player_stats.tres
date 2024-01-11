@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_rlxyd")
-base_speed = 100.0
+base_speed = 80.0
 base_health = 6

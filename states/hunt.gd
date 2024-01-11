@@ -27,13 +27,10 @@ func timeout():
 	
 	path.pop_front()
 	
-	#if path.size() == 1:
-		#print("arrived")
-		#return
-	
 	if path.is_empty():
-		print("can't find path")
-		state_machine.timer.start(randf_range(min_update_time, max_update_time))
+		if not enemy_entity.aggressive:
+			state_machine.transition_to("Wander")
+		
 		return
 	
 	enemy_entity.direction = (tilemap.map_to_local(path[0]) - enemy_entity.global_position).normalized()
@@ -42,3 +39,7 @@ func timeout():
 
 func enter(message = {}):
 	state_machine.timer.start(randf_range(0.2, 0.5))
+
+
+func exit():
+	state_machine.timer.stop()

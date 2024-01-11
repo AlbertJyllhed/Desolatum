@@ -3,13 +3,13 @@ extends EnemyState
 @export var min_transition_time : float = 0.1
 @export var max_transition_time : float = 0.5
 
+
 #func body_entered(body):
 	#state_machine.transition_to("Chase", {"target" : body})
 
 
 func timeout():
-	var rand = randf()
-	if state_machine.target_locator_ray.has_target():
+	if state_machine.target_locator_ray.has_target() or enemy_entity.aggressive:
 		state_machine.transition_to("Hunt")
 		return
 	

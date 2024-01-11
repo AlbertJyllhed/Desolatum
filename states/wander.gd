@@ -10,6 +10,10 @@ extends EnemyState
 
 
 func timeout():
+	if state_machine.target_locator_ray.has_target() or enemy_entity.aggressive:
+		state_machine.transition_to("Hunt")
+		return
+	
 	state_machine.transition_to("Idle")
 
 

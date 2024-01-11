@@ -165,7 +165,7 @@ autoplay = "default"
 [node name="Hitbox" parent="." instance=ExtResource("1_1wjry")]
 collision_layer = 96
 collision_mask = 24
-damage = 4
+damage = 3
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("CircleShape2D_4wr7k")

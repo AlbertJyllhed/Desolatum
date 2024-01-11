@@ -1,10 +1,10 @@
 extends Node
 
 var levels : Array[PackedScene] = [
-	preload("res://ship_hub.tscn"),
-	preload("res://main.tscn"),
-	preload("res://ice_level.tscn"),
-	preload("res://magma_level.tscn")
+	preload("res://levels/ship_hub.tscn"),
+	preload("res://levels/main.tscn"),
+	preload("res://levels/ice_level.tscn"),
+	preload("res://levels/nest_level.tscn")
 ]
 
 var max_level_index : int = 0

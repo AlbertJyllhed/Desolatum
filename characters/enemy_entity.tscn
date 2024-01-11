@@ -1,22 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5dskmq7j3isv"]
+[gd_scene load_steps=7 format=3 uid="uid://b5dskmq7j3isv"]
 
 [ext_resource type="Script" path="res://characters/enemy_entity.gd" id="1_kjgs7"]
 [ext_resource type="PackedScene" uid="uid://4pkuotplcb2p" path="res://states/state_machine.tscn" id="2_q83i5"]
 [ext_resource type="PackedScene" uid="uid://d1fic30u18k03" path="res://states/idle.tscn" id="3_isf4n"]
 [ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/health_component.tscn" id="4_jsje3"]
-[ext_resource type="PackedScene" uid="uid://d0m7vblybubk2" path="res://components/hit_flash_component.tscn" id="5_4n8sj"]
-[ext_resource type="Shader" path="res://resources/shaders/hit_flash_component.gdshader" id="6_7lrdc"]
 [ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/drop_component.tscn" id="7_5sxj7"]
 [ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="8_wyt2p"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nipkb"]
-resource_local_to_scene = true
-shader = ExtResource("6_7lrdc")
-shader_parameter/lerp_percent = 1.0
-
 [node name="EnemyEntity" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 1025
+collision_mask = 1029
 motion_mode = 1
 script = ExtResource("1_kjgs7")
 acceleration = 200.0
@@ -26,10 +19,6 @@ acceleration = 200.0
 [node name="Idle" parent="StateMachine" instance=ExtResource("3_isf4n")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_jsje3")]
-
-[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_4n8sj")]
-health_component = NodePath("../HealthComponent")
-hit_flash_material = SubResource("ShaderMaterial_nipkb")
 
 [node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_5sxj7")]
 health_component = NodePath("../HealthComponent")

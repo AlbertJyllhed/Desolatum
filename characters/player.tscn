@@ -267,7 +267,6 @@ collision_layer = 2
 collision_mask = 1025
 motion_mode = 1
 script = ExtResource("1_qc1vg")
-max_speed = 60
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_g1c5e")]
 script = ExtResource("5_o3i63")

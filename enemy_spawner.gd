@@ -8,7 +8,7 @@ signal done_spawning
 var light : Node2D
 
 
-func spawn_enemy(enemy_scene : PackedScene):
+func spawn_enemy(enemy_scene : PackedScene, is_aggressive : bool = false):
 	if light:
 		return
 	
@@ -16,6 +16,7 @@ func spawn_enemy(enemy_scene : PackedScene):
 	var base_layer = get_tree().get_first_node_in_group("base_layer")
 	base_layer.call_deferred("add_child", enemy_instance)
 	enemy_instance.global_position = global_position
+	enemy_instance.aggressive = is_aggressive
 	done_spawning.emit()
 
 

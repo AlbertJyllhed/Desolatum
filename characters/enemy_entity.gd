@@ -7,6 +7,7 @@ class_name EnemyEntity
 
 var direction : Vector2
 var disabled : bool = false
+var aggressive : bool = false
 
 
 func _ready():

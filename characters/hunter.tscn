@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://be6ojx14xn6p6"]
+[gd_scene load_steps=17 format=3 uid="uid://be6ojx14xn6p6"]
 
 [ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_uc5ge"]
 [ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="2_4bueh"]
 [ext_resource type="PackedScene" uid="uid://j5fmpojrs1ek" path="res://states/hunt.tscn" id="2_54ofg"]
-[ext_resource type="Shader" path="res://resources/shaders/hit_flash_component.gdshader" id="3_erw71"]
 [ext_resource type="PackedScene" uid="uid://r1gcjlte6h4r" path="res://states/attack.tscn" id="3_fdq7t"]
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="4_1j3ok"]
 [ext_resource type="Texture2D" uid="uid://ddvtvawcutf6h" path="res://assets/textures/enemy.png" id="5_swhyc"]
@@ -11,13 +10,52 @@
 [ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://enemy_weapon_base.tscn" id="8_km41x"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="8_o8o2p"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nipkb"]
-resource_local_to_scene = true
-shader = ExtResource("3_erw71")
-shader_parameter/lerp_percent = 1.0
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iega7"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8k60x"]
+light_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kmdy4"]
 radius = 2.0
+
+[sub_resource type="Animation" id="Animation_grk2s"]
+resource_name = "walk_right"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 1]
+}
+
+[sub_resource type="Animation" id="Animation_8moa0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_26e1w"]
+_data = {
+"RESET": SubResource("Animation_8moa0"),
+"walk_right": SubResource("Animation_grk2s")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yc3s6"]
 radius = 6.0
@@ -35,50 +73,53 @@ timer = NodePath("../Timer")
 [node name="Wander" parent="StateMachine" index="1" instance=ExtResource("2_4bueh")]
 
 [node name="Hunt" parent="StateMachine" index="2" instance=ExtResource("2_54ofg")]
-min_update_time = 0.25
-max_update_time = 0.5
 
 [node name="Attack" parent="StateMachine" index="3" instance=ExtResource("3_fdq7t")]
 next_state = "Hunt"
 
 [node name="HealthComponent" parent="." index="2"]
-max_health = 3.0
+max_health = 4.0
 
-[node name="HitFlashComponent" parent="." index="3"]
-hit_flash_material = SubResource("ShaderMaterial_nipkb")
-
-[node name="DropComponent" parent="." index="4"]
+[node name="DropComponent" parent="." index="3"]
 max_drop_amount = 3
 drop_chance = 0.1
 drop_list = ExtResource("4_1j3ok")
 
-[node name="Sprite2D" parent="." index="5"]
+[node name="Sprite2D" parent="." index="4"]
+material = SubResource("CanvasItemMaterial_iega7")
 texture = ExtResource("5_swhyc")
 hframes = 7
 
-[node name="Shadow" parent="." index="6"]
+[node name="Shadow" parent="." index="5"]
 modulate = Color(0, 0, 0, 0.294118)
 z_index = -1
+material = SubResource("CanvasItemMaterial_8k60x")
 scale = Vector2(1, 0.25)
 texture = ExtResource("6_xlxgm")
 
-[node name="CollisionShape2D" parent="." index="7"]
+[node name="CollisionShape2D" parent="." index="6"]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_kmdy4")
 
-[node name="Hurtbox" parent="." index="9"]
+[node name="AnimationPlayer" parent="." index="7"]
+libraries = {
+"": SubResource("AnimationLibrary_26e1w")
+}
+autoplay = "walk_right"
+
+[node name="Hurtbox" parent="." index="8"]
 position = Vector2(0, -4)
 damage_tick_delay = 0.1
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_yc3s6")
 
+[node name="DisableTimer" parent="." index="9"]
+wait_time = 0.25
+
 [node name="TargetLocatorRay" parent="." index="10" instance=ExtResource("8_o8o2p")]
 
 [node name="EnemyWeaponBase" parent="." index="11" instance=ExtResource("8_km41x")]
 position = Vector2(0, -6)
-
-[node name="DisableTimer" parent="." index="12"]
-wait_time = 0.25
 
 [editable path="Hurtbox"]
