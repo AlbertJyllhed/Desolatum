@@ -1,7 +1,7 @@
 extends Node
 
 signal item_picked_up(item)
-signal ammo_updated(magazine, max_magazine, ammo)
+signal ammo_updated(ammo, max_ammo)
 signal health_updated(health, max_health)
 signal weapons_updated(index)
 signal energy_updated(energy)

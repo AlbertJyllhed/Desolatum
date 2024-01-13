@@ -27,7 +27,7 @@ collision_mask = 6
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_obhpf")]
 blood_particles = ExtResource("2_1vlld")
-max_health = 2.0
+max_health = 3.0
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("2_snb1w")]
 health_component = NodePath("../HealthComponent")

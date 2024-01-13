@@ -13,10 +13,13 @@ func _physics_process(_delta):
 	if not is_colliding():
 		return
 	
-	if not get_collider() is TileMap:
+	var collider = get_collider()
+	enabled = false
+	
+	if not collider is TileMap:
 		return
 	
-	tilemap = get_collider() as TileMap
+	tilemap = collider as TileMap
 	var hit_position = get_collision_point() - get_collision_normal()
 	var tile_position = tilemap.local_to_map(hit_position)
 	var tile_id = tilemap.get_cell_source_id(0, tile_position)
@@ -30,7 +33,6 @@ func _physics_process(_delta):
 	tilemap.set_cell(0, tile_position, ground, random_tile)
 	tilemap.set_cell(1, tile_position, none, Vector2i.ZERO)
 	update_neighbors(tile_position)
-	enabled = false
 	GameEvents.navigation_updated.emit(tile_position, false)
 	
 	var ore_type = tile_data.get_custom_data("ore_type")

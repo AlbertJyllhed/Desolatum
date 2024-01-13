@@ -15,7 +15,7 @@ func has_target() -> bool:
 	target_position = target.global_position - global_position
 	force_raycast_update()
 	
-	if get_collider() is TileMap:
+	if is_colliding():
 		return false
 	
 	return true

@@ -47,7 +47,7 @@ _data = {
 }
 
 [node name="Shop" instance=ExtResource("1_cbr0t")]
-collision_layer = 129
+collision_layer = 1152
 collision_mask = 512
 script = ExtResource("2_qfalo")
 required_energy = 10

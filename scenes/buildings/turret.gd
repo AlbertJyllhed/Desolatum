@@ -43,12 +43,10 @@ func _on_timer_timeout():
 	if targets.size() == 0:
 		return
 	
-	var direction = find_closest_target()
-	gun_component.attack(direction)
-	ammo -= 1
+	find_closest_target()
 
 
-func find_closest_target() -> Vector2:
+func find_closest_target():
 	var closest_target = targets[0]
 	for target in targets:
 		if target.position.distance_to(position) < target.position.distance_to(closest_target.position):
@@ -56,9 +54,10 @@ func find_closest_target() -> Vector2:
 	
 	target_locator_ray.set_target(closest_target)
 	if not target_locator_ray.has_target():
-		return Vector2.ZERO
+		return
 	
-	return closest_target.global_position
+	gun_component.attack(closest_target.global_position)
+	ammo -= 1
 
 
 func interact():

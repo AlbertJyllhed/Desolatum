@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvkq0ml6ssv2r"]
+[gd_scene load_steps=8 format=3 uid="uid://cvkq0ml6ssv2r"]
 
 [ext_resource type="PackedScene" uid="uid://decmbpipp0rbw" path="res://particles/particles.tscn" id="1_7h747"]
 [ext_resource type="Texture2D" uid="uid://bjos6a7nm4ipd" path="res://assets/textures/particles.png" id="2_1jhs8"]
 [ext_resource type="AudioStream" uid="uid://bckkdt30amobv" path="res://sounds/crystal_break.wav" id="2_s1nhs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u7ew8"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="Gradient" id="Gradient_bj5xi"]
 offsets = PackedFloat32Array(0.740741, 0.815789)
@@ -27,6 +33,7 @@ anim_offset_max = 1.0
 
 [node name="CrystalParticles" instance=ExtResource("1_7h747")]
 modulate = Color(0.054902, 1, 0.4, 1)
+material = SubResource("CanvasItemMaterial_u7ew8")
 process_material = SubResource("ParticleProcessMaterial_173nt")
 texture = ExtResource("2_1jhs8")
 

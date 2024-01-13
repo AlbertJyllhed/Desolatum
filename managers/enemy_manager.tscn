@@ -11,5 +11,4 @@ enemy_list = ExtResource("2_owjkg")
 one_shot = true
 
 [node name="WaveTimer" type="Timer" parent="."]
-wait_time = 60.0
 one_shot = true

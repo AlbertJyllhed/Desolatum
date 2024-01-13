@@ -3,6 +3,5 @@
 [ext_resource type="Script" path="res://components/areas/target_locator_ray.gd" id="1_h0ec2"]
 
 [node name="TargetLocatorRay" type="RayCast2D"]
-collision_mask = 9
 collide_with_areas = true
 script = ExtResource("1_h0ec2")

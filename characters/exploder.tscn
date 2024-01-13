@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://pilwyjays5u2"]
+[gd_scene load_steps=15 format=3 uid="uid://pilwyjays5u2"]
 
 [ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_w460d"]
 [ext_resource type="PackedScene" uid="uid://j5fmpojrs1ek" path="res://states/hunt.tscn" id="2_on16h"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://r1gcjlte6h4r" path="res://states/attack.tscn" id="3_x7ofc"]
 [ext_resource type="Texture2D" uid="uid://ddvtvawcutf6h" path="res://assets/textures/enemy.png" id="4_5r74f"]
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="4_jldym"]
+[ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="5_7qdpn"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="5_x11qn"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="8_y8nl0"]
 [ext_resource type="PackedScene" uid="uid://cvll8o6xr230i" path="res://components/explode_attack.tscn" id="9_wr4oe"]
@@ -40,9 +41,9 @@ min_update_time = 0.25
 max_update_time = 0.5
 
 [node name="Attack" parent="StateMachine" index="3" instance=ExtResource("3_x7ofc")]
-cooldown = 1.0
 
 [node name="HealthComponent" parent="." index="2"]
+blood_particles = ExtResource("5_7qdpn")
 max_health = 1.0
 
 [node name="DropComponent" parent="." index="3"]
@@ -73,12 +74,10 @@ damage_tick_delay = 0.1
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_5gufv")
 
-[node name="DisableTimer" parent="." index="9"]
-wait_time = 0.25
-
 [node name="TargetLocatorRay" parent="." index="10" instance=ExtResource("8_y8nl0")]
 
 [node name="ExplodeAttack" parent="." index="11" node_paths=PackedStringArray("health_component") instance=ExtResource("9_wr4oe")]
+position = Vector2(0, -6)
 health_component = NodePath("../HealthComponent")
 
 [editable path="Hurtbox"]

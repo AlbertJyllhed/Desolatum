@@ -2,34 +2,57 @@ extends Node
 class_name EnemyManager
 
 @export var enemy_list : EnemyList
-@export var base_wave_time : float = 60.0
 
 @onready var spawn_timer : Timer = $SpawnTimer
-var spawn_time : float = 6.0
+var spawn_time : float
 
 @onready var wave_timer : Timer = $WaveTimer
 var wave_time : float
 
+var wave_mode : Dictionary = {
+	"buildup" : {
+		"max_enemies" : 8,
+		"spawn_time" : 10.0,
+		"min_wave_time" : 60.0,
+		"max_wave_time" : 120.0,
+		"aggressive" : false
+	},
+	"action" : {
+		"max_enemies" : 24,
+		"spawn_time" : 4.0,
+		"min_wave_time" : 30.0,
+		"max_wave_time" : 60.0,
+		"aggressive" : true
+	},
+	"cooldown" : {
+		"max_enemies" : 3,
+		"spawn_time" : 14.0,
+		"min_wave_time" : 20.0,
+		"max_wave_time" : 40.0,
+		"aggressive" : false
+	}
+}
+
+var index : int = 0
+
 var spawners : Array[EnemySpawner]
 var max_enemies : int
-var spawn_modifier : float = 1.0
+var spawn_aggressive : bool
 
-var wave_ongoing : bool = false
+var health_modifier : float = 1.0
+var energy_modifier : float = 1.0
 
 
 func _ready():
-	GameEvents.health_updated.connect(adjust_spawn_rate)
-	
+	GameEvents.health_updated.connect(on_health_updated)
+	GameEvents.energy_updated.connect(on_energy_updated)
 	spawn_timer.timeout.connect(spawn)
 	wave_timer.timeout.connect(update_difficulty)
 	
-	max_enemies = randi_range(1, 3)
-	wave_time = base_wave_time
-	
 	enemy_list.setup()
 	
+	update_difficulty()
 	spawn_timer.start(spawn_time)
-	wave_timer.start(wave_time)
 
 
 func add_spawner(spawner : EnemySpawner):
@@ -37,38 +60,33 @@ func add_spawner(spawner : EnemySpawner):
 
 
 func update_difficulty():
-	var enemies = get_tree().get_nodes_in_group("enemies") as Array[EnemyEntity]
-	if wave_ongoing:
-		#end wave
-		max_enemies = randi_range(4, 8) * spawn_modifier
-		print("max enemies: " + str(max_enemies))
-		wave_ongoing = false
-		wave_time = base_wave_time
-		for enemy in enemies:
-			enemy.aggressive = false
-		
-		wave_timer.start(wave_time)
-		print("wave ends")
-		return
+	if index > (wave_mode.size() - 1):
+		index = 0
 	
-	#start wave, wave timer should be shorter than time between
-	max_enemies = randi_range(24, 30) * spawn_modifier
-	print("max enemies: " + str(max_enemies))
-	wave_ongoing = true
-	wave_time = base_wave_time / 2
+	var enemies = get_tree().get_nodes_in_group("enemies") as Array[EnemyEntity]
+	var values = wave_mode.values()
+	max_enemies = values[index]["max_enemies"] * (energy_modifier * health_modifier)
+	spawn_time = values[index]["spawn_time"]
+	wave_time = randf_range(values[index]["min_wave_time"], values[index]["max_wave_time"])
+	spawn_aggressive = values[index]["aggressive"]
 	for enemy in enemies:
-		enemy.aggressive = true
+		enemy.aggressive = spawn_aggressive
 	
 	wave_timer.start(wave_time)
-	print("wave starts")
+	var keys = wave_mode.keys()
+	print(keys[index])
+	index += 1
 
 
-func adjust_spawn_rate(health, max_health):
-	if health < (max_health / 2):
-		spawn_modifier = 0.6
-		return
-	
-	spawn_modifier = 1.0
+func on_health_updated(health, max_health):
+	#health modifier lowers the max enemies based on player health
+	health_modifier = max(health / max_health, 0.25)
+
+
+func on_energy_updated(energy):
+	#energy modifier raises the max enemies based on player energy
+	var energy_percentage = float(energy) / 100
+	energy_modifier = min(1.0 + energy_percentage, 1.5)
 
 
 func spawn():
@@ -82,7 +100,7 @@ func spawn():
 			continue
 		
 		var enemy_scene = enemy_list.spawn_table.pick_item()
-		spawner.spawn_enemy(enemy_scene, wave_ongoing)
+		spawner.spawn_enemy(enemy_scene, spawn_aggressive)
 		total_enemies += 1
 	
 	spawn_timer.start(spawn_time)

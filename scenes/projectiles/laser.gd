@@ -33,7 +33,7 @@ func cast():
 	
 	light.position = cast_point / 2
 	light.rotation = cast_point.angle()
-	light.scale = Vector2(hitbox_size / 16, 1)
+	light.scale = Vector2(hitbox_size, 1)
 
 
 func grow():
