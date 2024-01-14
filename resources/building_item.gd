@@ -3,8 +3,7 @@ class_name BuildingItem
 
 @export var building_scene : PackedScene
 @export var texture : Texture2D
-@export var energy_cost : int = 1
-@export var ore_cost : int = 1
+@export var limit : int
 
 
 func get_size() -> Vector2:

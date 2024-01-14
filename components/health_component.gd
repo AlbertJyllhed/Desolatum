@@ -29,5 +29,5 @@ func check_death():
 func spawn_particles():
 	var base_layer = get_tree().get_first_node_in_group("base_layer")
 	var blood_instance = blood_particles.instantiate()
-	base_layer.add_child(blood_instance)
+	base_layer.call_deferred("add_child", blood_instance)
 	blood_instance.global_position = owner.global_position

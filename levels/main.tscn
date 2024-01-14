@@ -45,8 +45,8 @@ tilemap = NodePath("../TileMap")
 enemy_manager = NodePath("../EnemyManager")
 prop_list = ExtResource("10_cwgmt")
 crate_list = ExtResource("11_htlo5")
-walker_turn_chance = 0.5
 max_steps_until_turn = 10
+max_walkers = 4
 room_chance = 0.6
 
 [node name="PathfindingGrid" parent="." node_paths=PackedStringArray("tilemap") groups=["pathfinding"] instance=ExtResource("12_s3jgr")]

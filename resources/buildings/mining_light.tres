@@ -8,8 +8,7 @@
 script = ExtResource("1_lfs22")
 building_scene = ExtResource("1_hlabj")
 texture = ExtResource("3_7vet4")
-energy_cost = 6
-ore_cost = 2
+limit = 1
 id = "mining_light"
 name = "Mining Light"
 description = ""

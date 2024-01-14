@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Pickup
 
 @export var explode_time : float = 1.0
 

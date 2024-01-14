@@ -8,8 +8,7 @@
 script = ExtResource("1_cmfss")
 building_scene = ExtResource("1_g2vka")
 texture = ExtResource("3_x6uqr")
-energy_cost = 2
-ore_cost = 0
+limit = 10
 id = "mine"
 name = "Mine"
 description = ""

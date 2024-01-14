@@ -41,8 +41,8 @@ var prop_chance : float = 0.1
 @export var crate_amount : int = 4
 
 var used_positions = []
-var crate_positions = []
 var prop_positions = []
+var crate_positions = []
 var spawner_positions = []
 
 var base_layer : Node2D
@@ -67,6 +67,7 @@ func _ready():
 
 func create_floors():
 	var first_walker = Walker.new(Vector2.ZERO, walker_turn_chance, max_steps_until_turn)
+	first_walker.changed_direction.connect(on_walker_changed_direction)
 	walkers.append(first_walker)
 	create_room(Vector2.ZERO)
 	
@@ -93,12 +94,12 @@ func create_floors():
 			#check if we are going to destroy a walker
 			if randf() < walker_destroy_chance and walkers.size() > 1:
 				walker.queue_free()
-				get_random_tile_position(position, crate_positions)
 				break
 			
 			#check if we should spawn a new walker
 			if randf() < walker_spawn_chance and walkers.size() < max_walkers:
 				var new_walker = Walker.new(walker.position, walker_turn_chance, max_steps_until_turn)
+				new_walker.changed_direction.connect(on_walker_changed_direction)
 				walkers.append(new_walker)
 		
 		var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
@@ -111,6 +112,11 @@ func create_floors():
 		walker.queue_free()
 	
 	walkers.clear()
+
+
+func on_walker_changed_direction(position):
+	get_random_tile_position(position, crate_positions)
+	get_ground_without_neighbors(crate_positions, 1)
 
 
 func create_room(position):
@@ -232,25 +238,17 @@ func populate_level():
 		used_positions.append(tile)
 	
 	#place the generator
-	create_instance(generator_scene, get_end_room().position)
-	for tile in get_room_tiles(get_end_room()):
+	var end_room = get_end_room()
+	create_instance(generator_scene, end_room.position)
+	for tile in get_room_tiles(end_room):
 		used_positions.append(tile)
 	
 	#place crates
 	for i in crate_amount:
-		var crate_position = crate_positions.pick_random()
 		crate_list.setup()
+		var crate_position = crate_positions.pick_random()
 		var crate_scene = crate_list.spawn_table.pick_item()
 		create_instance(crate_scene, crate_position, offset)
-		crate_positions.erase(crate_position)
-	
-	#var handled_tiles = get_ground_without_neighbors()
-	#for i in crate_amount:
-		#var crate_position = handled_tiles.pick_random()
-		#var crate_instance = crate_scene.instantiate()
-		#base_layer.add_child(crate_instance)
-		#crate_instance.global_position = tilemap.to_global(crate_position) * 16 + offset
-		#handled_tiles.erase(crate_position)
 	
 	#place enemy spawners
 	for spawner_position in spawner_positions:

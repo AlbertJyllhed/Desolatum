@@ -8,8 +8,7 @@
 script = ExtResource("1_o3kkx")
 building_scene = ExtResource("1_dw2s2")
 texture = ExtResource("2_v80df")
-energy_cost = 8
-ore_cost = 4
+limit = 1
 id = "turret"
 name = "Turret"
 description = ""

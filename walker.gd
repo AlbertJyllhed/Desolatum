@@ -1,6 +1,8 @@
 extends Node
 class_name Walker
 
+signal changed_direction(position)
+
 const DIRECTIONS = [Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN]
 
 var position = Vector2.ZERO
@@ -36,3 +38,4 @@ func change_direction():
 	directions.erase(direction)
 	directions.shuffle()
 	direction = directions.pop_front()
+	changed_direction.emit(position)
