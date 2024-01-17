@@ -12,7 +12,7 @@ var base_layer : Node2D
 
 var buildings_placed : Dictionary = {
 	"turret" : 0,
-	"mining_light" : 0,
+	"fence" : 0,
 	"mine" : 0
 }
 var building_id = ""
@@ -80,4 +80,3 @@ func _physics_process(_delta):
 func on_item_picked_up(item : Item):
 	if buildings_placed.has(item.id):
 		buildings_placed[item.id] = max(buildings_placed[item.id] - 1, 0)
-		print(buildings_placed[item.id])

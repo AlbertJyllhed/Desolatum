@@ -1,19 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8h8q16gs2wqd"]
+[gd_scene load_steps=9 format=3 uid="uid://c8h8q16gs2wqd"]
 
 [ext_resource type="Script" path="res://components/tether_node.gd" id="1_myjgd"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_yqreb"]
 [ext_resource type="Resource" uid="uid://xtr2dyq32x00" path="res://resources/Items/tether.tres" id="2_5l3ft"]
 [ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_ta773"]
+[ext_resource type="PackedScene" uid="uid://bp256giwv7mxd" path="res://components/electric_arc.tscn" id="4_kxwea"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_01w7j"]
+radius = 4.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hjp2q"]
 light_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lni6l"]
+radius = 48.0
 
 [node name="TetherNode" type="StaticBody2D"]
 collision_layer = 128
 collision_mask = 512
 script = ExtResource("1_myjgd")
+electric_arc_scene = ExtResource("4_kxwea")
 item = ExtResource("2_5l3ft")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -23,14 +29,6 @@ texture = ExtResource("1_yqreb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_01w7j")
-
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 0)
-width = 2.0
-default_color = Color(0.054902, 1, 0.4, 1)
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
 
 [node name="Label" type="Label" parent="."]
 z_index = 11
@@ -52,3 +50,13 @@ theme_override_fonts/font = ExtResource("3_ta773")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_lni6l")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

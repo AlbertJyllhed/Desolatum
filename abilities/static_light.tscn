@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="1_cyoku"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ey3mw"]
-radius = 104.0
+radius = 78.0
 
 [node name="StaticLight" type="Node2D"]
 script = ExtResource("1_2c8uk")
@@ -12,7 +12,7 @@ script = ExtResource("1_2c8uk")
 [node name="Light" type="PointLight2D" parent="."]
 blend_mode = 2
 texture = ExtResource("1_cyoku")
-texture_scale = 0.8
+texture_scale = 0.6
 
 [node name="Area2D" type="Area2D" parent="Light"]
 collision_layer = 2048

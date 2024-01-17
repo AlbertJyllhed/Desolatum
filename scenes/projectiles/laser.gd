@@ -2,7 +2,6 @@ extends Line2D
 
 @onready var ray : RayCast2D = $RayCast2D
 @onready var hitbox : Hitbox = $Hitbox
-@onready var collision_shape : CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var light : Node2D = $PointLight2D
 
 var bounces : int = 3
@@ -29,7 +28,7 @@ func cast():
 	hitbox.position = cast_point / 2
 	hitbox.rotation = cast_point.angle()
 	var hitbox_size = (get_point_position(0) + cast_point).length() / 2
-	collision_shape.shape.extents = Vector2(hitbox_size, 6)
+	hitbox.collision_shape.shape.extents = Vector2(hitbox_size, 6)
 	
 	light.position = cast_point / 2
 	light.rotation = cast_point.angle()
@@ -42,7 +41,7 @@ func grow():
 
 
 func shrink():
-	collision_shape.disabled = true
+	hitbox.collision_shape.disabled = true
 	tween = get_tree().create_tween().bind_node(self)
 	tween.tween_property(self, "width", 0, 0.2)
 	tween.tween_callback(queue_free)

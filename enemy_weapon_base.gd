@@ -8,6 +8,7 @@ signal finished
 
 @onready var attack_area : TargetLocatorArea = $AttackArea
 @onready var target_locator_ray : TargetLocatorRay = $TargetLocatorRay
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var attack_vector : Vector2
 
@@ -22,12 +23,19 @@ func attack():
 		print("Error: no weapon component attached!")
 		return
 	
-	var player = target_locator_ray.player_node
+	var player = target_locator_ray.target
 	if not is_instance_valid(player):
 		return
 	
+	animation_player.play("attack")
 	attack_vector = player.global_position
-	#look_at(attack_vector)
+	
+	if attack_vector.x > global_position.x:
+		weapon_component.scale.y = 1
+	else:
+		weapon_component.scale.y = -1
+	
+	weapon_component.look_at(attack_vector)
 	weapon_component.attack(attack_vector)
 
 

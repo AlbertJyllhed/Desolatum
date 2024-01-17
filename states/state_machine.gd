@@ -4,6 +4,7 @@ class_name StateMachine
 signal transitioned(state_name)
 
 #@export var targeting_area : TargetLocatorArea
+@export var animation_player : AnimationPlayer
 @export var target_locator_ray : TargetLocatorRay
 @export var weapon : EnemyWeaponBase
 @export var timer : Timer

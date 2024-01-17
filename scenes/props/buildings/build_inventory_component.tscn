@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/props/buildings/build_inventory_component.gd" id="1_cbewi"]
 [ext_resource type="Resource" uid="uid://ditghyve5swtu" path="res://resources/buildings/turret.tres" id="2_l4sw1"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="2_o2kub"]
-[ext_resource type="Resource" uid="uid://dqwarqcxldebj" path="res://resources/buildings/mining_light.tres" id="3_3e0l4"]
+[ext_resource type="Resource" uid="uid://bh7dlvntjh62h" path="res://resources/buildings/fence.tres" id="3_4efcl"]
 [ext_resource type="Resource" uid="uid://b3ccnikewjlhd" path="res://resources/buildings/mine.tres" id="4_brkrd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb24h"]
@@ -11,7 +11,7 @@ size = Vector2(15, 15)
 
 [node name="BuildInventoryComponent" type="Node2D"]
 script = ExtResource("1_cbewi")
-buildings = Array[Resource("res://resources/building_item.gd")]([ExtResource("2_l4sw1"), ExtResource("3_3e0l4"), ExtResource("4_brkrd")])
+buildings = Array[Resource("res://resources/building_item.gd")]([ExtResource("2_l4sw1"), ExtResource("3_4efcl"), ExtResource("4_brkrd")])
 
 [node name="BuildingSprite" type="Sprite2D" parent="."]
 z_index = 11

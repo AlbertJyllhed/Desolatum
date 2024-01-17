@@ -1,14 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://be6ojx14xn6p6"]
+[gd_scene load_steps=20 format=3 uid="uid://be6ojx14xn6p6"]
 
 [ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_uc5ge"]
 [ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="2_4bueh"]
 [ext_resource type="PackedScene" uid="uid://j5fmpojrs1ek" path="res://states/hunt.tscn" id="2_54ofg"]
 [ext_resource type="PackedScene" uid="uid://r1gcjlte6h4r" path="res://states/attack.tscn" id="3_fdq7t"]
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="4_1j3ok"]
-[ext_resource type="Texture2D" uid="uid://ddvtvawcutf6h" path="res://assets/textures/enemy.png" id="5_swhyc"]
+[ext_resource type="Texture2D" uid="uid://bdme85pxjaufh" path="res://assets/textures/rock_enemy.png" id="6_8347q"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="6_xlxgm"]
-[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://enemy_weapon_base.tscn" id="8_km41x"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="8_o8o2p"]
+[ext_resource type="PackedScene" uid="uid://bi32k7cc6fr6" path="res://components/weapons/enemy_weapons/claws.tscn" id="9_5rq6l"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iega7"]
 light_mode = 2
@@ -36,7 +36,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_grk2s"]
 resource_name = "walk_right"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -45,29 +45,81 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 3, 4, 5, 6, 1]
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ttc81"]
+resource_name = "attack_right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 0]
+}
+
+[sub_resource type="Animation" id="Animation_sckvw"]
+resource_name = "prepare_attack_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_k2222"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_26e1w"]
 _data = {
 "RESET": SubResource("Animation_8moa0"),
+"attack_right": SubResource("Animation_ttc81"),
+"idle": SubResource("Animation_k2222"),
+"prepare_attack_right": SubResource("Animation_sckvw"),
 "walk_right": SubResource("Animation_grk2s")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yc3s6"]
-radius = 6.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_qmjuk"]
+radius = 8.0
 
 [node name="Hunter" instance=ExtResource("1_uc5ge")]
 
 [node name="Timer" type="Timer" parent="." index="0"]
 one_shot = true
 
-[node name="StateMachine" parent="." index="1" node_paths=PackedStringArray("target_locator_ray", "weapon", "timer")]
+[node name="StateMachine" parent="." index="1" node_paths=PackedStringArray("animation_player", "target_locator_ray", "weapon", "timer")]
+animation_player = NodePath("../AnimationPlayer")
 target_locator_ray = NodePath("../TargetLocatorRay")
-weapon = NodePath("../EnemyWeaponBase")
+weapon = NodePath("../Claws")
 timer = NodePath("../Timer")
 
 [node name="Wander" parent="StateMachine" index="1" instance=ExtResource("2_4bueh")]
@@ -87,8 +139,8 @@ drop_list = ExtResource("4_1j3ok")
 
 [node name="Sprite2D" parent="." index="4"]
 material = SubResource("CanvasItemMaterial_iega7")
-texture = ExtResource("5_swhyc")
-hframes = 7
+texture = ExtResource("6_8347q")
+hframes = 17
 
 [node name="Shadow" parent="." index="5"]
 modulate = Color(0, 0, 0, 0.294118)
@@ -108,18 +160,21 @@ libraries = {
 autoplay = "walk_right"
 
 [node name="Hurtbox" parent="." index="8"]
-position = Vector2(0, -4)
-damage_tick_delay = 0.1
+position = Vector2(0, -8)
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_yc3s6")
+shape = SubResource("CircleShape2D_qmjuk")
 
 [node name="DisableTimer" parent="." index="9"]
 wait_time = 0.25
 
 [node name="TargetLocatorRay" parent="." index="10" instance=ExtResource("8_o8o2p")]
 
-[node name="EnemyWeaponBase" parent="." index="11" instance=ExtResource("8_km41x")]
+[node name="Claws" parent="." index="11" instance=ExtResource("9_5rq6l")]
 position = Vector2(0, -6)
 
 [editable path="Hurtbox"]
+[editable path="Claws"]
+[editable path="Claws/MeleeComponent"]
+[editable path="Claws/MeleeComponent/Pivot/Hitbox"]
+[editable path="Claws/AttackArea"]

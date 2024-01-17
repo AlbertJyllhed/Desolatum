@@ -20,8 +20,8 @@ light_mode = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_h7ave"]
 radius = 2.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5gufv"]
-radius = 6.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_p6tbj"]
+radius = 8.0
 
 [node name="Exploder" instance=ExtResource("1_w460d")]
 max_speed = 60
@@ -29,7 +29,8 @@ max_speed = 60
 [node name="Timer" type="Timer" parent="." index="0"]
 one_shot = true
 
-[node name="StateMachine" parent="." index="1" node_paths=PackedStringArray("target_locator_ray", "weapon", "timer")]
+[node name="StateMachine" parent="." index="1" node_paths=PackedStringArray("animation_player", "target_locator_ray", "weapon", "timer")]
+animation_player = NodePath("../AnimationPlayer")
 target_locator_ray = NodePath("../TargetLocatorRay")
 weapon = NodePath("../ExplodeAttack")
 timer = NodePath("../Timer")
@@ -68,11 +69,10 @@ position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_h7ave")
 
 [node name="Hurtbox" parent="." index="8"]
-position = Vector2(0, -4)
-damage_tick_delay = 0.1
+position = Vector2(0, -8)
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_5gufv")
+shape = SubResource("CircleShape2D_p6tbj")
 
 [node name="TargetLocatorRay" parent="." index="10" instance=ExtResource("8_y8nl0")]
 

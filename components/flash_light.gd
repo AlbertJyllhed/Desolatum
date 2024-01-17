@@ -4,6 +4,7 @@ extends Node2D
 @export var light_distance : float = 16.0
 
 @onready var light : Node2D = $Light
+@onready var timer : Timer = $Timer
 
 var base_layer : Node2D
 var static_light_instance : Node2D
@@ -14,7 +15,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("flashlight"):
+	if Input.is_action_just_pressed("flashlight") and timer.is_stopped():
 		light.visible = !light.visible
 		send_to_position(light.visible)
 	
@@ -24,10 +25,15 @@ func _physics_process(_delta):
 
 func send_to_position(value : bool):
 	if value:
-		static_light_instance.queue_free()
+		static_light_instance.set_target_position(global_position)
+		timer.start()
 		return
 	
 	static_light_instance = static_light_scene.instantiate()
 	base_layer.add_child(static_light_instance)
 	static_light_instance.global_position = global_position
 	static_light_instance.set_target_position(get_global_mouse_position())
+
+
+func _on_timer_timeout():
+	static_light_instance.queue_free()

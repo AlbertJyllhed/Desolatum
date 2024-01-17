@@ -38,6 +38,7 @@ func timeout():
 
 
 func enter(message = {}):
+	state_machine.animation_player.play("walk_right")
 	state_machine.timer.start(randf_range(0.2, 0.5))
 
 

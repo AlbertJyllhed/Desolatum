@@ -21,6 +21,7 @@ power = 6.0
 position = Vector2(12, 0)
 projectile = ExtResource("2_8xe17")
 projectile_deviation = 0.0
+projectile_damage = 0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
 stream = ExtResource("5_1h6hb")

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp256giwv7mxd"]
+
+[ext_resource type="Script" path="res://components/electric_arc.gd" id="1_8d1dc"]
+[ext_resource type="PackedScene" path="res://components/areas/hitbox.tscn" id="1_683pa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkmb3"]
+
+[node name="ElectricArc" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+default_color = Color(0.054902, 1, 0.4, 1)
+script = ExtResource("1_8d1dc")
+time_between_zaps = 1.5
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+
+[node name="Hitbox" parent="." instance=ExtResource("1_683pa")]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_fkmb3")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Hitbox"]

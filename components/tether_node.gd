@@ -1,40 +1,38 @@
 extends Pickup
 class_name TetherNode
 
-@onready var line : Line2D = $Line2D
-@onready var ray : RayCast2D = $RayCast2D
+@export var electric_arc_scene : PackedScene
 
-var player : Player
-
-
-func _physics_process(delta):
-	if not player:
-		return
-	
-	check_ray(player)
+var electric_arcs : Array[ElectricArc]
+var max_target_amount : int = 6
 
 
-func check_ray(target):
-	var direction = target.global_position - global_position
-	ray.target_position = direction
-	ray.force_raycast_update()
-	
-	if ray.is_colliding():
-		line.set_point_position(1, Vector2.ZERO)
-		return
+func _ready():
+	for i in max_target_amount:
+		spawn_electric_arc()
+
+
+func spawn_electric_arc():
+	var electric_arc_instance = electric_arc_scene.instantiate() as ElectricArc
+	add_child(electric_arc_instance)
+	electric_arc_instance.global_position = global_position
+	electric_arc_instance.set_enabled(false)
+	electric_arcs.append(electric_arc_instance)
+
+
+func _on_area_2d_body_entered(body):
+	for electric_arc in electric_arcs:
+		if electric_arc.target:
+			continue
 		
-	line.set_point_position(1, ray.target_position)
-
-
-func show_details():
-	if not player:
+		electric_arc.set_target(body)
+		electric_arc.set_enabled(true)
 		return
-	
-	super.show_details()
 
 
-func interact():
-	if not player:
-		return
-	
-	super.interact()
+func _on_area_2d_body_exited(body):
+	for electric_arc in electric_arcs:
+		if electric_arc.target == body:
+			electric_arc.set_target(null)
+			electric_arc.set_enabled(false)
+			return

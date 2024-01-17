@@ -18,6 +18,8 @@ debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="TargetLocatorRay" parent="." instance=ExtResource("2_3lq11")]
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 
 [editable path="AttackArea"]
