@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_2e3pe")
-id = "speed"
-name = "Move Speed"
-description = "Increase movement speed by 10%"
+id = "adrenaline"
+name = "Adrenaline"
+description = "Increase movement speed by 10% when near enemies"
 amount = 1
+pickup_type = 0
+drop_weight = 1

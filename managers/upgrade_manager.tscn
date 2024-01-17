@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://managers/upgrade_manager.gd" id="1_g5l1x"]
 [ext_resource type="Resource" uid="uid://wtoq1hamm28h" path="res://resources/upgrades/health_up.tres" id="2_0ibor"]
 [ext_resource type="PackedScene" uid="uid://bwjib0aph6k3" path="res://ui/upgrade_selection_ui.tscn" id="2_yewm5"]
-[ext_resource type="Resource" uid="uid://ct5dagltkv6xx" path="res://resources/upgrades/speed.tres" id="3_sig20"]
+[ext_resource type="Resource" uid="uid://ct5dagltkv6xx" path="res://resources/upgrades/adrenaline.tres" id="3_sig20"]
 
 [node name="UpgradeManager" type="Node"]
 script = ExtResource("1_g5l1x")

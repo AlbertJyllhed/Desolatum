@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=3 format=3 uid="uid://cacpdv42u2xca"]
+
+[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_nlafg"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_v334g"]
+
+[resource]
+script = ExtResource("1_nlafg")
+id = "volatile"
+name = "Volatile"
+description = "Upon running out of ammo turret will explode"
+icon = ExtResource("1_v334g")
+amount = 1
+pickup_type = 0
+drop_weight = 1

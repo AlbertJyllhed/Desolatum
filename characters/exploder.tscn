@@ -1,13 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://pilwyjays5u2"]
+[gd_scene load_steps=21 format=3 uid="uid://pilwyjays5u2"]
 
 [ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_w460d"]
 [ext_resource type="PackedScene" uid="uid://j5fmpojrs1ek" path="res://states/hunt.tscn" id="2_on16h"]
 [ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="3_i6xyo"]
 [ext_resource type="PackedScene" uid="uid://r1gcjlte6h4r" path="res://states/attack.tscn" id="3_x7ofc"]
-[ext_resource type="Texture2D" uid="uid://ddvtvawcutf6h" path="res://assets/textures/enemy.png" id="4_5r74f"]
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="4_jldym"]
 [ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="5_7qdpn"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="5_x11qn"]
+[ext_resource type="Texture2D" uid="uid://rtls2ky0kogm" path="res://assets/textures/exploder_enemy.png" id="7_hm1ln"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="8_y8nl0"]
 [ext_resource type="PackedScene" uid="uid://cvll8o6xr230i" path="res://components/explode_attack.tscn" id="9_wr4oe"]
 
@@ -19,6 +19,96 @@ light_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h7ave"]
 radius = 2.0
+
+[sub_resource type="Animation" id="Animation_jftu0"]
+resource_name = "idle"
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_o2ini"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bgx3y"]
+resource_name = "walk_right"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 1]
+}
+
+[sub_resource type="Animation" id="Animation_udfay"]
+resource_name = "prepare_attack_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_mn20r"]
+resource_name = "attack_right"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [11, 12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6p0ej"]
+_data = {
+"RESET": SubResource("Animation_o2ini"),
+"attack_right": SubResource("Animation_mn20r"),
+"idle": SubResource("Animation_jftu0"),
+"prepare_attack_right": SubResource("Animation_udfay"),
+"walk_right": SubResource("Animation_bgx3y")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p6tbj"]
 radius = 8.0
@@ -54,8 +144,8 @@ drop_list = ExtResource("4_jldym")
 
 [node name="Sprite2D" parent="." index="4"]
 material = SubResource("CanvasItemMaterial_ap7to")
-texture = ExtResource("4_5r74f")
-hframes = 7
+texture = ExtResource("7_hm1ln")
+hframes = 13
 
 [node name="Shadow" parent="." index="5"]
 modulate = Color(0, 0, 0, 0.294118)
@@ -67,6 +157,12 @@ texture = ExtResource("5_x11qn")
 [node name="CollisionShape2D" parent="." index="6"]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_h7ave")
+
+[node name="AnimationPlayer" parent="." index="7"]
+libraries = {
+"": SubResource("AnimationLibrary_6p0ej")
+}
+autoplay = "walk_right"
 
 [node name="Hurtbox" parent="." index="8"]
 position = Vector2(0, -8)
