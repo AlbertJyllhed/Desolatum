@@ -2,9 +2,9 @@ extends Pickup
 class_name TetherNode
 
 @export var electric_arc_scene : PackedScene
+@export var max_target_amount : int = 3
 
 var electric_arcs : Array[ElectricArc]
-var max_target_amount : int = 6
 
 
 func _ready():

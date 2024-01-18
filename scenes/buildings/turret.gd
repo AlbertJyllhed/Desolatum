@@ -1,10 +1,13 @@
-extends Pickup
+extends Node2D
 class_name Turret
 
+@export var ammo : int = 45
 @export var cooldown : float = 1.0
 
 @onready var gun_component : GunComponent = $GunComponent
 @onready var target_locator_ray : TargetLocatorRay = $TargetLocatorRay
+@onready var light : Light2D = $Light
+@onready var light_collision_shape : CollisionShape2D = $Light/Area2D/CollisionShape2D
 @onready var cooldown_timer : Timer = $Timer
 
 var targets : Array[Node2D]
@@ -24,6 +27,10 @@ func _on_target_locator_area_body_exited(body):
 
 
 func _on_timer_timeout():
+	if ammo == 0:
+		disable()
+		return
+	
 	if targets.size() == 0:
 		return
 	
@@ -41,3 +48,9 @@ func find_closest_target():
 		return
 	
 	gun_component.attack(closest_target.global_position)
+	ammo = max(ammo - 1, 0)
+
+
+func disable():
+	light.hide()
+	light_collision_shape.disabled = true

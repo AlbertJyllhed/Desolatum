@@ -1,8 +1,6 @@
 extends Node2D
 class_name EnemySpawner
 
-#signal done_spawning
-
 @onready var sprite : Sprite2D = $Sprite2D
 
 var lights : Array[Node2D]
@@ -17,7 +15,6 @@ func spawn_enemy(enemy_scene : PackedScene, is_aggressive : bool = false):
 	base_layer.call_deferred("add_child", enemy_instance)
 	enemy_instance.global_position = global_position
 	enemy_instance.aggressive = is_aggressive
-	#done_spawning.emit()
 
 
 func _on_area_2d_area_entered(area):

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://csul0fd5y0xwk"]
+[gd_scene load_steps=4 format=3 uid="uid://csul0fd5y0xwk"]
 
 [ext_resource type="Script" path="res://components/flash_light.gd" id="1_k273c"]
 [ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="2_ai6be"]
-[ext_resource type="PackedScene" uid="uid://bqy83qvq6xgvw" path="res://abilities/static_light.tscn" id="2_bvgio"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ytra6"]
 radius = 78.0
@@ -10,7 +9,6 @@ radius = 78.0
 [node name="FlashLight" type="Node2D"]
 position = Vector2(0, -8)
 script = ExtResource("1_k273c")
-static_light_scene = ExtResource("2_bvgio")
 
 [node name="Light" type="PointLight2D" parent="."]
 blend_mode = 2
@@ -23,9 +21,3 @@ collision_mask = 4096
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/Area2D"]
 shape = SubResource("CircleShape2D_ytra6")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

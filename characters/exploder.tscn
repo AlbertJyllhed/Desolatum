@@ -20,23 +20,6 @@ light_mode = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_h7ave"]
 radius = 2.0
 
-[sub_resource type="Animation" id="Animation_jftu0"]
-resource_name = "idle"
-length = 0.001
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="Animation" id="Animation_o2ini"]
 length = 0.001
 tracks/0/type = "value"
@@ -52,9 +35,25 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_bgx3y"]
-resource_name = "walk_right"
-length = 0.6
+[sub_resource type="Animation" id="Animation_mn20r"]
+resource_name = "attack_right"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_jftu0"]
+resource_name = "idle"
+length = 0.001
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -63,10 +62,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1, 2, 3, 4, 5, 6, 1]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_udfay"]
@@ -85,9 +84,10 @@ tracks/0/keys = {
 "values": [7, 8, 9, 10]
 }
 
-[sub_resource type="Animation" id="Animation_mn20r"]
-resource_name = "attack_right"
-length = 0.1
+[sub_resource type="Animation" id="Animation_bgx3y"]
+resource_name = "walk_right"
+length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -95,10 +95,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [11, 12]
+"values": [1, 2, 3, 4, 5, 6, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6p0ej"]

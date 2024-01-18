@@ -1,13 +1,10 @@
 extends InventoryComponent
 
-@export var starter_weapon : WeaponItem
-@export var starter_melee : WeaponItem
+@export var weapon_items : Array[Item]
 
 @onready var audio_stream_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var stats : PlayerStats = preload("res://resources/Data/player_stats.tres")
-
-var weapon_item : WeaponItem
 
 var base_layer : Node2D
 var pickup_scene : PackedScene = preload("res://scenes/pickups/pickup.tscn")
@@ -18,15 +15,12 @@ func _ready():
 	GameEvents.item_picked_up.connect(on_item_picked_up)
 	
 	#if the player had equipped weapons in the previous scene we add them
-	if stats.melee:
-		add_item(stats.melee)
-	elif starter_melee:
-		add_item(starter_melee)
-	
-	if stats.gun:
-		add_item(stats.gun)
-	elif starter_weapon:
-		add_item(starter_weapon)
+	if stats.weapons.size() > 0:
+		for item in stats.weapons:
+			add_item(item)
+	else:
+		for item in weapon_items:
+			add_item(item)
 	
 	index = stats.equipment_index
 	equip_weapon(index)
@@ -55,6 +49,9 @@ func deactivate(value : bool):
 
 
 func next_slot():
+	if index == max_index:
+		return
+	
 	super.next_slot()
 	stats.equipment_index = index
 	audio_stream_player.play()
@@ -62,6 +59,9 @@ func next_slot():
 
 
 func prev_slot():
+	if index == 0:
+		return
+	
 	super.prev_slot()
 	stats.equipment_index = index
 	audio_stream_player.play()
@@ -72,30 +72,39 @@ func add_item(new_item : Item):
 	#GameEvents.weapons_updated.emit(new_item)
 	
 	if items.size() > 1:
-		var pickup_instance = pickup_scene.instantiate()
-		base_layer.add_child(pickup_instance)
-		pickup_instance.set_item(weapon_item)
-		pickup_instance.global_position = global_position
-		items[0].queue_free()
-		items.remove_at(0)
-	
-	if new_item.type == new_item.WeaponType.gun:
-		stats.gun = new_item
+		if new_item.type == new_item.WeaponType.gun:
+			var pickup_instance = create_pickup()
+			var weapon = create_weapon_instance(new_item)
+			items.push_front(weapon)
+			stats.weapons[0] = new_item
+			weapon_items[0] = new_item
 	else:
-		stats.melee = new_item
+		var weapon = create_weapon_instance(new_item)
+		items.append(weapon)
+		stats.weapons.append(new_item)
 	
+	max_index = items.size() - 1
+	index = 0
+	equip_weapon(index)
+
+
+func create_pickup():
+	#create pickup from current gun and drop it to the ground
+	var pickup_instance = pickup_scene.instantiate()
+	base_layer.add_child(pickup_instance)
+	pickup_instance.set_item(weapon_items[0])
+	pickup_instance.global_position = global_position
+	items[0].queue_free()
+	items.remove_at(0)
+
+
+func create_weapon_instance(new_item : Item):
 	#instantiate the new weapon and add it as a child of the inventory
 	var weapon = new_item.weapon_scene.instantiate()
 	add_child(weapon)
 	var offset = Vector2(0, -4)
 	weapon.global_position = global_position + offset
-	
-	#add the new weapon to the weapon list at index 0
-	weapon_item = new_item
-	items.push_front(weapon)
-	max_index = items.size() - 1
-	index = 0
-	equip_weapon(index)
+	return weapon
 
 
 func on_item_picked_up(item : Item):

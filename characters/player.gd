@@ -13,7 +13,7 @@ class_name Player
 @onready var animation_state = animation_tree.get("parameters/playback")
 
 var stats : PlayerStats = preload("res://resources/Data/player_stats.tres")
-var inventory_scene = preload("res://components/inventory_handler_component.tscn")
+var inventory_scene = preload("res://components/weapon_inventory_component.tscn")
 var inventory_instance : Node2D
 var top_left_limit : Vector2i
 var bottom_right_limit : Vector2i
