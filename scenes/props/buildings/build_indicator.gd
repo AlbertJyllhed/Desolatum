@@ -2,13 +2,19 @@ extends Node2D
 class_name BuildIndicator
 
 @export var building_scene : PackedScene
+@export var limit : int = 1
+@export var recharge_time : float = 30.0
 
 @onready var sprite : Sprite2D = $BuildingSprite
 @onready var tile_checker_area : Area2D = $TileCheckerArea
 @onready var collision_shape : CollisionShape2D = $TileCheckerArea/CollisionShape2D
+@onready var timer : Timer = $Timer
 
 var tilemap : TileMap
 var base_layer : Node2D
+
+var placed_amount : int
+var disabled : bool = false
 
 
 func _ready():
@@ -17,7 +23,7 @@ func _ready():
 
 
 func can_place() -> bool:
-	if tile_checker_area.has_overlapping_bodies():
+	if tile_checker_area.has_overlapping_bodies() or placed_amount >= limit:
 		modulate = Color.RED
 		modulate.a = 0.5
 		return false
@@ -28,6 +34,9 @@ func can_place() -> bool:
 
 
 func _physics_process(_delta):
+	if disabled:
+		return
+	
 	var mouse_tile = tilemap.local_to_map(get_global_mouse_position())
 	var local_pos = tilemap.map_to_local(mouse_tile)
 	var global_pos = tilemap.to_global(local_pos)
@@ -41,3 +50,14 @@ func _physics_process(_delta):
 		var building_instance = building_scene.instantiate()
 		base_layer.add_child(building_instance)
 		building_instance.global_position = global_pos
+		placed_amount = min(placed_amount + 1, limit)
+		timer.start(recharge_time)
+
+
+func disable(value : bool):
+	disabled = value
+	visible = !value
+
+
+func _on_timer_timeout():
+	placed_amount = 0

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd0wyg7osw55v"]
+
+[ext_resource type="PackedScene" uid="uid://i6sa4jrqvpnn" path="res://components/gravity_object_component.tscn" id="1_e48e5"]
+[ext_resource type="Texture2D" uid="uid://kvgdc11yxunm" path="res://assets/textures/mine.png" id="2_2fhrb"]
+[ext_resource type="PackedScene" uid="uid://c8h8q16gs2wqd" path="res://components/chain_lightning_component.tscn" id="2_i0l7b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i704y"]
+radius = 2.0
+
+[node name="LightningMine" instance=ExtResource("1_e48e5")]
+collision_layer = 0
+scene = ExtResource("2_i0l7b")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_2fhrb")
+
+[node name="Shadow" parent="." index="1"]
+modulate = Color(0, 0, 0, 0.294118)
+z_index = -1
+texture = ExtResource("2_2fhrb")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_i704y")

@@ -44,6 +44,9 @@ func _physics_process(_delta):
 
 
 func try_attack():
+	if disabled:
+		return
+	
 	if ammo_component:
 		ammo_component.use_ammo()
 		return
@@ -54,9 +57,6 @@ func try_attack():
 func attack():
 	if not weapon_component:
 		print("Error: no weapon component found!")
-		return
-	
-	if disabled:
 		return
 	
 	weapon_component.attack(attack_vector)
@@ -71,3 +71,7 @@ func attack():
 func disable(value : bool):
 	disabled = value
 	firing_component.disabled = value
+	if ammo_component:
+		ammo_component.disable(value)
+	
+	visible = !value

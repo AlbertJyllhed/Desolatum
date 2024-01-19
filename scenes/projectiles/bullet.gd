@@ -15,10 +15,10 @@ var direction = Vector2.ZERO
 
 
 func setup(new_direction, new_speed = 400, new_damage = 1):
+	direction = new_direction
 	speed = new_speed
 	hitbox.damage = new_damage
 	hitbox.knockback_vector = new_direction
-	direction = new_direction
 	sprite.rotation = direction.angle()
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 
@@ -34,18 +34,20 @@ func explode():
 
 func _physics_process(delta):
 	var collision_result = move_and_collide(direction * speed * delta)
-	if collision_result != null:
-		if bounces > 0:
-			direction = direction.bounce(collision_result.get_normal())
-			sprite.rotation = direction.angle()
-			bounces -= 1
-			return
-		
-		var impact_instance = impact_scene.instantiate() as Node2D
-		base_layer.add_child(impact_instance)
-		impact_instance.global_position = collision_result.get_position()
-		impact_instance.rotation = collision_result.get_normal().angle()
-		explode()
+	if not collision_result:
+		return
+	
+	if bounces > 0:
+		direction = direction.bounce(collision_result.get_normal())
+		sprite.rotation = direction.angle()
+		bounces -= 1
+		return
+	
+	var impact_instance = impact_scene.instantiate() as Node2D
+	base_layer.add_child(impact_instance)
+	impact_instance.global_position = collision_result.get_position()
+	impact_instance.rotation = collision_result.get_normal().angle()
+	explode()
 
 
 func _on_hitbox_area_entered(_area):

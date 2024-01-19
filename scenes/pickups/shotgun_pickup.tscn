@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c86vnmyvponfo"]
 
 [ext_resource type="PackedScene" uid="uid://bxanol7yje1c3" path="res://scenes/pickups/pickup.tscn" id="1_2i53f"]
-[ext_resource type="Resource" uid="uid://dwkvpxwfh0pjj" path="res://resources/Items/shotgun.tres" id="2_s3quh"]
+[ext_resource type="Resource" uid="uid://dwkvpxwfh0pjj" path="res://resources/Items/equipment/shotgun.tres" id="2_s3quh"]
 
 [node name="ShotgunPickup" instance=ExtResource("1_2i53f")]
 item = ExtResource("2_s3quh")

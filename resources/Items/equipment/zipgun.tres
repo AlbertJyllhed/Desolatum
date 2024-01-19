@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://bsgm2l30lw8wq"]
+
+[ext_resource type="PackedScene" uid="uid://btmriyiudgoba" path="res://components/weapons/zipgun.tscn" id="2_4qs74"]
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="2_62c3w"]
+
+[resource]
+script = ExtResource("2_62c3w")
+type = 0
+equipment_scene = ExtResource("2_4qs74")
+id = "zipgun"
+name = "Zipgun"
+description = "Fires fast homing bullets"
+amount = 1
+pickup_type = 0
+drop_weight = 1

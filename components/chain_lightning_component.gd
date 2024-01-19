@@ -1,5 +1,4 @@
-extends Pickup
-class_name TetherNode
+extends Node2D
 
 @export var electric_arc_scene : PackedScene
 @export var max_target_amount : int = 3
@@ -36,3 +35,7 @@ func _on_area_2d_body_exited(body):
 			electric_arc.set_target(null)
 			electric_arc.set_enabled(false)
 			return
+
+
+func _on_timer_timeout():
+	queue_free()

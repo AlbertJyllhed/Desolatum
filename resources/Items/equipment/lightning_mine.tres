@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://x6tyttborbmf"]
+
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="1_fsney"]
+[ext_resource type="PackedScene" uid="uid://suscde7igcyw" path="res://components/weapons/tesla_mine_thrower.tscn" id="1_s1qx3"]
+
+[resource]
+script = ExtResource("1_fsney")
+type = 3
+equipment_scene = ExtResource("1_s1qx3")
+id = "lightning_mine"
+name = "Tesla Mine"
+description = ""
+amount = 1
+pickup_type = 1
+drop_weight = 1

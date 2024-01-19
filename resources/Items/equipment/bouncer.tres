@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://vvob4fsuo80t"]
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://vvob4fsuo80t"]
 
-[ext_resource type="Script" path="res://resources/weapon_item.gd" id="1_wwn31"]
 [ext_resource type="PackedScene" uid="uid://bwdcvx8vur0ds" path="res://components/weapons/bouncer.tscn" id="2_h57l4"]
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="2_ireuq"]
 
 [resource]
-script = ExtResource("1_wwn31")
+script = ExtResource("2_ireuq")
 type = 0
-weapon_scene = ExtResource("2_h57l4")
+equipment_scene = ExtResource("2_h57l4")
 id = "bouncer"
 name = "Bouncer"
 description = "Fires a piercing bullet which increases in damage and bounces for every enemy hit"

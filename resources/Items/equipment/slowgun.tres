@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://oeqtxo0faba5"]
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://oeqtxo0faba5"]
 
-[ext_resource type="Script" path="res://resources/weapon_item.gd" id="1_b15il"]
 [ext_resource type="PackedScene" uid="uid://dbadiqrby3c8s" path="res://components/weapons/slowgun.tscn" id="2_2b8es"]
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="2_f6pa5"]
 
 [resource]
-script = ExtResource("1_b15il")
+script = ExtResource("2_f6pa5")
 type = 0
-weapon_scene = ExtResource("2_2b8es")
+equipment_scene = ExtResource("2_2b8es")
 id = "slowgun"
 name = "Slowgun"
 description = "Fires slow, piercing projectiles"

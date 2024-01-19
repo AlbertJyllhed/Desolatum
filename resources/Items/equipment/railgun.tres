@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://c6dse6vr5dbd6"]
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://c6dse6vr5dbd6"]
 
-[ext_resource type="Script" path="res://resources/weapon_item.gd" id="1_5ifyh"]
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="2_beloa"]
 [ext_resource type="PackedScene" uid="uid://h3gfnydp6egv" path="res://components/weapons/railgun.tscn" id="2_c4w64"]
 
 [resource]
-script = ExtResource("1_5ifyh")
+script = ExtResource("2_beloa")
 type = 0
-weapon_scene = ExtResource("2_c4w64")
+equipment_scene = ExtResource("2_c4w64")
 id = "railgun"
 name = "Railgun"
 description = "Fires lasers which pierce through enemies"

@@ -11,8 +11,7 @@ var max_health : int = 6
 @export var base_health : int = 6
 
 #for weapon component
-var weapons : Array[WeaponItem]
-var equipment_index : int
+var equipment : Array[EquipmentItem]
 
 var energy : int = 0
 var ore : int = 0
@@ -26,7 +25,6 @@ func reset():
 	speed = base_speed
 	max_health = base_health
 	health = max_health
-	weapons.clear()
-	equipment_index = 0
+	equipment.clear()
 	energy = 0
 	ore = 0

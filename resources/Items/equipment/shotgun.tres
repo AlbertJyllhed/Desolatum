@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://dwkvpxwfh0pjj"]
+
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="2_f12h4"]
+[ext_resource type="PackedScene" uid="uid://db6qgn0lifipy" path="res://components/weapons/shotgun.tscn" id="2_s2wia"]
+
+[resource]
+script = ExtResource("2_f12h4")
+type = 0
+equipment_scene = ExtResource("2_s2wia")
+id = "shotgun"
+name = "Shotgun"
+description = "For the big mess"
+amount = 1
+pickup_type = 0
+drop_weight = 1

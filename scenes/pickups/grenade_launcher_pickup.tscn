@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://beriaoo8o5cqp"]
 
 [ext_resource type="PackedScene" uid="uid://bxanol7yje1c3" path="res://scenes/pickups/pickup.tscn" id="1_oo12n"]
-[ext_resource type="Resource" uid="uid://c4au6yw5sn535" path="res://resources/Items/grenade_launcher.tres" id="2_cym5k"]
+[ext_resource type="Resource" uid="uid://c4au6yw5sn535" path="res://resources/Items/equipment/grenade_launcher.tres" id="2_cym5k"]
 
 [node name="GrenadeLauncherPickup" instance=ExtResource("1_oo12n")]
 item = ExtResource("2_cym5k")

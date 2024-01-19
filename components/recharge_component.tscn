@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2bqfjunuovrn"]
+
+[ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="1_1wobe"]
+[ext_resource type="Script" path="res://components/recharge_component.gd" id="2_ujmpq"]
+
+[node name="RechargeComponent" instance=ExtResource("1_1wobe")]
+script = ExtResource("2_ujmpq")
+reload_time = 0.2

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8h8q16gs2wqd"]
+
+[ext_resource type="Script" path="res://components/chain_lightning_component.gd" id="1_nxnf4"]
+[ext_resource type="PackedScene" uid="uid://bp256giwv7mxd" path="res://components/electric_arc.tscn" id="2_g1rr0"]
+[ext_resource type="Texture2D" uid="uid://kvgdc11yxunm" path="res://assets/textures/mine.png" id="3_o7toq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lni6l"]
+radius = 48.0
+
+[node name="ChainLightningComponent" type="Node2D"]
+script = ExtResource("1_nxnf4")
+electric_arc_scene = ExtResource("2_g1rr0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_o7toq")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_lni6l")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
