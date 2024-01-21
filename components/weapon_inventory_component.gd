@@ -1,4 +1,5 @@
 extends InventoryComponent
+class_name WeaponInventoryComponent
 
 @export var weapon_items : Array[Item]
 

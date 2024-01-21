@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ie26y2womcw5"]
+
+[ext_resource type="Script" path="res://ui/danger_sign.gd" id="1_k2w7x"]
+[ext_resource type="Texture2D" uid="uid://di71r1le6cpdf" path="res://assets/textures/ok_sign.png" id="1_nj5wo"]
+[ext_resource type="Texture2D" uid="uid://crupcdsb5nj86" path="res://assets/textures/warning_sign.png" id="3_0x6kd"]
+[ext_resource type="Texture2D" uid="uid://bd287gvi1mgv5" path="res://assets/textures/danger_sign.png" id="4_qds3y"]
+
+[node name="DangerSign" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_k2w7x")
+signs = Array[Texture2D]([ExtResource("3_0x6kd"), ExtResource("4_qds3y"), ExtResource("1_nj5wo")])
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 18.0
+grow_horizontal = 0
+mouse_filter = 2
+texture = ExtResource("1_nj5wo")
+stretch_mode = 3

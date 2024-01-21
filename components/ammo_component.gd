@@ -33,11 +33,6 @@ func _physics_process(delta):
 		reload()
 
 
-func decrement():
-	ammo = max(ammo - 1, 0)
-	GameEvents.ammo_updated.emit(ammo, max_ammo)
-
-
 func use_ammo():
 	if ammo > 0:
 		reload_timer.stop()
@@ -45,7 +40,8 @@ func use_ammo():
 		reload()
 		return
 	
-	decrement()
+	ammo = max(ammo - 1, 0)
+	GameEvents.ammo_updated.emit(ammo, max_ammo)
 	has_ammo.emit()
 
 

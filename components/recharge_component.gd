@@ -1,6 +1,11 @@
 extends AmmoComponent
 
 
+func _ready():
+	ammo = max_ammo
+	GameEvents.ammo_updated.emit(ammo, max_ammo)
+
+
 func disable(value : bool):
 	disabled = value
 	if disabled:
@@ -13,8 +18,9 @@ func use_ammo():
 	if ammo == 0:
 		return
 	
+	ammo = max(ammo - 1, 0)
+	GameEvents.ammo_updated.emit(ammo, max_ammo)
 	reload_timer.start(reload_time)
-	decrement()
 	has_ammo.emit()
 
 

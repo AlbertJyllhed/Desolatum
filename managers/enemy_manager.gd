@@ -44,6 +44,7 @@ var energy_modifier : float = 1.0
 
 
 func _ready():
+	GameEvents.start_wave.connect(set_difficulty)
 	GameEvents.health_updated.connect(on_health_updated)
 	GameEvents.energy_updated.connect(on_energy_updated)
 	spawn_timer.timeout.connect(spawn)
@@ -72,10 +73,17 @@ func update_difficulty():
 	for enemy in enemies:
 		enemy.aggressive = spawn_aggressive
 	
-	wave_timer.start(wave_time)
 	var keys = wave_mode.keys()
 	print(keys[index])
+	
+	wave_timer.start(wave_time)
+	GameEvents.wave_updated.emit(index)
 	index += 1
+
+
+func set_difficulty(new_index : int):
+	index = new_index
+	update_difficulty()
 
 
 func on_health_updated(health, max_health):

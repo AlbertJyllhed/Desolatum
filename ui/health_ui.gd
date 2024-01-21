@@ -1,7 +1,7 @@
 extends Control
 
 @onready var progress_bar : TextureProgressBar = $TextureProgressBar
-@onready var label : Label = $Label
+@onready var label : Label = $TextureProgressBar/Label
 
 
 func _ready():
