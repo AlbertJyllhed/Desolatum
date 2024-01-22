@@ -14,14 +14,13 @@ class_name Player
 
 var stats : PlayerStats = preload("res://resources/Data/player_stats.tres")
 var inventory_scene = preload("res://components/weapon_inventory_component.tscn")
-var inventory_instance : Node2D
+var inventory_instance : WeaponInventoryComponent
 var top_left_limit : Vector2i
 var bottom_right_limit : Vector2i
 
 
 func _ready():
 	max_speed = stats.speed
-	GameEvents.upgrade_added.connect(on_upgrade_added)
 	add_to_group("player")
 	health_component.setup(stats)
 	energy_gain_component.setup(stats)
@@ -70,15 +69,6 @@ func _physics_process(delta):
 		global_position = round(global_position)
 	
 	move_and_slide()
-
-
-func on_upgrade_added(upgrade : UpgradeItem, current_upgrades : Dictionary):
-	if upgrade.id != "speed":
-		return
-	
-	var percent_change = current_upgrades["speed"]["quantity"] * 0.1
-	max_speed = stats.base_speed * (1 + percent_change)
-	stats.speed = max_speed
 
 
 func set_active(value : bool):

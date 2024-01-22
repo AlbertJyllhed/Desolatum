@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://csul0fd5y0xwk"]
+[gd_scene load_steps=5 format=3 uid="uid://csul0fd5y0xwk"]
 
 [ext_resource type="Script" path="res://components/flash_light.gd" id="1_k273c"]
 [ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="2_ai6be"]
+[ext_resource type="PackedScene" uid="uid://d3bhg2u8x6pao" path="res://components/areas/proximity_sensor_area.tscn" id="3_w4gf2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ytra6"]
 radius = 78.0
@@ -21,3 +22,5 @@ collision_mask = 4096
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/Area2D"]
 shape = SubResource("CircleShape2D_ytra6")
+
+[node name="ProximitySensorArea" parent="." instance=ExtResource("3_w4gf2")]

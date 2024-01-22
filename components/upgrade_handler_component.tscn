@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkhd4d2ekkpur"]
+
+[ext_resource type="Script" path="res://components/upgrade_handler_component.gd" id="1_yqls3"]
+
+[node name="UpgradeHandlerComponent" type="Node"]
+script = ExtResource("1_yqls3")

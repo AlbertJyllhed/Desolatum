@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://oigv3iu1oim1"]
+[gd_scene load_steps=49 format=3 uid="uid://oigv3iu1oim1"]
 
 [ext_resource type="Script" path="res://characters/player.gd" id="1_qc1vg"]
 [ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/health_component.tscn" id="2_g1c5e"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://csul0fd5y0xwk" path="res://components/flash_light.tscn" id="13_8ok1f"]
 [ext_resource type="AudioStream" uid="uid://uq4stmgow63o" path="res://sounds/footsteps/stone_footstep_5.wav" id="13_wsrik"]
 [ext_resource type="AudioStream" uid="uid://wst7gi54ypoe" path="res://sounds/footsteps/stone_footstep_6.wav" id="14_e2unt"]
+[ext_resource type="PackedScene" uid="uid://6rqgj1vky0r7" path="res://components/upgrades/adrenaline_upgrade.tscn" id="20_h2d6i"]
+[ext_resource type="PackedScene" uid="uid://cv4mmh1n34afe" path="res://components/upgrades/panic_upgrade.tscn" id="21_4134j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7y1p"]
 resource_local_to_scene = true
@@ -345,6 +347,10 @@ shape = SubResource("CapsuleShape2D_yhbri")
 
 [node name="FlashLight" parent="." instance=ExtResource("13_8ok1f")]
 position = Vector2(0, -4)
+
+[node name="AdrenalineUpgrade" parent="." instance=ExtResource("20_h2d6i")]
+
+[node name="PanicUpgrade" parent="." instance=ExtResource("21_4134j")]
 
 [editable path="FootstepComponent"]
 [editable path="Hurtbox"]

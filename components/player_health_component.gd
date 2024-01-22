@@ -11,7 +11,6 @@ func setup(new_stats : PlayerStats):
 	current_health = stats.health
 	GameEvents.health_updated.emit(current_health, max_health)
 	GameEvents.item_picked_up.connect(on_item_picked_up)
-	GameEvents.upgrade_added.connect(on_upgrade_added)
 
 
 func damage(damage_amount : float):
@@ -39,14 +38,3 @@ func on_item_picked_up(item : Item):
 		current_health = min(current_health + 1, max_health)
 		stats.health = current_health
 		GameEvents.health_updated.emit(current_health, max_health)
-
-
-func on_upgrade_added(upgrade : UpgradeItem, current_upgrades : Dictionary):
-	if upgrade.id != "health_up":
-		return
-	
-	max_health = max_health + current_upgrades["health_up"]["quantity"]
-	current_health = max_health
-	stats.health = current_health
-	stats.max_health = max_health
-	GameEvents.health_updated.emit(current_health, max_health)

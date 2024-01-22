@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://6rqgj1vky0r7"]
+
+[ext_resource type="PackedScene" uid="uid://dy3meaaph61x0" path="res://components/upgrades/upgrade_base.tscn" id="1_bp3lg"]
+[ext_resource type="Script" path="res://components/upgrades/adrenaline_upgrade.gd" id="2_fryp0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gv6cw"]
+radius = 32.0
+
+[node name="AdrenalineUpgrade" instance=ExtResource("1_bp3lg")]
+script = ExtResource("2_fryp0")
+time_to_reset = 1.0
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_gv6cw")
+
+[node name="Timer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

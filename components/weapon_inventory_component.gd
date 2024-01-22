@@ -1,7 +1,9 @@
 extends InventoryComponent
 class_name WeaponInventoryComponent
 
-@export var weapon_items : Array[Item]
+signal weapon_replaced(weapon)
+
+@export var starter_items : Array[Item]
 
 @onready var audio_stream_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
@@ -20,7 +22,7 @@ func _ready():
 		for item in stats.equipment:
 			add_item(item)
 	else:
-		for item in weapon_items:
+		for item in starter_items:
 			add_item(item)
 
 
@@ -31,17 +33,6 @@ func equip_weapon(weapon_index):
 	
 	items[weapon_index].disable(false)
 	GameEvents.weapons_updated.emit(weapon_index)
-
-
-func deactivate(value : bool):
-	deactivated = value
-	if deactivated:
-		hide()
-		items[index].disable(true)
-		return
-	
-	show()
-	items[index].disable(false)
 
 
 func next_slot():
@@ -67,15 +58,19 @@ func add_item(new_item : Item):
 	
 	var weapon = create_weapon_instance(new_item)
 	
-	if items.size() == weapon_items.size():
-		if new_item.type == new_item.EquipmentType.gun:
-			create_pickup()
-			items.push_front(weapon)
-			stats.equipment[0] = new_item
-			weapon_items[0] = new_item
+	if items.size() == starter_items.size():
+		for item in starter_items:
+			if new_item.type == item.type:
+				index = item.type
+		
+		create_pickup()
+		items.insert(index, weapon)
+		stats.equipment[index] = new_item
+		starter_items[index] = new_item
+		weapon_replaced.emit(items[index])
 	else:
 		items.append(weapon)
-		stats.equipment.append(new_item)
+		stats.equipment.assign(starter_items)
 	
 	max_index = items.size() - 1
 	index = 0
@@ -86,9 +81,9 @@ func create_pickup():
 	#create pickup from current gun and drop it to the ground
 	var pickup_instance = pickup_scene.instantiate()
 	base_layer.add_child(pickup_instance)
-	pickup_instance.set_item(weapon_items[0])
+	pickup_instance.set_item(starter_items[index])
 	pickup_instance.global_position = global_position
-	items.pop_front().queue_free()
+	items.pop_at(index).queue_free()
 
 
 func create_weapon_instance(new_item : Item):

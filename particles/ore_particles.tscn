@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://qmi7ca5nrbxa"]
 
 [ext_resource type="PackedScene" uid="uid://cvkq0ml6ssv2r" path="res://particles/crystal_particles.tscn" id="1_pp3t6"]
-[ext_resource type="AudioStream" uid="uid://c3s650kcs1r0n" path="res://sounds/rock_destroy.wav" id="2_obmmt"]
+[ext_resource type="AudioStream" uid="uid://b7fikh63a7wqf" path="res://sounds/pickaxe/pickaxe_1.wav" id="2_5ph1k"]
 
 [node name="OreParticles" instance=ExtResource("1_pp3t6")]
 modulate = Color(0.831373, 0.462745, 0.137255, 1)
 
 [node name="AudioStreamPlayer2D" parent="." index="0"]
-stream = ExtResource("2_obmmt")
+stream = ExtResource("2_5ph1k")

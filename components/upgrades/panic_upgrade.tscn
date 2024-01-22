@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv4mmh1n34afe"]
+
+[ext_resource type="PackedScene" uid="uid://dy3meaaph61x0" path="res://components/upgrades/upgrade_base.tscn" id="1_lks8f"]
+[ext_resource type="Script" path="res://components/upgrades/panic_upgrade.gd" id="2_435sg"]
+
+[node name="PanicUpgrade" instance=ExtResource("1_lks8f")]
+script = ExtResource("2_435sg")
+time_to_reset = 6.0
+
+[node name="Timer" type="Timer" parent="." index="0"]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
