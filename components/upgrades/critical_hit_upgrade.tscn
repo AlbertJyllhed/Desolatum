@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1gw4v1fbjpq5"]
+
+[ext_resource type="PackedScene" uid="uid://dy3meaaph61x0" path="res://components/upgrades/upgrade_base.tscn" id="1_fe227"]
+[ext_resource type="Script" path="res://components/upgrades/critical_hit_upgrade.gd" id="2_28iq2"]
+
+[node name="CriticalHitUpgrade" instance=ExtResource("1_fe227")]
+script = ExtResource("2_28iq2")

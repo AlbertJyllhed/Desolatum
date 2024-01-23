@@ -6,7 +6,7 @@
 [node name="GunComponent" instance=ExtResource("1_yqots")]
 script = ExtResource("2_sgljh")
 projectile = null
-projectile_deviation = 0.1
-projectile_speed = 400.0
-projectile_damage = 1
+base_projectile_deviation = 0.1
+base_projectile_speed = 400.0
+base_projectile_damage = 1
 projectiles = Array[float]([0.0])

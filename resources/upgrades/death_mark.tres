@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=4 format=3 uid="uid://v4yx44j0lsvo"]
+
+[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_8m5b5"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_crt4y"]
+[ext_resource type="PackedScene" uid="uid://5bsg16xy023p" path="res://components/upgrades/death_mark_upgrade.tscn" id="3_7w2yw"]
+
+[resource]
+script = ExtResource("1_8m5b5")
+upgrade_scene = ExtResource("3_7w2yw")
+id = "death_mark"
+name = "Death Mark"
+description = "Chance to mark an enemy for death on melee hit"
+icon = ExtResource("1_crt4y")
+amount = 1
+pickup_type = 0
+drop_weight = 1

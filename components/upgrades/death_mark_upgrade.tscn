@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://5bsg16xy023p"]
+
+[ext_resource type="PackedScene" uid="uid://dy3meaaph61x0" path="res://components/upgrades/upgrade_base.tscn" id="1_r5ani"]
+[ext_resource type="Script" path="res://components/upgrades/death_mark_upgrade.gd" id="2_yelyf"]
+[ext_resource type="PackedScene" uid="uid://dnb76xapw2dlg" path="res://components/status_effects/mark_of_death.tscn" id="3_i151s"]
+
+[node name="DeathMarkUpgrade" instance=ExtResource("1_r5ani")]
+script = ExtResource("2_yelyf")
+status_effect_scene = ExtResource("3_i151s")

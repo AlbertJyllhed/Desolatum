@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=4 format=3 uid="uid://b1ri54mk2sxbw"]
+
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_42pus"]
+[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_p1d8r"]
+[ext_resource type="PackedScene" uid="uid://cv4mmh1n34afe" path="res://components/upgrades/panic_upgrade.tscn" id="3_mqfon"]
+
+[resource]
+script = ExtResource("1_p1d8r")
+upgrade_scene = ExtResource("3_mqfon")
+id = "panic"
+name = "Panic"
+description = "Increased gun damage and bullet spread for a short time upon taking damage"
+icon = ExtResource("1_42pus")
+amount = 1
+pickup_type = 0
+drop_weight = 1

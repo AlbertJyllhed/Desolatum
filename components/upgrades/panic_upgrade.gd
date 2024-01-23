@@ -4,25 +4,12 @@ extends Upgrade
 
 @onready var timer : Timer = $Timer
 
-var player : Player
 var gun : GunComponent
 
 
-func _ready():
-	if not owner is Player:
-		queue_free()
-		return
-	
-	player = owner as Player
-	player.ready.connect(on_player_ready)
-
-
-func on_player_ready():
+func apply_upgrade(upgrade_node : Node2D):
+	var player = upgrade_node as Player
 	player.health_component.health_changed.connect(on_health_changed)
-	if not player.inventory_instance:
-		queue_free()
-		return
-	
 	player.inventory_instance.weapon_replaced.connect(on_weapon_replaced)
 	gun = player.inventory_instance.items[0].weapon_component
 

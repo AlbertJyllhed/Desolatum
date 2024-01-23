@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="UpgradeItem" load_steps=2 format=3 uid="uid://ct5dagltkv6xx"]
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=3 format=3 uid="uid://ct5dagltkv6xx"]
 
 [ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_2e3pe"]
+[ext_resource type="PackedScene" uid="uid://6rqgj1vky0r7" path="res://components/upgrades/adrenaline_upgrade.tscn" id="2_vfb4y"]
 
 [resource]
 script = ExtResource("1_2e3pe")
+upgrade_scene = ExtResource("2_vfb4y")
 id = "adrenaline"
 name = "Adrenaline"
-description = "Increase movement speed by 10% when near enemies"
+description = "Increase movement speed by 30% when near enemies"
 amount = 1
 pickup_type = 0
 drop_weight = 1

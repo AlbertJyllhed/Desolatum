@@ -5,8 +5,10 @@
 
 [resource]
 script = ExtResource("1_t3h7b")
-icon = ExtResource("1_au0w3")
 id = "health_up"
 name = "Health Booster"
-description = "Permanently adds +1 extra health"
+description = "Permanently adds +1 max health"
+icon = ExtResource("1_au0w3")
 amount = 1
+pickup_type = 0
+drop_weight = 1

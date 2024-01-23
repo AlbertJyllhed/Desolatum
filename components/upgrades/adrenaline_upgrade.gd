@@ -5,30 +5,20 @@ extends Upgrade
 @onready var timer : Timer = $Timer
 
 var player : Player
-var nearby_enemies : Array[Node2D]
 
 
-func _ready():
-	if not owner is Player:
-		queue_free()
-		return
-	
-	player = owner as Player
+func apply_upgrade(upgrade_node : Node2D):
+	player = upgrade_node as Player
+	player.flash_light.proximity_sensor.body_entered.connect(on_body_entered)
 
 
-func _on_area_2d_body_entered(body):
+func on_body_entered(body):
 	if not timer.is_stopped():
 		timer.stop()
 	
-	nearby_enemies.append(body)
-	player.max_speed = min(player.stats.base_speed * 1.5, player.stats.base_speed * 3)
-
-
-func _on_area_2d_body_exited(body):
-	nearby_enemies.erase(body)
+	player.max_speed = min(player.stats.base_speed * 1.4, player.stats.base_speed * 3)
 	timer.start(time_to_reset)
 
 
 func _on_timer_timeout():
-	if nearby_enemies.size() == 0:
-		player.max_speed = player.stats.base_speed
+	player.max_speed = player.stats.base_speed

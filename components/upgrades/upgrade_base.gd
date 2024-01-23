@@ -1,6 +1,6 @@
-extends Node2D
+extends Node
 class_name Upgrade
 
 
-func _ready():
+func apply_upgrade(upgrade_node : Node2D):
 	pass

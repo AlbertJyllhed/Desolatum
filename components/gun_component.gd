@@ -1,6 +1,8 @@
 extends WeaponComponent
 class_name GunComponent
 
+signal shot_projectile(new_projectile)
+
 @export var projectile : PackedScene
 
 @export var base_projectile_deviation : float = 0.1
@@ -37,3 +39,4 @@ func attack(attack_vector : Vector2):
 		var deviation = randf_range(-projectile_deviation, projectile_deviation)
 		var deviation_vector = Vector2(deviation, deviation)
 		new_projectile.setup(angle + deviation_vector, projectile_speed, projectile_damage)
+		shot_projectile.emit(new_projectile)

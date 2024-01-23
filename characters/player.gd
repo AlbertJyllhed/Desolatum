@@ -8,9 +8,10 @@ class_name Player
 @onready var health_component : HealthComponent = $HealthComponent
 @onready var energy_gain_component : EnergyGainComponent = $EnergyGainComponent
 @onready var footstep_component : FootstepComponent = $FootstepComponent
-@onready var animation_player : AnimationPlayer = $AnimationPlayer
+#@onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
+@onready var flash_light : FlashLight = $FlashLight
 
 var stats : PlayerStats = preload("res://resources/Data/player_stats.tres")
 var inventory_scene = preload("res://components/weapon_inventory_component.tscn")

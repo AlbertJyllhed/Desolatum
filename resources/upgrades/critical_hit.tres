@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=4 format=3 uid="uid://dslnihbjgatv3"]
+
+[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_1gkee"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_71cf1"]
+[ext_resource type="PackedScene" uid="uid://b1gw4v1fbjpq5" path="res://components/upgrades/critical_hit_upgrade.tscn" id="3_y1u1l"]
+
+[resource]
+script = ExtResource("1_1gkee")
+upgrade_scene = ExtResource("3_y1u1l")
+id = "crit"
+name = "Critical Hit"
+description = "15% chance to fire a 3x damage bullet"
+icon = ExtResource("1_71cf1")
+amount = 1
+pickup_type = 0
+drop_weight = 1

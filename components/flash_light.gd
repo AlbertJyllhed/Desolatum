@@ -1,4 +1,5 @@
 extends Node2D
+class_name FlashLight
 
 @export var light_distance : float = 16.0
 

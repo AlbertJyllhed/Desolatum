@@ -8,5 +8,5 @@ class_name Hitbox
 var knockback_vector = Vector2.ZERO
 
 
-func set_damage(newDamage):
-	damage = newDamage
+func set_damage(new_damage : int):
+	damage = new_damage
