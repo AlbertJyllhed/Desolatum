@@ -50,7 +50,7 @@ _data = {
 collision_layer = 1152
 collision_mask = 512
 script = ExtResource("2_qfalo")
-required_energy = 10
+required_energy = 15
 
 [node name="DropComponent" parent="." index="0" instance=ExtResource("3_gfl2r")]
 drop_list = ExtResource("4_hog4e")

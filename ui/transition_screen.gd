@@ -1,27 +1,23 @@
 extends Control
 class_name TransitionScreen
 
-signal fade_complete
+signal fade_complete()
 
-@export var fade_on_ready : bool = false
-
-@onready var color_rect : ColorRect = $ColorRect
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
-	if not fade_on_ready:
+	animation_player.animation_finished.connect(fade_completed)
+	fade_to_black(false)
+
+
+func fade_to_black(value : bool):
+	if value:
+		animation_player.play("fade_to_black")
 		return
 	
-	color_rect.color = Color.BLACK
-	fade(0)
+	animation_player.play("remove_fade")
 
 
-func fade(value : int):
-	var tween = get_tree().create_tween().bind_node(self)
-	tween.tween_property($ColorRect, "color", Color(0, 0, 0, value), 1)
-	tween.tween_callback(fade_completed)
-
-
-func fade_completed():
+func fade_completed(_animation : String):
 	fade_complete.emit()
-	queue_free()

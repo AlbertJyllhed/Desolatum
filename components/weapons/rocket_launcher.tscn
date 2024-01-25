@@ -20,15 +20,14 @@ power = 6.0
 [node name="GunComponent" parent="." index="1" instance=ExtResource("3_aw42f")]
 position = Vector2(12, 0)
 projectile = ExtResource("2_8xe17")
-projectile_deviation = 0.0
-projectile_damage = 0
+base_projectile_deviation = 0.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
 stream = ExtResource("5_1h6hb")
 
 [node name="AmmoComponent" parent="." index="2" instance=ExtResource("5_tq8l3")]
 max_ammo = 4
-reload_time = 3.0
+reload_time = 2.0
 
 [node name="WeaponSprite" parent="." index="3"]
 texture = ExtResource("2_d5nue")

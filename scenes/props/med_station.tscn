@@ -4,21 +4,6 @@
 [ext_resource type="Resource" uid="uid://dh0agxs0mifp8" path="res://resources/Data/med_station_drop_list.tres" id="2_6tbi2"]
 [ext_resource type="Texture2D" uid="uid://ckactsthgfdeu" path="res://assets/textures/med_station.png" id="3_n57ph"]
 
-[sub_resource type="Animation" id="Animation_5iinv"]
-resource_name = "activate"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-}
-
 [sub_resource type="Animation" id="Animation_o058u"]
 length = 0.001
 tracks/0/type = "value"
@@ -34,6 +19,21 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_5iinv"]
+resource_name = "activate"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cq24j"]
 _data = {
 "RESET": SubResource("Animation_o058u"),
@@ -41,6 +41,7 @@ _data = {
 }
 
 [node name="MedStation" instance=ExtResource("1_2hr1o")]
+required_energy = 10
 
 [node name="DropComponent" parent="." index="0"]
 drop_list = ExtResource("2_6tbi2")

@@ -52,12 +52,10 @@ var noise : FastNoiseLite
 func _ready():
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 	noise = FastNoiseLite.new()
-	#noise.TYPE_SIMPLEX
-	noise.frequency = 0.2
+	noise.fractal_type = FastNoiseLite.FRACTAL_NONE
 	
 	create_floors()
 	create_walls()
-	create_shadows()
 	create_ceiling(ceiling, 10)
 	create_ceiling(bedrock, 2)
 	create_overlay()
@@ -72,7 +70,7 @@ func create_floors():
 	create_room(Vector2.ZERO)
 	
 	var iterations : int = 0
-	while iterations < 100000:
+	while iterations < 30000:
 		for walker in walkers:
 			var position = walker.walk()
 			var random_tile = Vector2i(randi_range(0, 2), 0)
@@ -116,7 +114,7 @@ func create_floors():
 
 func on_walker_changed_direction(position):
 	get_random_tile_position(position, crate_positions)
-	get_ground_without_neighbors(crate_positions, 1)
+	get_ground_without_neighbors(crate_positions, 0)
 
 
 func create_room(position):
@@ -166,13 +164,7 @@ func create_walls():
 		if tilemap.get_cell_source_id(0, top_tile) == none:
 			tilemap.set_cell(0, top_tile, wall, Vector2i.ZERO)
 			tilemap.set_cell(1, top_tile, ceiling, Vector2i(0, 1))
-
-
-func create_shadows():
-	var wall_tiles = tilemap.get_used_cells_by_id(0, wall)
-	for tile in wall_tiles:
-		var bottom_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
-		tilemap.set_cell(1, bottom_tile, shadow, Vector2i.ZERO)
+			tilemap.set_cell(1, tile, shadow, Vector2i.ZERO)
 
 
 func create_ceiling(tile_type, padding : int):
@@ -188,8 +180,9 @@ func create_ceiling(tile_type, padding : int):
 
 
 func create_overlay():
-	var threshold = 0.2
+	noise.frequency = 0.2
 	noise.seed = randi()
+	var threshold = 0.2
 	
 	var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
 	for tile in ground_tiles:
@@ -198,29 +191,46 @@ func create_overlay():
 
 
 func create_ore():
-	var threshold = 0.3
+	noise.frequency = 0.24
 	noise.seed = randi()
+	var threshold = 0.6
 	
-	#process ceiling tiles
+	var ore_tiles : Array[Vector2i]
+	
 	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
-	for tile in ceiling_tiles:
-		if noise.get_noise_2d(tile.x, tile.y) > threshold:
-			tilemap.set_cell(0, tile, ceiling, Vector2i(1, 0))
-	
-	#process wall tiles
 	var wall_tiles = tilemap.get_used_cells_by_id(0, wall)
-	for tile in wall_tiles:
-		if randf() > 0.1:
-			continue
-		
-		#create ore walls and top them off
-		tilemap.set_cell(0, tile, wall, Vector2i(2, 0))
-		tilemap.set_cell(1, tile, ceiling, Vector2i(2, 1))
-		
-		if noise.get_noise_2d(tile.x, tile.y) > threshold:
-			#create crystal walls and top them off
-			tilemap.set_cell(0, tile, wall, Vector2i(1, 0))
-			tilemap.set_cell(1, tile, ceiling, Vector2i(1, 1))
+	var check_tiles = ceiling_tiles + wall_tiles
+	
+	for tile in check_tiles:
+		var neighbors = tilemap.get_surrounding_cells(tile)
+		for neighbor in neighbors:
+			if tilemap.get_cell_source_id(0, neighbor) == ground:
+				if noise.get_noise_2d(tile.x, tile.y) > threshold:
+					ore_tiles.append(tile)
+					if tilemap.get_cell_source_id(0, tile) == ceiling:
+						tilemap.set_cell(0, tile, ceiling, Vector2i(1, 0))
+					if tilemap.get_cell_source_id(0, tile) == wall:
+						tilemap.set_cell(0, tile, wall, Vector2i(1, 0))
+						tilemap.set_cell(1, tile, ceiling, Vector2i(1, 1))
+	
+	for tile in ore_tiles:
+		var vein_size : int = 0
+		while vein_size < 6:
+			var ore_neighbors = tilemap.get_surrounding_cells(tile)
+			var neighbor = ore_neighbors.pick_random()
+			if tilemap.get_cell_source_id(0, neighbor) == ceiling:
+				if noise.get_noise_2d(tile.x, tile.y) > threshold:
+					tilemap.set_cell(0, neighbor, ceiling, Vector2i(1, 0))
+					vein_size += 1
+			
+			if tilemap.get_cell_source_id(0, neighbor) == wall:
+				if noise.get_noise_2d(tile.x, tile.y) > threshold:
+					tilemap.set_cell(0, neighbor, wall, Vector2i(1, 0))
+					tilemap.set_cell(1, neighbor, ceiling, Vector2i(1, 1))
+					vein_size += 1
+			
+			if randf() < 0.1:
+				break
 
 
 func populate_level():
@@ -244,9 +254,9 @@ func populate_level():
 		used_positions.append(tile)
 	
 	#place crates
-	for i in crate_amount:
-		crate_list.setup()
-		var crate_position = crate_positions.pick_random()
+	crate_list.setup()
+	for crate_position in crate_positions:
+		#var crate_position = crate_positions.pick_random()
 		var crate_scene = crate_list.spawn_table.pick_item()
 		create_instance(crate_scene, crate_position, offset)
 	
@@ -259,8 +269,8 @@ func populate_level():
 		create_instance(dust_scene, spawner_position, offset)
 	
 	#place props
+	prop_list.setup()
 	for prop_position in prop_positions:
-		prop_list.setup()
 		var prop_scene = prop_list.spawn_table.pick_item()
 		create_instance(prop_scene, prop_position, offset)
 	
@@ -303,6 +313,11 @@ func get_random_tile_position(position, tile_locations):
 func get_ground_without_neighbors(tile_locations, allowed_neighbors : int = 0):
 	for tile in tile_locations:
 		var neighbors = tilemap.get_surrounding_cells(tile)
+		#neighbors.append(tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER))
+		#neighbors.append(tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER))
+		#neighbors.append(tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE))
+		#neighbors.append(tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE))
+		
 		var neighbor_count = 0
 		for neighbor in neighbors:
 			if tilemap.get_cell_source_id(0, neighbor) != ground:

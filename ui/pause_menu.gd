@@ -3,7 +3,6 @@ extends Control
 @onready var return_button = $NinePatchRect/CenterContainer/VBoxContainer/ReturnButton
 @onready var quit_confirmation = $QuitConfirmation
 
-var transition_screen_scene : PackedScene = preload("res://ui/transition_screen.tscn")
 var paused : bool = false
 
 
@@ -30,18 +29,23 @@ func _on_resume_button_pressed():
 
 func _on_return_button_pressed():
 	pause()
-	var stats : PlayerStats = load("res://resources/Data/player_stats.tres")
-	stats.reset()
-	
 	var ui_layer = get_tree().get_first_node_in_group("ui_layer")
-	var transition_screen_instance = transition_screen_scene.instantiate() as TransitionScreen
-	ui_layer.add_child(transition_screen_instance)
-	transition_screen_instance.fade_complete.connect(on_fade_complete)
-	transition_screen_instance.fade(1)
+	var transition_screen : TransitionScreen
+	for child in ui_layer.get_children():
+		if child is TransitionScreen:
+			transition_screen = child
+			break
+	
+	if not transition_screen:
+		print("error: no transition screen")
+		return
+	
+	transition_screen.fade_complete.connect(on_fade_complete)
+	transition_screen.fade_to_black(true)
 
 
 func on_fade_complete():
-	SceneManager.load_starting_level()
+	SceneManager.load_level(0)
 
 
 func _on_quit_button_pressed():

@@ -80,7 +80,7 @@ text = "Return to ship"
 
 [node name="QuitButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
 layout_mode = 2
-text = "Quit Game"
+text = "Quit game"
 
 [node name="QuitConfirmation" parent="." instance=ExtResource("7_0cefe")]
 visible = false

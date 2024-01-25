@@ -39,10 +39,9 @@ process_mode = 3
 
 [node name="Cursor" parent="CanvasLayer" instance=ExtResource("7_a3i5o")]
 
-[node name="TransitionScreen" parent="CanvasLayer" instance=ExtResource("8_hc4qn")]
-fade_on_ready = true
-
 [node name="DangerSign" parent="CanvasLayer" instance=ExtResource("9_awiln")]
+
+[node name="TransitionScreen" parent="CanvasLayer" instance=ExtResource("8_hc4qn")]
 
 [node name="LevelGenerator" type="Node" parent="." node_paths=PackedStringArray("tilemap", "enemy_manager")]
 script = ExtResource("9_ajfwh")
@@ -64,7 +63,6 @@ tilemap = NodePath("../TileMap")
 [node name="TileMap" type="TileMap" parent="." groups=["tilemap_layer"]]
 texture_filter = 1
 tile_set = ExtResource("15_ukhfq")
-navigation_visibility_mode = 1
 format = 2
 layer_0/name = "base_layer"
 layer_1/name = "shadow_layer"

@@ -26,7 +26,6 @@ process_mode = 3
 [node name="Cursor" parent="CanvasLayer" instance=ExtResource("3_70tg6")]
 
 [node name="TransitionScreen" parent="CanvasLayer" instance=ExtResource("4_b8htk")]
-fade_on_ready = true
 
 [node name="GameCamera" parent="." instance=ExtResource("5_258ul")]
 

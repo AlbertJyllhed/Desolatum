@@ -17,12 +17,11 @@ ammo_component = NodePath("AmmoComponent")
 recoil = 0.2
 
 [node name="AutoFireComponent" parent="." index="0" instance=ExtResource("2_jro13")]
-cooldown = 0.1
+cooldown = 0.2
 
 [node name="GunComponent" parent="." index="1" instance=ExtResource("3_0sixg")]
 position = Vector2(12, 0)
 projectile = ExtResource("4_6n8gg")
-projectile_deviation = 0.2
 
 [node name="AudioPlayerComponent#AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
 stream = ExtResource("3_sjou5")
@@ -34,8 +33,8 @@ stream = ExtResource("4_dwp4e")
 stream = ExtResource("2_cm2p7")
 
 [node name="AmmoComponent" parent="." index="2" instance=ExtResource("8_4u4g7")]
-max_ammo = 25
-reload_time = 2.0
+max_ammo = 24
+reload_time = 1.5
 
 [node name="WeaponSprite" parent="." index="3"]
 texture = ExtResource("2_5actq")

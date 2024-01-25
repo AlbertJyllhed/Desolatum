@@ -17,7 +17,7 @@ ammo_component = NodePath("AmmoComponent")
 
 [node name="BurstFireComponent" parent="." index="0" instance=ExtResource("2_65cqg")]
 burst_interval = 0.1
-cooldown = 0.5
+cooldown = 0.4
 
 [node name="GunComponent" parent="." index="1" instance=ExtResource("3_7redu")]
 position = Vector2(12, 0)

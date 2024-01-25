@@ -70,15 +70,20 @@ vertical_alignment = 1
 
 [node name="RestartButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("2_6xqgq")]
 layout_mode = 2
+text = "Restart run"
+
+[node name="ReturnButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("2_6xqgq")]
+layout_mode = 2
 text = "Return to ship"
 
 [node name="QuitButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("2_6xqgq")]
 layout_mode = 2
-text = "Quit"
+text = "Quit game"
 
 [node name="QuitConfirmation" parent="." instance=ExtResource("5_ah68u")]
 visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

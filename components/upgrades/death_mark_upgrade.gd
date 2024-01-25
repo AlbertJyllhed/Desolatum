@@ -2,8 +2,6 @@ extends Upgrade
 
 @export var status_effect_scene : PackedScene
 
-var enemy_hurtbox : Hurtbox
-
 
 func apply_upgrade(upgrade_node : Node2D):
 	var player = upgrade_node as Player

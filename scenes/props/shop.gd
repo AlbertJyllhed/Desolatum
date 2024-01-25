@@ -1,6 +1,6 @@
 extends Interactable
 
-@export var required_energy : int = 10
+@export var required_energy : int = 15
 
 @onready var drop_component = $DropComponent
 @onready var sprite : Sprite2D = $Sprite2D

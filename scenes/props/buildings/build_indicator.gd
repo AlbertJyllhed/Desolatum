@@ -5,9 +5,7 @@ class_name BuildIndicator
 @export var limit : int = 1
 @export var recharge_time : float = 30.0
 
-@onready var sprite : Sprite2D = $BuildingSprite
 @onready var tile_checker_area : Area2D = $TileCheckerArea
-@onready var collision_shape : CollisionShape2D = $TileCheckerArea/CollisionShape2D
 @onready var timer : Timer = $Timer
 
 var tilemap : TileMap
@@ -47,11 +45,15 @@ func _physics_process(_delta):
 		return
 	
 	if Input.is_action_just_pressed("attack"):
-		var building_instance = building_scene.instantiate()
-		base_layer.add_child(building_instance)
-		building_instance.global_position = global_pos
-		placed_amount = min(placed_amount + 1, limit)
-		timer.start(recharge_time)
+		place_building(global_pos)
+
+
+func place_building(pos : Vector2):
+	var building_instance = building_scene.instantiate()
+	base_layer.add_child(building_instance)
+	building_instance.global_position = pos
+	placed_amount = min(placed_amount + 1, limit)
+	timer.start(recharge_time)
 
 
 func disable(value : bool):

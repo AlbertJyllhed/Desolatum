@@ -15,11 +15,17 @@ func _ready():
 	max_level_index = levels.size() - 1
 
 
-func load_starting_level():
-	level_index = 0
+func load_level(index : int):
+	clear_player_stats()
+	level_index = index
 	get_tree().change_scene_to_packed(levels[level_index])
 
 
 func load_next_level():
 	level_index = min(level_index + 1, max_level_index)
 	get_tree().change_scene_to_packed(levels[level_index])
+
+
+func clear_player_stats():
+	var stats : PlayerStats = load("res://resources/Data/player_stats.tres")
+	stats.reset()

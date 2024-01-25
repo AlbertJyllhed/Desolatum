@@ -15,7 +15,7 @@ ammo_component = NodePath("AmmoComponent")
 recoil = 0.2
 
 [node name="SingleFireComponent" parent="." index="0" instance=ExtResource("2_g2tyh")]
-cooldown = 0.33
+cooldown = 0.4
 
 [node name="GunComponent" parent="." index="1" instance=ExtResource("3_tmtln")]
 position = Vector2(8, 0)
@@ -25,7 +25,8 @@ projectile = ExtResource("2_xlj4f")
 stream = ExtResource("5_5p1ih")
 
 [node name="AmmoComponent" parent="." index="2" instance=ExtResource("5_s6xfo")]
-max_ammo = 6
+max_ammo = 8
+reload_time = 1.5
 
 [node name="WeaponSprite" parent="." index="3"]
 texture = ExtResource("3_q206j")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw7r0284d1bke"]
+
+[ext_resource type="TileSet" uid="uid://bhj5dobjuhwqa" path="res://resources/ice_tileset.tres" id="1_72fwi"]
+[ext_resource type="Script" path="res://cave_generator.gd" id="1_ts1sw"]
+[ext_resource type="Resource" uid="uid://bkqlhlpfwtkme" path="res://resources/Data/cave_prop_list.tres" id="3_bdpi2"]
+
+[node name="CaveGenerator" type="TileMap"]
+tile_set = ExtResource("1_72fwi")
+format = 2
+layer_0/name = "base_layer"
+layer_1/name = "shadow_layer"
+layer_1/tile_data = PackedInt32Array()
+script = ExtResource("1_ts1sw")
+prop_list = ExtResource("3_bdpi2")
+
+[node name="BaseLayer" type="Node2D" parent="." groups=["base_layer"]]
