@@ -13,6 +13,7 @@ const dust_scene = preload("res://particles/dust.tscn")
 @export var prop_list : EnemyList
 @export var crate_list : EnemyList
 
+
 enum {
 	ground = 0,
 	ceiling = 1,
@@ -39,8 +40,8 @@ var wall_map : Array[Vector2i]
 @export var max_room_size_y : int = 2
 var rooms = []
 
-var prop_chance : float = 0.1
-@export var crate_amount : int = 4
+@export var prop_chance : float = 0.6
+#@export var crate_amount : int = 4
 
 var used_positions = []
 var prop_positions = []
@@ -48,6 +49,7 @@ var crate_positions = []
 var spawner_positions = []
 
 var base_layer : Node2D
+var offset = Vector2(8, 8)
 var noise : FastNoiseLite
 
 
@@ -60,6 +62,7 @@ func _ready():
 	create_ceiling(ceiling, 8)
 	create_ceiling(bedrock, 2)
 	create_walls()
+	#create_canopy()
 	create_overlay()
 	create_ore()
 	populate_level()
@@ -171,6 +174,26 @@ func create_ceiling(tile_type, padding : int):
 			ceiling_map.append(tile)
 
 
+#func create_canopy():
+	#for tile in ceiling_map:
+		#var top_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_TOP_SIDE)
+		#var right_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
+		#var bottom_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
+		#var left_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_LEFT_SIDE)
+		#if tilemap.get_cell_source_id(0, top_tile) != ceiling:
+			#var canopy_instance = create_instance(canopy, top_tile, offset) as Canopy
+			#canopy_instance.setup(6)
+		#if tilemap.get_cell_source_id(0, right_tile) != ceiling:
+			#var canopy_instance = create_instance(canopy, right_tile, offset) as Canopy
+			#canopy_instance.setup(1)
+		#if tilemap.get_cell_source_id(0, bottom_tile) == wall:
+			#var canopy_instance = create_instance(canopy, bottom_tile, offset) as Canopy
+			#canopy_instance.setup(7)
+		#if tilemap.get_cell_source_id(0, left_tile) != ceiling:
+			#var canopy_instance = create_instance(canopy, left_tile, offset) as Canopy
+			#canopy_instance.setup(0)
+
+
 func create_walls():
 	#create wall tiles on the top of the map
 	wall_map = tilemap.get_used_cells_by_id(0, ceiling)
@@ -232,8 +255,6 @@ func create_ore():
 
 
 func populate_level():
-	var offset = Vector2(8, 8)
-	
 	#place the player
 	var player = create_instance(player_scene, rooms.front().position)
 	var limits = tilemap.get_used_rect()

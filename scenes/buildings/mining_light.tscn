@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0e50x30owl14"]
+[gd_scene load_steps=5 format=3 uid="uid://b0e50x30owl14"]
 
 [ext_resource type="Texture2D" uid="uid://byb4u8pnhh4j4" path="res://assets/textures/mining_light.png" id="1_a4hx5"]
-[ext_resource type="Script" path="res://scenes/pickups/pickup.gd" id="1_h0ogw"]
 [ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="2_0dfyv"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_1vhpb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f8p0d"]
 radius = 4.0
@@ -11,13 +9,9 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_lyjix"]
 radius = 80.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qk3ma"]
-light_mode = 1
-
 [node name="MiningLight" type="StaticBody2D"]
 collision_layer = 128
 collision_mask = 512
-script = ExtResource("1_h0ogw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -37,24 +31,3 @@ collision_mask = 4096
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Light/Area2D"]
 shape = SubResource("CircleShape2D_lyjix")
-
-[node name="Label" type="Label" parent="."]
-z_index = 11
-material = SubResource("CanvasItemMaterial_qk3ma")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -48.0
-offset_right = 43.5
-offset_bottom = -22.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("3_1vhpb")
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true

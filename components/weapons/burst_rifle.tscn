@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://vswiudpdclwa"]
+[gd_scene load_steps=11 format=3 uid="uid://vswiudpdclwa"]
 
 [ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_k0mvi"]
 [ext_resource type="PackedScene" uid="uid://dcrdtvgh6el3y" path="res://components/burst_fire_component.tscn" id="2_65cqg"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cr6ertvl6ct1l" path="res://sounds/minigun2.ogg" id="5_w05xi"]
 [ext_resource type="AudioStream" uid="uid://1j7iqgaes5tt" path="res://sounds/minigun3.ogg" id="6_xs8d5"]
 [ext_resource type="AudioStream" uid="uid://qqour2nnb8tt" path="res://sounds/minigun.ogg" id="7_c00x0"]
+[ext_resource type="PackedScene" uid="uid://dbv2o15wvnxbf" path="res://ui/reload_progress_bar.tscn" id="10_umivf"]
 
 [node name="BurstRifle" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_k0mvi")]
 firing_component = NodePath("BurstFireComponent")
@@ -40,5 +41,8 @@ texture = ExtResource("3_j7dlf")
 hframes = 4
 vframes = 4
 frame = 11
+
+[node name="ReloadProgressBar" parent="." index="4" node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_umivf")]
+ammo_component = NodePath("../AmmoComponent")
 
 [editable path="Pivot/GunComponent"]

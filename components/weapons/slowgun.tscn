@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbadiqrby3c8s"]
+[gd_scene load_steps=9 format=3 uid="uid://dbadiqrby3c8s"]
 
 [ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_l6rbb"]
 [ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="2_5fskb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="3_srdh4"]
 [ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="5_es0y4"]
 [ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="5_r7wcq"]
+[ext_resource type="PackedScene" uid="uid://dbv2o15wvnxbf" path="res://ui/reload_progress_bar.tscn" id="8_fwap2"]
 
 [node name="Slowgun" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_l6rbb")]
 firing_component = NodePath("SingleFireComponent")
@@ -32,5 +33,8 @@ texture = ExtResource("2_5fskb")
 hframes = 4
 vframes = 4
 frame = 8
+
+[node name="ReloadProgressBar" parent="." index="4" node_paths=PackedStringArray("ammo_component") instance=ExtResource("8_fwap2")]
+ammo_component = NodePath("../AmmoComponent")
 
 [editable path="Pivot/GunComponent"]

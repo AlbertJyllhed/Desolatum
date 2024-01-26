@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmpfnekve57gk"]
+[gd_scene load_steps=11 format=3 uid="uid://dmpfnekve57gk"]
 
 [ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_3px2c"]
 [ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="2_5actq"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="4_6n8gg"]
 [ext_resource type="AudioStream" uid="uid://1j7iqgaes5tt" path="res://sounds/minigun3.ogg" id="4_dwp4e"]
 [ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="8_4u4g7"]
+[ext_resource type="PackedScene" uid="uid://dbv2o15wvnxbf" path="res://ui/reload_progress_bar.tscn" id="10_qm1rg"]
 
 [node name="AutomaticRifle" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_3px2c")]
 firing_component = NodePath("AutoFireComponent")
@@ -41,5 +42,8 @@ texture = ExtResource("2_5actq")
 hframes = 4
 vframes = 4
 frame = 1
+
+[node name="ReloadProgressBar" parent="." index="4" node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_qm1rg")]
+ammo_component = NodePath("../AmmoComponent")
 
 [editable path="Pivot/GunComponent"]

@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="EnemyList" load_steps=6 format=3 uid="uid://bkqlhlpfwtkme"]
+[gd_resource type="Resource" script_class="EnemyList" load_steps=7 format=3 uid="uid://bkqlhlpfwtkme"]
 
 [ext_resource type="Script" path="res://resources/Data/enemy_list.gd" id="1_0ctti"]
 [ext_resource type="PackedScene" uid="uid://bnlr5jhs05d5q" path="res://scenes/props/crystal_cluster.tscn" id="1_uvl3u"]
 [ext_resource type="PackedScene" uid="uid://swwht6df18ty" path="res://components/areas/rock_fall_area.tscn" id="2_nb5o0"]
 [ext_resource type="PackedScene" uid="uid://bgs173x0vqtuf" path="res://scenes/props/ore_cluster.tscn" id="2_uhkep"]
 [ext_resource type="PackedScene" uid="uid://cbjc1fqd8prky" path="res://scenes/props/rock.tscn" id="4_ry41x"]
+[ext_resource type="PackedScene" uid="uid://b0e50x30owl14" path="res://scenes/buildings/mining_light.tscn" id="5_1m1un"]
 
 [resource]
 script = ExtResource("1_0ctti")
-enemy_scenes = Array[PackedScene]([ExtResource("1_uvl3u"), ExtResource("2_uhkep"), ExtResource("2_nb5o0"), ExtResource("4_ry41x")])
-weights = Array[int]([3, 2, 1, 1])
+enemy_scenes = Array[PackedScene]([ExtResource("1_uvl3u"), ExtResource("2_uhkep"), ExtResource("2_nb5o0"), ExtResource("4_ry41x"), ExtResource("5_1m1un")])
+weights = Array[int]([5, 5, 2, 3, 1])

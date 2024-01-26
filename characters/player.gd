@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var max_speed = 80
-@export var acceleration = 800
+@export var acceleration = 600
 @export var friction = 500
 
 @onready var health_component : HealthComponent = $HealthComponent

@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbv2o15wvnxbf"]
+[gd_scene load_steps=5 format=3 uid="uid://dbv2o15wvnxbf"]
 
 [ext_resource type="Texture2D" uid="uid://dlvma46up7dqv" path="res://assets/textures/reload_circle.png" id="1_l3q0w"]
 [ext_resource type="Texture2D" uid="uid://t6dmyka2hknn" path="res://assets/textures/reload_tag.png" id="2_srtos"]
 [ext_resource type="Script" path="res://ui/reload_progress_bar.gd" id="3_2mt8f"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fsgc1"]
+light_mode = 1
+
 [node name="ReloadProgressBar" type="TextureProgressBar"]
 z_index = 11
+material = SubResource("CanvasItemMaterial_fsgc1")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

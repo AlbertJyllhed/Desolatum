@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cig1m1a15gbdi"]
+[gd_scene load_steps=15 format=3 uid="uid://cig1m1a15gbdi"]
 
 [ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_7vgrc"]
 [ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_4jrri"]
@@ -14,8 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://jpwvtwbpum65" path="res://managers/enemy_manager.tscn" id="13_47pbc"]
 [ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://game_camera.tscn" id="14_k4cxe"]
 [ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tileset.tres" id="15_ukhfq"]
-[ext_resource type="PackedScene" uid="uid://bxanol7yje1c3" path="res://scenes/pickups/pickup.tscn" id="17_ih88f"]
-[ext_resource type="Resource" uid="uid://ct5dagltkv6xx" path="res://resources/upgrades/adrenaline.tres" id="18_6p6kp"]
 
 [node name="Main" type="Node"]
 
@@ -68,7 +66,3 @@ y_sort_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.266667, 0.254902, 0.223529, 1)
-
-[node name="Pickup" parent="." instance=ExtResource("17_ih88f")]
-position = Vector2(5, -10)
-item = ExtResource("18_6p6kp")

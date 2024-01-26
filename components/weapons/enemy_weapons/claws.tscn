@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi32k7cc6fr6"]
+[gd_scene load_steps=10 format=3 uid="uid://bi32k7cc6fr6"]
 
 [ext_resource type="PackedScene" uid="uid://cessatyns0dj4" path="res://components/melee_component.tscn" id="1_0v4yn"]
 [ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://enemy_weapon_base.tscn" id="1_6p8m8"]
@@ -8,6 +8,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5saj3"]
 radius = 9.0
 height = 24.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s51b1"]
+light_mode = 2
 
 [sub_resource type="Animation" id="Animation_ckfp0"]
 length = 0.001
@@ -113,6 +116,7 @@ shape = SubResource("CapsuleShape2D_5saj3")
 
 [node name="MuzzleFlash" type="Sprite2D" parent="Pivot" index="1"]
 visible = false
+material = SubResource("CanvasItemMaterial_s51b1")
 position = Vector2(12, 0)
 texture = ExtResource("3_ne1a1")
 hframes = 3
