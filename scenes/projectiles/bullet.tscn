@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/projectiles/bullet.gd" id="1_kamfy"]
 [ext_resource type="Texture2D" uid="uid://dj7gtv40h4sih" path="res://assets/textures/bullet.png" id="2_5sqda"]
 [ext_resource type="PackedScene" uid="uid://27y255pv8iog" path="res://particles/bullet_impact.tscn" id="2_yijoo"]
-[ext_resource type="PackedScene" path="res://components/areas/hitbox.tscn" id="3_uw4q1"]
+[ext_resource type="PackedScene" uid="uid://bygbrw7i4hp0m" path="res://components/areas/hitbox.tscn" id="3_uw4q1"]
 [ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="4_dth2l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e8gli"]

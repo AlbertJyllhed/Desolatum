@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://t781vhxyqnkb"]
+[gd_scene load_steps=11 format=3 uid="uid://t781vhxyqnkb"]
 
 [ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_pltg7"]
 [ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="2_5fo78"]
@@ -9,37 +9,38 @@
 [ext_resource type="AudioStream" uid="uid://b8p1igfjo3naq" path="res://sounds/pistol3.ogg" id="4_87jrf"]
 [ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://scenes/projectiles/bullet.tscn" id="5_n1yc8"]
 [ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="5_vleei"]
+[ext_resource type="PackedScene" uid="uid://dbv2o15wvnxbf" path="res://ui/reload_progress_bar.tscn" id="10_6h7dk"]
 
 [node name="Pistol" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_pltg7")]
 firing_component = NodePath("AutoFireComponent")
-weapon_component = NodePath("GunComponent")
+weapon_component = NodePath("Pivot/GunComponent")
 ammo_component = NodePath("AmmoComponent")
 
 [node name="AutoFireComponent" parent="." index="0" instance=ExtResource("2_2747n")]
 cooldown = 0.4
 
-[node name="GunComponent" parent="." index="1" instance=ExtResource("3_bj4am")]
+[node name="AmmoComponent" parent="." index="1" instance=ExtResource("5_vleei")]
+max_ammo = 12
+
+[node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_bj4am")]
 position = Vector2(8, 0)
 projectile = ExtResource("5_n1yc8")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="0"]
 stream = ExtResource("3_o1pe4")
 
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="1"]
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="1"]
 stream = ExtResource("4_87jrf")
 
-[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="2"]
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="2"]
 stream = ExtResource("2_mixvt")
 
-[node name="AmmoComponent" parent="." index="2" instance=ExtResource("5_vleei")]
-max_ammo = 12
-
-[node name="WeaponSprite" parent="." index="3"]
+[node name="WeaponSprite" parent="Pivot" index="1"]
 texture = ExtResource("2_5fo78")
 hframes = 4
 vframes = 4
 
-[node name="MuzzleFlash" parent="." index="4"]
-position = Vector2(-6, 0)
+[node name="ReloadProgressBar" parent="." index="4" node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_6h7dk")]
+ammo_component = NodePath("../AmmoComponent")
 
-[editable path="GunComponent"]
+[editable path="Pivot/GunComponent"]

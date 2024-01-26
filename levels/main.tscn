@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cig1m1a15gbdi"]
+[gd_scene load_steps=17 format=3 uid="uid://cig1m1a15gbdi"]
 
 [ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_7vgrc"]
 [ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_4jrri"]
@@ -8,10 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dinoa4adlhusc" path="res://ui/energy_ui.tscn" id="6_4fu6g"]
 [ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="7_a3i5o"]
 [ext_resource type="PackedScene" uid="uid://fd0y7pt4y18o" path="res://ui/transition_screen.tscn" id="8_hc4qn"]
-[ext_resource type="Script" path="res://level_generator.gd" id="9_ajfwh"]
 [ext_resource type="PackedScene" uid="uid://ie26y2womcw5" path="res://ui/danger_sign.tscn" id="9_awiln"]
-[ext_resource type="Resource" uid="uid://bkqlhlpfwtkme" path="res://resources/Data/cave_prop_list.tres" id="10_cwgmt"]
-[ext_resource type="Resource" uid="uid://dnphk7ey0fush" path="res://resources/Data/cave_crate_list.tres" id="11_htlo5"]
+[ext_resource type="PackedScene" uid="uid://cd6xh5dojbq0o" path="res://level_generator.tscn" id="10_h0ktf"]
 [ext_resource type="PackedScene" uid="uid://b4gv7qo8wn3yq" path="res://pathfinding_grid.tscn" id="12_s3jgr"]
 [ext_resource type="PackedScene" uid="uid://jpwvtwbpum65" path="res://managers/enemy_manager.tscn" id="13_47pbc"]
 [ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://game_camera.tscn" id="14_k4cxe"]
@@ -37,21 +35,15 @@ process_mode = 3
 
 [node name="EnergyUI" parent="CanvasLayer" instance=ExtResource("6_4fu6g")]
 
-[node name="Cursor" parent="CanvasLayer" instance=ExtResource("7_a3i5o")]
-
 [node name="DangerSign" parent="CanvasLayer" instance=ExtResource("9_awiln")]
+
+[node name="Cursor" parent="CanvasLayer" instance=ExtResource("7_a3i5o")]
 
 [node name="TransitionScreen" parent="CanvasLayer" instance=ExtResource("8_hc4qn")]
 
-[node name="LevelGenerator" type="Node" parent="." node_paths=PackedStringArray("tilemap", "enemy_manager")]
-script = ExtResource("9_ajfwh")
+[node name="LevelGenerator" parent="." node_paths=PackedStringArray("tilemap", "enemy_manager") instance=ExtResource("10_h0ktf")]
 tilemap = NodePath("../TileMap")
 enemy_manager = NodePath("../EnemyManager")
-prop_list = ExtResource("10_cwgmt")
-crate_list = ExtResource("11_htlo5")
-max_steps_until_turn = 10
-max_walkers = 4
-room_chance = 0.6
 
 [node name="PathfindingGrid" parent="." node_paths=PackedStringArray("tilemap") groups=["pathfinding"] instance=ExtResource("12_s3jgr")]
 tilemap = NodePath("../TileMap")

@@ -5,68 +5,28 @@
 [ext_resource type="AudioStream" uid="uid://b1no86fo8mucp" path="res://sounds/pickaxe/swish-1.wav" id="3_25s66"]
 [ext_resource type="Texture2D" uid="uid://bh2jwrbxkucsg" path="res://assets/textures/enemy_swing.png" id="3_ne1a1"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_acr0t"]
-radius = 8.0
-height = 18.0
-
-[sub_resource type="Animation" id="Animation_kg3w5"]
-resource_name = "attack"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeComponent/Pivot/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeComponent/Pivot:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeComponent/Pivot/Hitbox/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5saj3"]
+radius = 9.0
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_ckfp0"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeleeComponent/Pivot/Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/MeleeComponent/Hitbox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeComponent/Pivot:visible")
+tracks/1/path = NodePath("Pivot/MuzzleFlash:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -78,14 +38,54 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeComponent/Pivot/Hitbox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Pivot/MuzzleFlash:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kg3w5"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/MeleeComponent/Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/MuzzleFlash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/MuzzleFlash:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k0p83"]
@@ -95,32 +95,33 @@ _data = {
 }
 
 [node name="Claws" node_paths=PackedStringArray("weapon_component") instance=ExtResource("1_6p8m8")]
-weapon_component = NodePath("MeleeComponent")
+weapon_component = NodePath("Pivot/MeleeComponent")
 
-[node name="MeleeComponent" parent="." index="0" instance=ExtResource("1_0v4yn")]
+[node name="MeleeComponent" parent="Pivot" index="0" instance=ExtResource("1_0v4yn")]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MeleeComponent/AudioPlayerComponent" index="0"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pivot/MeleeComponent/AudioPlayerComponent" index="0"]
 stream = ExtResource("3_25s66")
 
-[node name="Sprite2D" parent="MeleeComponent/Pivot" index="0"]
-position = Vector2(12, 0)
-texture = ExtResource("3_ne1a1")
-
-[node name="Hitbox" parent="MeleeComponent/Pivot" index="1"]
-position = Vector2(10, 0)
+[node name="Hitbox" parent="Pivot/MeleeComponent" index="1"]
+position = Vector2(8, 0)
 collision_layer = 64
 collision_mask = 8
-damage = 1
 
-[node name="CollisionShape2D" parent="MeleeComponent/Pivot/Hitbox" index="0"]
+[node name="CollisionShape2D" parent="Pivot/MeleeComponent/Hitbox" index="0"]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_acr0t")
+shape = SubResource("CapsuleShape2D_5saj3")
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Pivot" index="1"]
+visible = false
+position = Vector2(12, 0)
+texture = ExtResource("3_ne1a1")
+hframes = 3
 
 [node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_k0p83")
 }
 
-[editable path="MeleeComponent"]
-[editable path="MeleeComponent/Pivot/Hitbox"]
+[editable path="Pivot/MeleeComponent"]
+[editable path="Pivot/MeleeComponent/Hitbox"]
 [editable path="AttackArea"]

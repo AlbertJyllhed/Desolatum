@@ -12,7 +12,7 @@ func apply_upgrade(upgrade_node : Node2D):
 	player.flash_light.proximity_sensor.body_entered.connect(on_body_entered)
 
 
-func on_body_entered(body):
+func on_body_entered(_body):
 	if not timer.is_stopped():
 		timer.stop()
 	

@@ -30,6 +30,8 @@ var walker_destroy_chance : float = 0.05
 var walkers : Array[Walker]
 
 var map : Array[Vector2]
+var ceiling_map : Array[Vector2i]
+var wall_map : Array[Vector2i]
 @export var max_level_size : int = 600
 
 @export var room_chance : float = 0.5
@@ -55,9 +57,9 @@ func _ready():
 	noise.fractal_type = FastNoiseLite.FRACTAL_NONE
 	
 	create_floors()
-	create_walls()
-	create_ceiling(ceiling, 10)
+	create_ceiling(ceiling, 8)
 	create_ceiling(bedrock, 2)
+	create_walls()
 	create_overlay()
 	create_ore()
 	populate_level()
@@ -114,7 +116,7 @@ func create_floors():
 
 func on_walker_changed_direction(position):
 	get_random_tile_position(position, crate_positions)
-	get_ground_without_neighbors(crate_positions, 0)
+	get_ground_without_neighbors(crate_positions, 1)
 
 
 func create_room(position):
@@ -136,7 +138,7 @@ func append_room(position, size):
 
 
 func get_room_tiles(room):
-	var room_tiles : Array[Vector2]
+	var room_tiles : Array[Vector2] = []
 	var top_left_corner = (room.position - room.size / 2).floor()
 	for y in room.size.y:
 		for x in room.size.x:
@@ -156,27 +158,28 @@ func get_end_room():
 	return end_room
 
 
-func create_walls():
-	#create wall tiles on the top of the map
-	var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
-	for tile in ground_tiles:
-		var top_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_TOP_SIDE)
-		if tilemap.get_cell_source_id(0, top_tile) == none:
-			tilemap.set_cell(0, top_tile, wall, Vector2i.ZERO)
-			tilemap.set_cell(1, top_tile, ceiling, Vector2i(0, 1))
-			tilemap.set_cell(1, tile, shadow, Vector2i.ZERO)
-
-
 func create_ceiling(tile_type, padding : int):
 	var tilemap_size = tilemap.get_used_rect()
+	var used_tiles = tilemap.get_used_cells(0)
 	for x in range(tilemap_size.position.x - padding, tilemap_size.end.x + padding):
 		for y in range(tilemap_size.position.y - padding, tilemap_size.end.y + padding):
 			var tile = Vector2i(x, y)
-			var used_tiles = tilemap.get_used_cells(0)
 			if used_tiles.has(tile):
 				continue
 			
 			tilemap.set_cell(0, tile, tile_type, Vector2i.ZERO)
+			ceiling_map.append(tile)
+
+
+func create_walls():
+	#create wall tiles on the top of the map
+	wall_map = tilemap.get_used_cells_by_id(0, ceiling)
+	for tile in wall_map:
+		var bottom_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
+		if tilemap.get_cell_source_id(0, bottom_tile) == ground:
+			tilemap.set_cell(0, tile, wall, Vector2i.ZERO)
+			tilemap.set_cell(1, tile, ceiling, Vector2i(0, 1))
+			tilemap.set_cell(1, bottom_tile, shadow, Vector2i.ZERO)
 
 
 func create_overlay():
@@ -184,10 +187,9 @@ func create_overlay():
 	noise.seed = randi()
 	var threshold = 0.2
 	
-	var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
-	for tile in ground_tiles:
-		if noise.get_noise_2d(tile.x, tile.y) > threshold:
-			tilemap.set_cell(0, tile, ground, Vector2i(0, 1))
+	for position in map:
+		if noise.get_noise_2d(position.x, position.y) > threshold:
+			tilemap.set_cell(0, position, ground, Vector2i(0, 1))
 
 
 func create_ore():
@@ -195,12 +197,8 @@ func create_ore():
 	noise.seed = randi()
 	var threshold = 0.6
 	
-	var ore_tiles : Array[Vector2i]
-	
-	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
-	var wall_tiles = tilemap.get_used_cells_by_id(0, wall)
-	var check_tiles = ceiling_tiles + wall_tiles
-	
+	var ore_tiles : Array[Vector2i] = []
+	var check_tiles = ceiling_map + wall_map
 	for tile in check_tiles:
 		var neighbors = tilemap.get_surrounding_cells(tile)
 		for neighbor in neighbors:
@@ -312,16 +310,19 @@ func get_random_tile_position(position, tile_locations):
 
 func get_ground_without_neighbors(tile_locations, allowed_neighbors : int = 0):
 	for tile in tile_locations:
-		var neighbors = tilemap.get_surrounding_cells(tile)
-		#neighbors.append(tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER))
-		#neighbors.append(tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER))
-		#neighbors.append(tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE))
-		#neighbors.append(tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE))
-		
-		var neighbor_count = 0
-		for neighbor in neighbors:
-			if tilemap.get_cell_source_id(0, neighbor) != ground:
-				neighbor_count += 1
-			
-			if neighbor_count > allowed_neighbors:
-				tile_locations.erase(tile)
+		var neighbors = check_neighbors(tile.x, tile.y)
+		if neighbors > allowed_neighbors:
+			tile_locations.erase(tile)
+
+
+func check_neighbors(x, y):
+	var count = 0
+	if tilemap.get_cell_source_id(0, Vector2i(x, y - 1)) != ground: count += 1
+	if tilemap.get_cell_source_id(0, Vector2i(x, y + 1)) != ground: count += 1
+	if tilemap.get_cell_source_id(0, Vector2i(x - 1, y)) != ground: count += 1
+	if tilemap.get_cell_source_id(0, Vector2i(x + 1, y)) != ground: count += 1
+	if tilemap.get_cell_source_id(0, Vector2i(x + 1, y + 1)) != ground: count += 1
+	if tilemap.get_cell_source_id(0, Vector2i(x + 1, y - 1)) != ground: count += 1
+	if tilemap.get_cell_source_id(0, Vector2i(x - 1, y + 1)) != ground: count += 1
+	if tilemap.get_cell_source_id(0, Vector2i(x - 1, y - 1)) != ground: count += 1
+	return count

@@ -20,7 +20,7 @@ func timeout():
 func enter(message = {}):
 	state_machine.animation_player.play("walk_right")
 	state_machine.timer.start(randf_range(min_update_time, max_update_time))
-	var wander_vector = Vector2(randi_range(-wander_range, wander_range), randi_range(-wander_range, wander_range))
+	var wander_vector = Vector2(randf_range(-wander_range, wander_range), randf_range(-wander_range, wander_range))
 	var wander_direction = wander_vector.normalized()
 	enemy_entity.direction = wander_direction
 

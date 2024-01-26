@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dawp4moicrfor"]
+[gd_scene load_steps=16 format=3 uid="uid://dawp4moicrfor"]
 
 [ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_kt1u0"]
 [ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="2_7rgnw"]
@@ -11,13 +11,14 @@
 [ext_resource type="AudioStream" uid="uid://um5a4c6t4s7b" path="res://sounds/pickaxe/swish-4.wav" id="7_atgmh"]
 [ext_resource type="AudioStream" uid="uid://d0ncw55h4lkgs" path="res://sounds/pickaxe/swish-5.wav" id="8_iqn0r"]
 [ext_resource type="AudioStream" uid="uid://dn5y3w5qh8nlo" path="res://sounds/pickaxe/swish-6.wav" id="9_ia3is"]
+[ext_resource type="Texture2D" uid="uid://dla1lpsrtarep" path="res://assets/textures/melee_swing.png" id="12_pjcxj"]
 
 [sub_resource type="Animation" id="Animation_mrgko"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/path = NodePath("Pivot/WeaponSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -29,7 +30,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("WeaponSprite:rotation")
+tracks/1/path = NodePath("Pivot/WeaponSprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -41,7 +42,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeComponent/Pivot:visible")
+tracks/2/path = NodePath("Pivot/TileRemoverRay:enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -53,7 +54,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeComponent/Pivot/Sprite2D:frame")
+tracks/3/path = NodePath("Pivot/MuzzleFlash:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -65,26 +66,26 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeComponent/Pivot/Hitbox/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Pivot/MuzzleFlash:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("TileRemoverRay:enabled")
+tracks/5/path = NodePath("Pivot/MeleeComponent/Hitbox/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_bvbe8"]
@@ -93,7 +94,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/path = NodePath("Pivot/WeaponSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -105,7 +106,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("WeaponSprite:rotation")
+tracks/1/path = NodePath("Pivot/WeaponSprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -117,11 +118,11 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeComponent/Pivot:visible")
+tracks/2/path = NodePath("Pivot/TileRemoverRay:enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -129,7 +130,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeComponent/Pivot/Sprite2D:frame")
+tracks/3/path = NodePath("Pivot/MuzzleFlash:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -141,26 +142,26 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeComponent/Pivot/Hitbox/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Pivot/MuzzleFlash:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("TileRemoverRay:enabled")
+tracks/5/path = NodePath("Pivot/MeleeComponent/Hitbox/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f8y8q"]
@@ -171,44 +172,47 @@ _data = {
 
 [node name="PickaxeNew" node_paths=PackedStringArray("firing_component", "weapon_component") instance=ExtResource("1_kt1u0")]
 firing_component = NodePath("AutoFireComponent")
-weapon_component = NodePath("MeleeComponent")
+weapon_component = NodePath("Pivot/MeleeComponent")
 
 [node name="AutoFireComponent" parent="." index="0" instance=ExtResource("2_ih87y")]
 cooldown = 0.5
 
-[node name="MeleeComponent" parent="." index="1" instance=ExtResource("3_f0qmk")]
+[node name="MeleeComponent" parent="Pivot" index="0" instance=ExtResource("3_f0qmk")]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MeleeComponent/AudioPlayerComponent" index="0"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pivot/MeleeComponent/AudioPlayerComponent" index="0"]
 stream = ExtResource("4_776kk")
 
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="MeleeComponent/AudioPlayerComponent" index="1"]
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Pivot/MeleeComponent/AudioPlayerComponent" index="1"]
 stream = ExtResource("5_bitnp")
 
-[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="MeleeComponent/AudioPlayerComponent" index="2"]
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="Pivot/MeleeComponent/AudioPlayerComponent" index="2"]
 stream = ExtResource("6_r50h8")
 
-[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="MeleeComponent/AudioPlayerComponent" index="3"]
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="Pivot/MeleeComponent/AudioPlayerComponent" index="3"]
 stream = ExtResource("7_atgmh")
 
-[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="MeleeComponent/AudioPlayerComponent" index="4"]
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="Pivot/MeleeComponent/AudioPlayerComponent" index="4"]
 stream = ExtResource("8_iqn0r")
 
-[node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="MeleeComponent/AudioPlayerComponent" index="5"]
+[node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="Pivot/MeleeComponent/AudioPlayerComponent" index="5"]
 stream = ExtResource("9_ia3is")
 
-[node name="TileRemoverRay" parent="." index="2" instance=ExtResource("3_r8v6n")]
+[node name="TileRemoverRay" parent="Pivot" index="1" instance=ExtResource("3_r8v6n")]
 enabled = false
 
-[node name="WeaponSprite" parent="." index="3"]
+[node name="WeaponSprite" parent="Pivot" index="2"]
 texture = ExtResource("2_7rgnw")
 hframes = 4
 vframes = 4
 frame = 5
 
-[node name="AnimationPlayer" parent="." index="5"]
+[node name="MuzzleFlash" parent="Pivot" index="3"]
+texture = ExtResource("12_pjcxj")
+
+[node name="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_f8y8q")
 }
 
-[editable path="MeleeComponent"]
-[editable path="MeleeComponent/Pivot/Hitbox"]
+[editable path="Pivot/MeleeComponent"]
+[editable path="Pivot/MeleeComponent/Hitbox"]

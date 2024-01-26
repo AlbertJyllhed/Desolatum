@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnlr5jhs05d5q"]
+[gd_scene load_steps=14 format=3 uid="uid://bnlr5jhs05d5q"]
 
+[ext_resource type="Script" path="res://scenes/props/prop.gd" id="1_0txxh"]
 [ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/health_component.tscn" id="1_obhpf"]
 [ext_resource type="PackedScene" uid="uid://cvkq0ml6ssv2r" path="res://particles/crystal_particles.tscn" id="2_1vlld"]
 [ext_resource type="PackedScene" uid="uid://d0m7vblybubk2" path="res://components/hit_flash_component.tscn" id="2_snb1w"]
@@ -24,6 +25,7 @@ radius = 8.0
 [node name="CrystalCluster" type="StaticBody2D"]
 collision_layer = 1024
 collision_mask = 6
+script = ExtResource("1_0txxh")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_obhpf")]
 blood_particles = ExtResource("2_1vlld")
@@ -72,5 +74,7 @@ shape = SubResource("CircleShape2D_3rcse")
 scale = Vector2(0.1, 0.1)
 blend_mode = 2
 texture = ExtResource("11_q6mtn")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 
 [editable path="Hurtbox"]

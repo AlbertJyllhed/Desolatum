@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://da5tghgostisi"]
+[gd_scene load_steps=8 format=3 uid="uid://da5tghgostisi"]
 
 [ext_resource type="Script" path="res://player_weapon_base.gd" id="1_2brx3"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="6_buywn"]
@@ -9,7 +9,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/path = NodePath("Pivot/WeaponSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MuzzleFlash:visible")
+tracks/1/path = NodePath("Pivot/MuzzleFlash:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -33,7 +33,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("WeaponSprite:rotation")
+tracks/2/path = NodePath("Pivot/WeaponSprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -49,7 +49,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/path = NodePath("Pivot/WeaponSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,7 +61,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MuzzleFlash:visible")
+tracks/1/path = NodePath("Pivot/MuzzleFlash:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -73,7 +73,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("WeaponSprite:rotation")
+tracks/2/path = NodePath("Pivot/WeaponSprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -83,20 +83,50 @@ tracks/2/keys = {
 "values": [-0.436332, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_a1u6s"]
+resource_name = "reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 0), Vector2(6, 2), Vector2(4, 0), Vector2(6, 2), Vector2(5, 0), Vector2(6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/WeaponSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 0.453786, 0.314159, -0.174533, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jf7la"]
 _data = {
 "RESET": SubResource("Animation_pj6or"),
-"attack": SubResource("Animation_kp1dh")
+"attack": SubResource("Animation_kp1dh"),
+"reload": SubResource("Animation_a1u6s")
 }
 
 [node name="PlayerWeaponBase" type="Node2D"]
 script = ExtResource("1_2brx3")
 
-[node name="WeaponSprite" type="Sprite2D" parent="."]
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="WeaponSprite" type="Sprite2D" parent="Pivot"]
 position = Vector2(6, 0)
 texture = ExtResource("6_buywn")
 
-[node name="MuzzleFlash" type="Sprite2D" parent="."]
+[node name="MuzzleFlash" type="Sprite2D" parent="Pivot"]
 visible = false
 z_index = 1
 texture = ExtResource("7_4n0lk")

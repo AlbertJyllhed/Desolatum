@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpesqka10ukpe"]
+
+[ext_resource type="PackedScene" uid="uid://dy3meaaph61x0" path="res://components/upgrades/upgrade_base.tscn" id="1_vyh8r"]
+[ext_resource type="Script" path="res://components/upgrades/big_mag_upgrade.gd" id="2_8a5q3"]
+
+[node name="BigMagUpgrade" instance=ExtResource("1_vyh8r")]
+script = ExtResource("2_8a5q3")

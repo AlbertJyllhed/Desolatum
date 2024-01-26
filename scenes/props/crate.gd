@@ -5,6 +5,11 @@ extends Interactable
 @onready var collision_shape : CollisionShape2D = $CollisionShape2D
 
 
+func _ready():
+	var pos = global_position / 16 - Vector2(0.5, 0.5)
+	GameEvents.navigation_updated.emit(pos, true)
+
+
 func show_details():
 	label.text = "Open Crate"
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd6xh5dojbq0o"]
+
+[ext_resource type="Script" path="res://level_generator.gd" id="1_iocxf"]
+[ext_resource type="Resource" uid="uid://bkqlhlpfwtkme" path="res://resources/Data/cave_prop_list.tres" id="2_r5gq2"]
+[ext_resource type="Resource" uid="uid://dnphk7ey0fush" path="res://resources/Data/cave_crate_list.tres" id="3_5ncbd"]
+
+[node name="LevelGenerator" type="Node"]
+script = ExtResource("1_iocxf")
+prop_list = ExtResource("2_r5gq2")
+crate_list = ExtResource("3_5ncbd")
+max_steps_until_turn = 10
+max_walkers = 4
+room_chance = 0.6

@@ -1,28 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://iofr7dg8131w"]
+[gd_scene load_steps=7 format=3 uid="uid://iofr7dg8131w"]
 
 [ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_txx2a"]
 [ext_resource type="PackedScene" uid="uid://dcrdtvgh6el3y" path="res://components/burst_fire_component.tscn" id="2_h3p16"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="3_1fphx"]
 [ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="3_dbugt"]
+[ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="3_i2k64"]
 [ext_resource type="PackedScene" uid="uid://bc68l5n4im6qh" path="res://scenes/projectiles/impact_grenade.tscn" id="3_i4oyw"]
 
-[node name="GrenadeDigger" node_paths=PackedStringArray("firing_component") instance=ExtResource("1_txx2a")]
+[node name="GrenadeDigger" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_txx2a")]
 firing_component = NodePath("BurstFireComponent")
+weapon_component = NodePath("Pivot/GunComponent")
+ammo_component = NodePath("AmmoComponent")
+recoil = 0.4
+power = 6.0
 
 [node name="BurstFireComponent" parent="." index="0" instance=ExtResource("2_h3p16")]
 burst_interval = 0.1
+cooldown = 0.5
 
-[node name="AmmoComponent" parent="." index="1"]
+[node name="AmmoComponent" parent="." index="1" instance=ExtResource("3_i2k64")]
 max_ammo = 3
-reload_time = 2.0
+reload_time = 1.5
 
-[node name="ShootingComponent" parent="." index="4"]
+[node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_1fphx")]
 projectile = ExtResource("3_i4oyw")
+base_projectile_deviation = 0.0
+base_projectile_speed = 300.0
 
-[node name="WeaponSprite" parent="." index="5"]
+[node name="WeaponSprite" parent="Pivot" index="1"]
 texture = ExtResource("3_dbugt")
 hframes = 4
 vframes = 4
 frame = 12
-
-[node name="MuzzleFlash" parent="." index="6"]
-position = Vector2(-4, 0)

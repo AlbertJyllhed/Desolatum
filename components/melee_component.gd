@@ -1,7 +1,7 @@
 extends WeaponComponent
 class_name MeleeComponent
 
-@onready var hitbox : Hitbox = $Pivot/Hitbox
+@onready var hitbox : Hitbox = $Hitbox
 
 
 func attack(attack_vector : Vector2):

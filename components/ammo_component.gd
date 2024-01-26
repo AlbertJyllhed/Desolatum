@@ -2,6 +2,8 @@ extends Node
 class_name AmmoComponent
 
 signal has_ammo
+signal reloading(time)
+signal cancel_reload
 
 @export var max_ammo : int = 10
 @export_range(0.1, 10.0) var reload_time : float = 0.2
@@ -12,8 +14,12 @@ signal has_ammo
 var ammo : int = 0
 var disabled : bool = false
 
+var ammo_multiplier : float = 1.0
+var reload_time_multiplier : float = 1.0
+
 
 func _ready():
+	max_ammo *= ammo_multiplier
 	ammo = max_ammo
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
 	#GameEvents.item_picked_up.connect(on_item_picked_up)
@@ -23,12 +29,19 @@ func disable(value : bool):
 	disabled = value
 	if disabled:
 		reload_timer.stop()
+		cancel_reload.emit()
 		return
 	
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
 
 
-func _physics_process(delta):
+func add_to_multiplier(change : float):
+	ammo_multiplier += change
+	max_ammo *= ammo_multiplier
+	GameEvents.ammo_updated.emit(ammo, max_ammo)
+
+
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("reload") and not disabled:
 		reload()
 
@@ -36,6 +49,7 @@ func _physics_process(delta):
 func use_ammo():
 	if ammo > 0:
 		reload_timer.stop()
+		cancel_reload.emit()
 	else:
 		reload()
 		return
@@ -54,10 +68,17 @@ func use_ammo():
 
 
 func reload():
+	if ammo == max_ammo:
+		return
+	
+	if not reload_timer.is_stopped():
+		return
+	
 	no_ammo_sound.play()
 	reload_timer.start(reload_time)
+	reloading.emit(reload_time)
 
 
 func _on_reload_timer_timeout():
-	ammo = max_ammo
+	ammo = max_ammo * ammo_multiplier
 	GameEvents.ammo_updated.emit(ammo, max_ammo)

@@ -19,7 +19,7 @@ func set_enabled(value : bool):
 	hitbox.collision_shape.set_deferred("disabled", !value)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not target:
 		return
 	
@@ -32,7 +32,7 @@ func _physics_process(delta):
 	hitbox.collision_shape.shape.extents = Vector2(hitbox_size, 2)
 
 
-func _on_hitbox_area_entered(area):
+func _on_hitbox_area_entered(_area):
 	hitbox.collision_shape.set_deferred("disabled", true)
 	timer.start(time_between_zaps)
 

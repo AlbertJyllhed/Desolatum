@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnrmggvnbauyb"]
+[gd_scene load_steps=5 format=3 uid="uid://bnrmggvnbauyb"]
 
+[ext_resource type="Script" path="res://scenes/props/prop.gd" id="1_hxef1"]
 [ext_resource type="Texture2D" uid="uid://do08lw42tsoxf" path="res://assets/textures/mini_car.png" id="1_jhomu"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="2_3k2hy"]
 
@@ -7,6 +8,7 @@
 size = Vector2(32, 20)
 
 [node name="Car" type="StaticBody2D"]
+script = ExtResource("1_hxef1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jhomu")

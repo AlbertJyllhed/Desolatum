@@ -7,6 +7,9 @@ class_name PathfindingGrid
 var astar_grid : AStarGrid2D
 var debug_positions : Dictionary
 
+var base_layer : Node2D
+var path_debug_scene = preload("res://debug/path.tscn")
+
 enum {
 	ground = 0,
 	ceiling = 1,
@@ -31,25 +34,18 @@ func setup_navigation():
 	var bedrock_tiles = tilemap.get_used_cells_by_id(0, bedrock)
 	var wall_tiles = tilemap.get_used_cells_by_id(0, wall)
 	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
-	var obstacle_tiles = bedrock_tiles + wall_tiles + ceiling_tiles
+	var obstacles = bedrock_tiles + wall_tiles + ceiling_tiles
 	
-	for tile in obstacle_tiles:
-		astar_grid.set_point_solid(tile)
-	
-	if not debug_mode:
-		return
-	
-	show_debug_nodes(obstacle_tiles)
+	base_layer = get_tree().get_first_node_in_group("base_layer")
+	for tile in obstacles:
+		update_point(tile, true)
 
 
-func show_debug_nodes(tiles):
-	var base_layer = get_tree().get_first_node_in_group("base_layer")
-	for tile in tiles:
-		var path_debug_scene = preload("res://debug/path.tscn")
-		var path_debug_instance = path_debug_scene.instantiate()
-		base_layer.add_child(path_debug_instance)
-		path_debug_instance.global_position = tile * 16 + Vector2i(8, 8)
-		debug_positions[tile] = path_debug_instance
+func create_debug_node(pos : Vector2):
+	var path_debug_instance = path_debug_scene.instantiate()
+	base_layer.call_deferred("add_child", path_debug_instance)
+	path_debug_instance.global_position = pos * 16 + Vector2(8, 8)
+	return path_debug_instance
 
 
 func update_point(tile : Vector2i, value : bool):
@@ -57,5 +53,11 @@ func update_point(tile : Vector2i, value : bool):
 	if not debug_mode:
 		return
 	
+	if value:
+		var debug_node = create_debug_node(tile)
+		debug_positions[tile] = debug_node
+		return
+	
 	if debug_positions.has(tile):
 		debug_positions[tile].queue_free()
+		debug_positions.erase(tile)

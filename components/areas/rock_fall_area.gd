@@ -6,7 +6,7 @@ extends Area2D
 var rock_fall_scene : PackedScene = preload("res://particles/rock_fall.tscn")
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	particles.emitting = true
 	timer.start()
 

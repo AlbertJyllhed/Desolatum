@@ -10,31 +10,28 @@
 
 [node name="Railgun" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_qpi2b")]
 firing_component = NodePath("SingleFireComponent")
-weapon_component = NodePath("GunComponent")
+weapon_component = NodePath("Pivot/GunComponent")
 ammo_component = NodePath("AmmoComponent")
 recoil = 0.2
 
 [node name="SingleFireComponent" parent="." index="0" instance=ExtResource("2_g2tyh")]
 cooldown = 0.4
 
-[node name="GunComponent" parent="." index="1" instance=ExtResource("3_tmtln")]
-position = Vector2(8, 0)
-projectile = ExtResource("2_xlj4f")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
-stream = ExtResource("5_5p1ih")
-
-[node name="AmmoComponent" parent="." index="2" instance=ExtResource("5_s6xfo")]
+[node name="AmmoComponent" parent="." index="1" instance=ExtResource("5_s6xfo")]
 max_ammo = 8
 reload_time = 1.5
 
-[node name="WeaponSprite" parent="." index="3"]
+[node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_tmtln")]
+position = Vector2(8, 0)
+projectile = ExtResource("2_xlj4f")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="0"]
+stream = ExtResource("5_5p1ih")
+
+[node name="WeaponSprite" parent="Pivot" index="1"]
 texture = ExtResource("3_q206j")
 hframes = 4
 vframes = 4
 frame = 3
 
-[node name="MuzzleFlash" parent="." index="4"]
-position = Vector2(-6, 0)
-
-[editable path="GunComponent"]
+[editable path="Pivot/GunComponent"]

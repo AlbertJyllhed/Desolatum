@@ -7,7 +7,8 @@ class_name PlayerWeaponBase
 @export var recoil : float = 0.1
 @export var power : float = 2.0
 
-@onready var sprite : Sprite2D = $WeaponSprite
+@onready var pivot : Node2D = $Pivot
+@onready var sprite : Sprite2D = $Pivot/WeaponSprite
 @onready var animation_player = $AnimationPlayer
 
 var camera : PlayerCamera
@@ -26,16 +27,17 @@ func _ready():
 		return
 	
 	ammo_component.has_ammo.connect(attack)
+	ammo_component.reloading.connect(reload)
 
 
 func _physics_process(_delta):
 	attack_vector = get_global_mouse_position()
-	look_at(attack_vector)
+	pivot.look_at(attack_vector)
 	
 	if attack_vector.x > global_position.x:
-		scale.y = 1
+		pivot.scale.y = 1
 	else:
-		scale.y = -1
+		pivot.scale.y = -1
 	
 	if attack_vector.y > global_position.y:
 		sprite.z_index = 0
@@ -66,6 +68,10 @@ func attack():
 	animation_player.play("attack")
 	var direction = (attack_vector - global_position).normalized() * 100
 	camera.shake(-direction, recoil, power)
+
+
+func reload(time : float):
+	animation_player.play("reload", -1, time)
 
 
 func disable(value : bool):
