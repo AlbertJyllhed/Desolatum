@@ -1,6 +1,7 @@
 extends Control
 
 @onready var return_button = $NinePatchRect/CenterContainer/VBoxContainer/ReturnButton
+@onready var options_menu = $OptionsMenu
 @onready var quit_confirmation = $QuitConfirmation
 
 var paused : bool = false
@@ -46,6 +47,10 @@ func _on_return_button_pressed():
 
 func on_fade_complete():
 	SceneManager.load_level(0)
+
+
+func _on_settings_button_pressed():
+	options_menu.show()
 
 
 func _on_quit_button_pressed():

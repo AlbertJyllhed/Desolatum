@@ -13,6 +13,7 @@ config_version=5
 config/name="Desolatum"
 run/main_scene="res://levels/ship_hub.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [audio]
@@ -38,6 +39,11 @@ window/vsync/vsync_mode=0
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[filesystem]
+
+import/blender/enabled=false
+import/fbx/enabled=false
 
 [input]
 
@@ -124,4 +130,10 @@ flashlight={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+lights_and_shadows/directional_shadow/size=512
+lights_and_shadows/directional_shadow/size.mobile=512
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+lights_and_shadows/positional_shadow/atlas_size=512
+lights_and_shadows/positional_shadow/atlas_size.mobile=512

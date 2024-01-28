@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0e50x30owl14"]
+[gd_scene load_steps=6 format=3 uid="uid://b0e50x30owl14"]
 
 [ext_resource type="Texture2D" uid="uid://byb4u8pnhh4j4" path="res://assets/textures/mining_light.png" id="1_a4hx5"]
 [ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="2_0dfyv"]
+[ext_resource type="Script" path="res://components/light_flicker_component.gd" id="3_s4rwa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f8p0d"]
 radius = 4.0
@@ -22,8 +23,13 @@ shape = SubResource("CircleShape2D_f8p0d")
 
 [node name="Light" type="PointLight2D" parent="."]
 blend_mode = 2
+shadow_enabled = true
 texture = ExtResource("2_0dfyv")
 texture_scale = 0.6
+script = ExtResource("3_s4rwa")
+light_size = 0.6
+max_light_size = 0.6
+min_light_size = 0.59
 
 [node name="Area2D" type="Area2D" parent="Light"]
 collision_layer = 2048

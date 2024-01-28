@@ -3,8 +3,8 @@ extends PointLight2D
 @export var light_size : float = 0.7
 @export var base_size_change_speed : float = 0.1
 
-var max_light_size : float = 0.7
-var min_light_size : float = 0.69
+@export var max_light_size : float = 0.7
+@export var min_light_size : float = 0.69
 var size_change_speed : float
 
 

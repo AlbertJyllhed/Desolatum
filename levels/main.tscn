@@ -22,6 +22,9 @@
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("1_7vgrc")]
 visible = false
 
+[node name="OptionsMenu" parent="CanvasLayer/PauseMenu" index="2" node_paths=PackedStringArray("fps_counter")]
+fps_counter = NodePath("../../FPSCounter")
+
 [node name="FPSCounter" parent="CanvasLayer" instance=ExtResource("2_4jrri")]
 process_mode = 3
 
@@ -66,3 +69,5 @@ y_sort_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.266667, 0.254902, 0.223529, 1)
+
+[editable path="CanvasLayer/PauseMenu"]

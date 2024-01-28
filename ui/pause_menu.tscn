@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhyexrog6bcbm"]
+[gd_scene load_steps=7 format=3 uid="uid://dhyexrog6bcbm"]
 
 [ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_jsj51"]
 [ext_resource type="Script" path="res://ui/pause_menu.gd" id="1_nfb08"]
 [ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_k8h5x"]
+[ext_resource type="PackedScene" uid="uid://d3cqb2wgvjy5a" path="res://ui/options_menu.tscn" id="5_edee6"]
 [ext_resource type="PackedScene" uid="uid://41n4kltx64wg" path="res://ui/quit_confirmation.tscn" id="7_0cefe"]
 [ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="7_dqpg8"]
 
@@ -35,9 +36,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -70.0
-offset_top = -60.0
+offset_top = -80.0
 offset_right = 70.0
-offset_bottom = 60.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_jsj51")
@@ -78,9 +79,17 @@ text = "Resume"
 layout_mode = 2
 text = "Return to ship"
 
+[node name="SettingsButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
+layout_mode = 2
+text = "Settings"
+
 [node name="QuitButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
 layout_mode = 2
 text = "Quit game"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("5_edee6")]
+visible = false
+layout_mode = 1
 
 [node name="QuitConfirmation" parent="." instance=ExtResource("7_0cefe")]
 visible = false
@@ -88,4 +97,5 @@ layout_mode = 1
 
 [connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -15,3 +15,5 @@ tile_set = ExtResource("2_0htae")
 
 [node name="CanvasModulate" parent="." index="8"]
 color = Color(0.227451, 0.266667, 0.305882, 1)
+
+[editable path="CanvasLayer/PauseMenu"]

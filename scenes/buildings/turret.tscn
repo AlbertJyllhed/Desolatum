@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvouwx0ctslr4"]
+[gd_scene load_steps=11 format=3 uid="uid://bvouwx0ctslr4"]
 
 [ext_resource type="Script" path="res://scenes/buildings/turret.gd" id="1_latmh"]
 [ext_resource type="Texture2D" uid="uid://dk30qefkmbkpx" path="res://assets/textures/turret.png" id="1_xg2jb"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="5_1ce5n"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="7_f3brc"]
 [ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="8_a1p7d"]
+[ext_resource type="Script" path="res://components/light_flicker_component.gd" id="9_jwuan"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bwxhy"]
 radius = 78.0
@@ -21,8 +22,6 @@ texture = ExtResource("1_xg2jb")
 
 [node name="GunComponent" parent="." instance=ExtResource("3_h2v3f")]
 projectile = ExtResource("4_1e520")
-projectile_deviation = 0.0
-projectile_speed = 600.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunComponent/AudioPlayerComponent" index="0"]
 stream = ExtResource("5_1ce5n")
@@ -35,8 +34,13 @@ collision_mask = 4
 
 [node name="Light" type="PointLight2D" parent="."]
 blend_mode = 2
+shadow_enabled = true
 texture = ExtResource("8_a1p7d")
 texture_scale = 0.6
+script = ExtResource("9_jwuan")
+light_size = 0.6
+max_light_size = 0.6
+min_light_size = 0.59
 
 [node name="Area2D" type="Area2D" parent="Light"]
 collision_layer = 2048

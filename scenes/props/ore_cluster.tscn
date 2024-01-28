@@ -29,4 +29,7 @@ frame = 2
 position = Vector2(0, 6)
 frame = 2
 
+[node name="PointLight2D" parent="." index="7"]
+enabled = false
+
 [editable path="Hurtbox"]
