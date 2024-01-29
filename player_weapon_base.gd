@@ -4,6 +4,8 @@ class_name PlayerWeaponBase
 @export var firing_component : FiringComponent
 @export var weapon_component : WeaponComponent
 @export var ammo_component : AmmoComponent
+
+@export_group("Camera Effects")
 @export var recoil : float = 0.1
 @export var power : float = 2.0
 

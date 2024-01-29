@@ -14,11 +14,13 @@ func apply_upgrade(upgrade_node : Node2D):
 
 func on_body_entered(_body):
 	if not timer.is_stopped():
-		timer.stop()
+		return
 	
-	player.max_speed = min(player.stats.base_speed * 1.4, player.stats.base_speed * 3)
+	player.stats.add_to_multiplier("move_speed", 0.3)
+	#player.max_speed = min(player.stats.base_speed * 1.4, player.stats.base_speed * 3)
 	timer.start(time_to_reset)
 
 
 func _on_timer_timeout():
-	player.max_speed = player.stats.base_speed
+	player.stats.add_to_multiplier("move_speed", -0.3)
+	#player.max_speed = player.stats.base_speed

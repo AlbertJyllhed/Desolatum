@@ -3,26 +3,23 @@ class_name WeaponInventoryComponent
 
 signal weapon_replaced(weapon)
 
-@export var starter_items : Array[Item]
-
 @onready var audio_stream_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
-var stats : PlayerStats = preload("res://resources/Data/player_stats.tres")
+var stats : PlayerStats
 
 var base_layer : Node2D
 var pickup_scene : PackedScene = preload("res://scenes/pickups/pickup.tscn")
 
 
-func _ready():
+func setup(new_stats : PlayerStats):
+	stats = new_stats
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 	GameEvents.item_picked_up.connect(on_item_picked_up)
+	weapon_replaced.connect(stats.update_equipment)
 	
 	#if the player had equipped weapons in the previous scene we add them
 	if stats.equipment.size() > 0:
 		for item in stats.equipment:
-			add_item(item)
-	else:
-		for item in starter_items:
 			add_item(item)
 
 
@@ -58,19 +55,17 @@ func add_item(new_item : Item):
 	
 	var weapon = create_weapon_instance(new_item)
 	
-	if items.size() == starter_items.size():
-		for item in starter_items:
+	if items.size() == stats.equipment.size():
+		for item in stats.equipment:
 			if new_item.type == item.type:
 				index = item.type
 		
 		create_pickup()
 		items.insert(index, weapon)
 		stats.equipment[index] = new_item
-		starter_items[index] = new_item
 		weapon_replaced.emit(items[index])
 	else:
 		items.append(weapon)
-		stats.equipment.assign(starter_items)
 	
 	max_index = items.size() - 1
 	index = 0
@@ -81,7 +76,7 @@ func create_pickup():
 	#create pickup from current gun and drop it to the ground
 	var pickup_instance = pickup_scene.instantiate()
 	base_layer.add_child(pickup_instance)
-	pickup_instance.set_item(starter_items[index])
+	pickup_instance.set_item(stats.equipment[index])
 	pickup_instance.global_position = global_position
 	items.pop_at(index).queue_free()
 

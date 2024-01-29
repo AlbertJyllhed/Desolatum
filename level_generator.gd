@@ -25,6 +25,7 @@ enum {
 
 var walker_spawn_chance : float = 0.05
 var walker_destroy_chance : float = 0.05
+@export_group("Walker Settings")
 @export var walker_turn_chance : float = 0.25
 @export var max_steps_until_turn : int = 4
 @export var max_walkers : int = 10
@@ -33,15 +34,16 @@ var walkers : Array[Walker]
 var map : Array[Vector2]
 var ceiling_map : Array[Vector2i]
 var wall_map : Array[Vector2i]
+@export_group("Level Settings")
 @export var max_level_size : int = 600
+@export var prop_chance : float = 0.6
+#@export var crate_amount : int = 4
 
+@export_group("Room Settings")
 @export var room_chance : float = 0.5
 @export var max_room_size_x : int = 2
 @export var max_room_size_y : int = 2
 var rooms = []
-
-@export var prop_chance : float = 0.6
-#@export var crate_amount : int = 4
 
 var used_positions = []
 var prop_positions = []

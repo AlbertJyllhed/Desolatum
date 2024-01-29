@@ -20,6 +20,7 @@ var foreground_layer : Node2D
 
 
 func _ready():
+	GameEvents.stats_changed.connect(on_stats_changed)
 	projectile_deviation = base_projectile_deviation
 	projectile_speed = base_projectile_speed
 	projectile_damage = base_projectile_damage
@@ -40,3 +41,9 @@ func attack(attack_vector : Vector2):
 		var deviation_vector = Vector2(deviation, deviation)
 		new_projectile.setup(angle + deviation_vector, projectile_speed, projectile_damage)
 		shot_projectile.emit(new_projectile)
+
+
+func on_stats_changed(dict : Dictionary):
+	projectile_damage *= dict["damage"]["mod"]
+	projectile_speed *= dict["bullet_speed"]["mod"]
+	projectile_deviation *= dict["bullet_spread"]["mod"]

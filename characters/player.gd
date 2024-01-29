@@ -1,14 +1,13 @@
 extends CharacterBody2D
 class_name Player
 
-@export var max_speed = 80
+@export var move_speed = 80
 @export var acceleration = 600
 @export var friction = 500
 
 @onready var health_component : HealthComponent = $HealthComponent
 @onready var energy_gain_component : EnergyGainComponent = $EnergyGainComponent
 @onready var footstep_component : FootstepComponent = $FootstepComponent
-#@onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 @onready var flash_light : FlashLight = $FlashLight
@@ -21,7 +20,8 @@ var bottom_right_limit : Vector2i
 
 
 func _ready():
-	max_speed = stats.speed
+	move_speed = stats.stats["move_speed"]["current"] * stats.stats["move_speed"]["mod"]
+	#max_speed = stats.speed
 	add_to_group("player")
 	health_component.setup(stats)
 	energy_gain_component.setup(stats)
@@ -46,6 +46,7 @@ func setup_inventory():
 	inventory_instance = inventory_scene.instantiate()
 	add_child(inventory_instance)
 	inventory_instance.global_position = global_position
+	inventory_instance.setup(stats)
 
 
 func _physics_process(delta):
@@ -62,7 +63,7 @@ func _physics_process(delta):
 	if input_vector != Vector2.ZERO:
 		animation_state.travel("walk")
 		footstep_component.start_footsteps()
-		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
+		velocity = velocity.move_toward(input_vector * move_speed, acceleration * delta)
 	else:
 		animation_state.travel("idle")
 		footstep_component.stop_footsteps()

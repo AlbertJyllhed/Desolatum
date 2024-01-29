@@ -14,30 +14,23 @@ signal cancel_reload
 var ammo : int = 0
 var disabled : bool = false
 
-var ammo_multiplier : float = 1.0
-var reload_time_multiplier : float = 1.0
-
 
 func _ready():
-	max_ammo *= ammo_multiplier
 	ammo = max_ammo
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
+	GameEvents.stats_changed.connect(on_stats_changed)
 	#GameEvents.item_picked_up.connect(on_item_picked_up)
 
 
 func disable(value : bool):
 	disabled = value
 	if disabled:
-		reload_timer.stop()
+		if reload_timer:
+			reload_timer.stop()
+		
 		cancel_reload.emit()
 		return
 	
-	GameEvents.ammo_updated.emit(ammo, max_ammo)
-
-
-func add_to_multiplier(change : float):
-	ammo_multiplier += change
-	max_ammo *= ammo_multiplier
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
 
 
@@ -67,6 +60,12 @@ func use_ammo():
 	#GameEvents.ammo_updated.emit(ammo, max_ammo)
 
 
+func on_stats_changed(dict : Dictionary):
+	max_ammo *= dict["ammo"]["mod"]
+	ammo = max_ammo
+	reload_time *= dict["reload_speed"]["mod"]
+
+
 func reload():
 	if ammo == max_ammo:
 		return
@@ -80,5 +79,5 @@ func reload():
 
 
 func _on_reload_timer_timeout():
-	ammo = max_ammo * ammo_multiplier
+	ammo = max_ammo
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
