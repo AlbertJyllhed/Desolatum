@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@export var move_speed = 80
+var move_speed = 80
 @export var acceleration = 600
 @export var friction = 500
 
@@ -20,9 +20,9 @@ var bottom_right_limit : Vector2i
 
 
 func _ready():
-	move_speed = stats.stats["move_speed"]["current"] * stats.stats["move_speed"]["mod"]
-	#max_speed = stats.speed
+	GameEvents.stats_changed.connect(on_stats_changed)
 	add_to_group("player")
+	stats.update_stats()
 	health_component.setup(stats)
 	energy_gain_component.setup(stats)
 	var camera = get_viewport().get_camera_2d() as PlayerCamera
@@ -71,6 +71,10 @@ func _physics_process(delta):
 		global_position = round(global_position)
 	
 	move_and_slide()
+
+
+func on_stats_changed(mods : Dictionary):
+	move_speed = (stats.base_move_speed + mods["move_speed"][0]) * mods["move_speed"][1]
 
 
 func set_active(value : bool):

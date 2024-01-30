@@ -22,7 +22,9 @@ power = 6.0
 cooldown = 0.4
 
 [node name="AmmoComponent" parent="." index="1" instance=ExtResource("5_k8fbk")]
+base_ammo = 6
 max_ammo = 6
+base_reload_time = 2.0
 reload_time = 2.0
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_kdswl")]

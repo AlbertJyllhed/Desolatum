@@ -19,7 +19,9 @@ power = 6.0
 [node name="SingleFireComponent" parent="." index="0" instance=ExtResource("2_hkrbn")]
 
 [node name="AmmoComponent" parent="." index="1" instance=ExtResource("5_tq8l3")]
+base_ammo = 4
 max_ammo = 4
+base_reload_time = 2.0
 reload_time = 2.0
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_aw42f")]

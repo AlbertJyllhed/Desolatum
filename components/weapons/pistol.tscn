@@ -20,7 +20,9 @@ ammo_component = NodePath("AmmoComponent")
 cooldown = 0.4
 
 [node name="AmmoComponent" parent="." index="1" instance=ExtResource("5_vleei")]
+base_ammo = 12
 max_ammo = 12
+base_reload_time = 1.0
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_bj4am")]
 position = Vector2(8, 0)

@@ -20,7 +20,9 @@ burst_interval = 0.1
 cooldown = 0.5
 
 [node name="AmmoComponent" parent="." index="1" instance=ExtResource("3_i2k64")]
+base_ammo = 3
 max_ammo = 3
+base_reload_time = 1.5
 reload_time = 1.5
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_1fphx")]

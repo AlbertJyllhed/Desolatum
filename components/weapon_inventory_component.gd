@@ -1,7 +1,7 @@
 extends InventoryComponent
 class_name WeaponInventoryComponent
 
-signal weapon_replaced(weapon)
+signal weapon_replaced()
 
 @onready var audio_stream_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
@@ -15,7 +15,7 @@ func setup(new_stats : PlayerStats):
 	stats = new_stats
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 	GameEvents.item_picked_up.connect(on_item_picked_up)
-	weapon_replaced.connect(stats.update_equipment)
+	weapon_replaced.connect(stats.update_stats)
 	
 	#if the player had equipped weapons in the previous scene we add them
 	if stats.equipment.size() > 0:
@@ -63,13 +63,13 @@ func add_item(new_item : Item):
 		create_pickup()
 		items.insert(index, weapon)
 		stats.equipment[index] = new_item
-		weapon_replaced.emit(items[index])
 	else:
 		items.append(weapon)
 	
 	max_index = items.size() - 1
 	index = 0
 	equip_weapon(index)
+	weapon_replaced.emit()
 
 
 func create_pickup():

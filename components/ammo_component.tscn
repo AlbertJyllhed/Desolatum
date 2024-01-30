@@ -5,7 +5,6 @@
 
 [node name="AmmoComponent" type="Node"]
 script = ExtResource("1_qq7ou")
-reload_time = 1.0
 
 [node name="NoAmmoSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_kl51q")

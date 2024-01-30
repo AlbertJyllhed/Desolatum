@@ -21,7 +21,9 @@ burst_interval = 0.1
 cooldown = 0.4
 
 [node name="AmmoComponent" parent="." index="1" instance=ExtResource("5_ca5mk")]
+base_ammo = 15
 max_ammo = 15
+base_reload_time = 1.0
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_7redu")]
 position = Vector2(12, 0)

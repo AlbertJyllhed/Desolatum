@@ -5,8 +5,11 @@ signal has_ammo
 signal reloading(time)
 signal cancel_reload
 
-@export var max_ammo : int = 10
-@export_range(0.1, 10.0) var reload_time : float = 0.2
+@export var base_ammo : int = 10
+var max_ammo : int = 10
+
+@export_range(0.1, 10.0, 0.1, "or_greater") var base_reload_time : float = 0.2
+var reload_time : float = 0.2
 
 @onready var no_ammo_sound : AudioStreamPlayer2D = $NoAmmoSound
 @onready var reload_timer = $ReloadTimer
@@ -16,7 +19,9 @@ var disabled : bool = false
 
 
 func _ready():
+	max_ammo = base_ammo
 	ammo = max_ammo
+	reload_time = base_reload_time
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
 	GameEvents.stats_changed.connect(on_stats_changed)
 	#GameEvents.item_picked_up.connect(on_item_picked_up)
@@ -60,10 +65,9 @@ func use_ammo():
 	#GameEvents.ammo_updated.emit(ammo, max_ammo)
 
 
-func on_stats_changed(dict : Dictionary):
-	max_ammo *= dict["ammo"]["mod"]
-	ammo = max_ammo
-	reload_time *= dict["reload_speed"]["mod"]
+func on_stats_changed(mods : Dictionary):
+	max_ammo = (base_ammo + mods["ammo"][0]) * mods["ammo"][1]
+	reload_time = (base_reload_time + mods["reload_speed"][0]) * mods["reload_speed"][1]
 
 
 func reload():

@@ -17,7 +17,9 @@ ammo_component = NodePath("AmmoComponent")
 [node name="SingleFireComponent" parent="." index="0" instance=ExtResource("2_s8xwr")]
 
 [node name="AmmoComponent" parent="." index="1" instance=ExtResource("5_es0y4")]
+base_ammo = 4
 max_ammo = 4
+base_reload_time = 1.0
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_srdh4")]
 position = Vector2(11, 0)
