@@ -4,10 +4,15 @@ extends Line2D
 @onready var hitbox : Hitbox = $Hitbox
 @onready var light : Node2D = $PointLight2D
 
+var explosion_scene : PackedScene = preload("res://particles/explosion.tscn")
+var base_layer : Node2D
+var explode_chance : float = 0.0
 var tween : Tween
 
 
 func setup(new_direction, new_length = 1000, new_damage = 1):
+	base_layer = get_tree().get_first_node_in_group("base_layer")
+	hitbox.area_entered.connect(on_hit)
 	ray.target_position = new_direction * new_length
 	hitbox.damage = new_damage
 	hitbox.knockback_vector = new_direction
@@ -44,3 +49,12 @@ func shrink():
 	tween = get_tree().create_tween().bind_node(self)
 	tween.tween_property(self, "width", 0, 0.2)
 	tween.tween_callback(queue_free)
+
+
+func on_hit(area):
+	if explode_chance < randf():
+		return
+	
+	var explosion_instance = explosion_scene.instantiate() as Node2D
+	base_layer.call_deferred("add_child", explosion_instance)
+	explosion_instance.global_position = area.global_position

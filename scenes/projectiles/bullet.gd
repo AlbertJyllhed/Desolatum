@@ -1,17 +1,20 @@
 extends CharacterBody2D
 class_name Projectile
 
+signal wall_hit
+
 @export var impact_scene : PackedScene
-@export var explosion_scene : PackedScene
 
 @export_group("Stats")
 @export var speed : float = 400
 @export_range(0, 1, 0.1) var bounce_chance : float = 0
 @export_range(0, 1, 0.1) var pierce_chance : float = 0
+@export_range(0, 1, 0.1) var explode_chance : float = 0
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var hitbox : Hitbox = $Hitbox
 
+var explosion_scene : PackedScene = preload("res://particles/explosion.tscn")
 var base_layer : Node2D
 var direction = Vector2.ZERO
 
@@ -26,7 +29,7 @@ func setup(new_direction, new_speed = 400, new_damage = 1):
 
 
 func explode():
-	if explosion_scene:
+	if explosion_scene and explode_chance > randf():
 		var explosion_instance = explosion_scene.instantiate() as Node2D
 		base_layer.call_deferred("add_child", explosion_instance)
 		explosion_instance.global_position = global_position
@@ -51,6 +54,7 @@ func _physics_process(delta):
 
 
 func hit_wall(collision_result):
+	wall_hit.emit()
 	var impact_instance = impact_scene.instantiate() as Node2D
 	base_layer.add_child(impact_instance)
 	impact_instance.global_position = collision_result.get_position()

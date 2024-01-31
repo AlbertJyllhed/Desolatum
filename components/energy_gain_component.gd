@@ -6,8 +6,8 @@ var stats : PlayerStats
 
 func setup(new_stats : PlayerStats):
 	stats = new_stats
-	stats.energy = 0
-	stats.ore = 0
+	#stats.energy = 0
+	#stats.ore = 0
 	GameEvents.energy_updated.emit(stats.energy)
 	GameEvents.ore_updated.emit(stats.ore)
 	GameEvents.item_picked_up.connect(on_item_picked_up)

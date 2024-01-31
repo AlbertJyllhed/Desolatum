@@ -8,7 +8,7 @@ radius = 6.0
 
 [node name="BouncerBullet" instance=ExtResource("1_2vd6v")]
 bounce_chance = 1.0
-pierce_chance = 0.8
+pierce_chance = 1.0
 
 [node name="Sprite2D" parent="." index="0"]
 frame = 7

@@ -23,6 +23,7 @@ func _ready():
 	GameEvents.stats_changed.connect(on_stats_changed)
 	add_to_group("player")
 	stats.update_stats()
+	stats.add_upgrades()
 	health_component.setup(stats)
 	energy_gain_component.setup(stats)
 	var camera = get_viewport().get_camera_2d() as PlayerCamera

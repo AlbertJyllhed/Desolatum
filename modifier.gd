@@ -1,6 +1,6 @@
 class_name Modifier
 
-var add : int = 0
+var add : float = 0.0
 var mult : float = 1.0
 
 

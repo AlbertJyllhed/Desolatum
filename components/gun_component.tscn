@@ -10,4 +10,5 @@ base_bullet_spread = 0.1
 base_bullet_speed = 400.0
 base_damage = 1
 base_crit_chance = 0.0
+base_bullet_explode_chance = 0.0
 projectiles = Array[float]([0.0])
