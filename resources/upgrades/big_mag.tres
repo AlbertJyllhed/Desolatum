@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=3 format=3 uid="uid://dpt08e65arpbe"]
+
+[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_wbgfo"]
+[ext_resource type="PackedScene" uid="uid://cpesqka10ukpe" path="res://components/upgrades/big_mag_upgrade.tscn" id="2_lyt7n"]
+
+[resource]
+script = ExtResource("1_wbgfo")
+upgrade_scene = ExtResource("2_lyt7n")
+id = "big_mag"
+name = "Big Mag"
+description = "Increase magazine size but lower reload speed"
+amount = 1
+pickup_type = 0
+drop_weight = 1

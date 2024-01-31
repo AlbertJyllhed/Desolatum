@@ -21,5 +21,6 @@ func on_item_picked_up(item : Item):
 	var upgrade_instance = item.upgrade_scene.instantiate() as Upgrade
 	add_child(upgrade_instance)
 	upgrade_instance.apply_upgrade(upgrade_node)
+	upgrade_instance.id = item.id
 	GameEvents.upgrade_added.emit(item, upgrade_instance)
 	#active_upgrades.append(upgrade_instance)

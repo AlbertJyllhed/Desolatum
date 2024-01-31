@@ -3,7 +3,7 @@ extends EnemyWeaponBase
 @export var health_component : HealthComponent
 
 
-func attack():
+func attack(_attack_vector : Vector2):
 	health_component.damage(100)
 
 

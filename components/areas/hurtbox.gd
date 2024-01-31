@@ -1,7 +1,7 @@
 extends Area2D
 class_name Hurtbox
 
-signal hit
+signal hit()
 
 @export var health_component : Node
 @export_range(0, 1.0) var damage_tick_delay : float = 0.5
@@ -35,7 +35,7 @@ func check_deal_damage(area):
 	
 	if owner is EnemyEntity:
 		var base = owner as EnemyEntity
-		base.knockback(hitbox.knockback_vector)
+		base.knockback(hitbox.knockback_vector * hitbox.knockback_multiplier, hitbox.stun_time)
 	
 	timer.start(damage_tick_delay)
 	hit.emit()

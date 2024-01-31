@@ -114,7 +114,7 @@ _data = {
 radius = 8.0
 
 [node name="Exploder" instance=ExtResource("1_w460d")]
-max_speed = 60
+base_speed = 60
 
 [node name="Timer" type="Timer" parent="." index="0"]
 one_shot = true
@@ -130,6 +130,7 @@ timer = NodePath("../Timer")
 [node name="Hunt" parent="StateMachine" index="2" instance=ExtResource("2_on16h")]
 min_update_time = 0.25
 max_update_time = 0.5
+run_chance = 1.0
 
 [node name="Attack" parent="StateMachine" index="3" instance=ExtResource("3_x7ofc")]
 

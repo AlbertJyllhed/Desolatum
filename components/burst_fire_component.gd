@@ -9,6 +9,7 @@ var bursts : int
 
 
 func _ready():
+	super._ready()
 	bursts = max_bursts
 
 

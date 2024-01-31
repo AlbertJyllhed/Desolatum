@@ -14,13 +14,12 @@ weapon_component = NodePath("Pivot/GunComponent")
 ammo_component = NodePath("RechargeComponent")
 
 [node name="SingleFireComponent" parent="." index="0" instance=ExtResource("2_0nx7o")]
+base_cooldown = 0.5
 cooldown = 0.5
 
 [node name="RechargeComponent" parent="." index="1" instance=ExtResource("6_epw3p")]
 base_ammo = 4
-max_ammo = 4
 base_reload_time = 10.0
-reload_time = 10.0
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_eualm")]
 projectile = ExtResource("4_3crg6")

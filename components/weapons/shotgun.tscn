@@ -21,15 +21,13 @@ power = 4.0
 
 [node name="AmmoComponent" parent="." index="1" instance=ExtResource("7_medf8")]
 base_ammo = 6
-max_ammo = 6
 base_reload_time = 1.5
-reload_time = 1.5
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_5nbty")]
 position = Vector2(12, 0)
 projectile = ExtResource("2_i2lxk")
 base_projectile_deviation = 0.0
-base_projectile_speed = 100.0
+base_projectile_speed = 200.0
 projectiles = Array[float]([-14.0, -7.0, 0.0, 7.0, 14.0])
 
 [node name="AudioPlayerComponent#AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="0"]

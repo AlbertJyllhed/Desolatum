@@ -3,9 +3,11 @@ class_name Projectile
 
 @export var impact_scene : PackedScene
 @export var explosion_scene : PackedScene
+
+@export_group("Stats")
 @export var speed : float = 400
-@export var bounces : int = 0
-@export var piercing : bool = false
+@export_range(0, 1, 0.1) var bounce_chance : float = 0
+@export_range(0, 1, 0.1) var pierce_chance : float = 0
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var hitbox : Hitbox = $Hitbox
@@ -37,21 +39,27 @@ func _physics_process(delta):
 	if not collision_result:
 		return
 	
-	if bounces > 0:
+	hit_wall(collision_result)
+	
+	if bounce_chance > randf():
 		direction = direction.bounce(collision_result.get_normal())
 		sprite.rotation = direction.angle()
-		bounces -= 1
+		bounce_chance = max(bounce_chance * 0.9, 0)
 		return
 	
+	explode()
+
+
+func hit_wall(collision_result):
 	var impact_instance = impact_scene.instantiate() as Node2D
 	base_layer.add_child(impact_instance)
 	impact_instance.global_position = collision_result.get_position()
 	impact_instance.rotation = collision_result.get_normal().angle()
-	explode()
 
 
 func _on_hitbox_area_entered(_area):
-	if piercing:
+	if pierce_chance > randf():
+		pierce_chance = max(pierce_chance * 0.9, 0)
 		return
 	
 	explode()

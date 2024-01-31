@@ -4,7 +4,6 @@ extends Line2D
 @onready var hitbox : Hitbox = $Hitbox
 @onready var light : Node2D = $PointLight2D
 
-var bounces : int = 3
 var tween : Tween
 
 

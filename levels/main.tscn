@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://game_camera.tscn" id="14_k4cxe"]
 [ext_resource type="PackedScene" uid="uid://bxanol7yje1c3" path="res://scenes/pickups/pickup.tscn" id="15_7j3bm"]
 [ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tileset.tres" id="15_ukhfq"]
-[ext_resource type="Resource" uid="uid://b1ri54mk2sxbw" path="res://resources/upgrades/panic.tres" id="16_1nto8"]
+[ext_resource type="Resource" uid="uid://dpt08e65arpbe" path="res://resources/upgrades/big_mag.tres" id="16_e1c84"]
 
 [node name="Main" type="Node"]
 
@@ -73,6 +73,6 @@ y_sort_enabled = true
 color = Color(0.266667, 0.254902, 0.223529, 1)
 
 [node name="Pickup" parent="." instance=ExtResource("15_7j3bm")]
-item = ExtResource("16_1nto8")
+item = ExtResource("16_e1c84")
 
 [editable path="CanvasLayer/PauseMenu"]

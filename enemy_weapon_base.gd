@@ -10,25 +10,23 @@ signal has_target
 @onready var target_locator_ray : TargetLocatorRay = $TargetLocatorRay
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
-var attack_vector : Vector2
-
 
 func _ready():
 	var player = get_tree().get_first_node_in_group("player")
 	target_locator_ray.set_target(player)
 
 
-func attack():
+func attack(attack_vector : Vector2):
 	if not weapon_component:
 		print("Error: no weapon component attached!")
 		return
 	
-	var player = target_locator_ray.target
-	if not is_instance_valid(player):
-		return
+	#var player = target_locator_ray.target
+	#if not is_instance_valid(player):
+		#return
 	
 	animation_player.play("attack")
-	attack_vector = player.global_position
+	#attack_vector = player.global_position
 	
 	if attack_vector.x > global_position.x:
 		pivot.scale.y = 1

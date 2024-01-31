@@ -10,8 +10,8 @@ radius = 6.0
 radius = 8.0
 
 [node name="BigBullet" instance=ExtResource("1_yfcny")]
-speed = 300
-bounces = 2
+bounce_chance = 0.6
+pierce_chance = 0.2
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(1.5, 1.5)

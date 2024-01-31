@@ -302,7 +302,7 @@ stream = ExtResource("13_wsrik")
 stream = ExtResource("14_e2unt")
 
 [node name="UpgradeHandlerComponent" parent="." node_paths=PackedStringArray("upgrade_node") instance=ExtResource("15_ng408")]
-allowed_upgrades = Array[String](["adrenaline", "panic", "death_mark", "crit"])
+allowed_upgrades = Array[String](["adrenaline", "panic", "death_mark", "crit", "big_mag", "fire_and_forget"])
 upgrade_node = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

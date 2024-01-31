@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://8x0urq7oxi1u"]
+
+[ext_resource type="Script" path="res://abilities/build_ability.gd" id="1_6b3rd"]
+[ext_resource type="PackedScene" uid="uid://bvouwx0ctslr4" path="res://scenes/buildings/turret.tscn" id="2_yaord"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qb24h"]
+size = Vector2(15, 15)
+
+[node name="BuildAbility" type="Node2D"]
+script = ExtResource("1_6b3rd")
+ability_scene = ExtResource("2_yaord")
+recharge_time = 120.0
+
+[node name="TileCheckerArea" type="Area2D" parent="."]
+position = Vector2(8, 8)
+collision_layer = 0
+collision_mask = 1031
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileCheckerArea"]
+shape = SubResource("RectangleShape2D_qb24h")
+
+[node name="RechargeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RechargeTimer" to="." method="_on_recharge_timer_timeout"]

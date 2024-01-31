@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvavkdsgx0bna"]
+
+[ext_resource type="PackedScene" uid="uid://dy3meaaph61x0" path="res://components/upgrades/upgrade_base.tscn" id="1_myeln"]
+[ext_resource type="Script" path="res://components/upgrades/fire_and_forget_upgrade.gd" id="2_yf8iy"]
+
+[node name="FireAndForgetUpgrade" instance=ExtResource("1_myeln")]
+script = ExtResource("2_yf8iy")

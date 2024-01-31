@@ -13,9 +13,9 @@ var pickup_scene : PackedScene = preload("res://scenes/pickups/pickup.tscn")
 
 func setup(new_stats : PlayerStats):
 	stats = new_stats
+	weapon_replaced.connect(stats.update_stats)
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 	GameEvents.item_picked_up.connect(on_item_picked_up)
-	weapon_replaced.connect(stats.update_stats)
 	
 	#if the player had equipped weapons in the previous scene we add them
 	if stats.equipment.size() > 0:

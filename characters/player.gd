@@ -74,7 +74,8 @@ func _physics_process(delta):
 
 
 func on_stats_changed(mods : Dictionary):
-	move_speed = (stats.base_move_speed + mods["move_speed"][0]) * mods["move_speed"][1]
+	move_speed = mods["move_speed"].get_values(stats.base_move_speed)
+	#move_speed = (stats.base_move_speed + mods["move_speed"][0]) * mods["move_speed"][1]
 
 
 func set_active(value : bool):

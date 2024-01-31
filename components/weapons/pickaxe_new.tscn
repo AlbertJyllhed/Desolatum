@@ -175,6 +175,7 @@ firing_component = NodePath("AutoFireComponent")
 weapon_component = NodePath("Pivot/MeleeComponent")
 
 [node name="AutoFireComponent" parent="." index="0" instance=ExtResource("2_ih87y")]
+base_cooldown = 0.5
 cooldown = 0.5
 
 [node name="MeleeComponent" parent="Pivot" index="0" instance=ExtResource("3_f0qmk")]

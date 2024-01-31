@@ -8,7 +8,8 @@ radius = 6.0
 
 [node name="SlowBullet" instance=ExtResource("1_yxacv")]
 speed = 100
-piercing = true
+bounce_chance = 0.0
+pierce_chance = 1.0
 
 [node name="Sprite2D" parent="." index="0"]
 frame = 5

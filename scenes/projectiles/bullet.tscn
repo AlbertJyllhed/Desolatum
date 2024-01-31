@@ -17,6 +17,7 @@ collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_kamfy")
 impact_scene = ExtResource("2_yijoo")
+bounce_chance = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_5sqda")

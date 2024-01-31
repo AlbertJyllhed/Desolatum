@@ -1,8 +1,14 @@
 extends CharacterBody2D
 class_name Entity
 
-@export var max_speed : int = 40
+@export var base_speed : int = 40
+var max_speed : int = 40
+
 @export var acceleration : float = 500
+
+
+func _ready():
+	max_speed = base_speed
 
 
 func _physics_process(delta):

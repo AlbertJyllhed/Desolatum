@@ -4,7 +4,8 @@
 
 [node name="PiercingBullet" instance=ExtResource("1_1gg5f")]
 speed = 600
-piercing = true
+bounce_chance = 0.0
+pierce_chance = 1.0
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(2, 1)

@@ -1,6 +1,8 @@
 extends Node
 class_name Upgrade
 
+var id : String
+
 
 func _ready():
 	SceneManager.changing_level.connect(remove_upgrade)

@@ -2,6 +2,7 @@ extends EnemyState
 
 @export var min_update_time : float = 0.5
 @export var max_update_time : float = 1.0
+@export var run_chance : float = 0.5
 
 var pathfinding_grid : PathfindingGrid
 var astar_grid : AStarGrid2D
@@ -40,7 +41,12 @@ func timeout():
 func enter(message = {}):
 	state_machine.animation_player.play("walk_right")
 	state_machine.timer.start(randf_range(0.2, 0.5))
+	if randf() > run_chance:
+		return
+	
+	enemy_entity.max_speed = enemy_entity.base_speed + 10
 
 
 func exit():
 	state_machine.timer.stop()
+	enemy_entity.max_speed = enemy_entity.base_speed

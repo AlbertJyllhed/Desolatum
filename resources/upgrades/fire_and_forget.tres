@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=3 format=3 uid="uid://bjmvfdrc5q2uk"]
+
+[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_0gapd"]
+[ext_resource type="PackedScene" uid="uid://bvavkdsgx0bna" path="res://components/upgrades/fire_and_forget_upgrade.tscn" id="2_v2ec2"]
+
+[resource]
+script = ExtResource("1_0gapd")
+upgrade_scene = ExtResource("2_v2ec2")
+id = "fire_and_forget"
+name = "Fire and Forget"
+description = "Lower damage but increased fire rate"
+amount = 1
+pickup_type = 0
+drop_weight = 1

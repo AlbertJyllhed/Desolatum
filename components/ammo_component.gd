@@ -66,8 +66,13 @@ func use_ammo():
 
 
 func on_stats_changed(mods : Dictionary):
-	max_ammo = (base_ammo + mods["ammo"][0]) * mods["ammo"][1]
-	reload_time = (base_reload_time + mods["reload_speed"][0]) * mods["reload_speed"][1]
+	max_ammo = clamp(mods["ammo"].get_values(base_ammo), 1, base_ammo * 2)
+	reload_time = max(mods["reload_speed"].get_values(base_reload_time), 0.2)
+	
+	#max_ammo = clamp((base_ammo + mods["ammo"][0]) * mods["ammo"][1], 1, base_ammo * 2)
+	#reload_time = max((base_reload_time + mods["reload_speed"][0]) * mods["reload_speed"][1], 0.2)
+	GameEvents.ammo_updated.emit(ammo, max_ammo)
+	#print(str(max_ammo) + " ammo, " + str(reload_time) + " reload speed")
 
 
 func reload():

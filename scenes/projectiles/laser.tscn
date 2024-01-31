@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b1rs7po8xij5l" path="res://assets/textures/laser.png" id="1_ka6lw"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_ny4mh"]
 [ext_resource type="Script" path="res://scenes/projectiles/laser.gd" id="2_kcna3"]
-[ext_resource type="PackedScene" path="res://components/areas/hitbox.tscn" id="2_tcifq"]
+[ext_resource type="PackedScene" uid="uid://bygbrw7i4hp0m" path="res://components/areas/hitbox.tscn" id="2_tcifq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w43og"]
 

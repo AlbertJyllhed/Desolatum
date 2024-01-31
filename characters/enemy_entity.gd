@@ -11,6 +11,7 @@ var aggressive : bool = false
 
 
 func _ready():
+	super._ready()
 	add_to_group("enemies")
 	health_component.died.connect(on_died)
 	disable_timer.timeout.connect(enable_movement)
@@ -19,22 +20,24 @@ func _ready():
 func _physics_process(delta):
 	if disabled:
 		accelerate_in_direction(Vector2.ZERO, 0, 1000)
-		move(delta)
-		return
+	else:
+		flip_sprite(direction)
+		accelerate_in_direction(direction)
 	
-	if direction.x < 0:
-		sprite.flip_h = true
-	elif direction.x > 0:
-		sprite.flip_h = false
-		
-	accelerate_in_direction(direction)
 	move(delta)
 
 
-func knockback(knockback_direction : Vector2):
+func flip_sprite(dir : Vector2):
+	if dir.x < 0:
+		sprite.flip_h = true
+	elif dir.x > 0:
+		sprite.flip_h = false
+
+
+func knockback(knockback_direction : Vector2, disable_time : float):
 	disabled = true
 	move_in_direction(knockback_direction, 160)
-	disable_timer.start()
+	disable_timer.start(disable_time)
 
 
 func enable_movement():
