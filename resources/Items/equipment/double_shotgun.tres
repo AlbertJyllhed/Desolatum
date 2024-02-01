@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://5aq7mactcic7"]
+
+[ext_resource type="PackedScene" uid="uid://ck43q14m4sfg5" path="res://components/weapons/double_shotgun.tscn" id="1_4fvln"]
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="1_l8ioj"]
+
+[resource]
+script = ExtResource("1_l8ioj")
+type = 0
+equipment_scene = ExtResource("1_4fvln")
+id = "double_shotgun"
+name = "Double Shotgun"
+description = "Shoots more pellets but reloads slower than a regular shotgun"
+amount = 1
+pickup_type = 0
+drop_weight = 1

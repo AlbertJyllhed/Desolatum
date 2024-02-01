@@ -1,6 +1,9 @@
 extends Node2D
 class_name InventoryComponent
 
+@export var scroll_down_input : String = "scroll_down"
+@export var scroll_up_input : String = "scroll_up"
+
 var deactivated : bool = false
 
 var items = []
@@ -9,10 +12,10 @@ var index : int
 
 
 func _physics_process(_delta):
-	if Input.is_action_just_released("scroll_down"):
+	if Input.is_action_just_released(scroll_down_input):
 		next_slot()
 	
-	if Input.is_action_just_released("scroll_up"):
+	if Input.is_action_just_released(scroll_up_input):
 		prev_slot()
 
 

@@ -12,4 +12,4 @@ name = "Burst Rifle"
 description = "Fires short bursts of bullets in quick succession"
 amount = 1
 pickup_type = 0
-drop_weight = 1
+drop_weight = 3

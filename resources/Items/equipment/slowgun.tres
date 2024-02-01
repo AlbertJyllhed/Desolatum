@@ -12,4 +12,4 @@ name = "Slowgun"
 description = "Fires slow, piercing projectiles"
 amount = 1
 pickup_type = 0
-drop_weight = 1
+drop_weight = 2

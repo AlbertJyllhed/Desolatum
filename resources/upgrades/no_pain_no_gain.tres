@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeItem" load_steps=3 format=3 uid="uid://dy2t8danuovc1"]
+
+[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_68ijd"]
+[ext_resource type="PackedScene" uid="uid://cls68c202jidd" path="res://components/upgrades/no_pain_no_gain_upgrade.tscn" id="2_wqqae"]
+
+[resource]
+script = ExtResource("1_68ijd")
+upgrade_scene = ExtResource("2_wqqae")
+id = "no_pain_no_gain"
+name = "No Pain No Gain"
+description = "+2 damage but -2 health"
+amount = 1
+pickup_type = 0
+drop_weight = 2

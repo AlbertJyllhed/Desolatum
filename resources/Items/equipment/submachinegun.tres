@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://h1ue3yjruk72"]
+
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="1_8ssxk"]
+[ext_resource type="PackedScene" uid="uid://b38md0om1ciwp" path="res://components/weapons/submachinegun.tscn" id="1_ein0c"]
+
+[resource]
+script = ExtResource("1_8ssxk")
+type = 0
+equipment_scene = ExtResource("1_ein0c")
+id = "submachinegun"
+name = "Submachinegun"
+description = "Rapid fire but low accuracy"
+amount = 1
+pickup_type = 0
+drop_weight = 3

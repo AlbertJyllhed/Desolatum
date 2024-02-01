@@ -6,6 +6,7 @@ signal weapon_replaced()
 @onready var audio_stream_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var stats : PlayerStats
+var ability : Ability
 
 var base_layer : Node2D
 var pickup_scene : PackedScene = preload("res://scenes/pickups/pickup.tscn")
@@ -21,6 +22,11 @@ func setup(new_stats : PlayerStats):
 	if stats.equipment.size() > 0:
 		for item in stats.equipment:
 			add_item(item)
+	
+	if not stats.ability_item:
+		return
+	
+	add_ability(stats.ability_item)
 
 
 func equip_weapon(weapon_index):
@@ -53,14 +59,14 @@ func prev_slot():
 func add_item(new_item : Item):
 	#GameEvents.weapons_updated.emit(new_item)
 	
-	var weapon = create_weapon_instance(new_item)
+	var weapon = create_equipment_instance(new_item)
 	
 	if items.size() == stats.equipment.size():
 		for item in stats.equipment:
 			if new_item.type == item.type:
 				index = item.type
 		
-		create_pickup()
+		create_pickup(stats.equipment[index])
 		items.insert(index, weapon)
 		stats.equipment[index] = new_item
 	else:
@@ -72,16 +78,24 @@ func add_item(new_item : Item):
 	weapon_replaced.emit()
 
 
-func create_pickup():
+func add_ability(new_item : Item):
+	if ability:
+		ability.queue_free()
+	
+	ability = create_equipment_instance(new_item)
+	print(ability.name)
+
+
+func create_pickup(new_item : Item):
 	#create pickup from current gun and drop it to the ground
 	var pickup_instance = pickup_scene.instantiate()
 	base_layer.add_child(pickup_instance)
-	pickup_instance.set_item(stats.equipment[index])
+	pickup_instance.set_item(new_item)
 	pickup_instance.global_position = global_position
 	items.pop_at(index).queue_free()
 
 
-func create_weapon_instance(new_item : Item):
+func create_equipment_instance(new_item : Item):
 	#instantiate the new weapon and add it as a child of the inventory
 	var weapon = new_item.equipment_scene.instantiate()
 	add_child(weapon)
@@ -93,6 +107,10 @@ func create_weapon_instance(new_item : Item):
 func on_item_picked_up(item : Item):
 	#equip a new weapon when its picked up
 	if not item is EquipmentItem:
+		return
+	
+	if item.type == item.EquipmentType.ability:
+		add_ability(item)
 		return
 	
 	add_item(item)

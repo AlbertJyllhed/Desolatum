@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DropList" load_steps=13 format=3 uid="uid://drxaut0ndjcw"]
+[gd_resource type="Resource" script_class="DropList" load_steps=17 format=3 uid="uid://drxaut0ndjcw"]
 
 [ext_resource type="Script" path="res://resources/Data/drop_list.gd" id="1_vvg13"]
 [ext_resource type="Resource" uid="uid://c6dse6vr5dbd6" path="res://resources/Items/equipment/railgun.tres" id="3_q6r8c"]
@@ -9,10 +9,14 @@
 [ext_resource type="Resource" uid="uid://bsgm2l30lw8wq" path="res://resources/Items/equipment/zipgun.tres" id="9_ry41c"]
 [ext_resource type="Resource" uid="uid://6dpbikp71lpi" path="res://resources/Items/equipment/rocket_launcher.tres" id="10_5jjed"]
 [ext_resource type="Resource" uid="uid://oeqtxo0faba5" path="res://resources/Items/equipment/slowgun.tres" id="11_4ol2s"]
+[ext_resource type="Resource" uid="uid://h1ue3yjruk72" path="res://resources/Items/equipment/submachinegun.tres" id="12_8ninj"]
 [ext_resource type="Resource" uid="uid://vvob4fsuo80t" path="res://resources/Items/equipment/bouncer.tres" id="12_d08k2"]
 [ext_resource type="Resource" uid="uid://cw7ctomhgalqj" path="res://resources/Items/equipment/burst_rifle.tres" id="13_awdlr"]
+[ext_resource type="Resource" uid="uid://dpnix2pvgil2p" path="res://resources/Items/equipment/revolver.tres" id="13_ts0ev"]
+[ext_resource type="Resource" uid="uid://bncga8ydr3vn" path="res://resources/Items/equipment/triple_machinegun.tres" id="14_bowve"]
 [ext_resource type="Resource" uid="uid://dy1gbvjht2apg" path="res://resources/Items/equipment/grenade_digger.tres" id="14_gqg2u"]
+[ext_resource type="Resource" uid="uid://5aq7mactcic7" path="res://resources/Items/equipment/double_shotgun.tres" id="15_dkt8p"]
 
 [resource]
 script = ExtResource("1_vvg13")
-items = Array[Resource("res://resources/item.gd")]([ExtResource("3_q6r8c"), ExtResource("4_fhd03"), ExtResource("5_gpgy0"), ExtResource("6_4v5yj"), ExtResource("8_5ynx4"), ExtResource("9_ry41c"), ExtResource("10_5jjed"), ExtResource("11_4ol2s"), ExtResource("12_d08k2"), ExtResource("13_awdlr"), ExtResource("14_gqg2u")])
+items = Array[Resource("res://resources/item.gd")]([ExtResource("3_q6r8c"), ExtResource("4_fhd03"), ExtResource("5_gpgy0"), ExtResource("6_4v5yj"), ExtResource("8_5ynx4"), ExtResource("9_ry41c"), ExtResource("10_5jjed"), ExtResource("11_4ol2s"), ExtResource("12_d08k2"), ExtResource("13_awdlr"), ExtResource("14_gqg2u"), ExtResource("12_8ninj"), ExtResource("13_ts0ev"), ExtResource("14_bowve"), ExtResource("15_dkt8p")])

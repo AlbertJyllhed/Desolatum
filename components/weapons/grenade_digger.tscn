@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://iofr7dg8131w"]
+[gd_scene load_steps=9 format=3 uid="uid://iofr7dg8131w"]
 
 [ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_txx2a"]
 [ext_resource type="PackedScene" uid="uid://dcrdtvgh6el3y" path="res://components/burst_fire_component.tscn" id="2_h3p16"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="3_dbugt"]
 [ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/ammo_component.tscn" id="3_i2k64"]
 [ext_resource type="PackedScene" uid="uid://bc68l5n4im6qh" path="res://scenes/projectiles/impact_grenade.tscn" id="3_i4oyw"]
+[ext_resource type="AudioStream" uid="uid://wnsap6eg544d" path="res://sounds/grenade.wav" id="6_lsylj"]
 [ext_resource type="PackedScene" uid="uid://dbv2o15wvnxbf" path="res://ui/reload_progress_bar.tscn" id="7_i2h8u"]
 
 [node name="GrenadeDigger" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_txx2a")]
@@ -25,13 +26,20 @@ base_reload_time = 1.5
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_1fphx")]
 projectile = ExtResource("3_i4oyw")
+base_bullet_spread = 0.2
+base_bullet_speed = 300.0
 base_bullet_explode_chance = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="0"]
+stream = ExtResource("6_lsylj")
 
 [node name="WeaponSprite" parent="Pivot" index="1"]
 texture = ExtResource("3_dbugt")
-hframes = 4
-vframes = 4
+hframes = 5
+vframes = 5
 frame = 12
 
 [node name="ReloadProgressBar" parent="." index="4" node_paths=PackedStringArray("ammo_component") instance=ExtResource("7_i2h8u")]
 ammo_component = NodePath("../AmmoComponent")
+
+[editable path="Pivot/GunComponent"]

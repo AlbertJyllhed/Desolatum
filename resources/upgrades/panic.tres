@@ -13,4 +13,4 @@ description = "Increased gun damage and bullet spread for a short time upon taki
 icon = ExtResource("1_42pus")
 amount = 1
 pickup_type = 0
-drop_weight = 1
+drop_weight = 3

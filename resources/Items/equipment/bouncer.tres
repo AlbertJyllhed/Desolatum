@@ -12,4 +12,4 @@ name = "Bouncer"
 description = "Fires a piercing bullet which increases in damage and bounces for every enemy hit"
 amount = 1
 pickup_type = 0
-drop_weight = 1
+drop_weight = 2

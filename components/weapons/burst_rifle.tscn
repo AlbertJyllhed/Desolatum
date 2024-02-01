@@ -19,7 +19,6 @@ ammo_component = NodePath("AmmoComponent")
 [node name="BurstFireComponent" parent="." index="0" instance=ExtResource("2_65cqg")]
 burst_interval = 0.1
 base_cooldown = 0.4
-cooldown = 0.4
 
 [node name="AmmoComponent" parent="." index="1" instance=ExtResource("5_ca5mk")]
 base_ammo = 15
@@ -40,8 +39,8 @@ stream = ExtResource("7_c00x0")
 
 [node name="WeaponSprite" parent="Pivot" index="1"]
 texture = ExtResource("3_j7dlf")
-hframes = 4
-vframes = 4
+hframes = 5
+vframes = 5
 frame = 11
 
 [node name="ReloadProgressBar" parent="." index="4" node_paths=PackedStringArray("ammo_component") instance=ExtResource("10_umivf")]

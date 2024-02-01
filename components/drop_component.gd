@@ -38,7 +38,7 @@ func on_died():
 			instance = pickup.instantiate() as Node2D
 		
 		instance.set_item(item)
-		drop_list.remove_item(item)
+		drop_list.spawn_table.remove_item(item)
 		
 		var offset = Vector2(randf_range(-8, 8), randf_range(-8, 8))
 		var spawn_position = (owner as Node2D).global_position + offset

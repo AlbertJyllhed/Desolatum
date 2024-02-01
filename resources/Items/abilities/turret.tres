@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://djbamfnyr0gik"]
+
+[ext_resource type="PackedScene" uid="uid://8x0urq7oxi1u" path="res://abilities/build_ability.tscn" id="1_6cy0p"]
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="1_dhjor"]
+
+[resource]
+script = ExtResource("1_dhjor")
+type = 2
+equipment_scene = ExtResource("1_6cy0p")
+id = "turret"
+name = "Turret"
+description = "Build a turret that automatically tracks and fires at the closest target"
+amount = 1
+pickup_type = 0
+drop_weight = 1

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4lnduxi4atft"]
+
+[ext_resource type="PackedScene" uid="uid://dy3meaaph61x0" path="res://components/upgrades/upgrade_base.tscn" id="1_3hv0f"]
+[ext_resource type="Script" path="res://components/upgrades/health_booster_upgrade.gd" id="2_uuoo5"]
+
+[node name="HealthBoosterUpgrade" instance=ExtResource("1_3hv0f")]
+script = ExtResource("2_uuoo5")

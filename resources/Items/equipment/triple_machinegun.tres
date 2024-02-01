@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=3 format=3 uid="uid://bncga8ydr3vn"]
+
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="1_3qg4c"]
+[ext_resource type="PackedScene" uid="uid://w7x3w1qwsdhe" path="res://components/weapons/triple_machinegun.tscn" id="1_sfdbp"]
+
+[resource]
+script = ExtResource("1_3qg4c")
+type = 0
+equipment_scene = ExtResource("1_sfdbp")
+id = "triple_machinegun"
+name = "Triple Machinegun"
+description = "Like the machinegun but shoots 3 bullets in a fixed-spread pattern"
+amount = 1
+pickup_type = 0
+drop_weight = 3

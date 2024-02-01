@@ -26,6 +26,8 @@ base_reload_time = 2.0
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_d7p16")]
 position = Vector2(11, 0)
 projectile = ExtResource("2_cyoym")
+base_bullet_spread = 0.0
+base_bullet_speed = 300.0
 base_bullet_explode_chance = 1.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="0"]
@@ -33,8 +35,8 @@ stream = ExtResource("3_xh6ql")
 
 [node name="WeaponSprite" parent="Pivot" index="1"]
 texture = ExtResource("3_dukjj")
-hframes = 4
-vframes = 4
+hframes = 5
+vframes = 5
 frame = 4
 
 [node name="ReloadProgressBar" parent="." index="4" node_paths=PackedStringArray("ammo_component") instance=ExtResource("8_cag5s")]

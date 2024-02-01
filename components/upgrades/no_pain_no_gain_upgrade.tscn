@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cls68c202jidd"]
+
+[ext_resource type="PackedScene" uid="uid://dy3meaaph61x0" path="res://components/upgrades/upgrade_base.tscn" id="1_cgdxq"]
+[ext_resource type="Script" path="res://components/upgrades/no_pain_no_gain_upgrade.gd" id="2_od8ex"]
+
+[node name="NoPainNoGainUpgrade" instance=ExtResource("1_cgdxq")]
+script = ExtResource("2_od8ex")

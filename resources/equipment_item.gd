@@ -4,8 +4,8 @@ class_name EquipmentItem
 enum EquipmentType { 
 	gun, 
 	melee,
-	building,
-	tool
+	ability,
+	consumable
 }
 
 @export var type = EquipmentType.gun

@@ -29,7 +29,7 @@ var upgrades : Array[UpgradeItem]
 @export var starter_equipment : Array[EquipmentItem]
 var equipment : Array[EquipmentItem]
 
-var active_item : EquipmentItem
+@export var ability_item : EquipmentItem
 var consumable : EquipmentItem
 
 var energy : int = 0

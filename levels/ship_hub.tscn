@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhktsvbmclxqc"]
+[gd_scene load_steps=13 format=3 uid="uid://bhktsvbmclxqc"]
 
 [ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_mx2lk"]
 [ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_m3r7t"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://bije8lxlem0jr" path="res://scenes/props/bed.tscn" id="10_0ukhy"]
 [ext_resource type="PackedScene" uid="uid://bcnbiriaw2jbb" path="res://scenes/props/upgrade_store.tscn" id="11_7q3c8"]
 [ext_resource type="PackedScene" uid="uid://loyfc1ludqk" path="res://scenes/props/carpet.tscn" id="12_rbndn"]
-[ext_resource type="PackedScene" uid="uid://bq87ij4ablqce" path="res://scenes/props/crate.tscn" id="13_egkc3"]
 
 [node name="ShipHub" type="Node"]
 
@@ -92,8 +91,5 @@ rotation = 0.349066
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.568627, 0.705882, 0.784314, 1)
-
-[node name="Crate" parent="." instance=ExtResource("13_egkc3")]
-position = Vector2(-50, -229)
 
 [editable path="CanvasLayer/PauseMenu"]

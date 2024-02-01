@@ -42,5 +42,5 @@ func on_item_picked_up(item : Item):
 
 func on_stats_changed(mods : Dictionary):
 	max_health = max(mods["health"].get_values(stats.base_health), 1)
-	#max_health = max((stats.base_health + mods["health"][0]) * mods["health"][1], 1)
+	current_health = clamp(current_health, 0, max_health)
 	GameEvents.health_updated.emit(current_health, max_health)

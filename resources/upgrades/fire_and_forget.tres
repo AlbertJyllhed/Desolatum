@@ -11,4 +11,4 @@ name = "Fire and Forget"
 description = "Lower damage but increased fire rate"
 amount = 1
 pickup_type = 0
-drop_weight = 1
+drop_weight = 3

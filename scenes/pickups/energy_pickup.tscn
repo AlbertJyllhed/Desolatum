@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkr5wf6xfwvqe"]
-
-[ext_resource type="PackedScene" uid="uid://dg7cnl5w3b4pp" path="res://scenes/pickups/auto_pickup.tscn" id="1_qmcqy"]
-[ext_resource type="Resource" uid="uid://othtdwxul6oi" path="res://resources/Items/energy.tres" id="2_61muh"]
-
-[node name="EnergyPickup" instance=ExtResource("1_qmcqy")]
-item = ExtResource("2_61muh")

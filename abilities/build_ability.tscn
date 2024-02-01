@@ -11,12 +11,14 @@ script = ExtResource("1_6b3rd")
 ability_scene = ExtResource("2_yaord")
 recharge_time = 120.0
 
-[node name="TileCheckerArea" type="Area2D" parent="."]
-position = Vector2(8, 8)
-collision_layer = 0
-collision_mask = 1031
+[node name="Pivot" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileCheckerArea"]
+[node name="TileCheckerArea" type="Area2D" parent="Pivot"]
+position = Vector2(16, 0)
+collision_layer = 0
+collision_mask = 1025
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/TileCheckerArea"]
 shape = SubResource("RectangleShape2D_qb24h")
 
 [node name="RechargeTimer" type="Timer" parent="."]
