@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://decmbpipp0rbw"]
+[gd_scene load_steps=11 format=3 uid="uid://decmbpipp0rbw"]
 
+[ext_resource type="PackedScene" uid="uid://c4acitghbf4a4" path="res://components/audio_player_component.tscn" id="1_8trn8"]
 [ext_resource type="AudioStream" uid="uid://da0oix6koiu21" path="res://sounds/creature_ouch.wav" id="1_scuva"]
+[ext_resource type="AudioStream" uid="uid://ciexnpwt07mvw" path="res://sounds/monster_death_4.wav" id="3_ocwve"]
+[ext_resource type="AudioStream" uid="uid://deuvji8iyfkut" path="res://sounds/monster_death_3.wav" id="4_dmqtp"]
 
 [sub_resource type="Gradient" id="Gradient_bj5xi"]
 offsets = PackedFloat32Array(0.740741, 1)
@@ -10,16 +13,14 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 gradient = SubResource("Gradient_bj5xi")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wegmu"]
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
 particle_flag_align_y = true
 particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
 spread = 180.0
-gravity = Vector3(0, 10, 0)
 initial_velocity_min = 40.0
 initial_velocity_max = 60.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 10, 0)
 damping_min = 75.0
 damping_max = 100.0
 scale_min = 2.0
@@ -87,12 +88,20 @@ one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioPlayerComponent" parent="." instance=ExtResource("1_8trn8")]
+play_on_ready = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
 stream = ExtResource("1_scuva")
-autoplay = true
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("3_ocwve")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="AudioPlayerComponent"]
+stream = ExtResource("4_dmqtp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "default"
 libraries = {
 "": SubResource("AnimationLibrary_ecdyo")
 }
+autoplay = "default"

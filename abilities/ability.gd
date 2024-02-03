@@ -10,6 +10,7 @@ var uses : int = 0
 
 func _ready():
 	uses = max_uses
+	GameEvents.ability_updated.emit(0, uses)
 
 
 func _physics_process(delta):
@@ -27,7 +28,9 @@ func try_use_ability():
 func use_ability():
 	uses = max(uses - 1, 0)
 	recharge_timer.start(recharge_time)
+	GameEvents.ability_updated.emit(recharge_time, uses)
 
 
 func _on_recharge_timer_timeout():
 	uses = min(uses + 1, max_uses)
+	GameEvents.ability_updated.emit(0, uses)

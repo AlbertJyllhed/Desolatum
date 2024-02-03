@@ -99,11 +99,11 @@ func on_energy_updated(energy):
 
 func spawn():
 	var total_enemies = get_tree().get_nodes_in_group("enemies").size()
+	var spawn_chance = 0.3
 	for spawner in spawners:
 		if total_enemies >= max_enemies:
 			break
 		
-		var spawn_chance = 0.3
 		if randf() > spawn_chance:
 			continue
 		

@@ -66,9 +66,11 @@ func use_ammo():
 
 
 func on_stats_changed(mods : Dictionary):
+	var old_ammo = max_ammo
 	max_ammo = clamp(mods["ammo"].get_values(base_ammo), 1, base_ammo * 2)
 	reload_time = max(mods["reload_speed"].get_values(base_reload_time), 0.2)
-	ammo = max_ammo
+	if ammo == old_ammo:
+		ammo = max_ammo
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
 	#print(str(max_ammo) + " ammo, " + str(reload_time) + " reload speed")
 

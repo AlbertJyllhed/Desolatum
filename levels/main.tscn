@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cig1m1a15gbdi"]
+[gd_scene load_steps=18 format=3 uid="uid://cig1m1a15gbdi"]
 
 [ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_7vgrc"]
 [ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_4jrri"]
 [ext_resource type="PackedScene" uid="uid://bbwms5jmwtqvg" path="res://ui/weapon_inventory_ui.tscn" id="3_3ohvm"]
 [ext_resource type="PackedScene" uid="uid://c66muf3s83t44" path="res://ui/health_ui.tscn" id="4_j4v5e"]
+[ext_resource type="PackedScene" uid="uid://c2heyas7xbet6" path="res://ui/ability_ui.tscn" id="5_nk1gg"]
 [ext_resource type="PackedScene" uid="uid://lvds6lc4b1aw" path="res://ui/ammo_ui.tscn" id="5_r8ks5"]
 [ext_resource type="PackedScene" uid="uid://dinoa4adlhusc" path="res://ui/energy_ui.tscn" id="6_4fu6g"]
 [ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="7_a3i5o"]
@@ -15,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://game_camera.tscn" id="14_k4cxe"]
 [ext_resource type="PackedScene" uid="uid://bxanol7yje1c3" path="res://scenes/pickups/pickup.tscn" id="15_7j3bm"]
 [ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tileset.tres" id="15_ukhfq"]
-[ext_resource type="Resource" uid="uid://5aq7mactcic7" path="res://resources/Items/equipment/double_shotgun.tres" id="16_ysae2"]
+[ext_resource type="Resource" uid="uid://dy2t8danuovc1" path="res://resources/upgrades/no_pain_no_gain.tres" id="17_gaxfi"]
 
 [node name="Main" type="Node"]
 
@@ -33,6 +34,8 @@ process_mode = 3
 [node name="WeaponInventoryUI" parent="CanvasLayer" instance=ExtResource("3_3ohvm")]
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource("4_j4v5e")]
+
+[node name="AbilityUI" parent="CanvasLayer" instance=ExtResource("5_nk1gg")]
 
 [node name="AmmoUI" parent="CanvasLayer" instance=ExtResource("5_r8ks5")]
 
@@ -73,6 +76,6 @@ y_sort_enabled = true
 color = Color(0.266667, 0.254902, 0.223529, 1)
 
 [node name="Pickup" parent="." instance=ExtResource("15_7j3bm")]
-item = ExtResource("16_ysae2")
+item = ExtResource("17_gaxfi")
 
 [editable path="CanvasLayer/PauseMenu"]
