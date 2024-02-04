@@ -34,3 +34,4 @@ amount = 4
 process_material = SubResource("ParticleProcessMaterial_cw51v")
 texture = ExtResource("1_h5y05")
 lifetime = 10.0
+interpolate = false

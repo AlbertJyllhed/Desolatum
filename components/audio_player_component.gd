@@ -4,7 +4,6 @@ class_name AudioPlayerComponent
 @export var volume_modifier : float = 0.0
 @export var min_pitch : float = 0.8
 @export var max_pitch : float = 1.2
-@export var play_on_ready : bool = false
 
 var audio_players = []
 
@@ -21,11 +20,6 @@ func _ready():
 	for audio_player in audio_players:
 		var player = audio_player as AudioStreamPlayer2D
 		player.volume_db += volume_modifier
-	
-	if not play_on_ready:
-		return
-	
-	play_random_sound()
 
 
 func play_random_sound():

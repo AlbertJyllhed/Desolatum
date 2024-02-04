@@ -6,13 +6,13 @@ const teleporter_scene = preload("res://scenes/props/teleport_platform.tscn")
 const generator_scene = preload("res://scenes/props/generator.tscn")
 const spawner_scene = preload("res://enemy_spawner.tscn")
 const car_scene = preload("res://scenes/props/car.tscn")
-const dust_scene = preload("res://particles/dust.tscn")
+const map_texture_instancer = preload("res://map_texture_instancer.tscn")
 
 @export var tilemap : TileMap
 @export var enemy_manager : EnemyManager
 @export var prop_list : EnemyList
 @export var crate_list : EnemyList
-
+@export var dust_scene : PackedScene
 
 enum {
 	ground = 0,
@@ -45,7 +45,11 @@ var wall_map : Array[Vector2i]
 @export var max_room_size_y : int = 2
 var rooms = []
 
+@export_group("Texture Room Settings")
+@export var texture_rooms : Array[Texture2D]
+
 var used_positions = []
+var texture_room_positions = []
 var prop_positions = []
 var crate_positions = []
 var spawner_positions = []
@@ -63,6 +67,7 @@ func _ready():
 	create_floors()
 	create_ceiling(ceiling, 8)
 	create_ceiling(bedrock, 2)
+	create_prefab_rooms()
 	create_walls()
 	#create_canopy()
 	create_overlay()
@@ -87,6 +92,9 @@ func create_floors():
 			#create rooms
 			if randf() < room_chance:
 				create_room(position)
+			
+			#find potential positions for texture rooms
+			get_random_tile_position(position, texture_room_positions, 16)
 			
 			#find potential positions for enemy spawners
 			get_random_tile_position(position, spawner_positions)
@@ -201,10 +209,20 @@ func create_walls():
 	wall_map = tilemap.get_used_cells_by_id(0, ceiling)
 	for tile in wall_map:
 		var bottom_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
-		if tilemap.get_cell_source_id(0, bottom_tile) == ground:
-			tilemap.set_cell(0, tile, wall, Vector2i.ZERO)
-			tilemap.set_cell(1, tile, ceiling, Vector2i(0, 1))
-			tilemap.set_cell(1, bottom_tile, shadow, Vector2i.ZERO)
+		if tilemap.get_cell_source_id(0, bottom_tile) == ceiling:
+			continue
+		
+		tilemap.set_cell(0, tile, wall, Vector2i.ZERO)
+		tilemap.set_cell(1, tile, ceiling, Vector2i(0, 1))
+		tilemap.set_cell(1, bottom_tile, shadow, Vector2i.ZERO)
+
+
+func create_prefab_rooms():
+	for tile in texture_room_positions:
+		var random_texture_room = texture_rooms.pick_random()
+		var texture_room_instance = create_instance(map_texture_instancer, tile, offset) as MapTextureInstancer
+		texture_room_instance.texture = random_texture_room
+		texture_room_instance.setup()
 
 
 func create_overlay():
@@ -310,21 +328,21 @@ func create_instance(scene : PackedScene, position : Vector2, offset : Vector2 =
 	return instance
 
 
-func get_random_tile_position(position, tile_locations):
+func get_random_tile_position(position, tile_locations, max_distance = 4):
 	#check if position already has been used for something else
 	if used_positions.has(position):
 		return
 	
 	#check how close the position is to the start and end of the map
-	if position.distance_to(rooms.front().position) < 4:
+	if position.distance_to(rooms.front().position) < max_distance:
 		return
 	
-	if position.distance_to(get_end_room().position) < 4:
+	if position.distance_to(get_end_room().position) < max_distance:
 		return
 	
 	#check previous tile positions, if they are too close chose another
 	for tile in tile_locations:
-		if tile.distance_to(position) < 4:
+		if tile.distance_to(position) < max_distance:
 			return
 	
 	tile_locations.append(position)

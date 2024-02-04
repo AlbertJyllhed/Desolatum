@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dajmnvscbp2sc"]
+
+[ext_resource type="PackedScene" uid="uid://7fdjb35st2hb" path="res://particles/dust.tscn" id="1_74b3o"]
+
+[sub_resource type="Gradient" id="Gradient_t1xbp"]
+offsets = PackedFloat32Array(0, 0.194245, 0.676259, 1)
+colors = PackedColorArray(0.564706, 0.662745, 0.596078, 0, 0.745098, 1, 0, 1, 0.745098, 1, 0, 1, 0.486275, 0.592157, 0.533333, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3o428"]
+gradient = SubResource("Gradient_t1xbp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ddmtu"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, -4, 0)
+color_ramp = SubResource("GradientTexture1D_3o428")
+anim_offset_max = 1.0
+turbulence_enabled = true
+
+[node name="Fireflies" instance=ExtResource("1_74b3o")]
+process_material = SubResource("ParticleProcessMaterial_ddmtu")

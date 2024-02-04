@@ -1,11 +1,10 @@
-[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://deia6nuosvlmu"]
+[gd_resource type="TileSet" load_steps=27 format=3 uid="uid://deia6nuosvlmu"]
 
 [ext_resource type="Texture2D" uid="uid://c0t1s2lcir2ux" path="res://assets/textures/cave_ground.png" id="1_3487x"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_rq5me"]
 [ext_resource type="Texture2D" uid="uid://xi1cdawv0iw8" path="res://assets/textures/cave_ceiling.png" id="2_4n8dc"]
 [ext_resource type="Texture2D" uid="uid://box78urgbijxb" path="res://assets/textures/cave_wall.png" id="3_73flk"]
 [ext_resource type="Texture2D" uid="uid://cwlgqkbhhdb22" path="res://assets/textures/wall_shadow.png" id="3_u37en"]
-[ext_resource type="Texture2D" uid="uid://081d5u8tbv6x" path="res://assets/textures/crack.png" id="5_6h7tb"]
 [ext_resource type="Texture2D" uid="uid://dlyr2omc4uh8g" path="res://assets/textures/ship_ground.png" id="6_qco5u"]
 [ext_resource type="Texture2D" uid="uid://c6gwtobfni3ew" path="res://assets/textures/ship_wall.png" id="7_av3uy"]
 [ext_resource type="Texture2D" uid="uid://2bcobtn1ncmk" path="res://assets/textures/ship_ceiling.png" id="8_a1x2w"]
@@ -123,18 +122,6 @@ texture = ExtResource("1_rq5me")
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pwlv6"]
-texture = ExtResource("5_6h7tb")
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_21gpx"]
 texture = ExtResource("6_qco5u")
 0:0/0 = 0
@@ -250,7 +237,6 @@ navigation_layer_0/layers = 1
 custom_data_layer_0/name = "ore_type"
 custom_data_layer_0/type = 2
 sources/3 = SubResource("TileSetAtlasSource_483t1")
-sources/4 = SubResource("TileSetAtlasSource_pwlv6")
 sources/5 = SubResource("TileSetAtlasSource_21gpx")
 sources/2 = SubResource("TileSetAtlasSource_nlfg2")
 sources/0 = SubResource("TileSetAtlasSource_ja3mu")

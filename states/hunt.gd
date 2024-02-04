@@ -19,6 +19,7 @@ func _ready():
 func timeout():
 	var player = get_tree().get_first_node_in_group("player")
 	if not is_instance_valid(player):
+		state_machine.transition_to("Wander")
 		return
 	
 	var path = astar_grid.get_id_path(
@@ -29,9 +30,7 @@ func timeout():
 	path.pop_front()
 	
 	if path.is_empty():
-		if not enemy_entity.aggressive:
-			state_machine.transition_to("Wander")
-		
+		state_machine.transition_to("Wander")
 		return
 	
 	enemy_entity.direction = (tilemap.map_to_local(path[0]) - enemy_entity.global_position).normalized()

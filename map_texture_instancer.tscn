@@ -1,41 +1,44 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwva45143mwml"]
+[gd_scene load_steps=11 format=3 uid="uid://cwva45143mwml"]
 
 [ext_resource type="Script" path="res://map_texture_instancer.gd" id="1_kpff3"]
-[ext_resource type="Texture2D" uid="uid://cetwqe8hhoodb" path="res://assets/textures/maptex1.png" id="2_wi5nt"]
+[ext_resource type="Texture2D" uid="uid://cetwqe8hhoodb" path="res://assets/textures/maptex1.png" id="2_yf108"]
 [ext_resource type="Script" path="res://color_to_instance.gd" id="3_5lrb1"]
 [ext_resource type="PackedScene" uid="uid://bq87ij4ablqce" path="res://scenes/props/crate.tscn" id="4_83m5f"]
-[ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tileset.tres" id="4_qwsoh"]
+[ext_resource type="PackedScene" uid="uid://bsu0qwh6vyytv" path="res://enemy_spawner.tscn" id="5_wx20g"]
+
+[sub_resource type="Resource" id="Resource_sh2vt"]
+script = ExtResource("3_5lrb1")
+color = Color(1, 1, 1, 1)
+tile_id = 5
+max_variant = 2
 
 [sub_resource type="Resource" id="Resource_lw18n"]
 script = ExtResource("3_5lrb1")
 color = Color(0.4, 0.223529, 0.192157, 1)
 tile_id = 1
-
-[sub_resource type="Resource" id="Resource_sh2vt"]
-script = ExtResource("3_5lrb1")
-color = Color(1, 1, 1, 1)
-tile_id = 0
+max_variant = 0
 
 [sub_resource type="Resource" id="Resource_0ro0k"]
 script = ExtResource("3_5lrb1")
 color = Color(0.415686, 0.745098, 0.188235, 1)
-tile_id = 0
+tile_id = 5
+max_variant = 2
 scene = ExtResource("4_83m5f")
+
+[sub_resource type="Resource" id="Resource_26rbn"]
+script = ExtResource("3_5lrb1")
+color = Color(0.607843, 0.678431, 0.717647, 1)
+tile_id = 0
+max_variant = 2
+
+[sub_resource type="Resource" id="Resource_pxmdm"]
+script = ExtResource("3_5lrb1")
+color = Color(1, 0, 0, 1)
+tile_id = 0
+max_variant = 0
+scene = ExtResource("5_wx20g")
 
 [node name="MapTextureInstancer" type="Node2D"]
 script = ExtResource("1_kpff3")
-texture = ExtResource("2_wi5nt")
-color_instances = Array[ExtResource("3_5lrb1")]([SubResource("Resource_lw18n"), SubResource("Resource_sh2vt"), SubResource("Resource_0ro0k")])
-
-[node name="TileMap" type="TileMap" parent="." groups=["tilemap_layer"]]
-texture_filter = 1
-tile_set = ExtResource("4_qwsoh")
-format = 2
-layer_0/name = "base_layer"
-layer_1/name = "shadow_layer"
-layer_1/navigation_enabled = false
-layer_1/tile_data = PackedInt32Array()
-
-[node name="BaseLayer" type="Node2D" parent="." groups=["base_layer"]]
-
-[node name="Camera2D" type="Camera2D" parent="."]
+texture = ExtResource("2_yf108")
+color_instances = Array[ExtResource("3_5lrb1")]([SubResource("Resource_sh2vt"), SubResource("Resource_lw18n"), SubResource("Resource_0ro0k"), SubResource("Resource_26rbn"), SubResource("Resource_pxmdm")])

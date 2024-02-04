@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://uc85vhfykdhy"]
+[gd_scene load_steps=4 format=3 uid="uid://uc85vhfykdhy"]
 
 [ext_resource type="PackedScene" uid="uid://cig1m1a15gbdi" path="res://levels/main.tscn" id="1_1rbtx"]
 [ext_resource type="TileSet" uid="uid://dvovn2blbggvj" path="res://resources/lava_tileset.tres" id="2_qxt6r"]
+[ext_resource type="PackedScene" uid="uid://dajmnvscbp2sc" path="res://particles/fireflies.tscn" id="2_vudfc"]
 
 [node name="NestLevel" instance=ExtResource("1_1rbtx")]
 
 [node name="LevelGenerator" parent="." index="1"]
+dust_scene = ExtResource("2_vudfc")
 walker_turn_chance = 0.1
 max_steps_until_turn = 4
 room_chance = 0.25
