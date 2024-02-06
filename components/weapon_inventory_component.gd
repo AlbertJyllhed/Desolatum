@@ -7,6 +7,7 @@ signal weapon_replaced()
 
 var stats : PlayerStats
 var ability : Ability
+var consumable : Consumable
 
 var base_layer : Node2D
 var pickup_scene : PackedScene = preload("res://scenes/pickups/pickup.tscn")
@@ -23,10 +24,8 @@ func setup(new_stats : PlayerStats):
 		for item in stats.equipment:
 			add_item(item)
 	
-	if not stats.ability_item:
-		return
-	
-	add_ability(stats.ability_item)
+	if stats.ability_item: add_ability(stats.ability_item)
+	if stats.consumable: add_consumable(stats.consumable)
 
 
 func equip_weapon(weapon_index):
@@ -79,11 +78,13 @@ func add_item(new_item : Item):
 
 
 func add_ability(new_item : Item):
-	if ability:
-		ability.queue_free()
-	
+	if ability: ability.queue_free()
 	ability = create_equipment_instance(new_item)
-	print(ability.name)
+
+
+func add_consumable(new_item : Item):
+	if consumable: consumable.queue_free()
+	consumable = create_equipment_instance(new_item)
 
 
 func create_pickup(new_item : Item):
@@ -111,6 +112,10 @@ func on_item_picked_up(item : Item):
 	
 	if item.type == item.EquipmentType.ability:
 		add_ability(item)
+		return
+	
+	if item.type == item.EquipmentType.consumable:
+		add_consumable(item)
 		return
 	
 	add_item(item)

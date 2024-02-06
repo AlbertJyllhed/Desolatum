@@ -27,6 +27,10 @@ texture = ExtResource("1_3487x")
 0:1/0/z_index = -10
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/z_index = -10
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qhs53"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

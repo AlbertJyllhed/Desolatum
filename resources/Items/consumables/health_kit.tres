@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=4 format=3 uid="uid://b6mx0o1p1137d"]
+
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="1_l1hnk"]
+[ext_resource type="PackedScene" uid="uid://imwty12o6eua" path="res://consumables/health_kit.tscn" id="1_ykvrd"]
+[ext_resource type="Texture2D" uid="uid://bbfu7y4xfxg1k" path="res://assets/textures/health_kit.png" id="2_r7qju"]
+
+[resource]
+script = ExtResource("1_l1hnk")
+type = 3
+equipment_scene = ExtResource("1_ykvrd")
+id = "health_kit"
+name = "Medkit"
+description = ""
+icon = ExtResource("2_r7qju")
+amount = 1
+pickup_type = 0
+drop_weight = 1

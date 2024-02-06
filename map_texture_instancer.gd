@@ -39,8 +39,9 @@ func generate_tile(x : int, y : int):
 			base_layer.call_deferred("add_child", instance)
 			instance.global_position = tile_pos * 16 + Vector2i(8, 8)
 		
-		var random_tile = randi_range(0, color_instance.max_variant)
-		tilemap.set_cell(0, tile_pos, color_instance.tile_id, Vector2i(random_tile, 0))
+		var random_x = randi_range(color_instance.min_x, color_instance.max_x)
+		var random_y = randi_range(color_instance.min_y, color_instance.max_y)
+		tilemap.set_cell(0, tile_pos, color_instance.tile_id, Vector2i(random_x, random_y))
 		tilemap.set_cell(1, tile_pos, -1, Vector2i.ZERO)
 		return
 
