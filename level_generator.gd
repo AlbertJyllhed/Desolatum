@@ -293,7 +293,7 @@ func populate_level():
 		used_positions.append(tile)
 	
 	#place crates
-	crate_list.setup()
+	#crate_list.setup()
 	for crate_position in crate_positions:
 		#var crate_position = crate_positions.pick_random()
 		var crate_scene = crate_list.spawn_table.pick_item()
@@ -308,7 +308,7 @@ func populate_level():
 		create_instance(dust_scene, spawner_position, offset)
 	
 	#place props
-	prop_list.setup()
+	#prop_list.setup()
 	for prop_position in prop_positions:
 		var prop_scene = prop_list.spawn_table.pick_item()
 		create_instance(prop_scene, prop_position, offset)

@@ -56,8 +56,6 @@ func prev_slot():
 
 
 func add_item(new_item : Item):
-	#GameEvents.weapons_updated.emit(new_item)
-	
 	var weapon = create_equipment_instance(new_item)
 	
 	if items.size() == stats.equipment.size():
