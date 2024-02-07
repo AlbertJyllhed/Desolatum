@@ -11,7 +11,6 @@ func setup(new_stats : PlayerStats):
 	current_health = stats.player_stats["health"]
 	GameEvents.health_updated.emit(current_health, max_health)
 	GameEvents.stats_changed.connect(on_stats_changed)
-	GameEvents.item_picked_up.connect(on_item_picked_up)
 
 
 func damage(damage_amount : float):
@@ -23,6 +22,12 @@ func damage(damage_amount : float):
 	Callable(check_death).call_deferred()
 
 
+func heal(heal_amount : float):
+	current_health = min(current_health + heal_amount, max_health)
+	stats.player_stats["health"] = current_health
+	GameEvents.health_updated.emit(current_health, max_health)
+
+
 func check_death():
 	if current_health == 0:
 		died.emit()
@@ -31,13 +36,6 @@ func check_death():
 		ui_layer.add_child(game_over_screen_instance)
 		ui_layer.move_child(game_over_screen_instance, 0)
 		owner.queue_free()
-
-
-func on_item_picked_up(item : Item):
-	if item.id == "health":
-		current_health = min(current_health + 1, max_health)
-		stats.player_stats["health"] = current_health
-		GameEvents.health_updated.emit(current_health, max_health)
 
 
 func on_stats_changed(mods : Dictionary):

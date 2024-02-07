@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=23 format=3 uid="uid://bhj5dobjuhwqa"]
 
-[ext_resource type="Texture2D" uid="uid://b41wrrkc84o66" path="res://assets/textures/ice_ground.png" id="1_atp7n"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_bmqd2"]
+[ext_resource type="Texture2D" uid="uid://ti035ncm4e2x" path="res://assets/textures/ice_ground_large.png" id="1_fjk1u"]
 [ext_resource type="Texture2D" uid="uid://drpvbnknmcl6u" path="res://assets/textures/ice_ceiling.png" id="2_5ghu4"]
 [ext_resource type="Texture2D" uid="uid://dfy8cuabbvitt" path="res://assets/textures/ice_wall.png" id="3_04y7n"]
 [ext_resource type="Texture2D" uid="uid://cwlgqkbhhdb22" path="res://assets/textures/wall_shadow.png" id="3_u3jlr"]
@@ -10,7 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://2bcobtn1ncmk" path="res://assets/textures/ship_ceiling.png" id="9_ld5rm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_scdaw"]
-texture = ExtResource("1_atp7n")
+texture = ExtResource("1_fjk1u")
+texture_region_size = Vector2i(22, 22)
 0:0/0 = 0
 0:0/0/z_index = -10
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -24,11 +25,11 @@ texture = ExtResource("1_atp7n")
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
 0:1/0 = 0
-0:1/0/z_index = -10
+0:1/0/z_index = -9
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0 = 0
-1:1/0/z_index = -10
+1:1/0/z_index = -8
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
 
@@ -92,7 +93,7 @@ texture_region_size = Vector2i(22, 22)
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7hn34"]
 texture = ExtResource("3_u3jlr")
 0:0/0 = 0
-0:0/0/z_index = -9
+0:0/0/z_index = -8
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 

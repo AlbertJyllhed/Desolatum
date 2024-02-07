@@ -66,6 +66,7 @@ func add_item(new_item : Item):
 				index = item.type
 		
 		create_pickup(stats.equipment[index])
+		items.pop_at(index).queue_free()
 		items.insert(index, weapon)
 		stats.equipment[index] = new_item
 	else:
@@ -83,8 +84,24 @@ func add_ability(new_item : Item):
 
 
 func add_consumable(new_item : Item):
-	if consumable: consumable.queue_free()
+	if consumable:
+		if consumable.item == new_item:
+			consumable.add_item(new_item)
+			return
+		
+		create_pickup(consumable.item)
+		consumable.queue_free()
+	
 	consumable = create_equipment_instance(new_item)
+	var player = get_parent() as Player
+	consumable.setup(player, new_item)
+	stats.consumable = consumable.item
+	consumable.used.connect(on_consumable_used)
+
+
+func on_consumable_used():
+	consumable = null
+	stats.consumable = null
 
 
 func create_pickup(new_item : Item):
@@ -93,7 +110,6 @@ func create_pickup(new_item : Item):
 	base_layer.add_child(pickup_instance)
 	pickup_instance.set_item(new_item)
 	pickup_instance.global_position = global_position
-	items.pop_at(index).queue_free()
 
 
 func create_equipment_instance(new_item : Item):

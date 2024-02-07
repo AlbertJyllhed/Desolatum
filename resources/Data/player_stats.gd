@@ -63,8 +63,8 @@ func on_item_picked_up(item : Item):
 		return
 	
 	upgrades.append(item)
-	for upgrade in upgrades:
-		print(upgrade.id)
+	#for upgrade in upgrades:
+		#print(upgrade.id)
 
 
 func add_upgrades():
@@ -87,6 +87,8 @@ func reset():
 	equipment = starter_equipment.duplicate()
 	#for item in equipment:
 		#print(item.name)
+	
+	consumable = null
 	
 	energy = 0
 	ore = 0

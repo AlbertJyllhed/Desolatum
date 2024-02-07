@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=27 format=3 uid="uid://deia6nuosvlmu"]
 
-[ext_resource type="Texture2D" uid="uid://c0t1s2lcir2ux" path="res://assets/textures/cave_ground.png" id="1_3487x"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_rq5me"]
+[ext_resource type="Texture2D" uid="uid://c4qspfywdieui" path="res://assets/textures/cave_ground_large.png" id="1_uptxm"]
 [ext_resource type="Texture2D" uid="uid://xi1cdawv0iw8" path="res://assets/textures/cave_ceiling.png" id="2_4n8dc"]
 [ext_resource type="Texture2D" uid="uid://box78urgbijxb" path="res://assets/textures/cave_wall.png" id="3_73flk"]
 [ext_resource type="Texture2D" uid="uid://cwlgqkbhhdb22" path="res://assets/textures/wall_shadow.png" id="3_u37en"]
@@ -10,7 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://2bcobtn1ncmk" path="res://assets/textures/ship_ceiling.png" id="8_a1x2w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ja3mu"]
-texture = ExtResource("1_3487x")
+texture = ExtResource("1_uptxm")
+texture_region_size = Vector2i(22, 22)
 0:0/0 = 0
 0:0/0/z_index = -10
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -24,11 +25,11 @@ texture = ExtResource("1_3487x")
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
 0:1/0 = 0
-0:1/0/z_index = -10
+0:1/0/z_index = -9
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0 = 0
-1:1/0/z_index = -10
+1:1/0/z_index = -8
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
 
@@ -92,7 +93,7 @@ texture_region_size = Vector2i(22, 22)
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n8vah"]
 texture = ExtResource("3_u37en")
 0:0/0 = 0
-0:0/0/z_index = -9
+0:0/0/z_index = -8
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
