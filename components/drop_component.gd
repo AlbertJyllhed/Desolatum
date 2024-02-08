@@ -13,7 +13,6 @@ var auto_pickup : PackedScene = preload("res://scenes/pickups/auto_pickup.tscn")
 
 
 func _ready():
-	drop_list.setup()
 	drop_amount = randi_range(min_drop_amount, max_drop_amount)
 	if not health_component:
 		return
@@ -38,10 +37,10 @@ func on_died():
 			instance = pickup.instantiate() as Node2D
 		
 		instance.set_item(item)
-		drop_list.spawn_table.remove_item(item)
+		drop_list.spawn_table.adjust_weights(item)
 		
-		var offset = Vector2(randf_range(-8, 8), randf_range(-8, 8))
-		var spawn_position = (owner as Node2D).global_position + offset
 		var base_layer = get_tree().get_first_node_in_group("base_layer")
 		base_layer.add_child(instance)
+		var offset = Vector2(randf_range(-8, 8), randf_range(-8, 8))
+		var spawn_position = (owner as Node2D).global_position + offset
 		instance.global_position = spawn_position

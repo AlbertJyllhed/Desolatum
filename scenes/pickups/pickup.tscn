@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxanol7yje1c3"]
+[gd_scene load_steps=9 format=3 uid="uid://bxanol7yje1c3"]
 
 [ext_resource type="Script" path="res://scenes/pickups/pickup.gd" id="1_57x74"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_vbw2f"]
@@ -10,13 +10,73 @@ radius = 12.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uyuri"]
 light_mode = 1
 
+[sub_resource type="Animation" id="Animation_101h1"]
+resource_name = "drop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_c1c7g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ox7vr"]
+_data = {
+"RESET": SubResource("Animation_c1c7g"),
+"drop": SubResource("Animation_101h1")
+}
+
 [node name="Pickup" type="StaticBody2D"]
 collision_layer = 128
 collision_mask = 512
 script = ExtResource("1_57x74")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
 texture = ExtResource("1_vbw2f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -42,3 +102,9 @@ theme_override_fonts/font = ExtResource("3_fcksl")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ox7vr")
+}
+autoplay = "drop"

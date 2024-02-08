@@ -12,3 +12,4 @@ description = "Increase magazine size but lower reload speed"
 amount = 1
 pickup_type = 0
 drop_weight = 2
+drop_limit = 2

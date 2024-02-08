@@ -12,3 +12,4 @@ description = "+2 damage but -2 health"
 amount = 1
 pickup_type = 0
 drop_weight = 2
+drop_limit = 1

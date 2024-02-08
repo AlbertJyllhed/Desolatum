@@ -14,3 +14,4 @@ icon = ExtResource("1_crt4y")
 amount = 1
 pickup_type = 0
 drop_weight = 1
+drop_limit = 1

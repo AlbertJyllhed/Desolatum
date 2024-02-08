@@ -40,6 +40,7 @@ func _init():
 	for stat in stat_list:
 		modifiers[stat] = Modifier.new()
 	
+	GameEvents.reset_stats.connect(reset)
 	GameEvents.item_picked_up.connect(on_item_picked_up)
 	call_deferred("reset")
 

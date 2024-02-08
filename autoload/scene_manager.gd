@@ -18,7 +18,7 @@ func _ready():
 
 
 func load_level(index : int):
-	clear_player_stats()
+	GameEvents.reset_stats.emit()
 	level_index = index
 	get_tree().change_scene_to_packed(levels[level_index])
 
@@ -27,8 +27,3 @@ func load_next_level():
 	changing_level.emit()
 	level_index = min(level_index + 1, max_level_index)
 	get_tree().change_scene_to_packed(levels[level_index])
-
-
-func clear_player_stats():
-	var stats : PlayerStats = load("res://resources/Data/player_stats.tres")
-	stats.reset()

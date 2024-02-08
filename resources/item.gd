@@ -11,3 +11,4 @@ class_name Item
 enum PickupType { manual, auto }
 @export var pickup_type = PickupType.manual
 @export var drop_weight : int = 1
+@export var drop_limit : int = -1

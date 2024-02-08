@@ -14,3 +14,4 @@ icon = ExtResource("1_71cf1")
 amount = 1
 pickup_type = 0
 drop_weight = 3
+drop_limit = 3

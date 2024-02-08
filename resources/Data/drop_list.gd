@@ -6,10 +6,11 @@ var spawn_table = WeightedTable.new()
 
 
 func _init():
+	GameEvents.reset_stats.connect(setup)
 	call_deferred("setup")
 
 
 func setup():
-	#adds items for every resource!! array becomes way too big
+	spawn_table.reset()
 	for item in items:
-		spawn_table.add_item(item, item.drop_weight)
+		spawn_table.add_item(item, item.drop_weight, item.drop_limit)

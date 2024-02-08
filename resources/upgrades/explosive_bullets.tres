@@ -12,3 +12,4 @@ description = "+ 5% chance to fire an explosive bullet"
 amount = 1
 pickup_type = 0
 drop_weight = 1
+drop_limit = 2

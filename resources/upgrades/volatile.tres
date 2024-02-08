@@ -12,3 +12,4 @@ icon = ExtResource("1_v334g")
 amount = 1
 pickup_type = 0
 drop_weight = 2
+drop_limit = 1
