@@ -1,14 +1,57 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxanol7yje1c3"]
+[gd_scene load_steps=12 format=3 uid="uid://bxanol7yje1c3"]
 
 [ext_resource type="Script" path="res://scenes/pickups/pickup.gd" id="1_57x74"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_vbw2f"]
 [ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_fcksl"]
+[ext_resource type="Texture2D" uid="uid://dr7bbvann5qiw" path="res://assets/textures/sparkle.png" id="4_ckqae"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i8lwx"]
 radius = 12.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uyuri"]
 light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pqwub"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jn4xn"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="Animation" id="Animation_c1c7g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_101h1"]
 resource_name = "drop"
@@ -36,33 +79,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_c1c7g"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ox7vr"]
@@ -102,6 +118,17 @@ theme_override_fonts/font = ExtResource("3_fcksl")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="Sparkles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_pqwub")
+amount = 1
+amount_ratio = 0.3
+process_material = SubResource("ParticleProcessMaterial_jn4xn")
+texture = ExtResource("4_ckqae")
+lifetime = 0.8
+speed_scale = 3.0
+explosiveness = 0.2
+interpolate = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -17,12 +17,15 @@ func set_target(new_target : Node2D):
 
 
 func update_target_position():
+	if not is_instance_valid(target):
+		return position
+	
+	if not target is Player:
+		return position
+	
 	var mouse_position = get_local_mouse_position()
 	mouse_position.x = clamp(mouse_position.x, -padding, padding)
 	mouse_position.y = clamp(mouse_position.y, -padding, padding)
-	
-	if not is_instance_valid(target):
-		return position
 	
 	var ret = target.position + mouse_position
 	ret += shake_offset
@@ -41,6 +44,20 @@ func shake(direction : Vector2, magnitude : float, length : float):
 	shake_vector = direction
 	shake_magnitude = magnitude
 	shake_time_end = Time.get_ticks_msec() + (length * 10)
+
+
+func random_shake(magnitude : float, length : float):
+	shaking = true
+	shake_vector = get_random_offset(magnitude)
+	shake_magnitude = magnitude
+	shake_time_end = Time.get_ticks_msec() + (length * 10)
+
+
+func get_random_offset(magnitude : float) -> Vector2:
+	return Vector2(
+		randf_range(-magnitude, magnitude),
+		randf_range(-magnitude, magnitude)
+	)
 
 
 func update_shake():

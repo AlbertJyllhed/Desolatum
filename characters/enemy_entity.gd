@@ -3,6 +3,7 @@ class_name EnemyEntity
 
 @onready var health_component : HealthComponent = $HealthComponent
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var hurtbox : Hurtbox = $Hurtbox
 @onready var disable_timer : Timer = $DisableTimer
 
 var direction : Vector2
@@ -14,6 +15,7 @@ func _ready():
 	super._ready()
 	add_to_group("enemies")
 	health_component.died.connect(on_died)
+	hurtbox.hit.connect(knockback)
 	disable_timer.timeout.connect(enable_movement)
 
 
@@ -53,3 +55,5 @@ func move(delta : float):
 
 func on_died():
 	remove_from_group("enemies")
+	var camera = get_viewport().get_camera_2d() as PlayerCamera
+	camera.random_shake(4, 4)

@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cdyosqubi74h4"]
+
+[ext_resource type="Shader" path="res://resources/shaders/hidden_hit_flash.gdshader" id="1_ml8mw"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_ml8mw")
+shader_parameter/lerp_percent = null

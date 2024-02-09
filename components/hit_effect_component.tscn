@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cglisf6kd1vpw"]
+
+[ext_resource type="Script" path="res://components/hit_effect_component.gd" id="1_26lxh"]
+[ext_resource type="PackedScene" uid="uid://diqk6ee4w1x1a" path="res://particles/enemy_hit_effect.tscn" id="2_pwjk4"]
+
+[node name="HitEffectComponent" type="Node"]
+script = ExtResource("1_26lxh")
+hit_effect_scene = ExtResource("2_pwjk4")

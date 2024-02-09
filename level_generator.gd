@@ -230,9 +230,10 @@ func create_overlay():
 	noise.seed = randi()
 	var threshold = 0.2
 	
-	for position in map:
-		if noise.get_noise_2d(position.x, position.y) > threshold:
-			tilemap.set_cell(0, position, ground, Vector2i(0, 1))
+	var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
+	for tile in ground_tiles:
+		if noise.get_noise_2d(tile.x, tile.y) > threshold:
+			tilemap.set_cell(0, tile, ground, Vector2i(0, 1))
 
 
 func create_ore():

@@ -4,7 +4,7 @@ extends Node
 @export var sprite : Sprite2D
 @export var hit_flash_material : ShaderMaterial
 
-var hit_flash_tween : Tween
+@onready var timer : Timer = $Timer
 
 
 func _ready():
@@ -16,9 +16,9 @@ func _ready():
 
 
 func on_health_changed(_health):
-	if hit_flash_tween != null and hit_flash_tween.is_valid():
-		hit_flash_tween.kill()
-	
 	(sprite.material as ShaderMaterial).set_shader_parameter("lerp_percent", 1.0)
-	hit_flash_tween = create_tween()
-	hit_flash_tween.tween_property(sprite.material, "shader_parameter/lerp_percent", 0.0, 0.2)
+	timer.start()
+
+
+func _on_timer_timeout():
+	(sprite.material as ShaderMaterial).set_shader_parameter("lerp_percent", 0.0)

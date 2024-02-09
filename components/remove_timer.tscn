@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckegkiyo3rx4q"]
+
+[ext_resource type="Script" path="res://components/remove_timer.gd" id="1_o15co"]
+
+[node name="RemoveTimer" type="Timer"]
+wait_time = 30.0
+one_shot = true
+autostart = true
+script = ExtResource("1_o15co")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

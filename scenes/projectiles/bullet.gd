@@ -23,7 +23,6 @@ func setup(new_direction, new_speed = 400, new_damage = 1):
 	direction = new_direction
 	speed = new_speed
 	hitbox.damage = new_damage
-	hitbox.knockback_vector = new_direction
 	sprite.rotation = direction.angle()
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 
@@ -62,6 +61,7 @@ func hit_wall(collision_result):
 
 
 func _on_hitbox_area_entered(_area):
+	hitbox.knockback_vector = direction
 	if pierce_chance > randf():
 		pierce_chance = max(pierce_chance * 0.9, 0)
 		return

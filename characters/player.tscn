@@ -1,13 +1,14 @@
-[gd_scene load_steps=48 format=3 uid="uid://oigv3iu1oim1"]
+[gd_scene load_steps=50 format=3 uid="uid://oigv3iu1oim1"]
 
 [ext_resource type="Script" path="res://characters/player.gd" id="1_qc1vg"]
 [ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/health_component.tscn" id="2_g1c5e"]
 [ext_resource type="PackedScene" uid="uid://d0m7vblybubk2" path="res://components/hit_flash_component.tscn" id="3_qbagp"]
 [ext_resource type="PackedScene" uid="uid://cerdil3sbcduq" path="res://particles/player_blood.tscn" id="4_hmhsu"]
 [ext_resource type="Shader" path="res://resources/shaders/hit_flash_component.gdshader" id="4_tihgs"]
+[ext_resource type="PackedScene" uid="uid://cgjcjsytg5uvl" path="res://components/blood_splatter_component.tscn" id="5_hqf0x"]
 [ext_resource type="Script" path="res://components/player_health_component.gd" id="5_o3i63"]
 [ext_resource type="PackedScene" uid="uid://b8kra05udsj1e" path="res://components/energy_gain_component.tscn" id="7_fn21c"]
-[ext_resource type="Texture2D" uid="uid://r4b7wk4mk0lm" path="res://assets/textures/Player_alt.png" id="8_7nw0s"]
+[ext_resource type="PackedScene" uid="uid://cglisf6kd1vpw" path="res://components/hit_effect_component.tscn" id="8_ks53g"]
 [ext_resource type="PackedScene" uid="uid://rubsem5ncror" path="res://components/footstep_component.tscn" id="8_om1nv"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="8_rc5f6"]
 [ext_resource type="PackedScene" uid="uid://g7y551vhlf7b" path="res://components/player_pickup_component.tscn" id="8_ujhh4"]
@@ -20,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://uq4stmgow63o" path="res://sounds/footsteps/stone_footstep_5.wav" id="13_wsrik"]
 [ext_resource type="AudioStream" uid="uid://wst7gi54ypoe" path="res://sounds/footsteps/stone_footstep_6.wav" id="14_e2unt"]
 [ext_resource type="PackedScene" uid="uid://dkhd4d2ekkpur" path="res://components/upgrade_handler_component.tscn" id="15_ng408"]
+[ext_resource type="Texture2D" uid="uid://dluocsfglcbsl" path="res://assets/textures/player_update.png" id="18_t0tkd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7y1p"]
 resource_local_to_scene = true
@@ -111,7 +113,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_cv314"]
 resource_name = "walk_down"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -120,15 +122,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [10, 11, 12, 13, 14, 15, 10]
+"values": [12, 13, 14, 15, 16, 17, 18, 19, 12]
 }
 
 [sub_resource type="Animation" id="Animation_7lm0o"]
 resource_name = "walk_left"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -137,15 +139,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [16, 17, 18, 19, 20, 21, 16]
+"values": [20, 21, 22, 23, 24, 25, 26, 27, 20]
 }
 
 [sub_resource type="Animation" id="Animation_3eatm"]
 resource_name = "walk_right"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -154,15 +156,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [4, 5, 6, 7, 8, 9, 4]
+"values": [4, 5, 6, 7, 8, 9, 10, 11, 4]
 }
 
 [sub_resource type="Animation" id="Animation_vst3g"]
 resource_name = "walk_up"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -171,10 +173,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [22, 23, 24, 25, 26, 27, 22]
+"values": [28, 29, 30, 31, 32, 33, 34, 35, 28]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b4jp7"]
@@ -274,10 +276,17 @@ script = ExtResource("5_o3i63")
 blood_particles = ExtResource("4_hmhsu")
 max_health = 6.0
 
+[node name="BloodSplatterComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_hqf0x")]
+health_component = NodePath("../HealthComponent")
+blood_color = Color(0.760784, 0.113725, 0.27451, 1)
+
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_qbagp")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
 hit_flash_material = SubResource("ShaderMaterial_h7y1p")
+
+[node name="HitEffectComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("8_ks53g")]
+hurtbox = NodePath("../Hurtbox")
 
 [node name="EnergyGainComponent" parent="." instance=ExtResource("7_fn21c")]
 
@@ -321,16 +330,16 @@ parameters/walk/blend_position = Vector2(0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -5)
-texture = ExtResource("8_7nw0s")
+position = Vector2(0, -6)
+texture = ExtResource("18_t0tkd")
 hframes = 6
-vframes = 5
+vframes = 6
 
 [node name="Shadow" type="Sprite2D" parent="Sprite2D"]
 modulate = Color(0, 0, 0, 0.294118)
 z_index = -1
-position = Vector2(0, 5)
-scale = Vector2(0.5, 0.25)
+position = Vector2(0, 8)
+scale = Vector2(0.6, 0.25)
 texture = ExtResource("8_rc5f6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

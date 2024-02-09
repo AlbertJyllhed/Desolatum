@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://diqk6ee4w1x1a"]
+
+[ext_resource type="Texture2D" uid="uid://chwxefadtwgv0" path="res://assets/textures/blood_effect.png" id="1_8ctup"]
+[ext_resource type="AudioStream" uid="uid://da0oix6koiu21" path="res://sounds/creature_ouch.wav" id="2_by3vq"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_epf4y"]
+light_mode = 2
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_km1ot"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(8, 0, 0)
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="Animation" id="Animation_ry24s"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xxf0f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqehp"]
+_data = {
+"RESET": SubResource("Animation_xxf0f"),
+"default": SubResource("Animation_ry24s")
+}
+
+[node name="EnemyHitEffect" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_epf4y")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_km1ot")
+texture = ExtResource("1_8ctup")
+one_shot = true
+speed_scale = 3.0
+interpolate = false
+local_coords = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_by3vq")
+volume_db = -1.0
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pqehp")
+}
+autoplay = "default"

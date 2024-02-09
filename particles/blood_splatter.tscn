@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://thdwyowvf85e"]
+
+[ext_resource type="Texture2D" uid="uid://dili0ekehyxsd" path="res://assets/textures/blood_splatter.png" id="1_oira1"]
+[ext_resource type="Script" path="res://scenes/props/random_prop_sprite.gd" id="2_28764"]
+[ext_resource type="PackedScene" uid="uid://ckegkiyo3rx4q" path="res://components/remove_timer.tscn" id="3_p6f04"]
+
+[node name="BloodSplatter" type="Sprite2D"]
+z_index = -8
+texture = ExtResource("1_oira1")
+hframes = 4
+script = ExtResource("2_28764")
+max_frame = 3
+
+[node name="RemoveTimer" parent="." instance=ExtResource("3_p6f04")]
+wait_time = 10.0

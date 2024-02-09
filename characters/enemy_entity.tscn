@@ -1,11 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5dskmq7j3isv"]
+[gd_scene load_steps=15 format=3 uid="uid://b5dskmq7j3isv"]
 
 [ext_resource type="Script" path="res://characters/enemy_entity.gd" id="1_kjgs7"]
 [ext_resource type="PackedScene" uid="uid://4pkuotplcb2p" path="res://states/state_machine.tscn" id="2_q83i5"]
 [ext_resource type="PackedScene" uid="uid://d1fic30u18k03" path="res://states/idle.tscn" id="3_isf4n"]
 [ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/health_component.tscn" id="4_jsje3"]
+[ext_resource type="PackedScene" uid="uid://bfgcoyro8k4dp" path="res://particles/blood_particles.tscn" id="5_ns42f"]
+[ext_resource type="PackedScene" uid="uid://cgjcjsytg5uvl" path="res://components/blood_splatter_component.tscn" id="6_s2nao"]
 [ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/drop_component.tscn" id="7_5sxj7"]
+[ext_resource type="PackedScene" uid="uid://d0m7vblybubk2" path="res://components/hit_flash_component.tscn" id="7_ouq2k"]
+[ext_resource type="Material" uid="uid://cdyosqubi74h4" path="res://assets/materials/hidden_hit_flash_material.tres" id="8_bye06"]
+[ext_resource type="Shader" path="res://resources/shaders/hidden_hit_flash.gdshader" id="8_eddt6"]
 [ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="8_wyt2p"]
+[ext_resource type="PackedScene" uid="uid://cglisf6kd1vpw" path="res://components/hit_effect_component.tscn" id="9_i76co"]
+[ext_resource type="PackedScene" uid="uid://b1flgtmb64om6" path="res://components/random_growl_component.tscn" id="11_qckmt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnyc5"]
+resource_local_to_scene = true
+shader = ExtResource("8_eddt6")
+shader_parameter/lerp_percent = null
 
 [node name="EnemyEntity" type="CharacterBody2D"]
 collision_layer = 4
@@ -19,14 +31,30 @@ acceleration = 200.0
 [node name="Idle" parent="StateMachine" instance=ExtResource("3_isf4n")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_jsje3")]
+blood_particles = ExtResource("5_ns42f")
+
+[node name="BloodSplatterComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_s2nao")]
+health_component = NodePath("../HealthComponent")
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("7_ouq2k")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_bnyc5")
+
+[node name="HitEffectComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("9_i76co")]
+hurtbox = NodePath("../Hurtbox")
 
 [node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_5sxj7")]
 health_component = NodePath("../HealthComponent")
 
+[node name="RandomGrowlComponent" parent="." instance=ExtResource("11_qckmt")]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("8_bye06")
 position = Vector2(0, -8)
 
 [node name="Shadow" type="Sprite2D" parent="."]
+material = ExtResource("8_bye06")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

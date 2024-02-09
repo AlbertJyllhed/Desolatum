@@ -21,9 +21,11 @@ func damage(damage_amount : float):
 
 
 func check_death():
-	if current_health == 0:
-		died.emit()
-		owner.queue_free()
+	if current_health > 0:
+		return
+	
+	died.emit()
+	owner.queue_free()
 
 
 func spawn_particles():

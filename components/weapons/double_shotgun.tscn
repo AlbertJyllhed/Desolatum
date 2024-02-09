@@ -24,6 +24,7 @@ base_ammo = 6
 base_reload_time = 2.0
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("4_vin3b")]
+position = Vector2(12, 0)
 projectile = ExtResource("5_ynhkp")
 base_bullet_speed = 200.0
 projectiles = Array[float]([-20.0, -15.0, -10.0, -5.0, 0.0, 5.0, 10.0, 15.0, 20.0])

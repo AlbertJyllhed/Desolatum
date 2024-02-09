@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cd6xh5dojbq0o"]
+[gd_scene load_steps=8 format=3 uid="uid://cd6xh5dojbq0o"]
 
 [ext_resource type="Script" path="res://level_generator.gd" id="1_iocxf"]
 [ext_resource type="Resource" uid="uid://bkqlhlpfwtkme" path="res://resources/Data/cave_prop_list.tres" id="2_r5gq2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7fdjb35st2hb" path="res://particles/dust.tscn" id="4_sdj2e"]
 [ext_resource type="Texture2D" uid="uid://b731ojn40so4i" path="res://assets/textures/maptex2.png" id="4_w4vfx"]
 [ext_resource type="Texture2D" uid="uid://cetwqe8hhoodb" path="res://assets/textures/maptex1.png" id="6_mc2pl"]
+[ext_resource type="Texture2D" uid="uid://fdavsm1q46w2" path="res://assets/textures/maptex3.png" id="7_7xdru"]
 
 [node name="LevelGenerator" type="Node"]
 script = ExtResource("1_iocxf")
@@ -15,4 +16,4 @@ dust_scene = ExtResource("4_sdj2e")
 max_steps_until_turn = 10
 max_walkers = 4
 room_chance = 0.6
-texture_rooms = Array[Texture2D]([ExtResource("6_mc2pl"), ExtResource("4_w4vfx")])
+texture_rooms = Array[Texture2D]([ExtResource("6_mc2pl"), ExtResource("4_w4vfx"), ExtResource("7_7xdru")])

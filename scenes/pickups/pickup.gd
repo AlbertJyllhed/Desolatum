@@ -6,15 +6,16 @@ class_name Pickup
 @onready var sprite : Sprite2D = $Sprite2D
 
 
-func _ready():
+func set_item(new_item : Item):
+	item = new_item
+	call_deferred("set_icon")
+
+
+func set_icon():
 	if not item.icon:
 		return
 	
 	sprite.texture = item.icon
-
-
-func set_item(new_item : Item):
-	item = new_item
 
 
 func show_details():

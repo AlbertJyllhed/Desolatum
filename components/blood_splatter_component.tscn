@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgjcjsytg5uvl"]
+
+[ext_resource type="Script" path="res://components/blood_splatter_component.gd" id="1_qctlu"]
+[ext_resource type="PackedScene" uid="uid://thdwyowvf85e" path="res://particles/blood_splatter.tscn" id="2_g0g4q"]
+
+[node name="BloodSplatterComponent" type="Node"]
+script = ExtResource("1_qctlu")
+blood_splatter_scene = ExtResource("2_g0g4q")
+blood_color = Color(0.494118, 0.113725, 0.27451, 1)

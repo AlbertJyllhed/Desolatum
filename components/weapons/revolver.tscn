@@ -26,6 +26,7 @@ base_ammo = 6
 base_reload_time = 1.5
 
 [node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("4_wctkj")]
+position = Vector2(9, 0)
 projectile = ExtResource("5_7hvxh")
 base_bullet_speed = 600.0
 base_crit_chance = 0.2
