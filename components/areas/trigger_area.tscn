@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmr5vnavj25es"]
+
+[ext_resource type="Script" path="res://components/areas/trigger_area.gd" id="1_n5mq4"]
+[ext_resource type="PackedScene" uid="uid://ch3qur7vvceug" path="res://components/event_handler_component.tscn" id="2_kbfx3"]
+
+[node name="TriggerArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_n5mq4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="EventHandlerComponent" parent="." instance=ExtResource("2_kbfx3")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

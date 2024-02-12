@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci62ax0kurvtb"]
+
+[ext_resource type="Script" path="res://components/areas/trigger_events/trigger_event.gd" id="1_awny2"]
+
+[node name="TriggerEvent" type="Node"]
+script = ExtResource("1_awny2")

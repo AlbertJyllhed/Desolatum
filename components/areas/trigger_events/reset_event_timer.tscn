@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://djul6rjnpm0n4"]
+
+[ext_resource type="PackedScene" uid="uid://ci62ax0kurvtb" path="res://components/areas/trigger_events/trigger_event.tscn" id="1_e2snq"]
+[ext_resource type="Script" path="res://components/areas/trigger_events/reset_event_timer.gd" id="2_3mrlj"]
+
+[node name="ResetEventTimer" instance=ExtResource("1_e2snq")]
+script = ExtResource("2_3mrlj")

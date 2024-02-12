@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0hapuf88hnr2"]
+
+[ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_ptg3t"]
+[ext_resource type="Script" path="res://ui/text_box.gd" id="1_ybkxj"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_bduta"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kicbv"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rfcmo"]
+light_mode = 1
+
+[node name="TextBox" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 31.0
+script = ExtResource("1_ybkxj")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+material = SubResource("CanvasItemMaterial_kicbv")
+layout_mode = 2
+texture = ExtResource("1_ptg3t")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+material = SubResource("CanvasItemMaterial_rfcmo")
+layout_mode = 2
+theme_override_colors/font_color = Color(0.054902, 1, 0.4, 1)
+theme_override_fonts/font = ExtResource("2_bduta")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetterDisplayTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="LetterDisplayTimer" to="." method="_on_letter_display_timer_timeout"]

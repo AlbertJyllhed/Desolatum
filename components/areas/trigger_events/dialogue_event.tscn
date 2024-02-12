@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://503rbqvccymo"]
+
+[ext_resource type="PackedScene" uid="uid://ci62ax0kurvtb" path="res://components/areas/trigger_events/trigger_event.tscn" id="1_8v0iq"]
+[ext_resource type="Script" path="res://components/areas/trigger_events/dialogue_event.gd" id="2_nrs5p"]
+
+[node name="DialogueEvent" instance=ExtResource("1_8v0iq")]
+script = ExtResource("2_nrs5p")
+dialogue = null

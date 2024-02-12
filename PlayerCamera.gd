@@ -12,6 +12,10 @@ var shake_time_end : float
 var shaking : bool
 
 
+func _ready():
+	GameEvents.set_camera_target.connect(set_target)
+
+
 func set_target(new_target : Node2D):
 	target = new_target
 
@@ -21,7 +25,7 @@ func update_target_position():
 		return position
 	
 	if not target is Player:
-		return position
+		return target.position
 	
 	var mouse_position = get_local_mouse_position()
 	mouse_position.x = clamp(mouse_position.x, -padding, padding)

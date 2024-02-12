@@ -12,5 +12,7 @@ signal add_upgrade(upgrade_item)
 signal stats_changed(modifiers)
 signal wave_updated(index)
 signal start_wave(index)
-signal unlock_exit()
-signal reset_stats()
+signal unlock_exit
+signal reset_stats
+
+signal set_camera_target(target)

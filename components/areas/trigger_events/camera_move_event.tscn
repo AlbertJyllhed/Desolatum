@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bipw1kkx5togr"]
+
+[ext_resource type="PackedScene" uid="uid://ci62ax0kurvtb" path="res://components/areas/trigger_events/trigger_event.tscn" id="1_itgan"]
+[ext_resource type="Script" path="res://components/areas/trigger_events/camera_move_event.gd" id="2_ng1ku"]
+
+[node name="CameraMoveEvent" instance=ExtResource("1_itgan")]
+script = ExtResource("2_ng1ku")

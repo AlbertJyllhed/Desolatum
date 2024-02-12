@@ -81,11 +81,10 @@ func on_stats_changed(mods : Dictionary):
 
 func set_active(value : bool):
 	set_physics_process(value)
-	$Sprite2D.visible = value
-	if value == true:
-		return
-	
+	animation_state.travel("idle")
+	footstep_component.stop_footsteps()
+	#$Sprite2D.visible = value
 	if not inventory_instance:
 		return
 	
-	inventory_instance.queue_free()
+	inventory_instance.deactivate(!value)

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ddpu4xoa8c8yq" path="res://assets/textures/shop.png" id="2_3g87p"]
 [ext_resource type="Script" path="res://scenes/props/shop.gd" id="2_qfalo"]
 [ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/drop_component.tscn" id="3_gfl2r"]
-[ext_resource type="Resource" uid="uid://drxaut0ndjcw" path="res://resources/Data/crate_drop_list.tres" id="4_hog4e"]
+[ext_resource type="Resource" uid="uid://cxj47cgtkafnc" path="res://resources/Data/upgrade_drop_list.tres" id="4_l3l8i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwfom"]
 size = Vector2(14, 14)
@@ -53,7 +53,7 @@ script = ExtResource("2_qfalo")
 required_energy = 15
 
 [node name="DropComponent" parent="." index="0" instance=ExtResource("3_gfl2r")]
-drop_list = ExtResource("4_hog4e")
+drop_list = ExtResource("4_l3l8i")
 
 [node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, -8)

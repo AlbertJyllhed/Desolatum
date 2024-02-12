@@ -65,9 +65,9 @@ func _ready():
 	noise.fractal_type = FastNoiseLite.FRACTAL_NONE
 	
 	create_floors()
+	create_prefab_rooms()
 	create_ceiling(ceiling, 8)
 	create_ceiling(bedrock, 2)
-	create_prefab_rooms()
 	create_walls()
 	#create_canopy()
 	create_overlay()
@@ -206,8 +206,7 @@ func create_ceiling(tile_type, padding : int):
 
 func create_walls():
 	#create wall tiles on the top of the map
-	wall_map = tilemap.get_used_cells_by_id(0, ceiling)
-	for tile in wall_map:
+	for tile in ceiling_map:
 		var bottom_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
 		if tilemap.get_cell_source_id(0, bottom_tile) == ceiling:
 			continue
@@ -215,6 +214,7 @@ func create_walls():
 		tilemap.set_cell(0, tile, wall, Vector2i.ZERO)
 		tilemap.set_cell(1, tile, ceiling, Vector2i(0, 1))
 		tilemap.set_cell(1, bottom_tile, shadow, Vector2i.ZERO)
+		wall_map.append(tile)
 
 
 func create_prefab_rooms():

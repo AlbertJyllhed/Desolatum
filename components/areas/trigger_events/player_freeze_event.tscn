@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp6eeuevd7veg"]
+
+[ext_resource type="PackedScene" uid="uid://ci62ax0kurvtb" path="res://components/areas/trigger_events/trigger_event.tscn" id="1_nwcce"]
+[ext_resource type="Script" path="res://components/areas/trigger_events/player_freeze_event.gd" id="2_ws31c"]
+
+[node name="PlayerFreezeEvent" instance=ExtResource("1_nwcce")]
+script = ExtResource("2_ws31c")

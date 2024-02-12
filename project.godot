@@ -24,6 +24,7 @@ buses/default_bus_layout=""
 
 GameEvents="*res://autoload/game_events.gd"
 SceneManager="*res://autoload/scene_manager.gd"
+DialogueManager="*res://autoload/dialogue_manager.gd"
 
 [display]
 
