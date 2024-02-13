@@ -22,6 +22,9 @@ func pause():
 	paused = !paused
 	visible = paused
 	get_tree().paused = paused
+	
+	options_menu.hide()
+	quit_confirmation.hide()
 
 
 func _on_resume_button_pressed():

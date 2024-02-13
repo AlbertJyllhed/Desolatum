@@ -73,6 +73,7 @@ layout_mode = 2
 [node name="FullscreenButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("3_vlhdk")]
 layout_mode = 2
 text = "Fullscreen"
+focus_button = true
 
 [node name="WindowedButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("3_vlhdk")]
 layout_mode = 2

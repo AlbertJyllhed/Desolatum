@@ -34,6 +34,9 @@ func _ready():
 
 func _physics_process(_delta):
 	attack_vector = get_global_mouse_position()
+	if GamepadManager.using_gamepad:
+		attack_vector = pivot.global_position + GamepadManager.get_aim_direction()
+	
 	pivot.look_at(attack_vector)
 	
 	if attack_vector.x > global_position.x:

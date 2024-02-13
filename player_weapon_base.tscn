@@ -133,6 +133,7 @@ _data = {
 script = ExtResource("1_2brx3")
 
 [node name="Pivot" type="Node2D" parent="."]
+position = Vector2(0, -6)
 
 [node name="WeaponSprite" type="Sprite2D" parent="Pivot"]
 position = Vector2(6, 0)

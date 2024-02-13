@@ -1,7 +1,7 @@
 extends InventoryComponent
 class_name WeaponInventoryComponent
 
-signal weapon_replaced()
+signal weapon_replaced
 
 @onready var audio_stream_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
@@ -114,8 +114,7 @@ func create_equipment_instance(new_item : Item):
 	#instantiate the new weapon and add it as a child of the inventory
 	var weapon = new_item.equipment_scene.instantiate()
 	add_child(weapon)
-	var offset = Vector2(0, -6)
-	weapon.global_position = global_position + offset
+	weapon.global_position = global_position
 	return weapon
 
 

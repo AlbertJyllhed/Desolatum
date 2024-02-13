@@ -6,6 +6,3 @@
 [node name="HealthKit" instance=ExtResource("1_cx5l2")]
 script = ExtResource("2_4u1x2")
 heal_amount = 4.0
-heal_time = 6.0
-
-[node name="UseTimer" type="Timer" parent="." index="0"]

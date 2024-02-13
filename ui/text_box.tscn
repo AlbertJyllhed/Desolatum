@@ -11,6 +11,7 @@ light_mode = 1
 light_mode = 1
 
 [node name="TextBox" type="MarginContainer"]
+z_index = 11
 offset_right = 40.0
 offset_bottom = 31.0
 script = ExtResource("1_ybkxj")

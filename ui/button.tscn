@@ -4,8 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://0bocruhyu6u1" path="res://resources/styles/button_style_normal.tres" id="2_8kjgk"]
 [ext_resource type="StyleBox" uid="uid://cm5mjwow7rh1h" path="res://resources/styles/button_style_highlighted.tres" id="3_lgnjn"]
 [ext_resource type="StyleBox" uid="uid://yh17l4xr184e" path="res://resources/styles/button_style_pressed.tres" id="4_phy5d"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxlqi"]
+[ext_resource type="Script" path="res://ui/custom_button.gd" id="5_fwcty"]
 
 [node name="Button" type="Button"]
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -20,5 +19,6 @@ theme_override_fonts/font = ExtResource("1_f15yx")
 theme_override_styles/normal = ExtResource("2_8kjgk")
 theme_override_styles/hover = ExtResource("3_lgnjn")
 theme_override_styles/pressed = ExtResource("4_phy5d")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_oxlqi")
+theme_override_styles/focus = ExtResource("3_lgnjn")
 text = "Button"
+script = ExtResource("5_fwcty")

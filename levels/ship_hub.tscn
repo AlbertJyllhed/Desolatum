@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhktsvbmclxqc"]
+[gd_scene load_steps=17 format=3 uid="uid://bhktsvbmclxqc"]
 
 [ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_mx2lk"]
 [ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_m3r7t"]
@@ -14,21 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://loyfc1ludqk" path="res://scenes/props/carpet.tscn" id="12_rbndn"]
 [ext_resource type="PackedScene" uid="uid://bmr5vnavj25es" path="res://components/areas/trigger_area.tscn" id="13_rsxer"]
 [ext_resource type="PackedScene" uid="uid://bipw1kkx5togr" path="res://components/areas/trigger_events/camera_move_event.tscn" id="14_8iadp"]
-[ext_resource type="Resource" uid="uid://b3q6mk6gawjei" path="res://resources/dialogue/intro.tres" id="14_70gq1"]
-[ext_resource type="PackedScene" uid="uid://dp6eeuevd7veg" path="res://components/areas/trigger_events/player_freeze_event.tscn" id="15_qyyqb"]
-[ext_resource type="PackedScene" uid="uid://503rbqvccymo" path="res://components/areas/trigger_events/dialogue_event.tscn" id="16_syfm8"]
+[ext_resource type="PackedScene" uid="uid://djul6rjnpm0n4" path="res://components/areas/trigger_events/reset_event_timer.tscn" id="18_wm1cj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_che76"]
 size = Vector2(32, 16)
 
 [node name="ShipHub" type="Node"]
-
-[node name="TriggerArea_Events#DialogueEvent" parent="." instance=ExtResource("16_syfm8")]
-dialogue = ExtResource("14_70gq1")
-
-[node name="TriggerArea_Events#CameraMoveEvent" parent="." instance=ExtResource("14_8iadp")]
-
-[node name="TriggerArea_Events#PlayerFreezeEvent" parent="." instance=ExtResource("15_qyyqb")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." groups=["ui_layer"]]
 
@@ -115,12 +106,12 @@ shape = SubResource("RectangleShape2D_che76")
 
 [node name="EventHandlerComponent" parent="TriggerArea" index="1" node_paths=PackedStringArray("event_target")]
 event_target = NodePath("../../BaseLayer/TeleportPlatform")
+keep_on_trigger = true
 
-[node name="DialogueEvent" parent="TriggerArea/EventHandlerComponent" index="1" instance=ExtResource("16_syfm8")]
+[node name="CameraMoveEvent" parent="TriggerArea/EventHandlerComponent" index="0" instance=ExtResource("14_8iadp")]
 
-[node name="CameraMoveEvent" parent="TriggerArea/EventHandlerComponent" index="2" instance=ExtResource("14_8iadp")]
-
-[node name="PlayerFreezeEvent" parent="TriggerArea/EventHandlerComponent" index="3" instance=ExtResource("15_qyyqb")]
+[node name="ResetEventTimer" parent="TriggerArea/EventHandlerComponent" index="1" instance=ExtResource("18_wm1cj")]
+reset_time = 2.0
 
 [editable path="CanvasLayer/PauseMenu"]
 [editable path="TriggerArea"]

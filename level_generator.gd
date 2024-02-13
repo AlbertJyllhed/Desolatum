@@ -30,10 +30,8 @@ var walker_destroy_chance : float = 0.05
 @export var max_steps_until_turn : int = 4
 @export var max_walkers : int = 10
 var walkers : Array[Walker]
-
 var map : Array[Vector2]
-var ceiling_map : Array[Vector2i]
-var wall_map : Array[Vector2i]
+
 @export_group("Level Settings")
 @export var max_level_size : int = 600
 @export var prop_chance : float = 0.6
@@ -181,7 +179,6 @@ func create_ceiling(tile_type, padding : int):
 				continue
 			
 			tilemap.set_cell(0, tile, tile_type, Vector2i.ZERO)
-			ceiling_map.append(tile)
 
 
 #func create_canopy():
@@ -206,7 +203,8 @@ func create_ceiling(tile_type, padding : int):
 
 func create_walls():
 	#create wall tiles on the top of the map
-	for tile in ceiling_map:
+	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
+	for tile in ceiling_tiles:
 		var bottom_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
 		if tilemap.get_cell_source_id(0, bottom_tile) == ceiling:
 			continue
@@ -214,13 +212,13 @@ func create_walls():
 		tilemap.set_cell(0, tile, wall, Vector2i.ZERO)
 		tilemap.set_cell(1, tile, ceiling, Vector2i(0, 1))
 		tilemap.set_cell(1, bottom_tile, shadow, Vector2i.ZERO)
-		wall_map.append(tile)
 
 
 func create_prefab_rooms():
+	var texture_room_instance : MapTextureInstancer
 	for tile in texture_room_positions:
 		var random_texture_room = texture_rooms.pick_random()
-		var texture_room_instance = create_instance(map_texture_instancer, tile, offset) as MapTextureInstancer
+		texture_room_instance = create_instance(map_texture_instancer, tile, offset) as MapTextureInstancer
 		texture_room_instance.texture = random_texture_room
 		texture_room_instance.setup()
 
@@ -241,8 +239,11 @@ func create_ore():
 	noise.seed = randi()
 	var threshold = 0.6
 	
+	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
+	var wall_tiles = tilemap.get_used_cells_by_id(0, wall)
+	
 	var ore_tiles : Array[Vector2i] = []
-	var check_tiles = ceiling_map + wall_map
+	var check_tiles = ceiling_tiles + wall_tiles
 	for tile in check_tiles:
 		var neighbors = tilemap.get_surrounding_cells(tile)
 		for neighbor in neighbors:

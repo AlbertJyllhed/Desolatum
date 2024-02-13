@@ -74,6 +74,7 @@ vertical_alignment = 1
 [node name="ResumeButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
 layout_mode = 2
 text = "Resume"
+focus_button = true
 
 [node name="ReturnButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
 layout_mode = 2

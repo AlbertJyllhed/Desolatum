@@ -3,9 +3,9 @@ extends TriggerEvent
 @export var dialogue : Dialogue
 
 
-func setup(new_trigger_area : TriggerArea, new_target_node : Node2D):
-	super.setup(new_trigger_area, new_target_node)
-	DialogueManager.dialogue_finished.connect(trigger_area.reset)
+func setup(handler : EventHandlerComponent, new_target_node : Node2D):
+	super.setup(handler, new_target_node)
+	DialogueManager.dialogue_finished.connect(handler.reset)
 
 
 func trigger(new_player : Player):

@@ -43,4 +43,7 @@ func on_stats_changed(mods : Dictionary):
 	max_health = max(mods["health"].get_values(stats.base_health), 1)
 	if current_health >= old_health:
 		current_health = max_health
+	
+	stats.player_stats["max_health"] = max_health
+	stats.player_stats["health"] = current_health
 	GameEvents.health_updated.emit(current_health, max_health)

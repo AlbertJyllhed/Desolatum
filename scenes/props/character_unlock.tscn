@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dghtorjtfjb4p"]
+
+[ext_resource type="PackedScene" uid="uid://bw7ihnd7xa1bu" path="res://scenes/interactable.tscn" id="1_0wllp"]
+[ext_resource type="Script" path="res://scenes/props/character_unlock.gd" id="2_arf8e"]
+[ext_resource type="Texture2D" uid="uid://dluocsfglcbsl" path="res://assets/textures/player_update.png" id="2_yn58a"]
+[ext_resource type="PackedScene" uid="uid://ch3qur7vvceug" path="res://components/event_handler_component.tscn" id="4_nc5qh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hnunq"]
+
+[node name="CharacterUnlock" instance=ExtResource("1_0wllp")]
+collision_layer = 128
+collision_mask = 512
+script = ExtResource("2_arf8e")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_yn58a")
+hframes = 6
+vframes = 6
+frame = 1
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_hnunq")
+
+[node name="EventHandlerComponent" parent="." index="3" node_paths=PackedStringArray("event_target") instance=ExtResource("4_nc5qh")]
+event_target = NodePath("..")

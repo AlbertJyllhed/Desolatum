@@ -28,6 +28,9 @@ func update_target_position():
 		return target.position
 	
 	var mouse_position = get_local_mouse_position()
+	if GamepadManager.using_gamepad:
+		mouse_position = GamepadManager.get_aim_direction() * 16
+	
 	mouse_position.x = clamp(mouse_position.x, -padding, padding)
 	mouse_position.y = clamp(mouse_position.y, -padding, padding)
 	

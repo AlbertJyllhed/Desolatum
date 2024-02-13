@@ -22,12 +22,12 @@ var bottom_right_limit : Vector2i
 func _ready():
 	GameEvents.stats_changed.connect(on_stats_changed)
 	add_to_group("player")
-	stats.update_stats()
-	stats.add_upgrades()
 	health_component.setup(stats)
 	energy_gain_component.setup(stats)
 	var camera = get_viewport().get_camera_2d() as PlayerCamera
 	camera.set_target(self)
+	stats.update_stats()
+	stats.add_upgrades()
 	
 	if top_left_limit == Vector2i.ZERO:
 		return
@@ -52,6 +52,9 @@ func setup_inventory():
 
 func _physics_process(delta):
 	var aim_vector = get_local_mouse_position().normalized()
+	if GamepadManager.using_gamepad:
+		aim_vector = GamepadManager.get_aim_direction()
+	
 	animation_tree.set("parameters/idle/blend_position", aim_vector)
 	animation_tree.set("parameters/walk/blend_position", aim_vector)
 	

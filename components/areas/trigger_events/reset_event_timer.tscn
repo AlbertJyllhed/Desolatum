@@ -5,3 +5,7 @@
 
 [node name="ResetEventTimer" instance=ExtResource("1_e2snq")]
 script = ExtResource("2_3mrlj")
+reset_time = 1.0
+
+[node name="Timer" type="Timer" parent="." index="0"]
+one_shot = true
