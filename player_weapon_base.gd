@@ -44,7 +44,7 @@ func _physics_process(_delta):
 	else:
 		pivot.scale.y = -1
 	
-	if attack_vector.y > global_position.y:
+	if attack_vector.y > pivot.global_position.y:
 		sprite.z_index = 0
 	else:
 		sprite.z_index = -1

@@ -1,5 +1,6 @@
 extends Control
 
+@onready var resume_button : Button = $NinePatchRect/CenterContainer/VBoxContainer/ResumeButton
 @onready var return_button = $NinePatchRect/CenterContainer/VBoxContainer/ReturnButton
 @onready var options_menu = $OptionsMenu
 @onready var quit_confirmation = $QuitConfirmation
@@ -8,9 +9,15 @@ var paused : bool = false
 
 
 func _ready():
+	options_menu.menu_closed.connect(set_button_focus)
+	quit_confirmation.menu_closed.connect(set_button_focus)
 	var index = SceneManager.level_index
 	if index == 0:
 		return_button.hide()
+
+
+func set_button_focus():
+	resume_button.grab_focus()
 
 
 func _input(event):

@@ -60,11 +60,15 @@ vertical_alignment = 1
 
 [node name="ReturnButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("2_gaddx")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 text = "No, Keep playing"
 focus_button = true
 
 [node name="QuitButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("2_gaddx")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ReturnButton")
+focus_neighbor_bottom = NodePath("../ReturnButton")
 text = "Yes, quit the game"
 
 [connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]

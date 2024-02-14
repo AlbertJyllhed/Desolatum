@@ -29,7 +29,7 @@ func update_target_position():
 	
 	var mouse_position = get_local_mouse_position()
 	if GamepadManager.using_gamepad:
-		mouse_position = GamepadManager.get_aim_direction() * 16
+		mouse_position = GamepadManager.get_aim_direction()
 	
 	mouse_position.x = clamp(mouse_position.x, -padding, padding)
 	mouse_position.y = clamp(mouse_position.y, -padding, padding)
@@ -43,7 +43,7 @@ func update_target_position():
 func _physics_process(delta):
 	shake_offset = update_shake()
 	target_position = update_target_position()
-	position = lerp(position, target_position, 20.0 * delta).round()
+	position = lerp(position, target_position, 10.0 * delta).round()
 
 
 func shake(direction : Vector2, magnitude : float, length : float):

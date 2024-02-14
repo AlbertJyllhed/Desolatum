@@ -2,6 +2,8 @@ extends Node
 
 var using_gamepad : bool = false
 
+var prev_direction : Vector2
+
 
 func _unhandled_input(event):
 	if event is InputEventJoypadMotion:
@@ -16,7 +18,12 @@ func _unhandled_input(event):
 
 
 func get_aim_direction() -> Vector2:
-	var direction : Vector2
+	var direction = prev_direction
 	direction.x = Input.get_axis("aim_left", "aim_right")
 	direction.y = Input.get_axis("aim_up", "aim_down")
-	return direction.normalized()
+	if direction.length() < 0.5:
+		return prev_direction
+	
+	var normalized_direction = direction.normalized() * 32
+	prev_direction = normalized_direction
+	return normalized_direction
