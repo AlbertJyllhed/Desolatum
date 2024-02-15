@@ -34,8 +34,10 @@ var map : Array[Vector2]
 
 @export_group("Level Settings")
 @export var max_level_size : int = 600
-@export var prop_chance : float = 0.6
-#@export var crate_amount : int = 4
+@export var texture_room_amount : int = 3
+@export var crate_amount : int = 6
+@export var prop_amount : int = 14
+@export var spawner_amount : int = 20
 
 @export_group("Room Settings")
 @export var room_chance : float = 0.5
@@ -44,7 +46,7 @@ var map : Array[Vector2]
 var rooms = []
 
 @export_group("Texture Room Settings")
-@export var texture_rooms : Array[Texture2D]
+@export var room_textures : Array[Texture2D]
 
 var used_positions = []
 var texture_room_positions = []
@@ -63,19 +65,18 @@ func _ready():
 	noise.fractal_type = FastNoiseLite.FRACTAL_NONE
 	
 	create_floors()
+	find_tile_positions()
+	create_overlay()
 	create_prefab_rooms()
 	create_ceiling(ceiling, 8)
 	create_ceiling(bedrock, 2)
 	create_walls()
-	#create_canopy()
-	create_overlay()
 	create_ore()
 	populate_level()
 
 
 func create_floors():
 	var first_walker = Walker.new(Vector2.ZERO, walker_turn_chance, max_steps_until_turn)
-	first_walker.changed_direction.connect(on_walker_changed_direction)
 	walkers.append(first_walker)
 	create_room(Vector2.ZERO)
 	
@@ -91,17 +92,6 @@ func create_floors():
 			if randf() < room_chance:
 				create_room(position)
 			
-			#find potential positions for texture rooms
-			get_random_tile_position(position, texture_room_positions, 16)
-			
-			#find potential positions for enemy spawners
-			get_random_tile_position(position, spawner_positions)
-			
-			#find potential positions for props
-			if randf() <= prop_chance:
-				get_random_tile_position(position, prop_positions)
-				get_ground_without_neighbors(prop_positions, 1)
-			
 			#check if we are going to destroy a walker
 			if randf() < walker_destroy_chance and walkers.size() > 1:
 				walker.queue_free()
@@ -110,7 +100,6 @@ func create_floors():
 			#check if we should spawn a new walker
 			if randf() < walker_spawn_chance and walkers.size() < max_walkers:
 				var new_walker = Walker.new(walker.position, walker_turn_chance, max_steps_until_turn)
-				new_walker.changed_direction.connect(on_walker_changed_direction)
 				walkers.append(new_walker)
 		
 		var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
@@ -125,9 +114,23 @@ func create_floors():
 	walkers.clear()
 
 
-func on_walker_changed_direction(position):
-	get_random_tile_position(position, crate_positions)
-	get_ground_without_neighbors(crate_positions, 1)
+func find_tile_positions():
+	#find potential positions for texture rooms
+	append_tile_positions(texture_room_positions, texture_room_amount, 16)
+	
+	#find potential positions for crates
+	append_tile_positions(crate_positions, crate_amount, 8, 0)
+	
+	#find potential positions for props
+	append_tile_positions(prop_positions, prop_amount, 4, 1)
+	
+	#find potential positions for enemy spawners
+	append_tile_positions(spawner_positions, spawner_amount, 3)
+	
+	print("texture rooms: " + str(texture_room_positions.size()))
+	print("crates: " + str(crate_positions.size()))
+	print("props: " + str(prop_positions.size()))
+	print("spawners: " + str(spawner_positions.size()))
 
 
 func create_room(position):
@@ -155,6 +158,7 @@ func get_room_tiles(room):
 		for x in room.size.x:
 			var new_step = top_left_corner + Vector2(x, y)
 			room_tiles.append(new_step)
+			#create_instance(spawner_scene, new_step, offset)
 	
 	return room_tiles
 
@@ -181,26 +185,6 @@ func create_ceiling(tile_type, padding : int):
 			tilemap.set_cell(0, tile, tile_type, Vector2i.ZERO)
 
 
-#func create_canopy():
-	#for tile in ceiling_map:
-		#var top_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_TOP_SIDE)
-		#var right_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
-		#var bottom_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
-		#var left_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_LEFT_SIDE)
-		#if tilemap.get_cell_source_id(0, top_tile) != ceiling:
-			#var canopy_instance = create_instance(canopy, top_tile, offset) as Canopy
-			#canopy_instance.setup(6)
-		#if tilemap.get_cell_source_id(0, right_tile) != ceiling:
-			#var canopy_instance = create_instance(canopy, right_tile, offset) as Canopy
-			#canopy_instance.setup(1)
-		#if tilemap.get_cell_source_id(0, bottom_tile) == wall:
-			#var canopy_instance = create_instance(canopy, bottom_tile, offset) as Canopy
-			#canopy_instance.setup(7)
-		#if tilemap.get_cell_source_id(0, left_tile) != ceiling:
-			#var canopy_instance = create_instance(canopy, left_tile, offset) as Canopy
-			#canopy_instance.setup(0)
-
-
 func create_walls():
 	#create wall tiles on the top of the map
 	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
@@ -209,16 +193,18 @@ func create_walls():
 		if tilemap.get_cell_source_id(0, bottom_tile) == ceiling:
 			continue
 		
+		if tilemap.get_cell_source_id(0, bottom_tile) == wall:
+			continue
+		
 		tilemap.set_cell(0, tile, wall, Vector2i.ZERO)
 		tilemap.set_cell(1, tile, ceiling, Vector2i(0, 1))
 		tilemap.set_cell(1, bottom_tile, shadow, Vector2i.ZERO)
 
 
 func create_prefab_rooms():
-	var texture_room_instance : MapTextureInstancer
 	for tile in texture_room_positions:
-		var random_texture_room = texture_rooms.pick_random()
-		texture_room_instance = create_instance(map_texture_instancer, tile, offset) as MapTextureInstancer
+		var random_texture_room = room_textures.pick_random()
+		var texture_room_instance = create_instance(map_texture_instancer, tile, offset) as MapTextureInstancer
 		texture_room_instance.texture = random_texture_room
 		texture_room_instance.setup()
 
@@ -295,7 +281,6 @@ func populate_level():
 		used_positions.append(tile)
 	
 	#place crates
-	#crate_list.setup()
 	for crate_position in crate_positions:
 		#var crate_position = crate_positions.pick_random()
 		var crate_scene = crate_list.spawn_table.pick_item()
@@ -310,7 +295,6 @@ func populate_level():
 		create_instance(dust_scene, spawner_position, offset)
 	
 	#place props
-	#prop_list.setup()
 	for prop_position in prop_positions:
 		var prop_scene = prop_list.spawn_table.pick_item()
 		create_instance(prop_scene, prop_position, offset)
@@ -330,32 +314,45 @@ func create_instance(scene : PackedScene, position : Vector2, offset : Vector2 =
 	return instance
 
 
-func get_random_tile_position(position, tile_locations, max_distance = 4):
-	#check if position already has been used for something else
-	if used_positions.has(position):
-		return
-	
-	#check how close the position is to the start and end of the map
-	if position.distance_to(rooms.front().position) < max_distance:
-		return
-	
-	if position.distance_to(get_end_room().position) < max_distance:
-		return
-	
-	#check previous tile positions, if they are too close chose another
-	for tile in tile_locations:
+func append_tile_positions(tile_locations, amount = 1, max_distance = 4, allowed_neighbors = 8):
+	var skip_chance = 0.95
+	while tile_locations.size() < amount:
+		for position in map:
+			if skip_chance > randf():
+				continue
+			
+			if used_positions.has(position):
+				continue
+			
+			if not is_distance_acceptable(position, texture_room_positions, 6):
+				continue
+			
+			if not is_distance_acceptable(position, used_positions, max_distance):
+				continue
+			
+			if position.distance_to(rooms.front().position) < max_distance:
+				continue
+			
+			if position.distance_to(get_end_room().position) < max_distance:
+				continue
+			
+			if check_neighbors(position.x, position.y) > allowed_neighbors:
+				continue
+			
+			tile_locations.append(position)
+			used_positions.append(position)
+			if tile_locations.size() == amount:
+				return
+		
+		max_distance -= 1
+
+
+func is_distance_acceptable(position, check_positions, max_distance = 4):
+	for tile in check_positions:
 		if tile.distance_to(position) < max_distance:
-			return
+			return false
 	
-	tile_locations.append(position)
-	used_positions.append(position)
-
-
-func get_ground_without_neighbors(tile_locations, allowed_neighbors : int = 0):
-	for tile in tile_locations:
-		var neighbors = check_neighbors(tile.x, tile.y)
-		if neighbors > allowed_neighbors:
-			tile_locations.erase(tile)
+	return true
 
 
 func check_neighbors(x, y):

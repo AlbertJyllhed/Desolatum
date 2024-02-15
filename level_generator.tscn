@@ -16,4 +16,4 @@ dust_scene = ExtResource("4_sdj2e")
 max_steps_until_turn = 10
 max_walkers = 4
 room_chance = 0.6
-texture_rooms = Array[Texture2D]([ExtResource("6_mc2pl"), ExtResource("4_w4vfx"), ExtResource("7_7xdru")])
+room_textures = Array[Texture2D]([ExtResource("6_mc2pl"), ExtResource("4_w4vfx"), ExtResource("7_7xdru")])

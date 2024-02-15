@@ -1,8 +1,6 @@
 extends Node2D
 class_name MapTextureInstancer
 
-signal finished
-
 @export var texture : Texture2D
 @export var color_instances : Array[ColorToInstance]
 
@@ -24,8 +22,6 @@ func generate_room_tiles():
 	for x in image.get_width():
 		for y in image.get_height():
 			generate_tile(x, y)
-	
-	finished.emit()
 
 
 func generate_tile(x : int, y : int):
