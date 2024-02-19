@@ -23,9 +23,9 @@ enum {
 	none = -1
 }
 
+@export_group("Walker Settings")
 var walker_spawn_chance : float = 0.05
 var walker_destroy_chance : float = 0.05
-@export_group("Walker Settings")
 @export var walker_turn_chance : float = 0.25
 @export var max_steps_until_turn : int = 4
 @export var max_walkers : int = 10
@@ -212,10 +212,9 @@ func create_prefab_rooms():
 func create_overlay():
 	noise.frequency = 0.2
 	noise.seed = randi()
-	var threshold = 0.2
+	var threshold : float = 0.2
 	
-	var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
-	for tile in ground_tiles:
+	for tile in map:
 		if noise.get_noise_2d(tile.x, tile.y) > threshold:
 			tilemap.set_cell(0, tile, ground, Vector2i(0, 1))
 
@@ -223,7 +222,7 @@ func create_overlay():
 func create_ore():
 	noise.frequency = 0.24
 	noise.seed = randi()
-	var threshold = 0.6
+	var threshold : float = 0.6
 	
 	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
 	var wall_tiles = tilemap.get_used_cells_by_id(0, wall)
@@ -315,39 +314,43 @@ func create_instance(scene : PackedScene, position : Vector2, offset : Vector2 =
 
 
 func append_tile_positions(tile_locations, amount = 1, max_distance = 4, allowed_neighbors = 8):
-	var skip_chance = 0.95
-	while tile_locations.size() < amount:
-		for position in map:
-			if skip_chance > randf():
-				continue
-			
-			if used_positions.has(position):
-				continue
-			
-			if not is_distance_acceptable(position, texture_room_positions, 6):
-				continue
-			
-			if not is_distance_acceptable(position, used_positions, max_distance):
-				continue
-			
-			if position.distance_to(rooms.front().position) < max_distance:
-				continue
-			
-			if position.distance_to(get_end_room().position) < max_distance:
-				continue
-			
-			if check_neighbors(position.x, position.y) > allowed_neighbors:
-				continue
-			
-			tile_locations.append(position)
-			used_positions.append(position)
-			if tile_locations.size() == amount:
-				return
+	#var iterations : int = 0
+	var ground_tiles = tilemap.get_used_cells_by_id(0, ground)
+	#var skip_chance : float = 0.1
+	#while iterations < 10000:
+	for tile in ground_tiles:
+		#if skip_chance > randf():
+			#continue
 		
-		max_distance -= 1
+		var position = Vector2(tile)
+		if used_positions.has(position):
+			continue
+		
+		if not is_distance_acceptable(position, texture_room_positions, 6):
+			continue
+		
+		if not is_distance_acceptable(position, used_positions, max_distance):
+			continue
+		
+		if position.distance_to(rooms.front().position) < max_distance:
+			continue
+		
+		if position.distance_to(get_end_room().position) < max_distance:
+			continue
+		
+		if check_neighbors(position.x, position.y) > allowed_neighbors:
+			continue
+		
+		tile_locations.append(position)
+		used_positions.append(position)
+		if tile_locations.size() == amount:
+			return
+		
+		#max_distance = max(max_distance - 1, 2)
+		#iterations += 1
 
 
-func is_distance_acceptable(position, check_positions, max_distance = 4):
+func is_distance_acceptable(position, check_positions, max_distance : int = 4):
 	for tile in check_positions:
 		if tile.distance_to(position) < max_distance:
 			return false
@@ -356,7 +359,7 @@ func is_distance_acceptable(position, check_positions, max_distance = 4):
 
 
 func check_neighbors(x, y):
-	var count = 0
+	var count : int = 0
 	if tilemap.get_cell_source_id(0, Vector2i(x, y - 1)) != ground: count += 1
 	if tilemap.get_cell_source_id(0, Vector2i(x, y + 1)) != ground: count += 1
 	if tilemap.get_cell_source_id(0, Vector2i(x - 1, y)) != ground: count += 1

@@ -13,3 +13,7 @@ func on_visibility_changed():
 	
 	if is_visible_in_tree():
 		grab_focus()
+
+
+func _on_mouse_entered():
+	grab_focus()

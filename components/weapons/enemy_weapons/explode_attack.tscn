@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvll8o6xr230i"]
+
+[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://components/weapons/enemy_weapons/enemy_weapon_base.tscn" id="1_s8qp3"]
+[ext_resource type="Script" path="res://components/weapons/enemy_weapons/explode_attack.gd" id="2_ii3cp"]
+
+[node name="ExplodeAttack" instance=ExtResource("1_s8qp3")]
+script = ExtResource("2_ii3cp")
+
+[editable path="AttackArea"]

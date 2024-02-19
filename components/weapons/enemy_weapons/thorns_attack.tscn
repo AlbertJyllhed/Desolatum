@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlsqkbrpsx6s"]
+
+[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://components/weapons/enemy_weapons/enemy_weapon_base.tscn" id="1_kjyqm"]
+[ext_resource type="Script" path="res://components/weapons/enemy_weapons/thorns_attack.gd" id="2_v4lwu"]
+[ext_resource type="PackedScene" uid="uid://derp11uuf41k6" path="res://components/thorn.tscn" id="3_33xff"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mpfoe"]
+radius = 64.0
+
+[node name="ThornsAttack" instance=ExtResource("1_kjyqm")]
+script = ExtResource("2_v4lwu")
+thorn_scene = ExtResource("3_33xff")
+thorn_amount = 3
+
+[node name="CollisionShape2D" parent="AttackArea" index="1"]
+shape = SubResource("CircleShape2D_mpfoe")
+
+[editable path="AttackArea"]

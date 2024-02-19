@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="EnemyList" load_steps=4 format=3 uid="uid://d488fpt75ddv"]
+[gd_resource type="Resource" script_class="EnemyList" load_steps=5 format=3 uid="uid://d488fpt75ddv"]
 
 [ext_resource type="PackedScene" uid="uid://pilwyjays5u2" path="res://characters/exploder.tscn" id="2_kttk7"]
 [ext_resource type="PackedScene" uid="uid://be6ojx14xn6p6" path="res://characters/hunter.tscn" id="2_rmvib"]
+[ext_resource type="PackedScene" uid="uid://bvps6dix4hy4c" path="res://characters/rooter.tscn" id="3_1bqnx"]
 [ext_resource type="Script" path="res://resources/Data/enemy_list.gd" id="4_l52ie"]
 
 [resource]
 script = ExtResource("4_l52ie")
-enemy_scenes = Array[PackedScene]([ExtResource("2_rmvib"), ExtResource("2_kttk7")])
-weights = Array[int]([3, 1])
+enemy_scenes = Array[PackedScene]([ExtResource("2_rmvib"), ExtResource("2_kttk7"), ExtResource("3_1bqnx")])
+weights = Array[int]([6, 3, 1])

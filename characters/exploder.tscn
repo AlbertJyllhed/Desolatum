@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://pilwyjays5u2"]
+[gd_scene load_steps=23 format=3 uid="uid://pilwyjays5u2"]
 
 [ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_w460d"]
 [ext_resource type="PackedScene" uid="uid://j5fmpojrs1ek" path="res://states/hunt.tscn" id="2_on16h"]
@@ -7,9 +7,15 @@
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="4_jldym"]
 [ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="5_7qdpn"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="5_x11qn"]
+[ext_resource type="Shader" path="res://resources/shaders/hidden_hit_flash.gdshader" id="6_rc5vf"]
 [ext_resource type="Texture2D" uid="uid://rtls2ky0kogm" path="res://assets/textures/exploder_enemy.png" id="7_hm1ln"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="8_y8nl0"]
-[ext_resource type="PackedScene" uid="uid://cvll8o6xr230i" path="res://components/explode_attack.tscn" id="9_wr4oe"]
+[ext_resource type="PackedScene" uid="uid://cvll8o6xr230i" path="res://components/weapons/enemy_weapons/explode_attack.tscn" id="9_wr4oe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnyc5"]
+resource_local_to_scene = true
+shader = ExtResource("6_rc5vf")
+shader_parameter/lerp_percent = null
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ap7to"]
 light_mode = 2
@@ -138,43 +144,46 @@ run_chance = 1.0
 blood_particles = ExtResource("5_7qdpn")
 max_health = 1.0
 
-[node name="DropComponent" parent="." index="3"]
+[node name="HitFlashComponent" parent="." index="4"]
+hit_flash_material = SubResource("ShaderMaterial_bnyc5")
+
+[node name="DropComponent" parent="." index="6"]
 max_drop_amount = 2
 drop_chance = 0.1
 drop_list = ExtResource("4_jldym")
 
-[node name="Sprite2D" parent="." index="4"]
+[node name="Sprite2D" parent="." index="8"]
 material = SubResource("CanvasItemMaterial_ap7to")
 texture = ExtResource("7_hm1ln")
 hframes = 15
 
-[node name="Shadow" parent="." index="5"]
+[node name="Shadow" parent="." index="9"]
 modulate = Color(0, 0, 0, 0.294118)
 z_index = -1
 material = SubResource("CanvasItemMaterial_vvnly")
 scale = Vector2(1, 0.25)
 texture = ExtResource("5_x11qn")
 
-[node name="CollisionShape2D" parent="." index="6"]
-position = Vector2(0, -2)
-shape = SubResource("CircleShape2D_h7ave")
-
-[node name="AnimationPlayer" parent="." index="7"]
-libraries = {
-"": SubResource("AnimationLibrary_6p0ej")
-}
-autoplay = "walk_right"
-
-[node name="Hurtbox" parent="." index="8"]
-position = Vector2(0, -8)
-
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_p6tbj")
-
 [node name="TargetLocatorRay" parent="." index="10" instance=ExtResource("8_y8nl0")]
 
 [node name="ExplodeAttack" parent="." index="11" node_paths=PackedStringArray("health_component") instance=ExtResource("9_wr4oe")]
 position = Vector2(0, -6)
 health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" parent="." index="12"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_h7ave")
+
+[node name="AnimationPlayer" parent="." index="13"]
+libraries = {
+"": SubResource("AnimationLibrary_6p0ej")
+}
+autoplay = "walk_right"
+
+[node name="Hurtbox" parent="." index="14"]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_p6tbj")
 
 [editable path="Hurtbox"]

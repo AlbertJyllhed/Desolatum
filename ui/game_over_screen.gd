@@ -13,7 +13,7 @@ func _ready():
 	var tween = get_tree().create_tween().bind_node(self)
 	tween.tween_property($ColorRect, "color", Color(0, 0, 0, 125), 1)
 	tween.tween_property(nine_patch_rect, "position", Vector2(90, 30), 2).set_trans(Tween.TRANS_QUINT)
-	tween.tween_callback(set_button_focus)
+	set_button_focus()
 
 
 func set_button_focus():

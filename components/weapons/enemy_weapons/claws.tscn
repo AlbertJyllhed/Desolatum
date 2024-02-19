@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bi32k7cc6fr6"]
 
 [ext_resource type="PackedScene" uid="uid://cessatyns0dj4" path="res://components/melee_component.tscn" id="1_0v4yn"]
-[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://enemy_weapon_base.tscn" id="1_6p8m8"]
+[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://components/weapons/enemy_weapons/enemy_weapon_base.tscn" id="1_6p8m8"]
 [ext_resource type="AudioStream" uid="uid://b1no86fo8mucp" path="res://sounds/pickaxe/swish-1.wav" id="3_25s66"]
 [ext_resource type="Texture2D" uid="uid://bh2jwrbxkucsg" path="res://assets/textures/enemy_swing.png" id="3_ne1a1"]
 

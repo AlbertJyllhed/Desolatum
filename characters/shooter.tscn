@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dhrg6kxv2f6m3" path="res://assets/textures/shooter.png" id="9_eguxq"]
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="9_ufchb"]
 [ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="9_ygfaw"]
-[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://enemy_weapon_base.tscn" id="12_e0gli"]
+[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://components/weapons/enemy_weapons/enemy_weapon_base.tscn" id="12_e0gli"]
 [ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="13_w5fm3"]
 [ext_resource type="PackedScene" uid="uid://do8m8t61t4wko" path="res://scenes/projectiles/enemy_bullet.tscn" id="14_34qlw"]
 [ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="15_jj6uj"]

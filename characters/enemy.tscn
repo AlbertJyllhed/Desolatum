@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ddvtvawcutf6h" path="res://assets/textures/enemy.png" id="9_ntrk0"]
 [ext_resource type="PackedScene" uid="uid://bhoelwsp2sndg" path="res://target_locator_area.tscn" id="10_h2yc3"]
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="10_ngrog"]
-[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://enemy_weapon_base.tscn" id="17_y5vf6"]
+[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://components/weapons/enemy_weapons/enemy_weapon_base.tscn" id="17_y5vf6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7i0ce"]
 resource_local_to_scene = true
