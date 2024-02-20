@@ -63,3 +63,4 @@ func transition_to(target_state_name : String, message : Dictionary = {}):
 	current_state = get_node(target_state_name)
 	current_state.enter(message)
 	transitioned.emit(current_state.name)
+	print(current_state.name)

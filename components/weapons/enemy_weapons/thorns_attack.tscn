@@ -12,6 +12,10 @@ script = ExtResource("2_v4lwu")
 thorn_scene = ExtResource("3_33xff")
 thorn_amount = 3
 
+[node name="AttackArea" parent="." index="1"]
+min_reset_time = 3.0
+max_reset_time = 4.0
+
 [node name="CollisionShape2D" parent="AttackArea" index="1"]
 shape = SubResource("CircleShape2D_mpfoe")
 

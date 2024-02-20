@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://tu01vf838dx"]
+
+[ext_resource type="PackedScene" uid="uid://bh7q24uyjs7mn" path="res://states/enemy_state.tscn" id="1_eedi8"]
+[ext_resource type="Script" path="res://states/flee.gd" id="2_t3tpg"]
+
+[node name="Flee" instance=ExtResource("1_eedi8")]
+script = ExtResource("2_t3tpg")
+next_state = "Wander"
+min_update_time = 0.5
+max_update_time = 1.0

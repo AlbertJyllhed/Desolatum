@@ -38,7 +38,7 @@ func attack():
 func on_animation_finished(animation : String):
 	if animation == "prepare_attack_right":
 		attack()
-		return
 	
-	enemy_entity.direction = Vector2.ZERO
-	state_machine.transition_to(next_state)
+	if animation == "attack_right":
+		enemy_entity.direction = Vector2.ZERO
+		state_machine.transition_to(next_state)

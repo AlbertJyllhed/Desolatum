@@ -19,6 +19,7 @@ enum {
 
 
 func _ready():
+	add_to_group("pathfinding")
 	GameEvents.navigation_updated.connect(update_point)
 	setup_navigation()
 

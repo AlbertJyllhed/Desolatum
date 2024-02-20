@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvps6dix4hy4c"]
+[gd_scene load_steps=20 format=3 uid="uid://bvps6dix4hy4c"]
 
 [ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_c1lw4"]
 [ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="2_8pydv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="3_bc5d8"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="3_hmmbl"]
 [ext_resource type="PackedScene" uid="uid://r1gcjlte6h4r" path="res://states/attack.tscn" id="4_r3m8m"]
+[ext_resource type="PackedScene" uid="uid://tu01vf838dx" path="res://states/flee.tscn" id="5_dfjyt"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="8_g16mx"]
 [ext_resource type="PackedScene" uid="uid://dlsqkbrpsx6s" path="res://components/weapons/enemy_weapons/thorns_attack.tscn" id="9_oy2v2"]
 
@@ -23,17 +24,17 @@ shader_parameter/lerp_percent = null
 [sub_resource type="CircleShape2D" id="CircleShape2D_2rcyd"]
 radius = 2.0
 
-[sub_resource type="Animation" id="Animation_12tj7"]
-resource_name = "prepare_attack_right"
-
 [sub_resource type="Animation" id="Animation_m3bmd"]
 resource_name = "attack_right"
 
-[sub_resource type="Animation" id="Animation_1t8qb"]
-resource_name = "walk_right"
-
 [sub_resource type="Animation" id="Animation_12elb"]
 resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_12tj7"]
+resource_name = "prepare_attack_right"
+
+[sub_resource type="Animation" id="Animation_1t8qb"]
+resource_name = "walk_right"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fj4p3"]
 _data = {
@@ -62,6 +63,10 @@ timer = NodePath("../Timer")
 [node name="Hunt" parent="StateMachine" index="2" instance=ExtResource("2_y4ahf")]
 
 [node name="Attack" parent="StateMachine" index="3" instance=ExtResource("4_r3m8m")]
+next_state = "Flee"
+
+[node name="Flee" parent="StateMachine" index="4" instance=ExtResource("5_dfjyt")]
+next_state = "Hunt"
 
 [node name="HealthComponent" parent="." index="2"]
 max_health = 8.0
@@ -76,12 +81,15 @@ drop_list = ExtResource("3_bc5d8")
 
 [node name="Sprite2D" parent="." index="8"]
 material = SubResource("ShaderMaterial_g8v80")
+use_parent_material = true
 texture = ExtResource("3_hmmbl")
 
 [node name="Shadow" parent="." index="9"]
 modulate = Color(0, 0, 0, 0.294118)
 z_index = -1
 material = SubResource("ShaderMaterial_g8v80")
+use_parent_material = true
+scale = Vector2(1, 0.25)
 texture = ExtResource("3_hmmbl")
 
 [node name="TargetLocatorRay" parent="." index="10" instance=ExtResource("8_g16mx")]

@@ -51,7 +51,7 @@ process_mode = 3
 tilemap = NodePath("../TileMap")
 enemy_manager = NodePath("../EnemyManager")
 
-[node name="PathfindingGrid" parent="." node_paths=PackedStringArray("tilemap") groups=["pathfinding"] instance=ExtResource("12_s3jgr")]
+[node name="PathfindingGrid" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("12_s3jgr")]
 tilemap = NodePath("../TileMap")
 
 [node name="EnemyManager" parent="." instance=ExtResource("13_47pbc")]
