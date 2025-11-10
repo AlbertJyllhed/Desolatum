@@ -1,16 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://boyarned37n7v"]
+[gd_scene load_steps=2 format=3 uid="uid://boyarned37n7v"]
 
 [ext_resource type="Script" path="res://abilities/detonator_ability.gd" id="1_28oc7"]
-[ext_resource type="PackedScene" uid="uid://bx6w1u7ew5ale" path="res://scenes/projectiles/grenade.tscn" id="2_d63iw"]
 
 [node name="DetonatorAbility" type="Node2D"]
 position = Vector2(0, -8)
 script = ExtResource("1_28oc7")
-bomb_scene = ExtResource("2_d63iw")
+max_uses = 3
+recharge_time = 10.0
 
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2(24, 0)
 
-[node name="Timer" type="Timer" parent="."]
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="RechargeTimer" type="Timer" parent="."]

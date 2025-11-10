@@ -34,3 +34,6 @@ func use_ability():
 func _on_recharge_timer_timeout():
 	uses = min(uses + 1, max_uses)
 	GameEvents.ability_updated.emit(0, uses)
+	
+	if uses == max_uses:
+		recharge_timer.stop()

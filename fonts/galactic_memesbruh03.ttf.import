@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/galactic_memesbruh03.ttf-5e1be5e395f509ac9621
 Rendering=null
 antialiasing=0
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

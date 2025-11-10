@@ -19,6 +19,8 @@ enum {
 	ceiling = 1,
 	wall = 2,
 	bedrock = 3,
+	ship_wall = 6,
+	ship_ceiling = 7,
 	shadow = 14,
 	none = -1
 }
@@ -70,7 +72,8 @@ func _ready():
 	create_prefab_rooms()
 	create_ceiling(ceiling, 8)
 	create_ceiling(bedrock, 2)
-	create_walls()
+	create_walls(ceiling, wall)
+	create_walls(ship_ceiling, ship_wall)
 	create_ore()
 	populate_level()
 
@@ -185,19 +188,19 @@ func create_ceiling(tile_type, padding : int):
 			tilemap.set_cell(0, tile, tile_type, Vector2i.ZERO)
 
 
-func create_walls():
+func create_walls(ceiling_type, wall_type):
 	#create wall tiles on the top of the map
-	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
+	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling_type)
 	for tile in ceiling_tiles:
 		var bottom_tile = tilemap.get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
-		if tilemap.get_cell_source_id(0, bottom_tile) == ceiling:
+		if tilemap.get_cell_source_id(0, bottom_tile) == ceiling_type:
 			continue
 		
-		if tilemap.get_cell_source_id(0, bottom_tile) == wall:
+		if tilemap.get_cell_source_id(0, bottom_tile) == wall_type:
 			continue
 		
-		tilemap.set_cell(0, tile, wall, Vector2i.ZERO)
-		tilemap.set_cell(1, tile, ceiling, Vector2i(0, 1))
+		tilemap.set_cell(0, tile, wall_type, Vector2i.ZERO)
+		tilemap.set_cell(1, tile, ceiling_type, Vector2i(0, 1))
 		tilemap.set_cell(1, bottom_tile, shadow, Vector2i.ZERO)
 
 

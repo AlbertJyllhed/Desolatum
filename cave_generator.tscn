@@ -9,7 +9,6 @@ tile_set = ExtResource("1_72fwi")
 format = 2
 layer_0/name = "base_layer"
 layer_1/name = "shadow_layer"
-layer_1/tile_data = PackedInt32Array()
 script = ExtResource("1_ts1sw")
 prop_list = ExtResource("3_bdpi2")
 

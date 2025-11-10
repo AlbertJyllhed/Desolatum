@@ -81,14 +81,12 @@ drop_list = ExtResource("3_bc5d8")
 
 [node name="Sprite2D" parent="." index="8"]
 material = SubResource("ShaderMaterial_g8v80")
-use_parent_material = true
 texture = ExtResource("3_hmmbl")
 
 [node name="Shadow" parent="." index="9"]
 modulate = Color(0, 0, 0, 0.294118)
 z_index = -1
 material = SubResource("ShaderMaterial_g8v80")
-use_parent_material = true
 scale = Vector2(1, 0.25)
 texture = ExtResource("3_hmmbl")
 
@@ -105,8 +103,10 @@ libraries = {
 "": SubResource("AnimationLibrary_fj4p3")
 }
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+[node name="Hurtbox" parent="." index="14"]
 position = Vector2(0, -8)
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_8jpai")
 
 [editable path="Hurtbox"]

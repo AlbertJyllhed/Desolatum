@@ -1,5 +1,6 @@
 extends EnemyState
 
+@export var next_state : String = "Hunt"
 @export var wander_range : float = 64.0
 @export var min_update_time : float = 1.0
 @export var max_update_time : float = 3.0
@@ -11,7 +12,7 @@ extends EnemyState
 
 func timeout():
 	if state_machine.target_locator_ray.has_target() or enemy_entity.aggressive:
-		state_machine.transition_to("Hunt")
+		state_machine.transition_to(next_state)
 		return
 	
 	state_machine.transition_to("Idle")

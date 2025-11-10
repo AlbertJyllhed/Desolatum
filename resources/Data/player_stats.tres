@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="PlayerStats" load_steps=5 format=3 uid="uid://ffwhqkje216k"]
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=6 format=3 uid="uid://ffwhqkje216k"]
 
 [ext_resource type="Resource" uid="uid://djbamfnyr0gik" path="res://resources/Items/abilities/turret.tres" id="1_0o17q"]
 [ext_resource type="Resource" uid="uid://busumql47jgp" path="res://resources/Items/equipment/pistol.tres" id="1_imd34"]
 [ext_resource type="Script" path="res://resources/Data/player_stats.gd" id="1_rlxyd"]
 [ext_resource type="Resource" uid="uid://bh346hr4ji17d" path="res://resources/Items/equipment/pickaxe.tres" id="2_duh3m"]
+[ext_resource type="Script" path="res://resources/equipment_item.gd" id="3_xon47"]
 
 [resource]
 script = ExtResource("1_rlxyd")
 base_health = 6
 base_move_speed = 80.0
-starter_equipment = Array[Resource("res://resources/equipment_item.gd")]([ExtResource("1_imd34"), ExtResource("2_duh3m")])
+starter_equipment = Array[ExtResource("3_xon47")]([ExtResource("1_imd34"), ExtResource("2_duh3m")])
 ability_item = ExtResource("1_0o17q")

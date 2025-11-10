@@ -8,4 +8,4 @@
 [resource]
 script = ExtResource("4_l52ie")
 enemy_scenes = Array[PackedScene]([ExtResource("2_rmvib"), ExtResource("2_kttk7"), ExtResource("3_1bqnx")])
-weights = Array[int]([6, 3, 1])
+weights = Array[int]([60, 30, 10])

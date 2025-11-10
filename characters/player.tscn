@@ -320,9 +320,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_b4jp7")
-}
 tree_root = SubResource("AnimationNodeStateMachine_vl2nl")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)

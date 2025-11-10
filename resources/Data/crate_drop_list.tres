@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="DropList" load_steps=17 format=3 uid="uid://drxaut0ndjcw"]
+[gd_resource type="Resource" script_class="DropList" load_steps=18 format=3 uid="uid://drxaut0ndjcw"]
 
+[ext_resource type="Script" path="res://resources/item.gd" id="1_p5ujb"]
 [ext_resource type="Script" path="res://resources/Data/drop_list.gd" id="1_vvg13"]
 [ext_resource type="Resource" uid="uid://c6dse6vr5dbd6" path="res://resources/Items/equipment/railgun.tres" id="3_q6r8c"]
 [ext_resource type="Resource" uid="uid://dwkvpxwfh0pjj" path="res://resources/Items/equipment/shotgun.tres" id="4_fhd03"]
@@ -19,4 +20,4 @@
 
 [resource]
 script = ExtResource("1_vvg13")
-items = Array[Resource("res://resources/item.gd")]([ExtResource("3_q6r8c"), ExtResource("4_fhd03"), ExtResource("5_gpgy0"), ExtResource("6_4v5yj"), ExtResource("8_5ynx4"), ExtResource("9_ry41c"), ExtResource("10_5jjed"), ExtResource("11_4ol2s"), ExtResource("12_d08k2"), ExtResource("13_awdlr"), ExtResource("14_gqg2u"), ExtResource("12_8ninj"), ExtResource("13_ts0ev"), ExtResource("14_bowve"), ExtResource("15_dkt8p")])
+items = Array[ExtResource("1_p5ujb")]([ExtResource("3_q6r8c"), ExtResource("4_fhd03"), ExtResource("5_gpgy0"), ExtResource("6_4v5yj"), ExtResource("8_5ynx4"), ExtResource("9_ry41c"), ExtResource("10_5jjed"), ExtResource("11_4ol2s"), ExtResource("12_d08k2"), ExtResource("13_awdlr"), ExtResource("14_gqg2u"), ExtResource("12_8ninj"), ExtResource("13_ts0ev"), ExtResource("14_bowve"), ExtResource("15_dkt8p")])

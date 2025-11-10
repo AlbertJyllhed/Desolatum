@@ -16,6 +16,9 @@ func _ready():
 
 
 func attack(attack_vector : Vector2):
+	if not is_instance_valid(player):
+		return
+	
 	for i in thorn_amount:
 		var offset = Vector2(randi_range(-32, 32), randi_range(-32, 32))
 		var tile_pos = tilemap.local_to_map(player.global_position + offset)

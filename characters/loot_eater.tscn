@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=3 uid="uid://ds2o8xdqd35kv"]
+
+[ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_75bso"]
+[ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="2_5gbct"]
+[ext_resource type="Shader" path="res://resources/shaders/hidden_hit_flash.gdshader" id="2_or8aj"]
+[ext_resource type="PackedScene" uid="uid://tu01vf838dx" path="res://states/flee.tscn" id="3_fhnva"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="5_75v26"]
+[ext_resource type="Resource" uid="uid://rwyaupgpdrpx" path="res://resources/Data/loot_drop_list.tres" id="5_tgq8l"]
+[ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="7_jxw8f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnyc5"]
+resource_local_to_scene = true
+shader = ExtResource("2_or8aj")
+shader_parameter/lerp_percent = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5kec7"]
+resource_local_to_scene = true
+shader = ExtResource("2_or8aj")
+shader_parameter/lerp_percent = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wigaw"]
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_2s1kp"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_vpvsf"]
+resource_name = "walk_right"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_phpwa"]
+_data = {
+"idle": SubResource("Animation_2s1kp"),
+"walk_right": SubResource("Animation_vpvsf")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nwp4e"]
+radius = 8.0
+
+[node name="LootEater" instance=ExtResource("1_75bso")]
+
+[node name="Timer" type="Timer" parent="." index="0"]
+one_shot = true
+
+[node name="StateMachine" parent="." index="1" node_paths=PackedStringArray("animation_player", "target_locator_ray", "timer")]
+animation_player = NodePath("../AnimationPlayer")
+target_locator_ray = NodePath("../TargetLocatorRay")
+timer = NodePath("../Timer")
+
+[node name="Wander" parent="StateMachine" index="1" instance=ExtResource("2_5gbct")]
+next_state = "Flee"
+
+[node name="Flee" parent="StateMachine" index="2" instance=ExtResource("3_fhnva")]
+
+[node name="HitFlashComponent" parent="." index="4"]
+hit_flash_material = SubResource("ShaderMaterial_bnyc5")
+
+[node name="DropComponent" parent="." index="6"]
+min_drop_amount = 3
+max_drop_amount = 6
+drop_list = ExtResource("5_tgq8l")
+
+[node name="Sprite2D" parent="." index="8"]
+material = SubResource("ShaderMaterial_5kec7")
+use_parent_material = true
+texture = ExtResource("5_75v26")
+
+[node name="Shadow" parent="." index="9"]
+modulate = Color(0, 0, 0, 0.294118)
+z_index = -1
+material = SubResource("ShaderMaterial_5kec7")
+use_parent_material = true
+scale = Vector2(1, 0.25)
+texture = ExtResource("5_75v26")
+
+[node name="TargetLocatorRay" parent="." index="10" instance=ExtResource("7_jxw8f")]
+
+[node name="CollisionShape2D" parent="." index="11"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_wigaw")
+
+[node name="AnimationPlayer" parent="." index="12"]
+libraries = {
+"": SubResource("AnimationLibrary_phpwa")
+}
+
+[node name="Hurtbox" parent="." index="13"]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_nwp4e")
+
+[editable path="Hurtbox"]

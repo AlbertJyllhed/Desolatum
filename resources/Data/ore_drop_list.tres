@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DropList" load_steps=3 format=3 uid="uid://b1thw765u4i2v"]
+[gd_resource type="Resource" script_class="DropList" load_steps=4 format=3 uid="uid://b1thw765u4i2v"]
 
 [ext_resource type="Script" path="res://resources/Data/drop_list.gd" id="1_a1db6"]
+[ext_resource type="Script" path="res://resources/item.gd" id="1_f824y"]
 [ext_resource type="Resource" uid="uid://bayy7fbn27s3h" path="res://resources/Items/ore.tres" id="1_i1ek5"]
 
 [resource]
 script = ExtResource("1_a1db6")
-items = Array[Resource("res://resources/item.gd")]([ExtResource("1_i1ek5")])
+items = Array[ExtResource("1_f824y")]([ExtResource("1_i1ek5")])

@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="DropList" load_steps=11 format=3 uid="uid://cxj47cgtkafnc"]
+[gd_resource type="Resource" script_class="DropList" load_steps=12 format=3 uid="uid://cxj47cgtkafnc"]
 
+[ext_resource type="Script" path="res://resources/item.gd" id="1_lknc2"]
 [ext_resource type="Script" path="res://resources/Data/drop_list.gd" id="1_nbkik"]
 [ext_resource type="Resource" uid="uid://b1ri54mk2sxbw" path="res://resources/upgrades/panic.tres" id="1_xexfv"]
 [ext_resource type="Resource" uid="uid://ct5dagltkv6xx" path="res://resources/upgrades/adrenaline.tres" id="2_cu06g"]
@@ -13,4 +14,4 @@
 
 [resource]
 script = ExtResource("1_nbkik")
-items = Array[Resource("res://resources/item.gd")]([ExtResource("1_xexfv"), ExtResource("2_cu06g"), ExtResource("3_g18kl"), ExtResource("4_yt0wi"), ExtResource("5_w2w0n"), ExtResource("6_a75e7"), ExtResource("7_ffbr6"), ExtResource("8_v5yjt"), ExtResource("9_x8mv6")])
+items = Array[ExtResource("1_lknc2")]([ExtResource("1_xexfv"), ExtResource("2_cu06g"), ExtResource("3_g18kl"), ExtResource("4_yt0wi"), ExtResource("5_w2w0n"), ExtResource("6_a75e7"), ExtResource("7_ffbr6"), ExtResource("8_v5yjt"), ExtResource("9_x8mv6")])
