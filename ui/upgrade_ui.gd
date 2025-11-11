@@ -1,28 +1,10 @@
 extends Control
 class_name UpgradeUI
 
-signal open_teleporter
-
-@onready var upgrades = $Upgrades
-@onready var powering_screen = $PoweringScreen
+@onready var icon : TextureRect = $HBoxContainer/Icon
+@onready var label : Label = $HBoxContainer/Label
 
 
-func show_screen():
-	show()
-	get_tree().paused = true
-
-
-func _on_close_button_pressed():
-	hide()
-	get_tree().paused = false
-
-
-func _on_down_button_pressed():
-	upgrades.visible = !upgrades.visible
-	powering_screen.visible = !powering_screen.visible
-
-
-func _on_powering_screen_fully_powered():
-	open_teleporter.emit()
-	hide()
-	get_tree().paused = false
+func setup(upgrade : UpgradeItem):
+	icon.texture = upgrade.icon
+	label.text = upgrade.name

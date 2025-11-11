@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cig1m1a15gbdi"]
+[gd_scene load_steps=17 format=3 uid="uid://cig1m1a15gbdi"]
 
 [ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_7vgrc"]
 [ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_4jrri"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://lvds6lc4b1aw" path="res://ui/ammo_ui.tscn" id="5_r8ks5"]
 [ext_resource type="PackedScene" uid="uid://dinoa4adlhusc" path="res://ui/energy_ui.tscn" id="6_4fu6g"]
 [ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="7_a3i5o"]
+[ext_resource type="PackedScene" uid="uid://blhvfwq1pfxm4" path="res://ui/upgrade_container_ui.tscn" id="8_fnyi5"]
 [ext_resource type="PackedScene" uid="uid://fd0y7pt4y18o" path="res://ui/transition_screen.tscn" id="8_hc4qn"]
 [ext_resource type="PackedScene" uid="uid://ie26y2womcw5" path="res://ui/danger_sign.tscn" id="9_awiln"]
 [ext_resource type="PackedScene" uid="uid://cd6xh5dojbq0o" path="res://level_generator.tscn" id="10_h0ktf"]
@@ -38,6 +39,8 @@ process_mode = 3
 [node name="AmmoUI" parent="CanvasLayer" instance=ExtResource("5_r8ks5")]
 
 [node name="EnergyUI" parent="CanvasLayer" instance=ExtResource("6_4fu6g")]
+
+[node name="UpgradeContainerUI" parent="CanvasLayer" instance=ExtResource("8_fnyi5")]
 
 [node name="DangerSign" parent="CanvasLayer" instance=ExtResource("9_awiln")]
 
