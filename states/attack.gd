@@ -18,8 +18,9 @@ func on_owner_ready():
 
 func enter(message = {}):
 	#prepare to attack
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	player_position = player.global_position
+	if (is_instance_valid(state_machine.player)):
+		player_position = state_machine.player.global_position
+	
 	state_machine.animation_player.play("prepare_attack_right")
 	enemy_entity.direction = Vector2.ZERO
 

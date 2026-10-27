@@ -11,10 +11,12 @@ var base_layer : Node2D
 var path_debug_scene = preload("res://debug/path.tscn")
 
 enum {
-	ground = 0,
-	ceiling = 1,
-	wall = 2,
-	bedrock = 3
+	GROUND = 0,
+	CEILING = 1,
+	WALL = 2,
+	BEDROCK = 3,
+	SHIP_WALL = 6,
+	SHIP_CEILING = 7,
 }
 
 
@@ -32,10 +34,12 @@ func setup_navigation():
 	astar_grid.jumping_enabled = true
 	astar_grid.update()
 	
-	var bedrock_tiles = tilemap.get_used_cells_by_id(0, bedrock)
-	var wall_tiles = tilemap.get_used_cells_by_id(0, wall)
-	var ceiling_tiles = tilemap.get_used_cells_by_id(0, ceiling)
-	var obstacles = bedrock_tiles + wall_tiles + ceiling_tiles
+	var bedrock_tiles = tilemap.get_used_cells_by_id(0, BEDROCK)
+	var wall_tiles = tilemap.get_used_cells_by_id(0, WALL)
+	var ceiling_tiles = tilemap.get_used_cells_by_id(0, CEILING)
+	var ship_wall_tiles = tilemap.get_used_cells_by_id(0, SHIP_WALL)
+	var ship_ceiling_tiles = tilemap.get_used_cells_by_id(0, SHIP_CEILING)
+	var obstacles = bedrock_tiles + wall_tiles + ceiling_tiles + ship_wall_tiles + ship_ceiling_tiles
 	
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 	for tile in obstacles:

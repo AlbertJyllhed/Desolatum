@@ -8,6 +8,7 @@ signal hit(knockback, stun_time)
 
 @onready var timer : Timer = $Timer
 
+var cooldowns : Dictionary = {} # Hitbox -> time (msec) it can hurt us again
 var damage_multiplier : float = 1.0
 
 
@@ -15,23 +16,27 @@ func _physics_process(_delta):
 	if not has_overlapping_areas():
 		return
 	
-	var areas = get_overlapping_areas()
-	for area in areas:
+	for area in get_overlapping_areas():
 		if not area is Hitbox:
-			return
+			continue
 		
 		check_deal_damage(area)
 
 
-func check_deal_damage(area):
+func check_deal_damage(area: Hitbox):
 	if not health_component:
 		return
 	
-	if not timer.is_stopped():
+	var now = Time.get_ticks_msec()
+	if cooldowns.get(area, 0) > now:
 		return
 	
-	var hitbox = area as Hitbox
-	health_component.damage(hitbox.damage * damage_multiplier)
+	cooldowns[area] = now + int(damage_tick_delay * 1000)
 	
-	timer.start(damage_tick_delay)
-	hit.emit(hitbox.knockback_vector * hitbox.knockback_multiplier, hitbox.stun_time)
+	health_component.damage(area.damage * damage_multiplier)
+	hit.emit(area.knockback_vector * area.knockback_multiplier, area.stun_time)
+	
+	# prune freed hitboxes so the dictionary doesn't grow
+	for key in cooldowns.keys():
+		if not is_instance_valid(key):
+			cooldowns.erase(key)

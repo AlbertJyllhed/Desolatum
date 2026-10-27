@@ -1,5 +1,7 @@
 extends Area2D
 
+@export var remove_by_position : bool = false
+
 @onready var collision_shape : CollisionShape2D = $CollisionShape2D
 
 var tilemap : TileMap
@@ -9,24 +11,39 @@ var ore : Item = preload("res://resources/Items/ore.tres")
 enum { ground = 0, ceiling = 1, wall = 2, bedrock = 3, shadow = 14, none = -1 }
 
 
-func _on_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
-	if not body is TileMap:
+func _ready():
+	if not remove_by_position:
 		return
 	
-	tilemap = body as TileMap
-	var coordinate = tilemap.get_coords_for_body_rid(body_rid)
-	var tile_at_coordinate = tilemap.get_cell_source_id(0, coordinate)
+	var map = get_tree().get_first_node_in_group("tilemap_layer") as TileMap
+	if not map:
+		return
 	
-	if tile_at_coordinate == wall or tile_at_coordinate == ceiling:
-		var tile_data = tilemap.get_cell_tile_data(0, coordinate)
-		var random_tile = Vector2i(randi_range(0, 2), 0)
-		tilemap.set_cell(0, coordinate, ground, random_tile)
-		tilemap.set_cell(1, coordinate, none, Vector2i.ZERO)
-		update_neighbors(coordinate)
-		collision_shape.set_deferred("disabled", true)
-		GameEvents.navigation_updated.emit(coordinate, false)
-		
-		create_ore(coordinate, tile_data)
+	var circle = collision_shape.shape as CircleShape2D
+	var radius_in_tiles = circle.radius / 16.0 if circle else 1.0
+	var center = map.local_to_map(map.to_local(global_position))
+	var r = ceili(radius_in_tiles)
+	for x in range(-r, r + 1):
+		for y in range(-r, r + 1):
+			if Vector2(x, y).length() > radius_in_tiles:
+				continue
+			
+			remove_tile(map, center + Vector2i(x, y))
+
+
+func remove_tile(map : TileMap, coordinate : Vector2i):
+	tilemap = map
+	var tile_id = tilemap.get_cell_source_id(0, coordinate)
+	if tile_id != wall and tile_id != ceiling:
+		return
+	
+	var tile_data = tilemap.get_cell_tile_data(0, coordinate)
+	var random_tile = Vector2i(randi_range(0, 2), 0)
+	tilemap.set_cell(0, coordinate, ground, random_tile)
+	tilemap.set_cell(1, coordinate, none, Vector2i.ZERO)
+	update_neighbors(coordinate)
+	GameEvents.navigation_updated.emit(coordinate, false)
+	create_ore(coordinate, tile_data)
 
 
 func update_neighbors(coordinate):
