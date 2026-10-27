@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cig1m1a15gbdi"]
+[gd_scene format=3 uid="uid://cig1m1a15gbdi"]
 
 [ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_7vgrc"]
 [ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_4jrri"]
@@ -17,49 +17,50 @@
 [ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://game_camera.tscn" id="14_k4cxe"]
 [ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tileset.tres" id="15_ukhfq"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=993354542]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." groups=["ui_layer"]]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1801392090 groups=["ui_layer"]]
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("1_7vgrc")]
+[node name="PauseMenu" parent="CanvasLayer" unique_id=313310532 instance=ExtResource("1_7vgrc")]
 visible = false
 
 [node name="OptionsMenu" parent="CanvasLayer/PauseMenu" index="2" node_paths=PackedStringArray("fps_counter")]
 fps_counter = NodePath("../../FPSCounter")
 
-[node name="FPSCounter" parent="CanvasLayer" instance=ExtResource("2_4jrri")]
+[node name="FPSCounter" parent="CanvasLayer" unique_id=69601674 instance=ExtResource("2_4jrri")]
 process_mode = 3
 
-[node name="WeaponInventoryUI" parent="CanvasLayer" instance=ExtResource("3_3ohvm")]
+[node name="WeaponInventoryUI" parent="CanvasLayer" unique_id=1258743420 instance=ExtResource("3_3ohvm")]
 
-[node name="HealthUI" parent="CanvasLayer" instance=ExtResource("4_j4v5e")]
+[node name="HealthUI" parent="CanvasLayer" unique_id=2102431913 instance=ExtResource("4_j4v5e")]
 
-[node name="AbilityUI" parent="CanvasLayer" instance=ExtResource("5_nk1gg")]
+[node name="AbilityUI" parent="CanvasLayer" unique_id=22427251 instance=ExtResource("5_nk1gg")]
 
-[node name="AmmoUI" parent="CanvasLayer" instance=ExtResource("5_r8ks5")]
+[node name="AmmoUI" parent="CanvasLayer" unique_id=859448541 instance=ExtResource("5_r8ks5")]
 
-[node name="EnergyUI" parent="CanvasLayer" instance=ExtResource("6_4fu6g")]
+[node name="EnergyUI" parent="CanvasLayer" unique_id=1980526584 instance=ExtResource("6_4fu6g")]
 
-[node name="UpgradeContainerUI" parent="CanvasLayer" instance=ExtResource("8_fnyi5")]
+[node name="UpgradeContainerUI" parent="CanvasLayer" unique_id=1639043525 instance=ExtResource("8_fnyi5")]
 
-[node name="DangerSign" parent="CanvasLayer" instance=ExtResource("9_awiln")]
+[node name="DangerSign" parent="CanvasLayer" unique_id=1039785935 instance=ExtResource("9_awiln")]
 
-[node name="Cursor" parent="CanvasLayer" instance=ExtResource("7_a3i5o")]
+[node name="Cursor" parent="CanvasLayer" unique_id=1236815725 instance=ExtResource("7_a3i5o")]
 
-[node name="TransitionScreen" parent="CanvasLayer" instance=ExtResource("8_hc4qn")]
+[node name="TransitionScreen" parent="CanvasLayer" unique_id=478338291 instance=ExtResource("8_hc4qn")]
 
-[node name="LevelGenerator" parent="." node_paths=PackedStringArray("tilemap", "enemy_manager") instance=ExtResource("10_h0ktf")]
+[node name="LevelGenerator" parent="." unique_id=2000138731 node_paths=PackedStringArray("tilemap", "enemy_manager") instance=ExtResource("10_h0ktf")]
 tilemap = NodePath("../TileMap")
 enemy_manager = NodePath("../EnemyManager")
+path_width = 1
 
-[node name="PathfindingGrid" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("12_s3jgr")]
+[node name="PathfindingGrid" parent="." unique_id=1950735315 node_paths=PackedStringArray("tilemap") instance=ExtResource("12_s3jgr")]
 tilemap = NodePath("../TileMap")
 
-[node name="EnemyManager" parent="." instance=ExtResource("13_47pbc")]
+[node name="EnemyManager" parent="." unique_id=695355371 instance=ExtResource("13_47pbc")]
 
-[node name="GameCamera" parent="." instance=ExtResource("14_k4cxe")]
+[node name="GameCamera" parent="." unique_id=78449428 instance=ExtResource("14_k4cxe")]
 
-[node name="TileMap" type="TileMap" parent="." groups=["tilemap_layer"]]
+[node name="TileMap" type="TileMap" parent="." unique_id=41610186 groups=["tilemap_layer"]]
 texture_filter = 1
 tile_set = ExtResource("15_ukhfq")
 format = 2
@@ -67,12 +68,12 @@ layer_0/name = "base_layer"
 layer_1/name = "shadow_layer"
 layer_1/navigation_enabled = false
 
-[node name="BaseLayer" type="Node2D" parent="." groups=["base_layer"]]
+[node name="BaseLayer" type="Node2D" parent="." unique_id=69973045 groups=["base_layer"]]
 y_sort_enabled = true
 
-[node name="ForegroundLayer" type="Node2D" parent="." groups=["foreground_layer"]]
+[node name="ForegroundLayer" type="Node2D" parent="." unique_id=1209205168 groups=["foreground_layer"]]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=863104168]
 color = Color(0.266667, 0.254902, 0.223529, 1)
 
 [editable path="CanvasLayer/PauseMenu"]

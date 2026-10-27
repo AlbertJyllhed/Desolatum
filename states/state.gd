@@ -2,6 +2,7 @@ extends Node
 class_name State
 
 var state_machine : StateMachine
+var interruptible : bool = true
 
 
 func physics_update(delta):

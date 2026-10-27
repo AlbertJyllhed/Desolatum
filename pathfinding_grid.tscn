@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4gv7qo8wn3yq"]
+[gd_scene format=3 uid="uid://b4gv7qo8wn3yq"]
 
-[ext_resource type="Script" path="res://pathfinding_grid.gd" id="1_bbqox"]
+[ext_resource type="Script" uid="uid://dsi34lh32wrvb" path="res://pathfinding_grid.gd" id="1_bbqox"]
 
-[node name="PathfindingGrid" type="Node"]
+[node name="PathfindingGrid" type="Node" unique_id=1000375041]
 script = ExtResource("1_bbqox")
+debug_mode = true

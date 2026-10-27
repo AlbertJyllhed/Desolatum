@@ -17,14 +17,13 @@ func _ready():
 
 
 func timeout():
-	var player = get_tree().get_first_node_in_group("player")
-	if not is_instance_valid(player):
+	if not is_instance_valid(state_machine.player):
 		state_machine.transition_to("Wander")
 		return
 	
 	var path = astar_grid.get_id_path(
 		tilemap.local_to_map(enemy_entity.global_position),
-		tilemap.local_to_map(player.global_position)
+		tilemap.local_to_map(state_machine.player.global_position)
 	)
 	
 	path.pop_front()

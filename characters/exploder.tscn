@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://pilwyjays5u2"]
+[gd_scene format=3 uid="uid://pilwyjays5u2"]
 
 [ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_w460d"]
 [ext_resource type="PackedScene" uid="uid://j5fmpojrs1ek" path="res://states/hunt.tscn" id="2_on16h"]
@@ -7,15 +7,15 @@
 [ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/Data/enemy_drop_list.tres" id="4_jldym"]
 [ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="5_7qdpn"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="5_x11qn"]
-[ext_resource type="Shader" path="res://resources/shaders/hidden_hit_flash.gdshader" id="6_rc5vf"]
+[ext_resource type="Shader" uid="uid://mtoxo3au8skm" path="res://resources/shaders/hidden_hit_flash.gdshader" id="6_rc5vf"]
 [ext_resource type="Texture2D" uid="uid://rtls2ky0kogm" path="res://assets/textures/exploder_enemy.png" id="7_hm1ln"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="8_y8nl0"]
 [ext_resource type="PackedScene" uid="uid://cvll8o6xr230i" path="res://components/weapons/enemy_weapons/explode_attack.tscn" id="9_wr4oe"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnyc5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qq40q"]
 resource_local_to_scene = true
 shader = ExtResource("6_rc5vf")
-shader_parameter/lerp_percent = null
+shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ap7to"]
 light_mode = 2
@@ -109,20 +109,20 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6p0ej"]
 _data = {
-"RESET": SubResource("Animation_o2ini"),
-"attack_right": SubResource("Animation_mn20r"),
-"idle": SubResource("Animation_jftu0"),
-"prepare_attack_right": SubResource("Animation_udfay"),
-"walk_right": SubResource("Animation_bgx3y")
+&"RESET": SubResource("Animation_o2ini"),
+&"attack_right": SubResource("Animation_mn20r"),
+&"idle": SubResource("Animation_jftu0"),
+&"prepare_attack_right": SubResource("Animation_udfay"),
+&"walk_right": SubResource("Animation_bgx3y")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p6tbj"]
 radius = 8.0
 
-[node name="Exploder" instance=ExtResource("1_w460d")]
+[node name="Exploder" unique_id=1589800081 instance=ExtResource("1_w460d")]
 base_speed = 60
 
-[node name="Timer" type="Timer" parent="." index="0"]
+[node name="Timer" type="Timer" parent="." index="0" unique_id=21929384]
 one_shot = true
 
 [node name="StateMachine" parent="." index="1" node_paths=PackedStringArray("animation_player", "target_locator_ray", "weapon", "timer")]
@@ -131,21 +131,21 @@ target_locator_ray = NodePath("../TargetLocatorRay")
 weapon = NodePath("../ExplodeAttack")
 timer = NodePath("../Timer")
 
-[node name="Wander" parent="StateMachine" index="1" instance=ExtResource("3_i6xyo")]
+[node name="Wander" parent="StateMachine" index="1" unique_id=2059350886 instance=ExtResource("3_i6xyo")]
 
-[node name="Hunt" parent="StateMachine" index="2" instance=ExtResource("2_on16h")]
+[node name="Hunt" parent="StateMachine" index="2" unique_id=31052387 instance=ExtResource("2_on16h")]
 min_update_time = 0.25
 max_update_time = 0.5
 run_chance = 1.0
 
-[node name="Attack" parent="StateMachine" index="3" instance=ExtResource("3_x7ofc")]
+[node name="Attack" parent="StateMachine" index="3" unique_id=1372510325 instance=ExtResource("3_x7ofc")]
 
 [node name="HealthComponent" parent="." index="2"]
 blood_particles = ExtResource("5_7qdpn")
 max_health = 1.0
 
 [node name="HitFlashComponent" parent="." index="4"]
-hit_flash_material = SubResource("ShaderMaterial_bnyc5")
+hit_flash_material = SubResource("ShaderMaterial_qq40q")
 
 [node name="DropComponent" parent="." index="6"]
 max_drop_amount = 2
@@ -164,9 +164,9 @@ material = SubResource("CanvasItemMaterial_vvnly")
 scale = Vector2(1, 0.25)
 texture = ExtResource("5_x11qn")
 
-[node name="TargetLocatorRay" parent="." index="10" instance=ExtResource("8_y8nl0")]
+[node name="TargetLocatorRay" parent="." index="10" unique_id=570604574 instance=ExtResource("8_y8nl0")]
 
-[node name="ExplodeAttack" parent="." index="11" node_paths=PackedStringArray("health_component") instance=ExtResource("9_wr4oe")]
+[node name="ExplodeAttack" parent="." index="11" unique_id=1348014377 node_paths=PackedStringArray("health_component") instance=ExtResource("9_wr4oe")]
 position = Vector2(0, -6)
 health_component = NodePath("../HealthComponent")
 
@@ -175,10 +175,8 @@ position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_h7ave")
 
 [node name="AnimationPlayer" parent="." index="13"]
-libraries = {
-"": SubResource("AnimationLibrary_6p0ej")
-}
-autoplay = "walk_right"
+libraries/ = SubResource("AnimationLibrary_6p0ej")
+autoplay = &"walk_right"
 
 [node name="Hurtbox" parent="." index="14"]
 position = Vector2(0, -8)

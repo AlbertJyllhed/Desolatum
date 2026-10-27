@@ -65,12 +65,12 @@ func update_difficulty():
 		index = 0
 	
 	var values = wave_mode.values()
-	max_enemies = values[index]["max_enemies"] * (energy_modifier * health_modifier)
+	max_enemies = ceili(values[index]["max_enemies"] * (energy_modifier * health_modifier))
 	spawn_time = values[index]["spawn_time"]
 	wave_time = randf_range(values[index]["min_wave_time"], values[index]["max_wave_time"])
 	spawn_aggressive = values[index]["aggressive"]
 	
-	var enemies = get_tree().get_nodes_in_group("enemies") as Array[EnemyEntity]
+	var enemies : Array[Node] = get_tree().get_nodes_in_group("enemies")
 	remove_excess_enemies(enemies)
 	for enemy in enemies:
 		enemy.aggressive = spawn_aggressive

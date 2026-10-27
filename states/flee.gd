@@ -7,7 +7,7 @@ extends EnemyState
 var pathfinding_grid : PathfindingGrid
 var astar_grid : AStarGrid2D
 var tilemap : TileMap
-var global_tile_pos : Vector2
+var target_tile : Vector2i
 
 
 func _ready():
@@ -20,7 +20,7 @@ func _ready():
 func timeout():
 	var path = astar_grid.get_id_path(
 		tilemap.local_to_map(enemy_entity.global_position),
-		tilemap.local_to_map(global_tile_pos)
+		target_tile
 	)
 	
 	path.pop_front()
@@ -34,11 +34,9 @@ func timeout():
 
 
 func enter(message = {}):
+	target_tile = tilemap.get_used_cells_by_id(0, 0).pick_random()
 	state_machine.animation_player.play("walk_right")
 	state_machine.timer.start(randf_range(0.2, 0.5))
-	var ground_tiles = tilemap.get_used_cells_by_id(0, 0)
-	var random_tile = ground_tiles.pick_random() * 16
-	global_tile_pos = tilemap.to_global(random_tile)
 
 
 func exit():

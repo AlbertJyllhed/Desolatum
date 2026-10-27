@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://dvovn2blbggvj"]
+[gd_resource type="TileSet" format=3 uid="uid://dvovn2blbggvj"]
 
 [ext_resource type="Texture2D" uid="uid://kx40djxfuom8" path="res://assets/textures/nest_ground_large.png" id="1_ebf0e"]
 [ext_resource type="Texture2D" uid="uid://xyynlr7huwlh" path="res://assets/textures/nest_ceiling.png" id="2_c45v0"]

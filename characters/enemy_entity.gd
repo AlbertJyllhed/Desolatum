@@ -56,4 +56,5 @@ func move(delta : float):
 func on_died():
 	remove_from_group("enemies")
 	var camera = get_viewport().get_camera_2d() as PlayerCamera
-	camera.random_shake(4, 4)
+	if camera:
+		camera.random_shake(4, 4)
