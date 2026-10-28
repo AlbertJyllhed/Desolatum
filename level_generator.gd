@@ -895,10 +895,12 @@ func _set_ore(cell: Vector2i) -> void:
 func _populate_level() -> void:
 	# The player starts standing on the teleporter.
 	var start_position := _rect_to_world(teleporter_rect)
-	var player = create_instance(PLAYER_SCENE, start_position)
+	create_instance(PLAYER_SCENE, start_position)
+	
+	var camera = get_viewport().get_camera_2d() as PlayerCamera
 	var limits := tilemap.get_used_rect()
-	player.setup_camera(limits.position, limits.end)
-	player.setup_inventory()
+	camera.set_limits(limits)
+	
 	create_instance(TELEPORTER_SCENE, start_position)
 
 	create_instance(GENERATOR_SCENE, _rect_to_world(generator_rect))

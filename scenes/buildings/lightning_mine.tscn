@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dd0wyg7osw55v"]
+[gd_scene format=3 uid="uid://dd0wyg7osw55v"]
 
 [ext_resource type="PackedScene" uid="uid://i6sa4jrqvpnn" path="res://components/gravity_object_component.tscn" id="1_e48e5"]
 [ext_resource type="Texture2D" uid="uid://kvgdc11yxunm" path="res://assets/textures/mine.png" id="2_2fhrb"]
-[ext_resource type="PackedScene" uid="uid://c8h8q16gs2wqd" path="res://components/chain_lightning_component.tscn" id="2_i0l7b"]
+[ext_resource type="PackedScene" uid="uid://c8h8q16gs2wqd" path="res://scenes/buildings/electric_fence.tscn" id="2_i0l7b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i704y"]
 radius = 2.0

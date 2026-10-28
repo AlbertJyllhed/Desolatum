@@ -1,27 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://8x0urq7oxi1u"]
+[gd_scene format=3 uid="uid://8x0urq7oxi1u"]
 
-[ext_resource type="Script" path="res://abilities/build_ability.gd" id="1_6b3rd"]
+[ext_resource type="Script" uid="uid://d0ow6ub2nkwse" path="res://abilities/build_ability.gd" id="1_6b3rd"]
 [ext_resource type="PackedScene" uid="uid://bvouwx0ctslr4" path="res://scenes/buildings/turret.tscn" id="2_yaord"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb24h"]
 size = Vector2(15, 15)
 
-[node name="BuildAbility" type="Node2D"]
+[node name="BuildAbility" type="Node2D" unique_id=1973136891]
 script = ExtResource("1_6b3rd")
 ability_scene = ExtResource("2_yaord")
 recharge_time = 120.0
 
-[node name="Pivot" type="Node2D" parent="."]
+[node name="Pivot" type="Node2D" parent="." unique_id=1076022824]
 
-[node name="TileCheckerArea" type="Area2D" parent="Pivot"]
+[node name="TileCheckerArea" type="Area2D" parent="Pivot" unique_id=1389377522]
 position = Vector2(16, 0)
 collision_layer = 0
 collision_mask = 1025
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/TileCheckerArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/TileCheckerArea" unique_id=354010907]
 shape = SubResource("RectangleShape2D_qb24h")
 
-[node name="RechargeTimer" type="Timer" parent="."]
+[node name="RechargeTimer" type="Timer" parent="." unique_id=1184010276]
 one_shot = true
 
 [connection signal="timeout" from="RechargeTimer" to="." method="_on_recharge_timer_timeout"]

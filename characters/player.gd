@@ -4,6 +4,7 @@ class_name Player
 var move_speed = 80
 @export var acceleration = 600
 @export var friction = 500
+@export var combat_enabled : bool = true
 
 @onready var health_component : HealthComponent = $HealthComponent
 @onready var energy_gain_component : EnergyGainComponent = $EnergyGainComponent
@@ -15,32 +16,30 @@ var move_speed = 80
 var stats : PlayerStats = preload("res://resources/Data/player_stats.tres")
 var inventory_scene = preload("res://components/weapon_inventory_component.tscn")
 var inventory_instance : WeaponInventoryComponent
-var top_left_limit : Vector2i
-var bottom_right_limit : Vector2i
+var build_manager : BuildManager
 
 
 func _ready():
 	GameEvents.stats_changed.connect(on_stats_changed)
 	add_to_group("player")
+	if combat_enabled:
+		setup_combat()
+	
 	health_component.setup(stats)
 	energy_gain_component.setup(stats)
 	var camera = get_viewport().get_camera_2d() as PlayerCamera
 	camera.set_target(self)
 	stats.update_stats()
 	stats.add_upgrades()
-	
-	if top_left_limit == Vector2i.ZERO:
-		return
-	
-	camera.limit_top = top_left_limit.y * 16
-	camera.limit_left = top_left_limit.x * 16
-	camera.limit_bottom = bottom_right_limit.y * 16
-	camera.limit_right = bottom_right_limit.x * 16
+	collision_mask |= 1 << 14
 
 
-func setup_camera(top_left : Vector2i, bottom_right : Vector2i):
-	top_left_limit = top_left
-	bottom_right_limit = bottom_right
+func setup_combat():
+	setup_inventory()
+	build_manager = BuildManager.new()
+	build_manager.name = "BuildManager"
+	add_child(build_manager)
+	build_manager.setup(stats, inventory_instance)
 
 
 func setup_inventory():
@@ -86,8 +85,7 @@ func set_active(value : bool):
 	set_physics_process(value)
 	animation_state.travel("idle")
 	footstep_component.stop_footsteps()
-	#$Sprite2D.visible = value
-	if not inventory_instance:
-		return
-	
-	inventory_instance.deactivate(!value)
+	if build_manager:
+		build_manager.set_active(false) if not value else null
+	if inventory_instance:
+		inventory_instance.deactivate(!value)

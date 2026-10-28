@@ -1,5 +1,6 @@
 extends Node
 
+# Player events
 signal item_picked_up(item)
 signal ammo_updated(ammo, max_ammo)
 signal health_updated(health, max_health)
@@ -7,12 +8,15 @@ signal weapons_updated(index)
 signal energy_updated(energy)
 signal ore_updated(ore)
 signal ability_updated(recharge_time, uses)
-signal navigation_updated(tile_position, value)
+signal building_selected(item)
+signal build_mode_changed(active)
 signal add_upgrade(upgrade_item)
 signal stats_changed(modifiers)
+signal reset_stats
+
+# World events
+signal navigation_updated(tile_position, value)
 signal wave_updated(index)
 signal start_wave(index)
 signal unlock_exit
-signal reset_stats
-
 signal set_camera_target(target)

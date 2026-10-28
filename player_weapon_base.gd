@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node2d/gun.svg")
 extends Node2D
 class_name PlayerWeaponBase
 

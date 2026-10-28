@@ -36,8 +36,9 @@ func _ready():
 	current_state.enter()
 
 
-#func _physics_process(delta):
-	#current_state.physics_update(delta)
+func _physics_process(delta):
+	if (current_state):
+		current_state.physics_update(delta)
 
 
 #func on_target_body_entered(body):

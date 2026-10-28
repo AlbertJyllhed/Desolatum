@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0e50x30owl14"]
+[gd_scene format=3 uid="uid://b0e50x30owl14"]
 
 [ext_resource type="Texture2D" uid="uid://byb4u8pnhh4j4" path="res://assets/textures/mining_light.png" id="1_a4hx5"]
+[ext_resource type="Script" uid="uid://buhijdvcks7eq" path="res://scenes/buildings/building.gd" id="1_b8o2s"]
 [ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="2_0dfyv"]
-[ext_resource type="Script" path="res://components/light_flicker_component.gd" id="3_s4rwa"]
+[ext_resource type="Script" uid="uid://hrui4805k8ng" path="res://components/light_flicker_component.gd" id="3_s4rwa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f8p0d"]
 radius = 4.0
@@ -10,18 +11,19 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_lyjix"]
 radius = 80.0
 
-[node name="MiningLight" type="StaticBody2D"]
+[node name="MiningLight" type="StaticBody2D" unique_id=82624487]
 collision_layer = 128
 collision_mask = 512
+script = ExtResource("1_b8o2s")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1242699013]
 position = Vector2(0, -8)
 texture = ExtResource("1_a4hx5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1456611499]
 shape = SubResource("CircleShape2D_f8p0d")
 
-[node name="Light" type="PointLight2D" parent="."]
+[node name="Light" type="PointLight2D" parent="." unique_id=1145198535]
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("2_0dfyv")
@@ -31,9 +33,9 @@ light_size = 0.6
 max_light_size = 0.6
 min_light_size = 0.59
 
-[node name="Area2D" type="Area2D" parent="Light"]
+[node name="Area2D" type="Area2D" parent="Light" unique_id=1770967828]
 collision_layer = 2048
 collision_mask = 4096
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/Area2D" unique_id=790779518]
 shape = SubResource("CircleShape2D_lyjix")

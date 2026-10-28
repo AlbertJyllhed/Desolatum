@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ja1paxd2xanj"]
+
+[ext_resource type="Script" uid="uid://buhijdvcks7eq" path="res://scenes/buildings/building.gd" id="1_0jupy"]
+[ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/health_component.tscn" id="2_ktw2p"]
+[ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="3_e4onj"]
+[ext_resource type="PackedScene" uid="uid://d0m7vblybubk2" path="res://components/hit_flash_component.tscn" id="3_hsok5"]
+[ext_resource type="Shader" uid="uid://dgn8qet0q3o2k" path="res://resources/shaders/hit_flash_component.gdshader" id="4_4utew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvtck"]
+size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hsok5"]
+resource_local_to_scene = true
+shader = ExtResource("4_4utew")
+shader_parameter/lerp_percent = 1.0
+
+[node name="Barrier" type="StaticBody2D" unique_id=343306319]
+collision_layer = 16384
+script = ExtResource("1_0jupy")
+metadata/_custom_type_script = "uid://buhijdvcks7eq"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1112951964]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=30955042]
+shape = SubResource("RectangleShape2D_uvtck")
+
+[node name="HealthComponent" parent="." unique_id=291245155 instance=ExtResource("2_ktw2p")]
+
+[node name="HitFlashComponent" parent="." unique_id=1309771502 node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_hsok5")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_hsok5")
+
+[node name="Hurtbox" parent="." unique_id=1095194193 instance=ExtResource("3_e4onj")]
+collision_layer = 8
+collision_mask = 64

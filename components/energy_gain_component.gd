@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/lightning_bolt.svg")
 extends Node
 class_name EnergyGainComponent
 

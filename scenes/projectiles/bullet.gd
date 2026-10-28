@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node2d/bullet.svg")
 extends CharacterBody2D
 class_name Projectile
 

@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/control/backpack.svg")
 extends Control
 
 @onready var gun_indicator : TextureRect = $NinePatchRect/VBoxContainer/GunIcon/Border

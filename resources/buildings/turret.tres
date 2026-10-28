@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuildingItem" format=3 uid="uid://dhpjnccxtr7uf"]
+
+[ext_resource type="Script" uid="uid://cnn4xenarf4bt" path="res://resources/building_item.gd" id="1_e4ccy"]
+[ext_resource type="PackedScene" uid="uid://bvouwx0ctslr4" path="res://scenes/buildings/turret.tscn" id="1_h4b3b"]
+[ext_resource type="Texture2D" uid="uid://dbsypm28nxdbb" path="res://assets/textures/turret_icon.png" id="2_vdgst"]
+
+[resource]
+script = ExtResource("1_e4ccy")
+building_scene = ExtResource("1_h4b3b")
+ore_cost = 20
+id = "turret"
+name = "Turret"
+description = "Build a turret that automatically tracks and fires at the closest target."
+icon = ExtResource("2_vdgst")
+metadata/_custom_type_script = "uid://cnn4xenarf4bt"

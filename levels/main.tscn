@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_4jrri"]
 [ext_resource type="PackedScene" uid="uid://bbwms5jmwtqvg" path="res://ui/weapon_inventory_ui.tscn" id="3_3ohvm"]
 [ext_resource type="PackedScene" uid="uid://c66muf3s83t44" path="res://ui/health_ui.tscn" id="4_j4v5e"]
-[ext_resource type="PackedScene" uid="uid://c2heyas7xbet6" path="res://ui/ability_ui.tscn" id="5_nk1gg"]
 [ext_resource type="PackedScene" uid="uid://lvds6lc4b1aw" path="res://ui/ammo_ui.tscn" id="5_r8ks5"]
 [ext_resource type="PackedScene" uid="uid://dinoa4adlhusc" path="res://ui/energy_ui.tscn" id="6_4fu6g"]
+[ext_resource type="PackedScene" uid="uid://pk28yt3g4cec" path="res://ui/build_ui.tscn" id="7_21ko3"]
 [ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="7_a3i5o"]
 [ext_resource type="PackedScene" uid="uid://blhvfwq1pfxm4" path="res://ui/upgrade_container_ui.tscn" id="8_fnyi5"]
 [ext_resource type="PackedScene" uid="uid://fd0y7pt4y18o" path="res://ui/transition_screen.tscn" id="8_hc4qn"]
@@ -34,11 +34,11 @@ process_mode = 3
 
 [node name="HealthUI" parent="CanvasLayer" unique_id=2102431913 instance=ExtResource("4_j4v5e")]
 
-[node name="AbilityUI" parent="CanvasLayer" unique_id=22427251 instance=ExtResource("5_nk1gg")]
-
 [node name="AmmoUI" parent="CanvasLayer" unique_id=859448541 instance=ExtResource("5_r8ks5")]
 
 [node name="EnergyUI" parent="CanvasLayer" unique_id=1980526584 instance=ExtResource("6_4fu6g")]
+
+[node name="BuildUI" parent="CanvasLayer" unique_id=235107328 instance=ExtResource("7_21ko3")]
 
 [node name="UpgradeContainerUI" parent="CanvasLayer" unique_id=1639043525 instance=ExtResource("8_fnyi5")]
 

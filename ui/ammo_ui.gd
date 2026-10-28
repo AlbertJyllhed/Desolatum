@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/control/ammunition.svg")
 extends Control
 
 @onready var progress_bar : TextureProgressBar = $TextureProgressBar

@@ -17,6 +17,7 @@ func _ready():
 	health_component.died.connect(on_died)
 	hurtbox.hit.connect(knockback)
 	disable_timer.timeout.connect(enable_movement)
+	collision_mask |= 1 << 14
 
 
 func _physics_process(delta):

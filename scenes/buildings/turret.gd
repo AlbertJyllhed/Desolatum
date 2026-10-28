@@ -1,4 +1,4 @@
-extends Node2D
+extends Building
 class_name Turret
 
 @export var ammo : int = 45
@@ -14,6 +14,7 @@ var targets : Array[Node2D]
 
 
 func _ready():
+	super._ready()
 	cooldown_timer.wait_time = cooldown
 	cooldown_timer.start()
 

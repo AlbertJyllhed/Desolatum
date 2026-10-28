@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/play.svg")
 extends Node
 class_name TriggerEvent
 

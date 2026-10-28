@@ -16,6 +16,13 @@ func _ready():
 	GameEvents.set_camera_target.connect(set_target)
 
 
+func set_limits(rect: Rect2i):
+	limit_left = rect.position.x * 16
+	limit_top = rect.position.y * 16
+	limit_right = rect.end.x * 16
+	limit_bottom = rect.end.y * 16
+
+
 func set_target(new_target : Node2D):
 	target = new_target
 

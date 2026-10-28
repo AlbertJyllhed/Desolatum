@@ -4,7 +4,6 @@ class_name EquipmentItem
 enum EquipmentType { 
 	gun, 
 	melee,
-	ability,
 	consumable
 }
 
