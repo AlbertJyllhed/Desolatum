@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildingItem" format=3 uid="uid://ro1xufphcqqf"]
+
+[ext_resource type="PackedScene" uid="uid://c8h8q16gs2wqd" path="res://scenes/buildings/electric_fence.tscn" id="1_7p2w6"]
+[ext_resource type="Script" uid="uid://cnn4xenarf4bt" path="res://resources/building_item.gd" id="1_jybw5"]
+
+[resource]
+script = ExtResource("1_jybw5")
+building_scene = ExtResource("1_7p2w6")
+ore_cost = 10
+id = "electric_fence"
+name = "Electric Fence"
+description = "Electrifies and slows down nearby enemies."
+metadata/_custom_type_script = "uid://cnn4xenarf4bt"

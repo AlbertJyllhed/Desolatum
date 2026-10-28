@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://5bacej3p66u8"]
+
+[ext_resource type="Script" uid="uid://cea5xwlctcsdf" path="res://components/build_manager.gd" id="1_et2lu"]
+
+[node name="BuildManager" type="Node2D" unique_id=1848034369]
+script = ExtResource("1_et2lu")
+metadata/_custom_type_script = "uid://cea5xwlctcsdf"

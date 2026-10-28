@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://lvds6lc4b1aw"]
+[gd_scene format=3 uid="uid://lvds6lc4b1aw"]
 
-[ext_resource type="Script" path="res://ui/ammo_ui.gd" id="1_kvr2m"]
+[ext_resource type="Script" uid="uid://dvoqtdfqhv12a" path="res://ui/ammo_ui.gd" id="1_kvr2m"]
 [ext_resource type="Texture2D" uid="uid://cvf67vgvonm4o" path="res://assets/textures/bar.png" id="2_n0ums"]
 [ext_resource type="Texture2D" uid="uid://bhmnjlilgp774" path="res://assets/textures/pistol_icon.png" id="2_scs0k"]
 [ext_resource type="Texture2D" uid="uid://c85f4lbrtkmlc" path="res://assets/textures/bar_overlay.png" id="3_flh0b"]
 [ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_ikkyb"]
 
-[node name="AmmoUI" type="Control"]
+[node name="AmmoUI" type="Control" unique_id=1789383291]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_kvr2m")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=290566409]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -31,7 +31,7 @@ grow_vertical = 0
 texture = ExtResource("2_scs0k")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=11375439]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -51,7 +51,7 @@ text = "100"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1492501679]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

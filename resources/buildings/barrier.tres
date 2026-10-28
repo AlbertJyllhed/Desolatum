@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildingItem" format=3 uid="uid://cgs0gfh7ekios"]
+
+[ext_resource type="PackedScene" uid="uid://ja1paxd2xanj" path="res://scenes/buildings/barrier.tscn" id="1_h4pqj"]
+[ext_resource type="Script" uid="uid://cnn4xenarf4bt" path="res://resources/building_item.gd" id="1_hp4ul"]
+
+[resource]
+script = ExtResource("1_hp4ul")
+building_scene = ExtResource("1_h4pqj")
+ore_cost = 2
+id = "barrier"
+name = "Barrier"
+description = "A sturdy barrier that stops unwanted guests."
+metadata/_custom_type_script = "uid://cnn4xenarf4bt"

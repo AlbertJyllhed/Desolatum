@@ -6,7 +6,6 @@ signal weapon_replaced
 @onready var audio_stream_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var stats : PlayerStats
-var ability : Ability
 var consumable : Consumable
 
 var base_layer : Node2D
@@ -24,7 +23,6 @@ func setup(new_stats : PlayerStats):
 		for item in stats.equipment:
 			add_item(item)
 	
-	if stats.ability_item: add_ability(stats.ability_item)
 	if stats.consumable: add_consumable(stats.consumable)
 
 
@@ -33,12 +31,15 @@ func equip_weapon(weapon_index):
 	for item in items:
 		item.disable(true)
 	
+	if deactivated:
+		return # suspended (e.g. build mode), keep everything disabled
+	
 	items[weapon_index].disable(false)
 	GameEvents.weapons_updated.emit(weapon_index)
 
 
 func next_slot():
-	if index == max_index:
+	if deactivated or index == max_index:
 		return
 	
 	super.next_slot()
@@ -47,7 +48,7 @@ func next_slot():
 
 
 func prev_slot():
-	if index == 0:
+	if deactivated or index == 0:
 		return
 	
 	super.prev_slot()
@@ -74,11 +75,6 @@ func add_item(new_item : Item):
 	index = 0
 	equip_weapon(index)
 	weapon_replaced.emit()
-
-
-func add_ability(new_item : Item):
-	if ability: ability.queue_free()
-	ability = create_equipment_instance(new_item)
 
 
 func add_consumable(new_item : Item):
@@ -118,13 +114,18 @@ func create_equipment_instance(new_item : Item):
 	return weapon
 
 
+func set_suspended(value: bool):
+	deactivate(value) # hides the weapons and blocks scroll switching
+	if value:
+		for item in items:
+			item.disable(true) # stops firing/reloading
+	else:
+		equip_weapon(index) # re-enables only the active weapon
+
+
 func on_item_picked_up(item : Item):
 	#equip a new weapon when its picked up
 	if not item is EquipmentItem:
-		return
-	
-	if item.type == item.EquipmentType.ability:
-		add_ability(item)
 		return
 	
 	if item.type == item.EquipmentType.consumable:

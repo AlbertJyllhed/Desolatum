@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/heart.svg")
 extends Node
 class_name HealthComponent
 
@@ -6,7 +7,9 @@ signal health_changed(health)
 
 @export var blood_particles : PackedScene
 @export var max_health : float = 10
+
 var current_health
+var dead : bool = false
 
 
 func _ready():
@@ -14,6 +17,9 @@ func _ready():
 
 
 func damage(damage_amount : float):
+	if dead or current_health <= 0:
+		return
+	
 	current_health = max(current_health - damage_amount, 0)
 	health_changed.emit(current_health)
 	spawn_particles()
@@ -21,9 +27,10 @@ func damage(damage_amount : float):
 
 
 func check_death():
-	if current_health > 0:
+	if dead or current_health > 0:
 		return
 	
+	dead = true
 	died.emit()
 	owner.queue_free()
 

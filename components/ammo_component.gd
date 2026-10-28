@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/ammunition.svg")
 extends Node
 class_name AmmoComponent
 

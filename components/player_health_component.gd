@@ -14,6 +14,9 @@ func setup(new_stats : PlayerStats):
 
 
 func damage(damage_amount : float):
+	if dead or current_health <= 0:
+		return
+	
 	current_health = max(current_health - damage_amount, 0)
 	stats.player_stats["health"] = current_health
 	health_changed.emit(current_health)
@@ -29,13 +32,16 @@ func heal(heal_amount : float):
 
 
 func check_death():
-	if current_health == 0:
-		died.emit()
-		var ui_layer = get_tree().get_first_node_in_group("ui_layer")
-		var game_over_screen_instance = game_over_screen_scene.instantiate()
-		ui_layer.add_child(game_over_screen_instance)
-		ui_layer.move_child(game_over_screen_instance, 0)
-		owner.queue_free()
+	if dead or current_health > 0:
+		return
+	
+	dead = true
+	died.emit()
+	var ui_layer = get_tree().get_first_node_in_group("ui_layer")
+	var game_over_screen_instance = game_over_screen_scene.instantiate()
+	ui_layer.add_child(game_over_screen_instance)
+	ui_layer.move_child(game_over_screen_instance, 0)
+	owner.queue_free()
 
 
 func on_stats_changed(mods : Dictionary):

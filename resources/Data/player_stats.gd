@@ -29,8 +29,11 @@ var upgrades : Array[UpgradeItem]
 @export var starter_equipment : Array[EquipmentItem]
 var equipment : Array[EquipmentItem]
 
-@export var ability_item : EquipmentItem
+#@export var ability_item : EquipmentItem
 var consumable : EquipmentItem
+
+@export var starter_buildings : Array[BuildingItem]
+var buildings : Array[BuildingItem]
 
 var energy : int = 0
 var ore : int = 0
@@ -60,12 +63,14 @@ func update_stats():
 
 
 func on_item_picked_up(item : Item):
+	if item is BuildingItem and not buildings.has(item):
+		buildings.append(item)
+		return
+	
 	if not item is UpgradeItem:
 		return
 	
 	upgrades.append(item)
-	#for upgrade in upgrades:
-		#print(upgrade.id)
 
 
 func add_upgrades():
@@ -74,6 +79,15 @@ func add_upgrades():
 	
 	for upgrade in upgrades:
 		GameEvents.add_upgrade.emit(upgrade)
+
+
+func spend_ore(amount: int) -> bool:
+	if ore < amount:
+		return false
+	
+	ore -= amount
+	GameEvents.ore_updated.emit(ore)
+	return true
 
 
 func reset():
@@ -86,6 +100,7 @@ func reset():
 	
 	upgrades.clear()
 	equipment = starter_equipment.duplicate()
+	buildings = starter_buildings.duplicate()
 	#for item in equipment:
 		#print(item.name)
 	

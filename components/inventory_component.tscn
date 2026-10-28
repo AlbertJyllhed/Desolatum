@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc5qs4c57n36e"]
+[gd_scene format=3 uid="uid://bc5qs4c57n36e"]
 
-[ext_resource type="Script" path="res://components/inventory_component.gd" id="1_5ujap"]
+[ext_resource type="Script" uid="uid://bkykni28gvb5e" path="res://components/inventory_component.gd" id="1_5ujap"]
 
-[node name="InventoryComponent" type="Node2D"]
+[node name="InventoryComponent" type="Node2D" unique_id=411765244]
 script = ExtResource("1_5ujap")

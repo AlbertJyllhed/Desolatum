@@ -67,6 +67,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="BaseLayer" unique_id=192318516 instance=ExtResource("7_rnirf")]
 position = Vector2(0, -80)
+combat_enabled = false
 
 [node name="TeleportPlatform" parent="BaseLayer" unique_id=1228721553 instance=ExtResource("8_gkuio")]
 position = Vector2(0, -288)

@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/star.svg")
 extends Node
 class_name Upgrade
 
