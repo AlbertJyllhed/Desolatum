@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8c1nb11i1802"]
+[gd_scene format=3 uid="uid://b8c1nb11i1802"]
 
 [ext_resource type="Texture2D" uid="uid://xadi28i86w54" path="res://assets/textures/energy_ui.png" id="1_dsb5h"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_vj8qh"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_vj8qh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qy5p1"]
 

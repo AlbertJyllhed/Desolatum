@@ -19,17 +19,17 @@ func pick_item():
 
 
 func adjust_weights(item_to_adjust):
-	for item in items:
-		if item["item"] != item_to_adjust:
+	for entry in items.duplicate():
+		if entry["item"] != item_to_adjust:
 			var rand_increase = randi_range(0, 1)
-			item["weight"] += rand_increase
+			entry["weight"] += rand_increase
 			weight_sum += rand_increase
 			continue
 		
-		weight_sum -= item["weight"]
-		item["weight"] = 1
-		weight_sum += item["weight"]
-		remove_item(item)
+		weight_sum -= entry["weight"]
+		entry["weight"] = 1
+		weight_sum += entry["weight"]
+		remove_item(entry)
 
 
 func remove_item(item_to_remove):

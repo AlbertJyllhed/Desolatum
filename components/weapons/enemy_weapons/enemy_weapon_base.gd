@@ -10,9 +10,11 @@ signal has_target
 @onready var target_locator_ray : TargetLocatorRay = $TargetLocatorRay
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
+var player: Player
+
 
 func _ready():
-	var player = get_tree().get_first_node_in_group("player")
+	player = get_tree().get_first_node_in_group("player")
 	target_locator_ray.set_target(player)
 
 

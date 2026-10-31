@@ -16,7 +16,7 @@ func timeout():
 	state_machine.transition_to("Wander")
 
 
-func enter(message = {}):
+func enter(_message = {}):
 	state_machine.animation_player.play("idle")
 	enemy_entity.direction = Vector2.ZERO
 	state_machine.timer.start(randf_range(min_transition_time, max_transition_time))

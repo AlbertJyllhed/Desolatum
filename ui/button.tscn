@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ltk0r5nwd7pa"]
+[gd_scene format=3 uid="uid://ltk0r5nwd7pa"]
 
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="1_f15yx"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="1_f15yx"]
 [ext_resource type="StyleBox" uid="uid://0bocruhyu6u1" path="res://resources/styles/button_style_normal.tres" id="2_8kjgk"]
 [ext_resource type="StyleBox" uid="uid://yh17l4xr184e" path="res://resources/styles/button_style_pressed.tres" id="4_phy5d"]
 [ext_resource type="StyleBox" uid="uid://bmsustc6gavrh" path="res://resources/styles/button_style_focused.tres" id="5_2xubx"]
-[ext_resource type="Script" path="res://ui/custom_button.gd" id="5_fwcty"]
+[ext_resource type="Script" uid="uid://cwv66vlagstpv" path="res://ui/custom_button.gd" id="5_fwcty"]
 
 [node name="Button" type="Button"]
 theme_override_colors/font_color = Color(1, 1, 1, 1)

@@ -10,9 +10,12 @@ var direction : Vector2
 var disabled : bool = false
 var aggressive : bool = false
 
+static var all_enemies: Array[EnemyEntity] = []
+
 
 func _ready():
 	super._ready()
+	all_enemies.append(self)
 	add_to_group("enemies")
 	health_component.died.connect(on_died)
 	hurtbox.hit.connect(knockback)
@@ -54,7 +57,12 @@ func move(delta : float):
 		direction = velocity.normalized()
 
 
+func _exit_tree() -> void:
+	all_enemies.erase(self)
+
+
 func on_died():
+	all_enemies.erase(self)
 	remove_from_group("enemies")
 	var camera = get_viewport().get_camera_2d() as PlayerCamera
 	if camera:

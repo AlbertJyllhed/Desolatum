@@ -75,8 +75,8 @@ func update_difficulty():
 	for enemy in enemies:
 		enemy.aggressive = spawn_aggressive
 	
-	var keys = wave_mode.keys()
-	print(keys[index])
+	#var keys = wave_mode.keys()
+	#print(keys[index])
 	
 	wave_timer.start(wave_time)
 	GameEvents.wave_updated.emit(index)

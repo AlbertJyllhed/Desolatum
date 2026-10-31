@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node2d/hand.svg")
 extends Node2D
 
 @onready var attract_area : Area2D = $AttractArea

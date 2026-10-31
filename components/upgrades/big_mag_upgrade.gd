@@ -1,13 +1,10 @@
 extends Upgrade
 
-var player : Player
+
+func apply_upgrade(_upgrade_node : Node2D) -> void:
+	Run.state.add_modifiers({ "ammo" : 0.5, "reload_speed" : 0.4 }, "*")
 
 
-func apply_upgrade(upgrade_node : Node2D):
-	player = upgrade_node as Player
-	player.stats.add_modifiers({ "ammo" : 0.5, "reload_speed" : 0.4 }, "*")
-
-
-func remove_upgrade():
-	player.stats.add_modifiers({ "ammo" : -0.5, "reload_speed" : -0.4 }, "*")
+func remove_upgrade() -> void:
+	Run.state.add_modifiers({ "ammo" : -0.5, "reload_speed" : -0.4 }, "*")
 	super.remove_upgrade()

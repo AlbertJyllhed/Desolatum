@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://blhvfwq1pfxm4"]
+[gd_scene format=3 uid="uid://blhvfwq1pfxm4"]
 
-[ext_resource type="Script" path="res://ui/upgrade_container_ui.gd" id="1_g8080"]
+[ext_resource type="Script" uid="uid://dwn1wa8enfukl" path="res://ui/upgrade_container_ui.gd" id="1_g8080"]
 [ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="2_54b7e"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_1uvye"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="3_1uvye"]
 
 [node name="UpgradeContainerUI" type="Control"]
 layout_mode = 3

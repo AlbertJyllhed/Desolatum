@@ -4,7 +4,10 @@ extends Control
 @onready var nine_patch_rect : NinePatchRect = $NinePatchRect
 @onready var quit_confirmation = $QuitConfirmation
 
-var load_index : int
+enum Levels {
+	SHIP = 0,
+	CAVE = 1,
+}
 
 
 func _ready():
@@ -21,33 +24,11 @@ func set_button_focus():
 
 
 func _on_restart_button_pressed():
-	load_index = 1
-	transition()
+	SceneManager.change_level_with_fade(Levels.CAVE)
 
 
 func _on_return_button_pressed():
-	load_index = 0
-	transition()
-
-
-func transition():
-	var ui_layer = get_tree().get_first_node_in_group("ui_layer")
-	var transition_screen : TransitionScreen
-	for child in ui_layer.get_children():
-		if child is TransitionScreen:
-			transition_screen = child
-			break
-	
-	if not transition_screen:
-		print("error: no transition screen")
-		return
-	
-	transition_screen.fade_complete.connect(on_fade_complete)
-	transition_screen.fade_to_black(true)
-
-
-func on_fade_complete():
-	SceneManager.load_level(load_index)
+	SceneManager.change_level_with_fade(Levels.SHIP)
 
 
 func _on_quit_button_pressed():

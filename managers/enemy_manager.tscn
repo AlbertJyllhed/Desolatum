@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://jpwvtwbpum65"]
+[gd_scene format=3 uid="uid://jpwvtwbpum65"]
 
-[ext_resource type="Script" path="res://managers/enemy_manager.gd" id="1_7gyjg"]
-[ext_resource type="Resource" uid="uid://d488fpt75ddv" path="res://resources/Data/cave_enemy_list.tres" id="2_owjkg"]
+[ext_resource type="Script" uid="uid://b16cq3y5ca6j0" path="res://managers/enemy_manager.gd" id="1_7gyjg"]
+[ext_resource type="Resource" uid="uid://d488fpt75ddv" path="res://resources/data/enemy_lists/cave_enemy_list.tres" id="2_owjkg"]
 
-[node name="EnemyManager" type="Node"]
+[node name="EnemyManager" type="Node" unique_id=1565340141]
 script = ExtResource("1_7gyjg")
 enemy_list = ExtResource("2_owjkg")
 
-[node name="SpawnTimer" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="." unique_id=236808919]
 one_shot = true
 
-[node name="WaveTimer" type="Timer" parent="."]
+[node name="WaveTimer" type="Timer" parent="." unique_id=394350684]
 one_shot = true

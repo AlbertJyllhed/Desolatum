@@ -1,11 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://ds2o8xdqd35kv"]
+[gd_scene format=3 uid="uid://ds2o8xdqd35kv"]
 
 [ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy_entity.tscn" id="1_75bso"]
 [ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="2_5gbct"]
-[ext_resource type="Shader" path="res://resources/shaders/hidden_hit_flash.gdshader" id="2_or8aj"]
+[ext_resource type="Shader" uid="uid://mtoxo3au8skm" path="res://resources/shaders/hidden_hit_flash.gdshader" id="2_or8aj"]
 [ext_resource type="PackedScene" uid="uid://tu01vf838dx" path="res://states/flee.tscn" id="3_fhnva"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="5_75v26"]
-[ext_resource type="Resource" uid="uid://rwyaupgpdrpx" path="res://resources/Data/loot_drop_list.tres" id="5_tgq8l"]
+[ext_resource type="Resource" uid="uid://rwyaupgpdrpx" path="res://resources/data/drop_lists/loot_drop_list.tres" id="5_tgq8l"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="7_jxw8f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bnyc5"]

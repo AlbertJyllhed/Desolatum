@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="UpgradeItem" load_steps=3 format=3 uid="uid://dy2t8danuovc1"]
+[gd_resource type="Resource" script_class="UpgradeItem" format=3 uid="uid://dy2t8danuovc1"]
 
-[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_68ijd"]
+[ext_resource type="Script" uid="uid://bkaheuvgyelfp" path="res://resources/upgrades/upgrade_item.gd" id="1_68ijd"]
 [ext_resource type="PackedScene" uid="uid://cls68c202jidd" path="res://components/upgrades/no_pain_no_gain_upgrade.tscn" id="2_wqqae"]
 
 [resource]

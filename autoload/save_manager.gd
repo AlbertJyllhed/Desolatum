@@ -1,46 +1,30 @@
 extends Node
 
-const SAVE_PATH = "user://save.json"
-
-var player_stats : Resource = preload("res://resources/Data/player_stats.tres")
-
-var global_position = Vector2.ZERO
-var map_name = ""
+const SAVE_PATH := "user://save.json"
+const SAVE_VERSION := 1
 
 
-func save_game():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	var data = {
-		"global_position" :
-		{
-			"x" : global_position.x,
-			"y" : global_position.y
-		},
-		"map_name" : map_name,
-		"player" : 
-		{
-			"health" : player_stats.health,
-			"ammo" : player_stats.ammo,
-			"speed" : player_stats.speed,
-			"energy" : player_stats.energy
-		}
-	}
+func save_game() -> void:
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file == null:
+		push_error("Save failed: %s" % error_string(FileAccess.get_open_error()))
+		return
 	
-	var json_string = JSON.stringify(data)
-	file.store_string(json_string)
-	file.close()
+	file.store_string(JSON.stringify({
+		"version": SAVE_VERSION,
+		"level_index": SceneManager.level_index,
+		"stats": Run.state.to_dict(),
+	}, "\t"))
 
 
-func load_game():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-	var content = file.get_as_text()
-	file.close()
+func load_game() -> bool:
+	if not FileAccess.file_exists(SAVE_PATH):
+		return false
 	
-	var data : Dictionary = JSON.parse_string(content).result
-	global_position = Vector2(data.global_position.x, data.global_position.y)
-	map_name = data.map_name
+	var data = JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
+	if not data is Dictionary:
+		push_warning("Save file is corrupt")
+		return false
 	
-	player_stats.health = data.health
-	player_stats.ammo = data.ammo
-	player_stats.speed = data.speed
-	player_stats.energy = data.energy
+	Run.load_run(data.get("stats", {}))
+	return true

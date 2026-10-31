@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cupc6eyn5o6xv"]
+[gd_scene format=3 uid="uid://cupc6eyn5o6xv"]
 
-[ext_resource type="Script" path="res://ui/time_ui.gd" id="1_ecelo"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="1_ws7de"]
+[ext_resource type="Script" uid="uid://bs7onatff2c1k" path="res://ui/time_ui.gd" id="1_ecelo"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="1_ws7de"]
 
 [node name="TimeUI" type="Control"]
 layout_mode = 3

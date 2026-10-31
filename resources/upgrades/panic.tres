@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="UpgradeItem" load_steps=4 format=3 uid="uid://b1ri54mk2sxbw"]
+[gd_resource type="Resource" script_class="UpgradeItem" format=3 uid="uid://b1ri54mk2sxbw"]
 
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_42pus"]
-[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_p1d8r"]
+[ext_resource type="Script" uid="uid://bkaheuvgyelfp" path="res://resources/upgrades/upgrade_item.gd" id="1_p1d8r"]
 [ext_resource type="PackedScene" uid="uid://cv4mmh1n34afe" path="res://components/upgrades/panic_upgrade.tscn" id="3_mqfon"]
 
 [resource]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://41n4kltx64wg"]
+[gd_scene format=3 uid="uid://41n4kltx64wg"]
 
 [ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_o3d1l"]
-[ext_resource type="Script" path="res://ui/quit_confirmation.gd" id="1_oifvh"]
+[ext_resource type="Script" uid="uid://kuecj4wyn27o" path="res://ui/quit_confirmation.gd" id="1_oifvh"]
 [ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="2_gaddx"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_wo3kd"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_wo3kd"]
 
 [node name="QuitConfirmation" type="Control"]
 layout_mode = 3

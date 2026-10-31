@@ -1,5 +1,7 @@
 extends Node
 
+@warning_ignore_start("unused_signal")
+
 # Player events
 signal item_picked_up(item)
 signal ammo_updated(ammo, max_ammo)
@@ -15,6 +17,7 @@ signal stats_changed(modifiers)
 signal reset_stats
 
 # World events
+signal level_generated
 signal navigation_updated(tile_position, value)
 signal wave_updated(index)
 signal start_wave(index)

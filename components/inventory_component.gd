@@ -43,5 +43,5 @@ func prev_slot():
 	index = max(index - 1, 0)
 
 
-func add_item(new_item : Item):
+func add_item(_new_item : Item):
 	pass

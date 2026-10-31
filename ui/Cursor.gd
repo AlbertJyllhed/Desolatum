@@ -13,7 +13,7 @@ func on_window_size_changed():
 	screen_center = get_viewport_rect().size / 2
 
 
-func _process(delta):
+func _process(_delta):
 	global_position = get_global_mouse_position()
 	if GamepadManager.using_gamepad:
 		global_position = screen_center + GamepadManager.get_aim_direction()

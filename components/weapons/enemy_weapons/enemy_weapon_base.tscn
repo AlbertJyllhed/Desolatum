@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://chu6wx510d7q7"]
+[gd_scene format=3 uid="uid://chu6wx510d7q7"]
 
-[ext_resource type="Script" path="res://components/weapons/enemy_weapons/enemy_weapon_base.gd" id="1_8bn8n"]
+[ext_resource type="Script" uid="uid://c550nv4y6fk1g" path="res://components/weapons/enemy_weapons/enemy_weapon_base.gd" id="1_8bn8n"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="2_3lq11"]
-[ext_resource type="PackedScene" uid="uid://bhoelwsp2sndg" path="res://target_locator_area.tscn" id="2_hkxeg"]
+[ext_resource type="PackedScene" uid="uid://bhoelwsp2sndg" path="res://components/areas/target_locator_area.tscn" id="2_hkxeg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fboq7"]
 radius = 24.0

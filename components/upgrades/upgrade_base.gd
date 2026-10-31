@@ -9,7 +9,7 @@ func _ready():
 	SceneManager.changing_level.connect(remove_upgrade)
 
 
-func apply_upgrade(upgrade_node : Node2D):
+func apply_upgrade(_upgrade_node : Node2D):
 	pass
 
 

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://bh346hr4ji17d"]
+
+[ext_resource type="PackedScene" uid="uid://dawp4moicrfor" path="res://components/weapons/pickaxe.tscn" id="2_8uel7"]
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_85guu"]
+
+[resource]
+script = ExtResource("2_85guu")
+type = 1
+equipment_scene = ExtResource("2_8uel7")
+id = "pickaxe"
+name = "Pickaxe"
+description = "Great for mining, also useful when ammo is low"
+amount = 1
+pickup_type = 0
+drop_weight = 1

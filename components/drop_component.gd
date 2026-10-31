@@ -8,8 +8,8 @@ extends Node
 @export var drop_list : DropList
 var drop_amount
 
-var pickup : PackedScene = preload("res://scenes/pickups/pickup.tscn")
-var auto_pickup : PackedScene = preload("res://scenes/pickups/auto_pickup.tscn")
+var pickup : PackedScene = preload("res://components/pickups/pickup.tscn")
+var auto_pickup : PackedScene = preload("res://components/pickups/auto_pickup.tscn")
 
 
 func _ready():
