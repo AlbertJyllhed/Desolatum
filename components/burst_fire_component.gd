@@ -13,11 +13,8 @@ func _ready():
 	bursts = max_bursts
 
 
-func _physics_process(_delta):
-	if Input.is_action_just_pressed("attack"):
-		if not ready_to_shoot:
-			return
-		
+func process_trigger(just_pressed: bool, _held: bool) -> void:
+	if just_pressed and ready_to_shoot:
 		fire()
 		burst_timer.start(burst_interval)
 

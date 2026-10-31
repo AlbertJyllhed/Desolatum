@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://hm3wwqimeisn"]
+[gd_scene format=3 uid="uid://hm3wwqimeisn"]
 
-[ext_resource type="Script" path="res://ui/fps_counter.gd" id="1_3j0cj"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_bjpbq"]
+[ext_resource type="Script" uid="uid://b1mij3lbyrj04" path="res://ui/fps_counter.gd" id="1_3j0cj"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_bjpbq"]
 
 [node name="FPSCounter" type="Control"]
 layout_mode = 3

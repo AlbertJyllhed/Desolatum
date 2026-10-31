@@ -5,15 +5,15 @@ var state_machine : StateMachine
 var interruptible : bool = true
 
 
-func physics_update(delta):
+func physics_update(_delta):
 	pass
 
 
-func body_entered(body):
+func body_entered(_body):
 	pass
 
 
-func body_exited(body):
+func body_exited(_body):
 	pass
 
 
@@ -21,7 +21,7 @@ func timeout():
 	pass
 
 
-func enter(message = {}):
+func enter(_message = {}):
 	pass
 
 

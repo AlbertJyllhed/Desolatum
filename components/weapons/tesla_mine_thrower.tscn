@@ -1,32 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://suscde7igcyw"]
+[gd_scene format=3 uid="uid://suscde7igcyw"]
 
-[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://player_weapon_base.tscn" id="1_vtc1f"]
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://components/weapons/player_weapon_base.tscn" id="1_vtc1f"]
 [ext_resource type="PackedScene" uid="uid://b63err5lwk6fn" path="res://components/single_fire_component.tscn" id="2_0nx7o"]
 [ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/gun_component.tscn" id="3_eualm"]
-[ext_resource type="PackedScene" uid="uid://dd0wyg7osw55v" path="res://scenes/buildings/lightning_mine.tscn" id="4_3crg6"]
 [ext_resource type="AudioStream" uid="uid://b1no86fo8mucp" path="res://sounds/pickaxe/swish-1.wav" id="5_1qfvi"]
 [ext_resource type="PackedScene" uid="uid://d2bqfjunuovrn" path="res://components/recharge_component.tscn" id="6_epw3p"]
 [ext_resource type="Texture2D" uid="uid://kvgdc11yxunm" path="res://assets/textures/mine.png" id="7_qdut6"]
 
-[node name="TeslaMineThrower" node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_vtc1f")]
+[node name="TeslaMineThrower" unique_id=321133783 node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_vtc1f")]
 firing_component = NodePath("SingleFireComponent")
 weapon_component = NodePath("Pivot/GunComponent")
 ammo_component = NodePath("RechargeComponent")
 
-[node name="SingleFireComponent" parent="." index="0" instance=ExtResource("2_0nx7o")]
+[node name="SingleFireComponent" parent="." index="0" unique_id=143195789 instance=ExtResource("2_0nx7o")]
 base_cooldown = 0.5
-cooldown = 0.5
 
-[node name="RechargeComponent" parent="." index="1" instance=ExtResource("6_epw3p")]
+[node name="RechargeComponent" parent="." index="1" unique_id=294789801 instance=ExtResource("6_epw3p")]
 base_ammo = 4
 base_reload_time = 10.0
 
-[node name="GunComponent" parent="Pivot" index="0" instance=ExtResource("3_eualm")]
-projectile = ExtResource("4_3crg6")
-base_projectile_deviation = 0.0
-base_projectile_speed = 50.0
+[node name="GunComponent" parent="Pivot" index="0" unique_id=1651468666 instance=ExtResource("3_eualm")]
+bullet_scene = null
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="0"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Pivot/GunComponent/AudioPlayerComponent" index="0" unique_id=164259881]
 stream = ExtResource("5_1qfvi")
 
 [node name="WeaponSprite" parent="Pivot" index="1"]

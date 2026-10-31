@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://imwty12o6eua"]
-
-[ext_resource type="PackedScene" uid="uid://chn1mor0yopqh" path="res://consumables/consumable_base.tscn" id="1_cx5l2"]
-[ext_resource type="Script" path="res://consumables/health_kit.gd" id="2_4u1x2"]
-
-[node name="HealthKit" instance=ExtResource("1_cx5l2")]
-script = ExtResource("2_4u1x2")
-heal_amount = 4.0

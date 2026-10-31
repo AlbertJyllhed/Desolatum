@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0hapuf88hnr2"]
+[gd_scene format=3 uid="uid://d0hapuf88hnr2"]
 
 [ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_ptg3t"]
-[ext_resource type="Script" path="res://ui/text_box.gd" id="1_ybkxj"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_bduta"]
+[ext_resource type="Script" uid="uid://b4pphkc517318" path="res://ui/text_box.gd" id="1_ybkxj"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_bduta"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kicbv"]
 light_mode = 1

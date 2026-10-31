@@ -1,22 +1,21 @@
 extends CharacterBody2D
 class_name Player
 
-var move_speed = 80
-@export var acceleration = 600
-@export var friction = 500
+var move_speed : float = 80
+@export var acceleration : float = 600
+@export var friction : float = 500
 @export var combat_enabled : bool = true
 
-@onready var health_component : HealthComponent = $HealthComponent
+@onready var health_component : PlayerHealthComponent = $HealthComponent
 @onready var energy_gain_component : EnergyGainComponent = $EnergyGainComponent
+@onready var build_manager : BuildManager = $BuildManager
 @onready var footstep_component : FootstepComponent = $FootstepComponent
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 @onready var flash_light : FlashLight = $FlashLight
 
-var stats : PlayerStats = preload("res://resources/Data/player_stats.tres")
 var inventory_scene = preload("res://components/weapon_inventory_component.tscn")
 var inventory_instance : WeaponInventoryComponent
-var build_manager : BuildManager
 
 
 func _ready():
@@ -25,28 +24,25 @@ func _ready():
 	if combat_enabled:
 		setup_combat()
 	
-	health_component.setup(stats)
-	energy_gain_component.setup(stats)
+	health_component.setup()
+	energy_gain_component.setup()
 	var camera = get_viewport().get_camera_2d() as PlayerCamera
 	camera.set_target(self)
-	stats.update_stats()
-	stats.add_upgrades()
+	Run.state.update_stats()
+	Run.state.add_upgrades()
 	collision_mask |= 1 << 14
 
 
 func setup_combat():
 	setup_inventory()
-	build_manager = BuildManager.new()
-	build_manager.name = "BuildManager"
-	add_child(build_manager)
-	build_manager.setup(stats, inventory_instance)
+	build_manager.setup(inventory_instance)
 
 
 func setup_inventory():
-	inventory_instance = inventory_scene.instantiate()
+	inventory_instance = inventory_scene.instantiate() as WeaponInventoryComponent
 	add_child(inventory_instance)
 	inventory_instance.global_position = global_position
-	inventory_instance.setup(stats)
+	inventory_instance.setup()
 
 
 func _physics_process(delta):
@@ -58,9 +54,7 @@ func _physics_process(delta):
 	animation_tree.set("parameters/walk/blend_position", aim_vector)
 	
 	# Get the input direction and handle the movement/deceleration.
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	var input_vector := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	input_vector = input_vector.normalized()
 	
 	if input_vector != Vector2.ZERO:
@@ -77,8 +71,7 @@ func _physics_process(delta):
 
 
 func on_stats_changed(mods : Dictionary):
-	move_speed = mods["move_speed"].get_values(stats.base_move_speed)
-	#move_speed = (stats.base_move_speed + mods["move_speed"][0]) * mods["move_speed"][1]
+	move_speed = mods["move_speed"].get_values(Run.config.base_move_speed)
 
 
 func set_active(value : bool):

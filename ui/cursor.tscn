@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c11eblksds3j"]
+[gd_scene format=3 uid="uid://c11eblksds3j"]
 
-[ext_resource type="Script" path="res://ui/Cursor.gd" id="1_pfjnp"]
+[ext_resource type="Script" uid="uid://bbu1u5sdcmwms" path="res://ui/cursor.gd" id="1_pfjnp"]
 [ext_resource type="Texture2D" uid="uid://b4huc35vsk752" path="res://assets/textures/cursor.png" id="2_62w7k"]
 
 [node name="Cursor" type="Control"]

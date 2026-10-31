@@ -8,7 +8,7 @@ class_name FlashLight
 @onready var proximity_sensor : ProximitySensor = $ProximitySensorArea
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("flashlight"):
 		toggle_light()
 	
@@ -22,4 +22,3 @@ func _physics_process(delta):
 func toggle_light():
 	light.enabled = !light.enabled
 	proximity_sensor.enable_alarm(!light.enabled)
-	print(proximity_sensor.alarm_enabled)

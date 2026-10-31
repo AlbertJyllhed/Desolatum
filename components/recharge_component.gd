@@ -3,14 +3,7 @@ extends AmmoComponent
 
 func _ready():
 	ammo = max_ammo
-	GameEvents.ammo_updated.emit(ammo, max_ammo)
-
-
-func disable(value : bool):
-	disabled = value
-	if disabled:
-		return
-	
+	reload_while_holstered = true
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
 
 
@@ -22,6 +15,10 @@ func use_ammo():
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
 	reload_timer.start(reload_time)
 	has_ammo.emit()
+
+
+func reload() -> void:
+	pass # recharges passively, no manual reload
 
 
 func _on_reload_timer_timeout():

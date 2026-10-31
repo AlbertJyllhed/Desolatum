@@ -7,7 +7,6 @@ class_name BuildManager
 const GROUND_SOURCE := 0
 const CHARACTER_MASK := 2 | 4 # player + enemy layers
 
-var stats : PlayerStats
 var inventory : WeaponInventoryComponent
 var tilemap : TileMap
 var base_layer : Node2D
@@ -30,8 +29,7 @@ func _ready():
 	set_physics_process(false) # stays off until setup (e.g. in the ship hub)
 
 
-func setup(new_stats : PlayerStats, new_inventory : WeaponInventoryComponent):
-	stats = new_stats
+func setup(new_inventory : WeaponInventoryComponent):
 	inventory = new_inventory
 	tilemap = get_tree().get_first_node_in_group("tilemap_layer")
 	base_layer = get_tree().get_first_node_in_group("base_layer")
@@ -59,7 +57,7 @@ func _physics_process(_delta):
 
 
 func set_active(value : bool):
-	if value and stats.buildings.is_empty():
+	if value and Run.state.buildings.is_empty():
 		return
 	
 	active = value
@@ -71,12 +69,12 @@ func set_active(value : bool):
 
 
 func select(new_index : int):
-	index = wrapi(new_index, 0, stats.buildings.size())
-	GameEvents.building_selected.emit(stats.buildings[index])
+	index = wrapi(new_index, 0, Run.state.buildings.size())
+	GameEvents.building_selected.emit(Run.state.buildings[index])
 
 
 func update_ghost():
-	var item := stats.buildings[index]
+	var item := Run.state.buildings[index]
 	var aim := get_global_mouse_position()
 	if GamepadManager.using_gamepad:
 		aim = global_position + GamepadManager.get_aim_direction()
@@ -91,7 +89,7 @@ func update_ghost():
 
 
 func can_place(tile : Vector2i, item : BuildingItem) -> bool:
-	if stats.ore < item.ore_cost:
+	if Run.state.ore < item.ore_cost:
 		return false
 	if tilemap.get_cell_source_id(0, tile) != GROUND_SOURCE:
 		return false
@@ -113,8 +111,8 @@ func can_place(tile : Vector2i, item : BuildingItem) -> bool:
 
 
 func place():
-	var item := stats.buildings[index]
-	if not stats.spend_ore(item.ore_cost):
+	var item := Run.state.buildings[index]
+	if not Run.state.spend_ore(item.ore_cost):
 		return
 	
 	var building := item.building_scene.instantiate() as Node2D

@@ -7,12 +7,17 @@ extends Control
 
 var paused : bool = false
 
+enum Levels {
+	SHIP = 0,
+	CAVE = 1,
+}
+
 
 func _ready():
 	options_menu.menu_closed.connect(set_button_focus)
 	quit_confirmation.menu_closed.connect(set_button_focus)
-	var index = SceneManager.level_index
-	if index == 0:
+	var index := SceneManager.level_index
+	if index == Levels.SHIP:
 		return_button.hide()
 
 
@@ -40,23 +45,7 @@ func _on_resume_button_pressed():
 
 func _on_return_button_pressed():
 	pause()
-	var ui_layer = get_tree().get_first_node_in_group("ui_layer")
-	var transition_screen : TransitionScreen
-	for child in ui_layer.get_children():
-		if child is TransitionScreen:
-			transition_screen = child
-			break
-	
-	if not transition_screen:
-		print("error: no transition screen")
-		return
-	
-	transition_screen.fade_complete.connect(on_fade_complete)
-	transition_screen.fade_to_black(true)
-
-
-func on_fade_complete():
-	SceneManager.load_level(0)
+	SceneManager.change_level_with_fade(Levels.SHIP)
 
 
 func _on_settings_button_pressed():

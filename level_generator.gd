@@ -9,33 +9,23 @@ class_name LevelGenerator
 ##      flood fill. If the level got cut apart, steps 1-3 are retried.
 ##   4. The end room is the room farthest from the start by walking distance.
 ##   5. Crates, props and enemy spawners are placed.
-##   6. Ceiling, bedrock, walls and ore are built.
+##   6. Ceiling, bedrock and walls are built, then energy and ore are scattered
+##      in the rock. Energy is budgeted from the cost of the shops (see below).
 ##   7. Scenes are instantiated.
 ##
 ## Everything random goes through Godot's global RNG, which generate() seeds,
 ## so the same seed always produces the same level.
 
 const PLAYER_SCENE = preload("res://characters/player.tscn")
-const TELEPORTER_SCENE = preload("res://scenes/props/teleport_platform.tscn")
-const GENERATOR_SCENE = preload("res://scenes/props/generator.tscn")
+const TELEPORTER_SCENE = preload("res://components/props/teleport_platform.tscn")
+const GENERATOR_SCENE = preload("res://components/props/generator.tscn")
 const SPAWNER_SCENE = preload("res://enemy_spawner.tscn")
-const CAR_SCENE = preload("res://scenes/props/car.tscn")
+const CAR_SCENE = preload("res://components/props/car.tscn")
 const MAP_TEXTURE_INSTANCER_SCENE = preload("res://map_texture_instancer.tscn")
 
-## TileSet source ids.
-enum Tile {
-	GROUND = 0,
-	CEILING = 1,
-	WALL = 2,
-	BEDROCK = 3,
-	SHIP_WALL = 6,
-	SHIP_CEILING = 7,
-	SHADOW = 14,
-	NONE = -1,
-}
-
-const LAYER_BASE := 0
-const LAYER_OVERLAY := 1
+const Tile = Tiles.Id
+const LAYER_BASE := Tiles.LAYER_BASE
+const LAYER_OVERLAY := Tiles.LAYER_OVERLAY
 
 const CARDINALS: Array[Vector2i] = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 ## The 8 tiles around a tile, in circular order starting at the top. Neighbours
@@ -50,17 +40,17 @@ const SMOOTH_ERODE_MAX_NEIGHBORS := 3  # floor with at most this many floor neig
 
 const OVERLAY_NOISE_FREQUENCY := 0.2
 const OVERLAY_NOISE_THRESHOLD := 0.2
-const ORE_NOISE_FREQUENCY := 0.24
-const ORE_NOISE_THRESHOLD := 0.6
-const ORE_MAX_VEIN_SIZE := 6
-const ORE_VEIN_STOP_CHANCE := 0.1
+## Column in the ceiling/wall atlases that holds each mineral (tile custom data
+## ore_type 1 = energy, 2 = ore).
+const ENERGY_ATLAS_X := 1
+const ORE_ATLAS_X := 2
 const MIN_RELAXED_SPACING := 2  # placement spacing is never relaxed below this
 const CAR_SPACING := 5          # keep the car this far from the start and end rooms
 
 @export var tilemap: TileMap
 @export var enemy_manager: EnemyManager
 @export var prop_list: EnemyList
-@export var crate_list: EnemyList
+@export var crate_list: PropList
 @export var dust_scene: PackedScene
 ## Parent for everything that gets spawned. If empty, the first node in the
 ## "base_layer" group is used.
@@ -119,6 +109,37 @@ const CAR_SPACING := 5          # keep the car this far from the start and end r
 ## on if it has collision that should be kept from blocking a passage.
 @export var teleporter_is_solid: bool = false
 
+@export_group("Energy")
+## Energy tiles placed = the combined energy cost of the crate shops * this. Crystal
+## clusters and enemy drops come on top, so 1.0 already leaves some slack.
+@export var energy_surplus: float = 1.25
+## Floor for levels with few or no shops.
+@export var min_energy_tiles: int = 0
+## Every vein starts on a tile that touches the floor, then grows into the rock.
+## This is how deep (in tiles from the floor) it may grow. 1 = along the wall face only.
+@export var energy_max_depth: int = 3
+## Tiles per vein, including the starting tile.
+@export var energy_vein_size := Vector2i(2, 4)
+## Minimum distance (tiles) between vein starting points. Relaxed if there is no room.
+@export var energy_min_spacing: int = 6
+## Lower = smoother, more sweeping veins. Higher = more ragged.
+@export var energy_noise_frequency: float = 0.2
+
+@export_group("Ore")
+## Ore tiles hidden in the walls. Ore pays for buildings, so this is much more
+## common than energy. Each tile gives 1 ore.
+@export var ore_amount: int = 80
+## How many tiles deep into the rock ore may hide. 1 = only tiles touching the floor.
+@export var ore_max_depth: int = 3
+## Tiles per cluster. Clusters grow along the noise, so they come out irregular.
+@export var ore_vein_size := Vector2i(8, 16)
+## Minimum distance (tiles) between cluster centres. Relaxed if there is no room.
+@export var ore_min_spacing: int = 8
+## Lower = bigger, smoother blobs. Higher = more, smaller patches.
+@export var ore_noise_frequency: float = 0.12
+## Ore never spawns closer than this (tiles) to an energy tile.
+@export var ore_energy_clearance: int = 3
+
 @export_group("Room Settings")
 ## Chance that a walker leaves a room behind when it turns.
 @export_range(0.0, 1.0, 0.01) var room_chance: float = 0.5
@@ -172,6 +193,7 @@ var reserved_cells := {}                  # Vector2i -> true. Cells that must st
 var solid_cells := {}                     # Vector2i -> true. Cells covered by solid objects.
 var car_positions: Array[Vector2i] = []   # top-left cell of each footprint
 var crate_positions: Array[Vector2i] = []
+var crate_items: Array[PropItem] = []     # what stands on each crate position
 var prop_positions: Array[Vector2i] = []
 var spawner_positions: Array[Vector2i] = []
 
@@ -227,8 +249,9 @@ func generate(new_seed: int) -> void:
 	_create_ceiling(Tile.BEDROCK, 2)
 	_create_walls(Tile.CEILING, Tile.WALL)
 	_create_walls(Tile.SHIP_CEILING, Tile.SHIP_WALL)
-	_create_ore()
+	_scatter_minerals()
 	_populate_level()
+	GameEvents.level_generated.emit()
 
 	# The level is done; don't leave gameplay randomness tied to the level seed.
 	randomize()
@@ -251,6 +274,7 @@ func _reset_state(clear_tiles: bool) -> void:
 	solid_cells.clear()
 	car_positions.clear()
 	crate_positions.clear()
+	crate_items.clear()
 	prop_positions.clear()
 	spawner_positions.clear()
 
@@ -691,7 +715,12 @@ func _find_tile_positions() -> void:
 	# Order matters: each category keeps its distance from the ones before it.
 	# The car is the biggest thing, so it gets first pick of the spots.
 	car_positions = _pick_positions("car", 1, car_size, CAR_SPACING, 8, true)
-	crate_positions = _pick_positions("crates", crate_amount, crate_size, 8, 0, true)
+	crate_positions = _pick_positions("crates", crate_amount if crate_list != null else 0, crate_size, 8, 0, true)
+	# Decide what each crate is now, so _shop_energy_cost() knows the energy budget
+	# before the minerals are scattered.
+	crate_items.clear()
+	for i in crate_positions.size():
+		crate_items.append(crate_list.spawn_table.pick_item())
 	prop_positions = _pick_positions("props", prop_amount, prop_size, 4, 1, true)
 	spawner_positions = _pick_positions("spawners", spawner_amount, Vector2i.ONE, 3, 8, false)
 
@@ -844,48 +873,191 @@ func _create_walls(ceiling_type: int, wall_type: int) -> void:
 		tilemap.set_cell(LAYER_OVERLAY, below, Tile.SHADOW, Vector2i.ZERO)
 
 
-func _create_ore() -> void:
-	var noise := _make_noise(ORE_NOISE_FREQUENCY)
+## Energy first, so it gets the pick of the rock and the shop budget is always met.
+## Ore then goes into whatever rock is left, away from the energy.
+func _scatter_minerals() -> void:
+	var shop_cost := _shop_energy_cost()
+	var energy_target := maxi(ceili(shop_cost * energy_surplus), min_energy_tiles)
+	_log("shops cost %d energy" % shop_cost)
 
-	# Seeds: ceiling/wall tiles next to the floor where the noise is high.
-	var ore_cells: Array[Vector2i] = []
-	for source_id in [Tile.CEILING, Tile.WALL]:
-		for cell in tilemap.get_used_cells_by_id(LAYER_BASE, source_id):
-			if noise.get_noise_2d(cell.x, cell.y) <= ORE_NOISE_THRESHOLD:
-				continue
-			if not _touches_ground(cell):
-				continue
-			_set_ore(cell)
-			ore_cells.append(cell)
+	# Every vein starts on rock that touches the floor (depth 1), so there is always
+	# energy that needs no digging. From there it grows into the rock in any
+	# direction, following the noise. Starting points are random so the energy is
+	# spread evenly over the map instead of bunching up on the noise peaks.
+	var energy_cells := _scatter_in_rock(
+		"energy", energy_target, ENERGY_ATLAS_X, energy_vein_size, energy_min_spacing,
+		_rock_candidates(1), _rock_candidates(maxi(energy_max_depth, 1)),
+		_make_vein_noise(energy_noise_frequency), false
+	)
 
-	# Veins: each seed spreads into a few random neighbouring rock tiles.
-	for seed_cell in ore_cells:
-		var vein_size := 0
-		while vein_size < ORE_MAX_VEIN_SIZE:
-			var neighbor: Vector2i = tilemap.get_surrounding_cells(seed_cell).pick_random()
-			var neighbor_id := tilemap.get_cell_source_id(LAYER_BASE, neighbor)
-			if neighbor_id == Tile.CEILING or neighbor_id == Tile.WALL:
-				_set_ore(neighbor)
-				vein_size += 1
+	# Built after the energy is placed, so energy tiles are no longer plain rock.
+	# Ore starts on the noise peaks, so it forms a few big natural clusters.
+	var ore_rock := _rock_candidates(ore_max_depth)
+	_block_around(energy_cells, ore_energy_clearance, ore_rock)
+	_scatter_in_rock(
+		"ore", ore_amount, ORE_ATLAS_X, ore_vein_size, ore_min_spacing,
+		ore_rock, ore_rock, _make_vein_noise(ore_noise_frequency), true
+	)
 
-			if randf() < ORE_VEIN_STOP_CHANCE:
+
+## Noise for growing veins. Two octaves roughen the edges so veins don't look like
+## smooth blobs.
+func _make_vein_noise(frequency: float) -> FastNoiseLite:
+	var noise := _make_noise(frequency)
+	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+	noise.fractal_octaves = 2
+	return noise
+
+
+## Total energy the crate shops on this level charge.
+func _shop_energy_cost() -> int:
+	var total := 0
+	for item in crate_items:
+		total += item.energy_cost
+	return total
+
+
+## Hides [param target] tiles of a mineral in the rock, as veins whose starting
+## points keep their distance from each other. That spreads the mineral over the
+## whole map, so the player has to explore to collect it all. If there isn't room,
+## the spacing is relaxed step by step.
+##
+## [param starts] holds the tiles a vein may start on and [param free_rock] the tiles
+## it may grow into (both are cell -> true; they may be the same dictionary). Veins
+## grow along [param noise]. If [param starts_follow_noise] is on, the highest noise
+## values are tried first as starting points, otherwise they are random.
+## Placed tiles are removed from [param free_rock]. Returns the tiles placed.
+func _scatter_in_rock(
+	label: String, target: int, atlas_x: int, vein_size: Vector2i, min_spacing: int,
+	starts: Dictionary, free_rock: Dictionary, noise: FastNoiseLite, starts_follow_noise: bool
+) -> Array[Vector2i]:
+	var placed: Array[Vector2i] = []
+	if target <= 0:
+		return placed
+
+	var order: Array = starts.keys()
+	if starts_follow_noise:
+		order.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
+			return noise.get_noise_2d(a.x, a.y) > noise.get_noise_2d(b.x, b.y))
+	else:
+		order.shuffle()
+
+	var low := maxi(vein_size.x, 1)
+	var high := maxi(vein_size.y, low)
+	var seeds: Array[Vector2i] = []
+	var spacing := min_spacing
+	while placed.size() < target and spacing >= 0:
+		for cell in order:
+			if placed.size() >= target:
 				break
+			if not free_rock.has(cell) or not _far_from_all(cell, seeds, spacing):
+				continue
+			seeds.append(cell)
+			var wanted := mini(randi_range(low, high), target - placed.size())
+			placed.append_array(_grow_vein(cell, wanted, atlas_x, free_rock, noise))
+		spacing -= 1
+
+	if placed.size() < target:
+		push_warning("LevelGenerator: placed only %d of %d %s tiles (seed %d)." % [
+			placed.size(), target, label, current_seed
+		])
+	_log("%s: %d/%d" % [label, placed.size(), target])
+	return placed
 
 
-func _touches_ground(cell: Vector2i) -> bool:
-	for neighbor in tilemap.get_surrounding_cells(cell):
-		if tilemap.get_cell_source_id(LAYER_BASE, neighbor) == Tile.GROUND:
-			return true
-	return false
+## Plain ceiling and wall tiles (no mineral yet) that are at most [param max_depth]
+## steps from the floor. A flood fill starts at every ground tile and spreads
+## through rock, so the depth is the number of tiles the player has to dig through.
+func _rock_candidates(max_depth: int) -> Dictionary:
+	var depth := {}
+	var queue: Array[Vector2i] = []
+	for cell in tilemap.get_used_cells_by_id(LAYER_BASE, Tile.GROUND):
+		depth[cell] = 0
+		queue.append(cell)
+
+	var index := 0
+	while index < queue.size():
+		var cell := queue[index]
+		index += 1
+		if depth[cell] >= max_depth:
+			continue
+		for dir in CARDINALS:
+			var next: Vector2i = cell + dir
+			if depth.has(next):
+				continue
+			var id := tilemap.get_cell_source_id(LAYER_BASE, next)
+			if id != Tile.CEILING and id != Tile.WALL:
+				continue
+			depth[next] = depth[cell] + 1
+			queue.append(next)
+
+	var result := {}
+	for cell in depth:
+		# Atlas column 0 is plain rock. Anything else already holds a mineral.
+		if depth[cell] > 0 and tilemap.get_cell_atlas_coords(LAYER_BASE, cell).x == 0:
+			result[cell] = true
+	return result
 
 
-func _set_ore(cell: Vector2i) -> void:
+## Removes every rock tile closer than [param radius] tiles to one of [param cells].
+func _block_around(cells: Array[Vector2i], radius: int, free_rock: Dictionary) -> void:
+	if radius <= 0:
+		return
+
+	var radius_sq := radius * radius
+	for cell in cells:
+		for y in range(-radius, radius + 1):
+			for x in range(-radius, radius + 1):
+				if x * x + y * y < radius_sq:
+					free_rock.erase(cell + Vector2i(x, y))
+
+
+## Grows up to [param size] connected rock tiles from [param start]. Best-first:
+## it always claims the neighbouring tile with the highest noise value next, so
+## the vein follows the shape of the noise instead of a circle, in any direction.
+## Placed tiles are removed from [param free_rock]. Returns them.
+func _grow_vein(
+	start: Vector2i, size: int, atlas_x: int, free_rock: Dictionary, noise: FastNoiseLite
+) -> Array[Vector2i]:
+	var vein: Array[Vector2i] = []
+	var frontier := {start: true}
+	while vein.size() < size and not frontier.is_empty():
+		var best: Vector2i = start
+		var best_value := -INF
+		for cell in frontier:
+			var value := noise.get_noise_2d(cell.x, cell.y)
+			if value > best_value:
+				best_value = value
+				best = cell
+
+		frontier.erase(best)
+		_set_mineral(best, atlas_x)
+		free_rock.erase(best)
+		vein.append(best)
+		for dir in CARDINALS:
+			var next: Vector2i = best + dir
+			if free_rock.has(next):
+				frontier[next] = true
+	return vein
+
+
+func _far_from_all(cell: Vector2i, points: Array[Vector2i], spacing: int) -> bool:
+	var min_distance_sq := spacing * spacing
+	for other in points:
+		if (cell - other).length_squared() < min_distance_sq:
+			return false
+	return true
+
+
+## Ceilings swap to the mineral's atlas column. Walls do too, plus the matching cap
+## on the overlay layer (row 1) so the top of the wall looks right.
+func _set_mineral(cell: Vector2i, atlas_x: int) -> void:
 	match tilemap.get_cell_source_id(LAYER_BASE, cell):
 		Tile.CEILING:
-			tilemap.set_cell(LAYER_BASE, cell, Tile.CEILING, Vector2i(1, 0))
+			tilemap.set_cell(LAYER_BASE, cell, Tile.CEILING, Vector2i(atlas_x, 0))
 		Tile.WALL:
-			tilemap.set_cell(LAYER_BASE, cell, Tile.WALL, Vector2i(1, 0))
-			tilemap.set_cell(LAYER_OVERLAY, cell, Tile.CEILING, Vector2i(1, 1))
+			tilemap.set_cell(LAYER_BASE, cell, Tile.WALL, Vector2i(atlas_x, 0))
+			tilemap.set_cell(LAYER_OVERLAY, cell, Tile.CEILING, Vector2i(atlas_x, 1))
 
 
 # ---------------------------------------------------------------------------
@@ -908,8 +1080,12 @@ func _populate_level() -> void:
 	for anchor in car_positions:
 		create_instance(CAR_SCENE, _rect_to_world(Rect2i(anchor, car_size)))
 
-	for anchor in crate_positions:
-		create_instance(crate_list.spawn_table.pick_item(), _rect_to_world(Rect2i(anchor, crate_size)))
+	for i in crate_items.size():
+		var item := crate_items[i]
+		var crate := create_instance(item.scene, _rect_to_world(Rect2i(crate_positions[i], crate_size)))
+		# The item is the single source of truth for the price.
+		if "required_energy" in crate:
+			crate.set("required_energy", item.energy_cost)
 
 	for cell in spawner_positions:
 		var spawner := create_instance(SPAWNER_SCENE, _cell_to_world(cell))
@@ -923,8 +1099,8 @@ func _populate_level() -> void:
 
 func create_instance(scene: PackedScene, world_position: Vector2) -> Node2D:
 	var instance := scene.instantiate() as Node2D
+	instance.position = world_position
 	base_layer.add_child(instance)
-	instance.global_position = world_position
 	return instance
 
 

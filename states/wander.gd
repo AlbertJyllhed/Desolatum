@@ -18,7 +18,7 @@ func timeout():
 	state_machine.transition_to("Idle")
 
 
-func enter(message = {}):
+func enter(_message = {}):
 	state_machine.animation_player.play("walk_right")
 	state_machine.timer.start(randf_range(min_update_time, max_update_time))
 	var wander_vector = Vector2(randf_range(-wander_range, wander_range), randf_range(-wander_range, wander_range))

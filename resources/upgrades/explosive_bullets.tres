@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="UpgradeItem" load_steps=3 format=3 uid="uid://dmlp2d51mq285"]
+[gd_resource type="Resource" script_class="UpgradeItem" format=3 uid="uid://dmlp2d51mq285"]
 
-[ext_resource type="Script" path="res://resources/upgrade_item.gd" id="1_0e2bf"]
+[ext_resource type="Script" uid="uid://bkaheuvgyelfp" path="res://resources/upgrades/upgrade_item.gd" id="1_0e2bf"]
 [ext_resource type="PackedScene" uid="uid://dmdgvhxeshd86" path="res://components/upgrades/explosive_bullets.tscn" id="2_ow7qu"]
 
 [resource]

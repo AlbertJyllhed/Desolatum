@@ -6,17 +6,19 @@ signal has_ammo
 signal reloading(time)
 signal cancel_reload
 
-@export var base_ammo : int = 10
-var max_ammo : int = 10
+@export var base_ammo: int = 10
+var max_ammo: int = 10
 
-@export_range(0.1, 10.0, 0.1, "or_greater") var base_reload_time : float = 0.2
-var reload_time : float = 0.2
+@export_range(0.1, 10.0, 0.1, "or_greater") var base_reload_time: float = 0.2
+var reload_time: float = 0.2
 
-@onready var no_ammo_sound : AudioStreamPlayer2D = $NoAmmoSound
-@onready var reload_timer = $ReloadTimer
+@export var reload_while_holstered: bool = false
 
-var ammo : int = 0
-var disabled : bool = false
+@onready var no_ammo_sound: AudioStreamPlayer2D = $NoAmmoSound
+@onready var reload_timer: Timer = $ReloadTimer
+
+var ammo: int = 0
+var disabled: bool = false
 
 
 func _ready():
@@ -24,25 +26,16 @@ func _ready():
 	ammo = max_ammo
 	reload_time = base_reload_time
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
-	GameEvents.stats_changed.connect(on_stats_changed)
-	#GameEvents.item_picked_up.connect(on_item_picked_up)
 
 
-func disable(value : bool):
-	disabled = value
+func set_active(value : bool) -> void:
+	disabled = not value
 	if disabled:
-		if reload_timer:
+		if not reload_while_holstered:
 			reload_timer.stop()
-		
-		cancel_reload.emit()
-		return
-	
-	GameEvents.ammo_updated.emit(ammo, max_ammo)
-
-
-func _physics_process(_delta):
-	if Input.is_action_just_pressed("reload") and not disabled:
-		reload()
+			cancel_reload.emit()
+	else:
+		GameEvents.ammo_updated.emit(ammo, max_ammo)
 
 
 func use_ammo():
@@ -56,24 +49,6 @@ func use_ammo():
 	ammo = max(ammo - 1, 0)
 	GameEvents.ammo_updated.emit(ammo, max_ammo)
 	has_ammo.emit()
-
-
-#func on_item_picked_up(item : Item):
-	#if item.id != "energy":
-		#return
-	#
-	#ammo = min(ammo + item.amount, max_ammo)
-	#GameEvents.ammo_updated.emit(ammo, max_ammo)
-
-
-func on_stats_changed(mods : Dictionary):
-	var old_ammo = max_ammo
-	max_ammo = clamp(mods["ammo"].get_values(base_ammo), 1, base_ammo * 2)
-	reload_time = max(mods["reload_speed"].get_values(base_reload_time), 0.2)
-	if ammo == old_ammo:
-		ammo = max_ammo
-	GameEvents.ammo_updated.emit(ammo, max_ammo)
-	#print(str(max_ammo) + " ammo, " + str(reload_time) + " reload speed")
 
 
 func reload():
@@ -90,4 +65,14 @@ func reload():
 
 func _on_reload_timer_timeout():
 	ammo = max_ammo
+	if not disabled:
+		GameEvents.ammo_updated.emit(ammo, max_ammo)
+
+
+func apply_stats(mods: Dictionary) -> void:
+	var old_ammo = max_ammo
+	max_ammo = clamp(mods["ammo"].get_values(base_ammo), 1, base_ammo * 2)
+	reload_time = max(mods["reload_speed"].get_values(base_reload_time), 0.2)
+	if ammo == old_ammo:
+		ammo = max_ammo
 	GameEvents.ammo_updated.emit(ammo, max_ammo)

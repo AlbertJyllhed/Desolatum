@@ -24,6 +24,11 @@ var path : Array[Vector2i] = []
 var last_goal_tile : Vector2i = Vector2i(-9999, -9999)
 var has_line_of_sight : bool = false
 
+const SEPARATION_INTERVAL := 0.1
+
+var separation := Vector2.ZERO
+var separation_timer := 0.0
+
 
 func _ready():
 	super._ready()
@@ -32,7 +37,7 @@ func _ready():
 	tilemap = pathfinding_grid.tilemap
 
 
-func enter(message = {}):
+func enter(_message = {}):
 	state_machine.animation_player.play("walk_right")
 	path.clear()
 	last_goal_tile = Vector2i(-9999, -9999)
@@ -43,6 +48,8 @@ func enter(message = {}):
 	
 	if randf() <= run_chance:
 		enemy_entity.max_speed = enemy_entity.base_speed + 10
+	
+	separation_timer = randf_range(0.0, SEPARATION_INTERVAL)
 
 
 func exit():
@@ -78,9 +85,14 @@ func physics_update(delta):
 	if not is_instance_valid(player):
 		return
 	
+	separation_timer -= delta
+	if separation_timer <= 0.0:
+		separation = get_separation()
+		separation_timer = SEPARATION_INTERVAL
+	
 	var target_pos = get_steer_target(player)
 	var dir = (target_pos - enemy_entity.global_position).normalized()
-	dir += get_separation() * separation_weight
+	dir += separation * separation_weight
 	enemy_entity.direction = dir.normalized()
 
 
@@ -140,11 +152,13 @@ func update_path(player_pos: Vector2) -> bool:
 func get_separation() -> Vector2:
 	var push := Vector2.ZERO
 	var radius_sq = separation_radius * separation_radius
-	for other in get_tree().get_nodes_in_group("enemies"):
+	var my_pos := enemy_entity.global_position
+	
+	for other in EnemyEntity.all_enemies:
 		if other == enemy_entity:
 			continue
 		
-		var offset : Vector2 = enemy_entity.global_position - other.global_position
+		var offset := my_pos - other.global_position
 		var dist_sq = offset.length_squared()
 		if dist_sq > 0.0 and dist_sq < radius_sq:
 			var dist = sqrt(dist_sq)

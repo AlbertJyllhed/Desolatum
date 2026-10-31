@@ -5,25 +5,23 @@ signal weapon_replaced
 
 @onready var audio_stream_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
-var stats : PlayerStats
 var consumable : Consumable
 
 var base_layer : Node2D
-var pickup_scene : PackedScene = preload("res://scenes/pickups/pickup.tscn")
+var pickup_scene : PackedScene = preload("res://components/pickups/pickup.tscn")
 
 
-func setup(new_stats : PlayerStats):
-	stats = new_stats
-	weapon_replaced.connect(stats.update_stats)
+func setup():
+	weapon_replaced.connect(Run.state.update_stats)
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 	GameEvents.item_picked_up.connect(on_item_picked_up)
 	
 	#if the player had equipped weapons in the previous scene we add them
-	if stats.equipment.size() > 0:
-		for item in stats.equipment:
+	if Run.state.equipment.size() > 0:
+		for item in Run.state.equipment:
 			add_item(item)
 	
-	if stats.consumable: add_consumable(stats.consumable)
+	if Run.state.consumable: add_consumable(Run.state.consumable)
 
 
 func equip_weapon(weapon_index):
@@ -59,15 +57,15 @@ func prev_slot():
 func add_item(new_item : Item):
 	var weapon = create_equipment_instance(new_item)
 	
-	if items.size() == stats.equipment.size():
-		for item in stats.equipment:
+	if items.size() == Run.state.equipment.size():
+		for item in Run.state.equipment:
 			if new_item.type == item.type:
 				index = item.type
 		
-		create_pickup(stats.equipment[index])
+		create_pickup(Run.state.equipment[index])
 		items.pop_at(index).queue_free()
 		items.insert(index, weapon)
-		stats.equipment[index] = new_item
+		Run.state.equipment[index] = new_item
 	else:
 		items.append(weapon)
 	
@@ -89,13 +87,13 @@ func add_consumable(new_item : Item):
 	consumable = create_equipment_instance(new_item)
 	var player = get_parent() as Player
 	consumable.setup(player, new_item)
-	stats.consumable = consumable.item
+	Run.state.consumable = consumable.item
 	consumable.used.connect(on_consumable_used)
 
 
 func on_consumable_used():
 	consumable = null
-	stats.consumable = null
+	Run.state.consumable = null
 
 
 func create_pickup(new_item : Item):

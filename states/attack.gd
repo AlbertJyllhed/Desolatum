@@ -16,7 +16,7 @@ func on_owner_ready():
 	state_machine.animation_player.animation_finished.connect(on_animation_finished)
 
 
-func enter(message = {}):
+func enter(_message = {}):
 	#prepare to attack
 	if (is_instance_valid(state_machine.player)):
 		player_position = state_machine.player.global_position

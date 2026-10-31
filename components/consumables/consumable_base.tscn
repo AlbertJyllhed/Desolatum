@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://chn1mor0yopqh"]
+
+[ext_resource type="Script" uid="uid://d05mbog1yl486" path="res://components/consumables/consumable_base.gd" id="1_dfhp0"]
+
+[node name="ConsumableBase" type="Node2D"]
+script = ExtResource("1_dfhp0")

@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/footsteps.svg")
 extends Node
 class_name FootstepComponent
 

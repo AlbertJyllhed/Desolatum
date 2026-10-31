@@ -1,9 +1,6 @@
 extends FiringComponent
 
 
-func _physics_process(_delta):
-	if Input.is_action_pressed("attack"):
-		if not ready_to_shoot:
-			return
-		
+func process_trigger(_just_pressed: bool, held: bool) -> void:
+	if held and ready_to_shoot:
 		fire()

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://dpnix2pvgil2p"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_80cg2"]
+[ext_resource type="PackedScene" uid="uid://sn7gytsxjfpc" path="res://components/weapons/revolver.tscn" id="1_cqhip"]
+
+[resource]
+script = ExtResource("1_80cg2")
+equipment_scene = ExtResource("1_cqhip")
+id = "revolver"
+name = "Revolver"
+description = "Stronger version of the pistol with a 20% chance to crit"
+drop_weight = 2

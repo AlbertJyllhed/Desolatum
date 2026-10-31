@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwva45143mwml"]
+[gd_scene format=3 uid="uid://cwva45143mwml"]
 
-[ext_resource type="Script" path="res://map_texture_instancer.gd" id="1_kpff3"]
+[ext_resource type="Script" uid="uid://d04750t8thvsj" path="res://map_texture_instancer.gd" id="1_kpff3"]
 [ext_resource type="Texture2D" uid="uid://cetwqe8hhoodb" path="res://assets/textures/maptex1.png" id="2_yf108"]
-[ext_resource type="Script" path="res://color_to_instance.gd" id="3_5lrb1"]
-[ext_resource type="PackedScene" uid="uid://bq87ij4ablqce" path="res://scenes/props/crate.tscn" id="4_83m5f"]
+[ext_resource type="Script" uid="uid://c2cgp0710simv" path="res://color_to_instance.gd" id="3_5lrb1"]
+[ext_resource type="PackedScene" uid="uid://bq87ij4ablqce" path="res://components/props/crate.tscn" id="4_83m5f"]
 [ext_resource type="PackedScene" uid="uid://bsu0qwh6vyytv" path="res://enemy_spawner.tscn" id="5_wx20g"]
 
 [sub_resource type="Resource" id="Resource_sh2vt"]

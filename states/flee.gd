@@ -8,6 +8,7 @@ var pathfinding_grid : PathfindingGrid
 var astar_grid : AStarGrid2D
 var tilemap : TileMap
 var target_tile : Vector2i
+var used_tiles : Array[Vector2i]
 
 
 func _ready():
@@ -15,6 +16,7 @@ func _ready():
 	pathfinding_grid = get_tree().get_first_node_in_group("pathfinding")
 	astar_grid = pathfinding_grid.astar_grid
 	tilemap = pathfinding_grid.tilemap
+	used_tiles = tilemap.get_used_cells_by_id(0, 0)
 
 
 func timeout():
@@ -33,8 +35,8 @@ func timeout():
 	state_machine.timer.start(randf_range(min_update_time, max_update_time))
 
 
-func enter(message = {}):
-	target_tile = tilemap.get_used_cells_by_id(0, 0).pick_random()
+func enter(_message = {}):
+	target_tile = used_tiles.pick_random()
 	state_machine.animation_player.play("walk_right")
 	state_machine.timer.start(randf_range(0.2, 0.5))
 

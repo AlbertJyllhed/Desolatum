@@ -12,7 +12,7 @@ func _ready():
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 
 
-func on_health_changed(health : float):
+func on_health_changed(_health : float):
 	var offset = Vector2(randf_range(-8, 8), randf_range(-8, 8))
 	var spawn_position = (owner as Node2D).global_position + offset
 	var blood_splatter_instance = blood_splatter_scene.instantiate() as Node2D

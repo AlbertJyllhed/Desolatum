@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://by6qfdacpxedr"]
+[gd_scene format=3 uid="uid://by6qfdacpxedr"]
 
 [ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_1i6xa"]
-[ext_resource type="Script" path="res://ui/game_over_screen.gd" id="1_3cj0s"]
+[ext_resource type="Script" uid="uid://bjicllyxufnpw" path="res://ui/game_over_screen.gd" id="1_3cj0s"]
 [ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="2_6xqgq"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_cy7e1"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_cy7e1"]
 [ext_resource type="PackedScene" uid="uid://41n4kltx64wg" path="res://ui/quit_confirmation.tscn" id="5_ah68u"]
 
 [node name="GameOverScreen" type="Control"]

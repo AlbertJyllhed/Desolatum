@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PropItem" format=3 uid="uid://cp0pwhqxf34ph"]
+
+[ext_resource type="Script" uid="uid://dvhci1535al1u" path="res://resources/items/props/prop_item.gd" id="1_s7dhn"]
+[ext_resource type="PackedScene" uid="uid://bd5clowt0q87k" path="res://components/props/shop.tscn" id="1_wlvi2"]
+
+[resource]
+script = ExtResource("1_s7dhn")
+scene = ExtResource("1_wlvi2")
+weight = 3
+energy_cost = 15
+metadata/_custom_type_script = "uid://dvhci1535al1u"

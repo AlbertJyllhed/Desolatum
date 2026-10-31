@@ -7,6 +7,7 @@ signal fade_complete()
 
 
 func _ready():
+	add_to_group("transition_screen")
 	animation_player.animation_finished.connect(fade_completed)
 	fade_to_black(false)
 

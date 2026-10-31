@@ -30,6 +30,8 @@ GameEvents="*res://autoload/game_events.gd"
 SceneManager="*res://autoload/scene_manager.gd"
 DialogueManager="*res://autoload/dialogue_manager.gd"
 GamepadManager="*res://autoload/gamepad_manager.gd"
+SaveManager="*uid://oi6t2y1igf7x"
+Run="*uid://bi4jbw6h1vu6n"
 
 [display]
 
@@ -52,6 +54,7 @@ version_control/autoload_on_startup=true
 folder_colors={
 "res://addons/": "gray",
 "res://assets/": "blue",
+"res://autoload/": "teal",
 "res://characters/": "orange",
 "res://components/": "yellow",
 "res://debug/": "pink",

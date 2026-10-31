@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dinoa4adlhusc"]
+[gd_scene format=3 uid="uid://dinoa4adlhusc"]
 
 [ext_resource type="Texture2D" uid="uid://xadi28i86w54" path="res://assets/textures/energy_ui.png" id="1_5e0hk"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="1_126id"]
-[ext_resource type="Script" path="res://ui/energy_ui.gd" id="1_xgeki"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="1_126id"]
+[ext_resource type="Script" uid="uid://bq27ik4lwumif" path="res://ui/energy_ui.gd" id="1_xgeki"]
 [ext_resource type="Texture2D" uid="uid://kd3bycytj7hn" path="res://assets/textures/background_hud.png" id="2_jjjk4"]
 [ext_resource type="Texture2D" uid="uid://cvjp84iy1v2iv" path="res://assets/textures/ore_ui.png" id="5_h2obd"]
 

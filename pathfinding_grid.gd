@@ -10,6 +10,13 @@ var debug_positions : Dictionary
 var base_layer : Node2D
 var path_debug_scene = preload("res://debug/path.tscn")
 
+var _pending: Dictionary = {} # Vector2i -> bool, updates that arrived before the grid existed
+
+const OBSTACLE_IDS: Array[int] = [
+	Tiles.Id.BEDROCK, Tiles.Id.WALL, Tiles.Id.CEILING,
+	Tiles.Id.SHIP_WALL, Tiles.Id.SHIP_CEILING
+]
+
 enum {
 	GROUND = 0,
 	CEILING = 1,
@@ -23,7 +30,7 @@ enum {
 func _ready():
 	add_to_group("pathfinding")
 	GameEvents.navigation_updated.connect(update_point)
-	setup_navigation()
+	GameEvents.level_generated.connect(setup_navigation, CONNECT_ONE_SHOT)
 
 
 func setup_navigation():
@@ -34,16 +41,17 @@ func setup_navigation():
 	astar_grid.jumping_enabled = true
 	astar_grid.update()
 	
-	var bedrock_tiles = tilemap.get_used_cells_by_id(0, BEDROCK)
-	var wall_tiles = tilemap.get_used_cells_by_id(0, WALL)
-	var ceiling_tiles = tilemap.get_used_cells_by_id(0, CEILING)
-	var ship_wall_tiles = tilemap.get_used_cells_by_id(0, SHIP_WALL)
-	var ship_ceiling_tiles = tilemap.get_used_cells_by_id(0, SHIP_CEILING)
-	var obstacles = bedrock_tiles + wall_tiles + ceiling_tiles + ship_wall_tiles + ship_ceiling_tiles
+	var obstacles: Array[Vector2i] = []
+	for id in OBSTACLE_IDS:
+		obstacles.append_array(tilemap.get_used_cells_by_id(Tiles.LAYER_BASE, id))
 	
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 	for tile in obstacles:
 		update_point(tile, true)
+	
+	for tile in _pending:
+		update_point(tile, _pending[tile])
+	_pending.clear()
 
 
 func create_debug_node(pos : Vector2):
@@ -54,6 +62,13 @@ func create_debug_node(pos : Vector2):
 
 
 func update_point(tile : Vector2i, value : bool):
+	if astar_grid == null:
+		_pending[tile] = value
+		return
+	
+	if not astar_grid.is_in_boundsv(tile):
+		return
+	
 	astar_grid.set_point_solid(tile, value)
 	if not debug_mode:
 		return

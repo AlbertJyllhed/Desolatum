@@ -43,9 +43,9 @@ func _on_close_button_pressed():
 
 
 func _on_resolution_button_item_selected(index):
-	var size = resolutions.get(resolution_button.get_item_text(index))
-	get_window().set_size(size[1])
-	get_window().set_content_scale_size(size[0])
+	var new_resolution = resolutions.get(resolution_button.get_item_text(index))
+	get_window().set_size(new_resolution[1])
+	get_window().set_content_scale_size(new_resolution[0])
 	current_resolution = get_window().get_size()
 	
 	var mode = get_window().mode

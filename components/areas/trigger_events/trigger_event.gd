@@ -6,7 +6,7 @@ var player : Player
 var target_node : Node2D
 
 
-func setup(handler : EventHandlerComponent, new_target_node : Node2D):
+func setup(_handler : EventHandlerComponent, new_target_node : Node2D):
 	target_node = new_target_node
 
 

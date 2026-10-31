@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PropList" format=3 uid="uid://odkbc4oebsi7"]
+
+[ext_resource type="Script" uid="uid://dvhci1535al1u" path="res://resources/items/props/prop_item.gd" id="1_ag43t"]
+[ext_resource type="Resource" uid="uid://cp0pwhqxf34ph" path="res://resources/items/props/shop.tres" id="2_23mrg"]
+[ext_resource type="Resource" uid="uid://b7tm5vdsmrok1" path="res://resources/items/props/med_station.tres" id="3_pj8e2"]
+[ext_resource type="Script" uid="uid://dutmupx2rjsey" path="res://resources/data/prop_lists/prop_list.gd" id="4_g22a1"]
+
+[resource]
+script = ExtResource("4_g22a1")
+items = Array[ExtResource("1_ag43t")]([ExtResource("2_23mrg"), ExtResource("3_pj8e2")])
+metadata/_custom_type_script = "uid://dutmupx2rjsey"

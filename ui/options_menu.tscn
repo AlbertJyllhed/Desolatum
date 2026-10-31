@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3cqb2wgvjy5a"]
+[gd_scene format=3 uid="uid://d3cqb2wgvjy5a"]
 
 [ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_a15o4"]
-[ext_resource type="Script" path="res://ui/options_menu.gd" id="1_q5462"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="2_j5bdn"]
+[ext_resource type="Script" uid="uid://ba3p2p0sd5isl" path="res://ui/options_menu.gd" id="1_q5462"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_j5bdn"]
 [ext_resource type="PackedScene" uid="uid://ca1yr76wl3rdy" path="res://ui/close_button.tscn" id="3_nwhrd"]
 [ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="3_vlhdk"]
 

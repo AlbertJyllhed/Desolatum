@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0kmp3178vt22"]
+[gd_scene format=3 uid="uid://c0kmp3178vt22"]
 
-[ext_resource type="Script" path="res://ui/upgrade_ui.gd" id="1_vk2qj"]
+[ext_resource type="Script" uid="uid://coaea3l5t6mxr" path="res://ui/upgrade_ui.gd" id="1_vk2qj"]
 [ext_resource type="Texture2D" uid="uid://bhmnjlilgp774" path="res://assets/textures/pistol_icon.png" id="2_hu442"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://fonts/galactic_memesbruh03.ttf" id="3_kcxq7"]
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="3_kcxq7"]
 [ext_resource type="Texture2D" uid="uid://c85f4lbrtkmlc" path="res://assets/textures/bar_overlay.png" id="4_s17ko"]
 
 [node name="UpgradeUI" type="MarginContainer"]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DropList" format=3 uid="uid://dh0agxs0mifp8"]
+
+[ext_resource type="Script" uid="uid://clu26y18mu08j" path="res://resources/items/item.gd" id="1_tu6j6"]
+[ext_resource type="Resource" uid="uid://b6mx0o1p1137d" path="res://resources/items/equipment/consumables/health_kit.tres" id="2_hu5ac"]
+[ext_resource type="Script" uid="uid://dr33pcok72p0l" path="res://resources/data/drop_lists/drop_list.gd" id="3_1wgkk"]
+
+[resource]
+script = ExtResource("3_1wgkk")
+items = Array[ExtResource("1_tu6j6")]([ExtResource("2_hu5ac")])
