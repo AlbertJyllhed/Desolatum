@@ -9,7 +9,7 @@ func _ready():
 	if not remove_by_position:
 		return
 	
-	var map = get_tree().get_first_node_in_group("tilemap_layer") as TileMap
+	var map = get_tree().get_first_node_in_group("tilemap_layer") as TileMapLayer
 	if not map:
 		return
 	
@@ -22,4 +22,4 @@ func _ready():
 			if Vector2(x, y).length() > radius_in_tiles:
 				continue
 			
-			TileBreaker.break_tile(map, center + Vector2i(x, y))
+			TileBreaker.break_tile(center + Vector2i(x, y))

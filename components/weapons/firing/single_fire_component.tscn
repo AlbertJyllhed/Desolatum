@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b63err5lwk6fn"]
+
+[ext_resource type="Script" uid="uid://7cpa0g37kbsh" path="res://components/weapons/firing/single_fire_component.gd" id="1_16xib"]
+
+[node name="SingleFireComponent" type="Node"]
+script = ExtResource("1_16xib")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

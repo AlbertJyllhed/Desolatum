@@ -68,6 +68,11 @@ folder_colors={
 import/blender/enabled=false
 import/fbx/enabled=false
 
+[global_group]
+
+tile_overlay=""
+tilemap_layer=""
+
 [input]
 
 ui_accept={

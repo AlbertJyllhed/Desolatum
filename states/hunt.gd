@@ -1,24 +1,27 @@
 extends EnemyState
 
 @export_group("Pathing")
-@export var min_update_time : float = 0.3
-@export var max_update_time : float = 0.6
-@export var waypoint_reach_distance : float = 4.0
+@export var min_update_time: float = 0.3
+@export var max_update_time: float = 0.6
+@export var waypoint_reach_distance: float = 4.0
 ## If the enemy ends up this far from the next waypoint, force a repath
-@export var max_waypoint_distance : float = 40.0
+@export var max_waypoint_distance: float = 40.0
 
 @export_group("Chase")
-@export var run_chance : float = 0.5
+@export var run_chance: float = 0.5
 ## Within this distance and with line of sight, ignore the path and run straight at the player
-@export var direct_chase_distance : float = 64.0
+@export var direct_chase_distance: float = 64.0
 
 @export_group("Separation")
-@export var separation_radius : float = 16.0
-@export var separation_weight : float = 0.8
+@export var separation_radius: float = 16.0
+@export var separation_weight: float = 0.8
+
+@export_group("Config")
+@export var attacks_buildings: bool = true
 
 var pathfinding_grid : PathfindingGrid
 var astar_grid : AStarGrid2D
-var tilemap : TileMap
+var tilemap : TileMapLayer
 
 var path : Array[Vector2i] = []
 var last_goal_tile : Vector2i = Vector2i(-9999, -9999)
@@ -77,6 +80,14 @@ func timeout():
 			return
 	
 	state_machine.timer.start(randf_range(min_update_time, max_update_time))
+	
+	if not attacks_buildings or state_machine.weapon == null:
+		return
+	
+	var blocker := enemy_entity.get_blocking_building()
+	if blocker:
+		state_machine.weapon.building_target = blocker
+		state_machine.on_attack_entered() # transitions to Attack
 
 
 # Runs every physics frame: cheap steering only

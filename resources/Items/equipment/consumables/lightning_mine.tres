@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://x6tyttborbmf"]
 
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_fsney"]
-[ext_resource type="PackedScene" uid="uid://suscde7igcyw" path="res://components/weapons/tesla_mine_thrower.tscn" id="1_s1qx3"]
+[ext_resource type="PackedScene" uid="uid://suscde7igcyw" path="res://components/weapons/player/tesla_mine_thrower.tscn" id="1_s1qx3"]
 
 [resource]
 script = ExtResource("1_fsney")

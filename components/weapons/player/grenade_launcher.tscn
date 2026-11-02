@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://de01xm3v2666m"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://components/weapons/player/player_weapon_base.tscn" id="1_gcm8c"]
+[ext_resource type="PackedScene" uid="uid://bx6w1u7ew5ale" path="res://components/projectiles/grenade.tscn" id="2_cyoym"]
+[ext_resource type="PackedScene" uid="uid://b63err5lwk6fn" path="res://components/weapons/firing/single_fire_component.tscn" id="2_mowbd"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/weapons/firing/gun_component.tscn" id="3_d7p16"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="3_dukjj"]
+[ext_resource type="AudioStream" uid="uid://wnsap6eg544d" path="res://sounds/grenade.wav" id="3_xh6ql"]
+[ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/weapons/firing/ammo_component.tscn" id="5_lx1a8"]
+[ext_resource type="PackedScene" uid="uid://dbv2o15wvnxbf" path="res://ui/reload_progress_bar.tscn" id="8_cag5s"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_if6pc"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("3_xh6ql")
+
+[node name="GrenadeLauncher" unique_id=431389696 node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_gcm8c")]
+firing_component = NodePath("SingleFireComponent")
+weapon_component = NodePath("Pivot/GunComponent")
+ammo_component = NodePath("AmmoComponent")
+recoil = 0.4
+power = 6.0
+
+[node name="SingleFireComponent" parent="." index="0" unique_id=1386871221 instance=ExtResource("2_mowbd")]
+base_cooldown = 0.5
+
+[node name="AmmoComponent" parent="." index="1" unique_id=1625188102 instance=ExtResource("5_lx1a8")]
+base_ammo = 4
+base_reload_time = 2.0
+
+[node name="GunComponent" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="0" unique_id=713740774 instance=ExtResource("3_d7p16")]
+position = Vector2(11, 0)
+bullet_scene = ExtResource("2_cyoym")
+base_bullet_spread = 0.0
+base_bullet_speed = 300.0
+base_bullet_explode_chance = 1.0
+
+[node name="AudioStreamPlayer2D" parent="Pivot/GunComponent" index="0" unique_id=1943517960]
+stream = SubResource("AudioStreamRandomizer_if6pc")
+
+[node name="WeaponSprite" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="1" unique_id=995957032]
+texture = ExtResource("3_dukjj")
+hframes = 5
+vframes = 5
+frame = 4
+
+[node name="ReloadProgressBar" parent="." index="3" unique_id=602523292 node_paths=PackedStringArray("ammo_component") instance=ExtResource("8_cag5s")]
+ammo_component = NodePath("../AmmoComponent")
+
+[editable path="Pivot/GunComponent"]

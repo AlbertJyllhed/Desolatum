@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://chna2rf27ovx5"]
 
 [ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://components/projectiles/bullet.tscn" id="1_2vd6v"]
-[ext_resource type="PackedScene" uid="uid://bec4mimet22ja" path="res://components/bounce_counter_component.tscn" id="2_yunsf"]
+[ext_resource type="PackedScene" uid="uid://bec4mimet22ja" path="res://components/projectiles/behaviors/bounce_counter_component.tscn" id="2_yunsf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_chct2"]
 radius = 6.0

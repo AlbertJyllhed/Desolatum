@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://h1ue3yjruk72"]
 
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_8ssxk"]
-[ext_resource type="PackedScene" uid="uid://b38md0om1ciwp" path="res://components/weapons/submachinegun.tscn" id="1_ein0c"]
+[ext_resource type="PackedScene" uid="uid://b38md0om1ciwp" path="res://components/weapons/player/submachinegun.tscn" id="1_ein0c"]
 
 [resource]
 script = ExtResource("1_8ssxk")

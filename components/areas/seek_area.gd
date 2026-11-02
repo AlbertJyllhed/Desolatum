@@ -16,7 +16,7 @@ func _physics_process(delta):
 	ray.force_raycast_update()
 	
 	if ray.is_colliding():
-		if ray.get_collider() is TileMap:
+		if ray.get_collider() is TileMapLayer:
 			return
 	
 	var direction = (target.global_position - global_position).normalized()

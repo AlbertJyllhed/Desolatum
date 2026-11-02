@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dktlg5hq532ni"]
+
+[ext_resource type="Script" uid="uid://d3rjarwk142h8" path="res://components/hazards/gas_vent.gd" id="1_ujdbc"]
+[ext_resource type="PackedScene" uid="uid://bygbrw7i4hp0m" path="res://components/areas/hitbox.tscn" id="2_7wlce"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="2_ntt25"]
+
+[node name="GasVent" type="Node2D" unique_id=358596030]
+script = ExtResource("1_ujdbc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1103175704]
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("2_ntt25")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=343958664]
+
+[node name="Hitbox" parent="." unique_id=889807776 instance=ExtResource("2_7wlce")]
+collision_layer = 64
+collision_mask = 8
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1546240441]
+
+[node name="Timer" type="Timer" parent="." unique_id=88058934]
+
+[editable path="Hitbox"]

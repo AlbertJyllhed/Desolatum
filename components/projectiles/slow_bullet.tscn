@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cg2acvobf2bpm"]
 
 [ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://components/projectiles/bullet.tscn" id="1_yxacv"]
-[ext_resource type="PackedScene" uid="uid://l0g0un5pxytx" path="res://components/projectile_timer_component.tscn" id="2_iywp4"]
+[ext_resource type="PackedScene" uid="uid://l0g0un5pxytx" path="res://components/projectiles/behaviors/projectile_timer_component.tscn" id="2_iywp4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_irmsw"]
 radius = 6.0

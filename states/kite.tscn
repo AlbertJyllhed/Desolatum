@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cgiu3gpl2rtdc"]
+
+[ext_resource type="Script" uid="uid://co4eywcp0jd6o" path="res://states/kite.gd" id="1_2flmc"]
+
+[node name="Kite" type="Node" unique_id=27324345]
+script = ExtResource("1_2flmc")

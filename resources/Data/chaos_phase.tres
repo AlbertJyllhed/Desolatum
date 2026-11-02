@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DirectorPhase" format=3 uid="uid://bn6gvoklooigy"]
+
+[ext_resource type="Script" uid="uid://crbhyo4k7ctr2" path="res://resources/data/director_phase.gd" id="1_nmb7j"]
+
+[resource]
+script = ExtResource("1_nmb7j")
+max_enemies = 24
+spawn_time = 4.0
+aggressive = true
+metadata/_custom_type_script = "uid://crbhyo4k7ctr2"

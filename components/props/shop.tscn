@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bd5clowt0q87k"]
 
-[ext_resource type="PackedScene" uid="uid://bw7ihnd7xa1bu" path="res://components/interactable.tscn" id="1_cbr0t"]
+[ext_resource type="PackedScene" uid="uid://bw7ihnd7xa1bu" path="res://components/interactables/interactable.tscn" id="1_cbr0t"]
 [ext_resource type="Texture2D" uid="uid://ddpu4xoa8c8yq" path="res://assets/textures/shop.png" id="2_3g87p"]
 [ext_resource type="Script" uid="uid://sixpgpmpa0hu" path="res://components/props/shop.gd" id="2_qfalo"]
-[ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/drop_component.tscn" id="3_gfl2r"]
+[ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/core/drop_component.tscn" id="3_gfl2r"]
 [ext_resource type="Resource" uid="uid://cxj47cgtkafnc" path="res://resources/data/drop_lists/upgrade_drop_list.tres" id="4_l3l8i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwfom"]

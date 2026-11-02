@@ -1,5 +1,7 @@
 extends Node
 
+signal changing_level
+
 var levels : Array[PackedScene] = [
 	preload("res://levels/ship_hub.tscn"),
 	preload("res://levels/main.tscn"),
@@ -21,6 +23,7 @@ func load_level(index: int, new_run: bool = true) -> void:
 	if new_run:
 		Run.new_run() # fresh RunState, and it emits reset_stats itself
 	level_index = index
+	changing_level.emit()
 	get_tree().change_scene_to_packed(levels[level_index])
 
 

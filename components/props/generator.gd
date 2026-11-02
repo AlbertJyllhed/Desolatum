@@ -3,7 +3,7 @@ class_name Generator
 
 @onready var sprite : Sprite2D = $Sprite2D
 
-var time_ui_scene : PackedScene = preload("res://ui/time_ui.tscn")
+var time_ui_scene : PackedScene = preload("uid://cupc6eyn5o6xv")
 var used : bool = false
 
 

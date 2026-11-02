@@ -2,7 +2,7 @@ extends Node
 
 signal dialogue_finished
 
-var text_box_scene = preload("res://ui/text_box.tscn")
+var text_box_scene = preload("uid://d0hapuf88hnr2")
 
 var dialogue_lines : Array[String] = []
 var current_line_index : int = 0

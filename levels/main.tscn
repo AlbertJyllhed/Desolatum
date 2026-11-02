@@ -11,11 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://blhvfwq1pfxm4" path="res://ui/upgrade_container_ui.tscn" id="8_fnyi5"]
 [ext_resource type="PackedScene" uid="uid://fd0y7pt4y18o" path="res://ui/transition_screen.tscn" id="8_hc4qn"]
 [ext_resource type="PackedScene" uid="uid://ie26y2womcw5" path="res://ui/danger_sign.tscn" id="9_awiln"]
-[ext_resource type="PackedScene" uid="uid://cd6xh5dojbq0o" path="res://level_generator.tscn" id="10_h0ktf"]
-[ext_resource type="PackedScene" uid="uid://b4gv7qo8wn3yq" path="res://pathfinding_grid.tscn" id="12_s3jgr"]
+[ext_resource type="PackedScene" uid="uid://cd6xh5dojbq0o" path="res://systems/level_generation/level_generator.tscn" id="10_h0ktf"]
+[ext_resource type="PackedScene" uid="uid://b4gv7qo8wn3yq" path="res://systems/navigation/pathfinding_grid.tscn" id="12_s3jgr"]
 [ext_resource type="PackedScene" uid="uid://jpwvtwbpum65" path="res://managers/enemy_manager.tscn" id="13_47pbc"]
-[ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://components/player_camera.tscn" id="14_k4cxe"]
-[ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tileset.tres" id="15_ukhfq"]
+[ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://characters/player/player_camera.tscn" id="14_k4cxe"]
+[ext_resource type="PackedScene" uid="uid://bq87ij4ablqce" path="res://components/props/crate.tscn" id="14_s07ge"]
+[ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tilesets/tileset.tres" id="15_ukhfq"]
 
 [node name="Main" type="Node" unique_id=993354542]
 
@@ -49,24 +50,33 @@ process_mode = 3
 [node name="TransitionScreen" parent="CanvasLayer" unique_id=478338291 instance=ExtResource("8_hc4qn")]
 
 [node name="PathfindingGrid" parent="." unique_id=1950735315 node_paths=PackedStringArray("tilemap") instance=ExtResource("12_s3jgr")]
-tilemap = NodePath("../TileMap")
+tilemap = NodePath("../TileMap/GroundLayer")
 
-[node name="LevelGenerator" parent="." unique_id=2000138731 node_paths=PackedStringArray("tilemap", "enemy_manager") instance=ExtResource("10_h0ktf")]
-tilemap = NodePath("../TileMap")
+[node name="LevelGenerator" parent="." unique_id=2000138731 node_paths=PackedStringArray("tilemap", "overlay_layer", "enemy_manager", "base_layer") instance=ExtResource("10_h0ktf")]
+tilemap = NodePath("../TileMap/GroundLayer")
+overlay_layer = NodePath("../TileMap/OverlayLayer")
 enemy_manager = NodePath("../EnemyManager")
+base_layer = NodePath("../BaseLayer")
 path_width = 1
+secret_reward_scene = ExtResource("14_s07ge")
 
 [node name="EnemyManager" parent="." unique_id=695355371 instance=ExtResource("13_47pbc")]
 
 [node name="GameCamera" parent="." unique_id=78449428 instance=ExtResource("14_k4cxe")]
 
-[node name="TileMap" type="TileMap" parent="." unique_id=41610186 groups=["tilemap_layer"]]
+[node name="TileMap" type="Node2D" parent="." unique_id=1102920393]
 texture_filter = 1
+
+[node name="GroundLayer" type="TileMapLayer" parent="TileMap" unique_id=522179895 groups=["tilemap_layer"]]
+texture_filter = 1
+use_parent_material = true
 tile_set = ExtResource("15_ukhfq")
-format = 2
-layer_0/name = "base_layer"
-layer_1/name = "shadow_layer"
-layer_1/navigation_enabled = false
+
+[node name="OverlayLayer" type="TileMapLayer" parent="TileMap" unique_id=1704102308 groups=["tile_overlay"]]
+use_parent_material = true
+tile_set = ExtResource("15_ukhfq")
+collision_enabled = false
+navigation_enabled = false
 
 [node name="BaseLayer" type="Node2D" parent="." unique_id=69973045 groups=["base_layer"]]
 y_sort_enabled = true

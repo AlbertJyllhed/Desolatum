@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://c6dse6vr5dbd6"]
 
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_beloa"]
-[ext_resource type="PackedScene" uid="uid://h3gfnydp6egv" path="res://components/weapons/railgun.tscn" id="2_c4w64"]
+[ext_resource type="PackedScene" uid="uid://h3gfnydp6egv" path="res://components/weapons/player/railgun.tscn" id="2_c4w64"]
 
 [resource]
 script = ExtResource("2_beloa")

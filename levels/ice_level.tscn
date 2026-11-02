@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://n6u8wuybgpys"]
+[gd_scene format=3 uid="uid://n6u8wuybgpys"]
 
 [ext_resource type="PackedScene" uid="uid://cig1m1a15gbdi" path="res://levels/main.tscn" id="1_snetv"]
-[ext_resource type="TileSet" uid="uid://bhj5dobjuhwqa" path="res://resources/ice_tileset.tres" id="2_0htae"]
+[ext_resource type="TileSet" uid="uid://bhj5dobjuhwqa" path="res://resources/tilesets/ice_tileset.tres" id="2_0htae"]
 
 [node name="IceLevel" instance=ExtResource("1_snetv")]
 

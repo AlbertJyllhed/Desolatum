@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuildingItem" format=3 uid="uid://bo7rv4udfku30"]
+
+[ext_resource type="PackedScene" uid="uid://b0e50x30owl14" path="res://components/buildings/mining_light.tscn" id="1_baydw"]
+[ext_resource type="Script" uid="uid://cnn4xenarf4bt" path="res://resources/items/buildings/building_item.gd" id="1_unyx6"]
+[ext_resource type="Texture2D" uid="uid://byb4u8pnhh4j4" path="res://assets/textures/mining_light.png" id="2_7cp5d"]
+
+[resource]
+script = ExtResource("1_unyx6")
+building_scene = ExtResource("1_baydw")
+ore_cost = 10
+id = "mining_light"
+name = "Mining Light"
+description = "The mining light allows you to block monster spawn points and gives you better visibility."
+icon = ExtResource("2_7cp5d")
+metadata/_custom_type_script = "uid://cnn4xenarf4bt"

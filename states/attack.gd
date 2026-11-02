@@ -21,6 +21,10 @@ func enter(_message = {}):
 	if (is_instance_valid(state_machine.player)):
 		player_position = state_machine.player.global_position
 	
+	var weapon = state_machine.weapon
+	if is_instance_valid(weapon.building_target):
+		player_position = weapon.building_target.global_position
+	
 	state_machine.animation_player.play("prepare_attack_right")
 	enemy_entity.direction = Vector2.ZERO
 

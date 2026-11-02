@@ -3,7 +3,7 @@ class_name UpgradeContainerUI
 
 @onready var upgrade_container : GridContainer = $NinePatchRect/VBoxContainer/GridContainer
 
-var upgrade_ui_scene = preload("res://ui/upgrade_ui.tscn")
+var upgrade_ui_scene = preload("uid://c0kmp3178vt22")
 
 
 func _ready() -> void:

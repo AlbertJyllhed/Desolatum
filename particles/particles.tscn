@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://decmbpipp0rbw"]
+[gd_scene format=3 uid="uid://decmbpipp0rbw"]
 
-[ext_resource type="PackedScene" uid="uid://c4acitghbf4a4" path="res://components/audio_player_component.tscn" id="1_8trn8"]
+[ext_resource type="PackedScene" uid="uid://c4acitghbf4a4" path="res://components/core/audio_player_component.tscn" id="1_8trn8"]
 [ext_resource type="Texture2D" uid="uid://bjos6a7nm4ipd" path="res://assets/textures/particles.png" id="1_bj64k"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3n60r"]

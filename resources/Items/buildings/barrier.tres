@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ja1paxd2xanj" path="res://components/buildings/barrier.tscn" id="1_h4pqj"]
 [ext_resource type="Script" uid="uid://cnn4xenarf4bt" path="res://resources/items/buildings/building_item.gd" id="1_hp4ul"]
+[ext_resource type="Texture2D" uid="uid://duy2nrkv3pidr" path="res://assets/textures/barricade.png" id="2_5pp42"]
 
 [resource]
 script = ExtResource("1_hp4ul")
@@ -10,4 +11,5 @@ ore_cost = 2
 id = "barrier"
 name = "Barrier"
 description = "A sturdy barrier that stops unwanted guests."
+icon = ExtResource("2_5pp42")
 metadata/_custom_type_script = "uid://cnn4xenarf4bt"

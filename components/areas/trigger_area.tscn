@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmr5vnavj25es"]
+[gd_scene format=3 uid="uid://bmr5vnavj25es"]
 
-[ext_resource type="Script" path="res://components/areas/trigger_area.gd" id="1_n5mq4"]
-[ext_resource type="PackedScene" uid="uid://ch3qur7vvceug" path="res://components/event_handler_component.tscn" id="2_kbfx3"]
+[ext_resource type="Script" uid="uid://cpv1gceixe5fn" path="res://components/areas/trigger_area.gd" id="1_n5mq4"]
+[ext_resource type="PackedScene" uid="uid://ch3qur7vvceug" path="res://components/core/event_handler_component.tscn" id="2_kbfx3"]
 
 [node name="TriggerArea" type="Area2D"]
 collision_layer = 0

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bec4mimet22ja"]
+
+[ext_resource type="Script" uid="uid://dn8bm7275j5t" path="res://components/projectiles/behaviors/bounce_counter_component.gd" id="1_ds0wq"]
+
+[node name="BounceCounterComponent" type="Node"]
+script = ExtResource("1_ds0wq")

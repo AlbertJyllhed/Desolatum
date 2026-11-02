@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://6dpbikp71lpi"]
 
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_7hbr4"]
-[ext_resource type="PackedScene" uid="uid://jlqf3hvx0osp" path="res://components/weapons/rocket_launcher.tscn" id="2_8s5bh"]
+[ext_resource type="PackedScene" uid="uid://jlqf3hvx0osp" path="res://components/weapons/player/rocket_launcher.tscn" id="2_8s5bh"]
 
 [resource]
 script = ExtResource("2_7hbr4")

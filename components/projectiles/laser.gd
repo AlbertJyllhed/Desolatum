@@ -4,7 +4,6 @@ extends Line2D
 @onready var hitbox : Hitbox = $Hitbox
 @onready var light : Node2D = $PointLight2D
 
-var explosion_scene : PackedScene = preload("res://particles/explosion.tscn")
 var base_layer : Node2D
 var explode_chance : float = 0.0
 var tween : Tween
@@ -52,9 +51,9 @@ func shrink():
 
 
 func on_hit(area):
-	if explode_chance < randf():
+	if explode_chance > randf():
 		return
 	
-	var explosion_instance = explosion_scene.instantiate() as Node2D
+	var explosion_instance = Scenes.EXPLOSION.instantiate() as Node2D
 	base_layer.call_deferred("add_child", explosion_instance)
 	explosion_instance.global_position = area.global_position

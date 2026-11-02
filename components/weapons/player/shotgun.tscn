@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://db6qgn0lifipy"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://components/weapons/player/player_weapon_base.tscn" id="1_g54el"]
+[ext_resource type="PackedScene" uid="uid://cw6reupfolow" path="res://components/projectiles/big_bullet.tscn" id="2_i2lxk"]
+[ext_resource type="PackedScene" uid="uid://b63err5lwk6fn" path="res://components/weapons/firing/single_fire_component.tscn" id="2_rcp6m"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/weapons/firing/gun_component.tscn" id="3_5nbty"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="3_cx8mp"]
+[ext_resource type="AudioStream" uid="uid://dhit7yl2a8iat" path="res://sounds/shotgun2.ogg" id="3_eslak"]
+[ext_resource type="AudioStream" uid="uid://4hyf8sd4of5i" path="res://sounds/shotgun3.ogg" id="4_q5kyh"]
+[ext_resource type="PackedScene" uid="uid://d3vb0c3uyj7qk" path="res://components/weapons/firing/ammo_component.tscn" id="7_medf8"]
+[ext_resource type="PackedScene" uid="uid://dbv2o15wvnxbf" path="res://ui/reload_progress_bar.tscn" id="9_qch7m"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rashh"]
+random_pitch = 1.0594631
+streams_count = 2
+stream_0/stream = ExtResource("3_eslak")
+stream_1/stream = ExtResource("4_q5kyh")
+
+[node name="Shotgun" unique_id=969309493 node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_g54el")]
+firing_component = NodePath("SingleFireComponent")
+weapon_component = NodePath("Pivot/GunComponent")
+ammo_component = NodePath("AmmoComponent")
+recoil = 0.4
+power = 4.0
+
+[node name="SingleFireComponent" parent="." index="0" unique_id=1959991087 instance=ExtResource("2_rcp6m")]
+
+[node name="AmmoComponent" parent="." index="1" unique_id=156437394 instance=ExtResource("7_medf8")]
+base_ammo = 6
+base_reload_time = 1.5
+
+[node name="ReloadProgressBar" parent="." index="2" unique_id=1170337143 node_paths=PackedStringArray("ammo_component") instance=ExtResource("9_qch7m")]
+ammo_component = NodePath("../AmmoComponent")
+
+[node name="GunComponent" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="0" unique_id=1566842755 instance=ExtResource("3_5nbty")]
+position = Vector2(12, 0)
+bullet_scene = ExtResource("2_i2lxk")
+base_bullet_spread = 0.0
+base_bullet_speed = 200.0
+projectiles = Array[float]([-20.0, -10.0, 0.0, 10.0, 20.0])
+
+[node name="AudioStreamPlayer2D" parent="Pivot/GunComponent" index="0" unique_id=1943517960]
+stream = SubResource("AudioStreamRandomizer_rashh")
+
+[node name="WeaponSprite" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="1" unique_id=995957032]
+texture = ExtResource("3_cx8mp")
+hframes = 5
+vframes = 5
+frame = 2
+
+[editable path="Pivot/GunComponent"]

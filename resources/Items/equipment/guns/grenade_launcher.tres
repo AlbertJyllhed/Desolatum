@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://c4au6yw5sn535"]
 
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_dweur"]
-[ext_resource type="PackedScene" uid="uid://de01xm3v2666m" path="res://components/weapons/grenade_launcher.tscn" id="3_r6tdf"]
+[ext_resource type="PackedScene" uid="uid://de01xm3v2666m" path="res://components/weapons/player/grenade_launcher.tscn" id="3_r6tdf"]
 
 [resource]
 script = ExtResource("2_dweur")

@@ -3,15 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://components/projectiles/bullet.tscn" id="1_pc4bw"]
 [ext_resource type="Texture2D" uid="uid://rv2ksim5ij72" path="res://assets/textures/enemy_bullet.png" id="2_j8knr"]
 
-[node name="EnemyBullet" instance=ExtResource("1_pc4bw")]
-speed = 200.0
+[node name="EnemyBullet" unique_id=1382366181 instance=ExtResource("1_pc4bw")]
+bounce_chance = 0.0
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0" unique_id=1839627737]
 texture = ExtResource("2_j8knr")
 hframes = 1
 vframes = 1
 
-[node name="Hitbox" parent="." index="2"]
+[node name="Hitbox" parent="." index="2" unique_id=959537835]
 collision_layer = 64
 collision_mask = 8
 

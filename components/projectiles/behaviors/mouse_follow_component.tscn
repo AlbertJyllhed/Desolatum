@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ydba4c4ulab5"]
+
+[ext_resource type="Script" uid="uid://cy4l6hjpuhhgx" path="res://components/projectiles/behaviors/mouse_follow_component.gd" id="1_sf7nl"]
+
+[node name="MouseFollowComponent" type="Node2D"]
+script = ExtResource("1_sf7nl")
