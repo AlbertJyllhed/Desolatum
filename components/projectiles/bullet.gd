@@ -15,7 +15,6 @@ signal wall_hit
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var hitbox : Hitbox = $Hitbox
 
-var explosion_scene : PackedScene = preload("res://particles/explosion.tscn")
 var base_layer : Node2D
 var direction = Vector2.ZERO
 
@@ -29,8 +28,8 @@ func setup(new_direction, new_speed = 400, new_damage = 1):
 
 
 func explode():
-	if explosion_scene and explode_chance > randf():
-		var explosion_instance = explosion_scene.instantiate() as Node2D
+	if explode_chance > randf():
+		var explosion_instance = Scenes.EXPLOSION.instantiate() as Node2D
 		base_layer.call_deferred("add_child", explosion_instance)
 		explosion_instance.global_position = global_position
 	

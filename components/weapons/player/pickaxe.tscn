@@ -1,0 +1,202 @@
+[gd_scene format=3 uid="uid://dawp4moicrfor"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://components/weapons/player/player_weapon_base.tscn" id="1_ha81r"]
+[ext_resource type="AudioStream" uid="uid://b1no86fo8mucp" path="res://sounds/pickaxe/swish-1.wav" id="2_byhdo"]
+[ext_resource type="AudioStream" uid="uid://bi6vejoa5pywu" path="res://sounds/pickaxe/swish-2.wav" id="3_j7x4x"]
+[ext_resource type="AudioStream" uid="uid://beh6unceatsxf" path="res://sounds/pickaxe/swish-3.wav" id="4_fpw2u"]
+[ext_resource type="AudioStream" uid="uid://um5a4c6t4s7b" path="res://sounds/pickaxe/swish-4.wav" id="5_oplce"]
+[ext_resource type="AudioStream" uid="uid://d0ncw55h4lkgs" path="res://sounds/pickaxe/swish-5.wav" id="6_1tach"]
+[ext_resource type="AudioStream" uid="uid://dn5y3w5qh8nlo" path="res://sounds/pickaxe/swish-6.wav" id="7_0efn7"]
+[ext_resource type="PackedScene" uid="uid://w4snfyux8ecm" path="res://components/weapons/firing/auto_fire_component.tscn" id="8_tvjrx"]
+[ext_resource type="PackedScene" uid="uid://cessatyns0dj4" path="res://components/weapons/firing/melee_component.tscn" id="9_jon3f"]
+[ext_resource type="PackedScene" uid="uid://jmqh7mkm5qki" path="res://components/core/tile_remover_ray.tscn" id="10_3u3rm"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="11_7oxqd"]
+[ext_resource type="Texture2D" uid="uid://dla1lpsrtarep" path="res://assets/textures/melee_swing.png" id="12_5avw0"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6fmhv"]
+random_pitch = 1.0594631
+streams_count = 6
+stream_0/stream = ExtResource("2_byhdo")
+stream_1/stream = ExtResource("3_j7x4x")
+stream_2/stream = ExtResource("4_fpw2u")
+stream_3/stream = ExtResource("5_oplce")
+stream_4/stream = ExtResource("6_1tach")
+stream_5/stream = ExtResource("7_0efn7")
+
+[sub_resource type="Animation" id="Animation_mrgko"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/WeaponSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/MuzzleFlash:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/MuzzleFlash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/MeleeComponent/Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bvbe8"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 6), Vector2(6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/WeaponSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0944, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/MuzzleFlash:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/MuzzleFlash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/MeleeComponent/Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot/TileRemoverRay")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"force_raycast_update"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f8y8q"]
+_data = {
+&"RESET": SubResource("Animation_mrgko"),
+&"attack": SubResource("Animation_bvbe8")
+}
+
+[node name="Pickaxe" unique_id=256671506 node_paths=PackedStringArray("firing_component", "weapon_component") instance=ExtResource("1_ha81r")]
+firing_component = NodePath("AutoFireComponent")
+weapon_component = NodePath("Pivot/MeleeComponent")
+
+[node name="AutoFireComponent" parent="." index="0" unique_id=1804659464 instance=ExtResource("8_tvjrx")]
+base_cooldown = 0.5
+
+[node name="MeleeComponent" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="0" unique_id=1230403482 instance=ExtResource("9_jon3f")]
+
+[node name="AudioStreamPlayer2D" parent="Pivot/MeleeComponent" index="0" unique_id=1943517960]
+stream = SubResource("AudioStreamRandomizer_6fmhv")
+
+[node name="TileRemoverRay" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="1" unique_id=1474221233 instance=ExtResource("10_3u3rm")]
+enabled = false
+hit_from_inside = true
+
+[node name="WeaponSprite" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="2" unique_id=995957032]
+texture = ExtResource("11_7oxqd")
+hframes = 5
+vframes = 5
+frame = 5
+
+[node name="MuzzleFlash" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="3" unique_id=351866008]
+texture = ExtResource("12_5avw0")
+
+[node name="AnimationPlayer" parent="." index="2" unique_id=35985317]
+libraries/ = SubResource("AnimationLibrary_f8y8q")
+
+[editable path="Pivot/MeleeComponent"]
+[editable path="Pivot/MeleeComponent/Hitbox"]

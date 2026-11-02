@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dili0ekehyxsd" path="res://assets/textures/blood_splatter.png" id="1_oira1"]
 [ext_resource type="Script" uid="uid://bdkvcodixrljk" path="res://components/props/random_prop_sprite.gd" id="2_28764"]
-[ext_resource type="PackedScene" uid="uid://ckegkiyo3rx4q" path="res://components/remove_timer.tscn" id="3_p6f04"]
+[ext_resource type="PackedScene" uid="uid://ckegkiyo3rx4q" path="res://components/projectiles/behaviors/remove_timer.tscn" id="3_p6f04"]
 
 [node name="BloodSplatter" type="Sprite2D"]
 z_index = -8

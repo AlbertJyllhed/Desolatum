@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://bncga8ydr3vn"]
 
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_3qg4c"]
-[ext_resource type="PackedScene" uid="uid://w7x3w1qwsdhe" path="res://components/weapons/triple_machinegun.tscn" id="1_sfdbp"]
+[ext_resource type="PackedScene" uid="uid://w7x3w1qwsdhe" path="res://components/weapons/player/triple_machinegun.tscn" id="1_sfdbp"]
 
 [resource]
 script = ExtResource("1_3qg4c")

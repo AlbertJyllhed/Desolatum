@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b2c1mhdcquj0t"]
+
+[ext_resource type="Script" uid="uid://bg3mdljes702i" path="res://components/weapons/firing/weapon_component.gd" id="1_cvaik"]
+
+[node name="WeaponComponent" type="Node2D" unique_id=893577152]
+script = ExtResource("1_cvaik")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1943517960]

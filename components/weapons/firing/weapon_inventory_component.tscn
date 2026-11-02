@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://xt0peorh0f2i"]
+
+[ext_resource type="Script" uid="uid://wmke13pepona" path="res://components/weapons/firing/weapon_inventory_component.gd" id="1_vtby2"]
+[ext_resource type="AudioStream" uid="uid://dpfk0kbncq0j3" path="res://sounds/weapswitch.ogg" id="4_r1awt"]
+
+[node name="WeaponInventoryComponent" type="Node2D" unique_id=1793599471]
+script = ExtResource("1_vtby2")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1308258161]
+stream = ExtResource("4_r1awt")

@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://b5dskmq7j3isv"]
+
+[ext_resource type="Script" uid="uid://cqngxwj7nlj4m" path="res://characters/enemy/enemy_entity.gd" id="1_kjgs7"]
+[ext_resource type="PackedScene" uid="uid://4pkuotplcb2p" path="res://states/state_machine.tscn" id="2_q83i5"]
+[ext_resource type="PackedScene" uid="uid://d1fic30u18k03" path="res://states/idle.tscn" id="3_isf4n"]
+[ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/core/health_component.tscn" id="4_jsje3"]
+[ext_resource type="PackedScene" uid="uid://bfgcoyro8k4dp" path="res://particles/blood_particles.tscn" id="5_ns42f"]
+[ext_resource type="PackedScene" uid="uid://cgjcjsytg5uvl" path="res://components/core/blood_splatter_component.tscn" id="6_s2nao"]
+[ext_resource type="PackedScene" uid="uid://6ebkryoetwyk" path="res://components/core/drop_component.tscn" id="7_5sxj7"]
+[ext_resource type="PackedScene" uid="uid://d0m7vblybubk2" path="res://components/core/hit_flash_component.tscn" id="7_ouq2k"]
+[ext_resource type="Material" uid="uid://cdyosqubi74h4" path="res://assets/materials/hidden_hit_flash_material.tres" id="8_bye06"]
+[ext_resource type="Shader" uid="uid://mtoxo3au8skm" path="res://resources/shaders/hidden_hit_flash.gdshader" id="8_eddt6"]
+[ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="8_wyt2p"]
+[ext_resource type="PackedScene" uid="uid://cglisf6kd1vpw" path="res://components/core/hit_effect_component.tscn" id="9_i76co"]
+[ext_resource type="PackedScene" uid="uid://b1flgtmb64om6" path="res://components/core/random_growl_component.tscn" id="11_qckmt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ceg3g"]
+resource_local_to_scene = true
+shader = ExtResource("8_eddt6")
+shader_parameter/lerp_percent = 0.0
+
+[node name="EnemyEntity" type="CharacterBody2D" unique_id=1108072473]
+collision_layer = 4
+collision_mask = 1029
+motion_mode = 1
+script = ExtResource("1_kjgs7")
+acceleration = 200.0
+
+[node name="Timer" type="Timer" parent="." unique_id=848623446]
+one_shot = true
+
+[node name="StateMachine" parent="." unique_id=1365531725 node_paths=PackedStringArray("animation_player", "timer") instance=ExtResource("2_q83i5")]
+animation_player = NodePath("../AnimationPlayer")
+timer = NodePath("../Timer")
+
+[node name="Idle" parent="StateMachine" unique_id=126536048 instance=ExtResource("3_isf4n")]
+
+[node name="HealthComponent" parent="." unique_id=761884021 instance=ExtResource("4_jsje3")]
+blood_particles = ExtResource("5_ns42f")
+
+[node name="BloodSplatterComponent" parent="." unique_id=78404631 node_paths=PackedStringArray("health_component") instance=ExtResource("6_s2nao")]
+health_component = NodePath("../HealthComponent")
+
+[node name="HitFlashComponent" parent="." unique_id=77334823 node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("7_ouq2k")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_ceg3g")
+
+[node name="HitEffectComponent" parent="." unique_id=548618509 node_paths=PackedStringArray("hurtbox") instance=ExtResource("9_i76co")]
+hurtbox = NodePath("../Hurtbox")
+
+[node name="DropComponent" parent="." unique_id=618434561 node_paths=PackedStringArray("health_component") instance=ExtResource("7_5sxj7")]
+health_component = NodePath("../HealthComponent")
+
+[node name="RandomGrowlComponent" parent="." unique_id=905644605 instance=ExtResource("11_qckmt")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=25887476]
+material = ExtResource("8_bye06")
+position = Vector2(0, -8)
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2109732505]
+material = ExtResource("8_bye06")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=651231320]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1461731086]
+
+[node name="Hurtbox" parent="." unique_id=1380650229 node_paths=PackedStringArray("health_component") instance=ExtResource("8_wyt2p")]
+collision_layer = 16
+collision_mask = 32
+health_component = NodePath("../HealthComponent")
+damage_tick_delay = 0.1
+
+[node name="DisableTimer" type="Timer" parent="." unique_id=1717461473]
+wait_time = 0.5
+one_shot = true

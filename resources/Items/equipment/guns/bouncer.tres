@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://vvob4fsuo80t"]
 
-[ext_resource type="PackedScene" uid="uid://bwdcvx8vur0ds" path="res://components/weapons/bouncer.tscn" id="2_h57l4"]
+[ext_resource type="PackedScene" uid="uid://bwdcvx8vur0ds" path="res://components/weapons/player/bouncer.tscn" id="2_h57l4"]
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_ireuq"]
 
 [resource]

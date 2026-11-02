@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://chu6wx510d7q7"]
+
+[ext_resource type="Script" uid="uid://c550nv4y6fk1g" path="res://components/weapons/enemy/enemy_weapon_base.gd" id="1_8bn8n"]
+[ext_resource type="PackedScene" uid="uid://bhoelwsp2sndg" path="res://components/areas/target_locator_area.tscn" id="2_hkxeg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fboq7"]
+radius = 24.0
+
+[node name="EnemyWeaponBase" type="Node2D" unique_id=1338235100]
+script = ExtResource("1_8bn8n")
+
+[node name="Pivot" type="Node2D" parent="." unique_id=1925312281]
+
+[node name="AttackArea" parent="." unique_id=2131331540 instance=ExtResource("2_hkxeg")]
+
+[node name="CollisionShape2D" parent="AttackArea" index="1"]
+shape = SubResource("CircleShape2D_fboq7")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=188550295]
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+
+[editable path="AttackArea"]

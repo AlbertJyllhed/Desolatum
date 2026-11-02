@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dghtorjtfjb4p"]
 
-[ext_resource type="PackedScene" uid="uid://bw7ihnd7xa1bu" path="res://components/interactable.tscn" id="1_0wllp"]
+[ext_resource type="PackedScene" uid="uid://bw7ihnd7xa1bu" path="res://components/interactables/interactable.tscn" id="1_0wllp"]
 [ext_resource type="Script" uid="uid://dc3gwkgn1iyw4" path="res://components/props/character_unlock.gd" id="2_arf8e"]
 [ext_resource type="Texture2D" uid="uid://dluocsfglcbsl" path="res://assets/textures/player_update.png" id="2_yn58a"]
-[ext_resource type="PackedScene" uid="uid://ch3qur7vvceug" path="res://components/event_handler_component.tscn" id="4_nc5qh"]
+[ext_resource type="PackedScene" uid="uid://ch3qur7vvceug" path="res://components/core/event_handler_component.tscn" id="4_nc5qh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hnunq"]
 

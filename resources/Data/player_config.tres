@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://ffwhqkje216k"]
+[gd_resource type="Resource" script_class="PlayerConfig" format=3 uid="uid://ffwhqkje216k"]
 
 [ext_resource type="Script" uid="uid://cx6nffhnwk2c0" path="res://resources/data/player_config.gd" id="1_q118o"]
 [ext_resource type="Script" uid="uid://cnn4xenarf4bt" path="res://resources/items/buildings/building_item.gd" id="2_ik64d"]
 [ext_resource type="Resource" uid="uid://cgs0gfh7ekios" path="res://resources/items/buildings/barrier.tres" id="3_8cbci"]
 [ext_resource type="Resource" uid="uid://dhpjnccxtr7uf" path="res://resources/items/buildings/turret.tres" id="4_uqck5"]
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="5_xmw3t"]
+[ext_resource type="Resource" uid="uid://bo7rv4udfku30" path="res://resources/items/buildings/mining_light.tres" id="5_ycjs4"]
+[ext_resource type="Resource" uid="uid://ro1xufphcqqf" path="res://resources/items/buildings/electric_fence.tres" id="6_ga2dh"]
 [ext_resource type="Resource" uid="uid://busumql47jgp" path="res://resources/items/equipment/guns/pistol.tres" id="6_tytom"]
 [ext_resource type="Resource" uid="uid://bh346hr4ji17d" path="res://resources/items/equipment/melee/pickaxe.tres" id="7_5ahp5"]
 
 [resource]
 script = ExtResource("1_q118o")
 starter_equipment = Array[ExtResource("5_xmw3t")]([ExtResource("6_tytom"), ExtResource("7_5ahp5")])
-starter_buildings = Array[ExtResource("2_ik64d")]([ExtResource("3_8cbci"), ExtResource("4_uqck5")])
+starter_buildings = Array[ExtResource("2_ik64d")]([ExtResource("3_8cbci"), ExtResource("4_uqck5"), ExtResource("5_ycjs4"), ExtResource("6_ga2dh")])

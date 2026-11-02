@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://suscde7igcyw"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://components/weapons/player/player_weapon_base.tscn" id="1_vtc1f"]
+[ext_resource type="PackedScene" uid="uid://b63err5lwk6fn" path="res://components/weapons/firing/single_fire_component.tscn" id="2_0nx7o"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/weapons/firing/gun_component.tscn" id="3_eualm"]
+[ext_resource type="AudioStream" uid="uid://b1no86fo8mucp" path="res://sounds/pickaxe/swish-1.wav" id="5_1qfvi"]
+[ext_resource type="PackedScene" uid="uid://d2bqfjunuovrn" path="res://components/weapons/firing/recharge_component.tscn" id="6_epw3p"]
+[ext_resource type="Texture2D" uid="uid://kvgdc11yxunm" path="res://assets/textures/mine.png" id="7_qdut6"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yn2dx"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("5_1qfvi")
+
+[node name="TeslaMineThrower" unique_id=321133783 node_paths=PackedStringArray("firing_component", "weapon_component", "ammo_component") instance=ExtResource("1_vtc1f")]
+firing_component = NodePath("SingleFireComponent")
+weapon_component = NodePath("Pivot/GunComponent")
+ammo_component = NodePath("RechargeComponent")
+
+[node name="SingleFireComponent" parent="." index="0" unique_id=143195789 instance=ExtResource("2_0nx7o")]
+base_cooldown = 0.5
+
+[node name="RechargeComponent" parent="." index="1" unique_id=294789801 instance=ExtResource("6_epw3p")]
+base_ammo = 4
+base_reload_time = 10.0
+
+[node name="GunComponent" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="0" unique_id=1651468666 instance=ExtResource("3_eualm")]
+bullet_scene = null
+
+[node name="AudioStreamPlayer2D" parent="Pivot/GunComponent" index="0" unique_id=1943517960]
+stream = SubResource("AudioStreamRandomizer_yn2dx")
+
+[node name="WeaponSprite" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="1" unique_id=995957032]
+texture = ExtResource("7_qdut6")
+
+[editable path="Pivot/GunComponent"]

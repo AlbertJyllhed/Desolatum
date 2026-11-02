@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c8h8q16gs2wqd" path="res://components/buildings/electric_fence.tscn" id="1_7p2w6"]
 [ext_resource type="Script" uid="uid://cnn4xenarf4bt" path="res://resources/items/buildings/building_item.gd" id="1_jybw5"]
+[ext_resource type="Texture2D" uid="uid://b5etpki8us1bf" path="res://assets/textures/electric_fence.png" id="2_qma8f"]
 
 [resource]
 script = ExtResource("1_jybw5")
@@ -10,4 +11,5 @@ ore_cost = 10
 id = "electric_fence"
 name = "Electric Fence"
 description = "Electrifies and slows down nearby enemies."
+icon = ExtResource("2_qma8f")
 metadata/_custom_type_script = "uid://cnn4xenarf4bt"

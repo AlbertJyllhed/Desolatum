@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b16cq3y5ca6j0" path="res://managers/enemy_manager.gd" id="1_7gyjg"]
 [ext_resource type="Resource" uid="uid://d488fpt75ddv" path="res://resources/data/enemy_lists/cave_enemy_list.tres" id="2_owjkg"]
+[ext_resource type="Resource" uid="uid://pxrvrs1pfv84" path="res://resources/data/calm_phase.tres" id="3_qofgo"]
+[ext_resource type="Resource" uid="uid://bn6gvoklooigy" path="res://resources/data/chaos_phase.tres" id="4_ucpqc"]
 
 [node name="EnemyManager" type="Node" unique_id=1565340141]
 script = ExtResource("1_7gyjg")
 enemy_list = ExtResource("2_owjkg")
+calm_phase = ExtResource("3_qofgo")
+chaos_phase = ExtResource("4_ucpqc")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=236808919]
 one_shot = true

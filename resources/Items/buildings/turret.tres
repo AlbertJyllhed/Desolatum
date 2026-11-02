@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cnn4xenarf4bt" path="res://resources/items/buildings/building_item.gd" id="1_e4ccy"]
 [ext_resource type="PackedScene" uid="uid://bvouwx0ctslr4" path="res://components/buildings/turret.tscn" id="1_h4b3b"]
-[ext_resource type="Texture2D" uid="uid://dbsypm28nxdbb" path="res://assets/textures/turret_icon.png" id="2_vdgst"]
+[ext_resource type="Texture2D" uid="uid://dk30qefkmbkpx" path="res://assets/textures/turret.png" id="2_djbbb"]
 
 [resource]
 script = ExtResource("1_e4ccy")
@@ -11,5 +11,5 @@ ore_cost = 20
 id = "turret"
 name = "Turret"
 description = "Build a turret that automatically tracks and fires at the closest target."
-icon = ExtResource("2_vdgst")
+icon = ExtResource("2_djbbb")
 metadata/_custom_type_script = "uid://cnn4xenarf4bt"

@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://ogprrsboosi7"]
+
+[ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy/enemy_entity.tscn" id="1_gjiat"]
+[ext_resource type="PackedScene" uid="uid://cgiu3gpl2rtdc" path="res://states/kite.tscn" id="2_6b3n6"]
+[ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="2_q8u65"]
+[ext_resource type="PackedScene" uid="uid://j5fmpojrs1ek" path="res://states/hunt.tscn" id="3_1deni"]
+[ext_resource type="Shader" uid="uid://mtoxo3au8skm" path="res://resources/shaders/hidden_hit_flash.gdshader" id="3_1yla6"]
+[ext_resource type="PackedScene" uid="uid://r1gcjlte6h4r" path="res://states/attack.tscn" id="3_6b3n6"]
+[ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/data/drop_lists/enemy_drop_list.tres" id="5_1yla6"]
+[ext_resource type="PackedScene" uid="uid://bgnk2fyi80pec" path="res://components/weapons/enemy/enemy_shooter.tscn" id="5_s7bt0"]
+[ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="7_odo0u"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="8_f6u7c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6u7c"]
+resource_local_to_scene = true
+shader = ExtResource("3_1yla6")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oeew7"]
+resource_local_to_scene = true
+shader = ExtResource("3_1yla6")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_odo0u"]
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_oeew7"]
+resource_name = "attack_right"
+
+[sub_resource type="Animation" id="Animation_1deni"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_esjsj"]
+resource_name = "prepare_attack_right"
+
+[sub_resource type="Animation" id="Animation_f6u7c"]
+resource_name = "walk_right"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oeew7"]
+_data = {
+&"attack_right": SubResource("Animation_oeew7"),
+&"idle": SubResource("Animation_1deni"),
+&"prepare_attack_right": SubResource("Animation_esjsj"),
+&"walk_right": SubResource("Animation_f6u7c")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q8u65"]
+radius = 8.0
+
+[node name="Spitter" unique_id=10341414 instance=ExtResource("1_gjiat")]
+
+[node name="StateMachine" parent="." index="1" unique_id=1365531725 node_paths=PackedStringArray("target_locator_ray", "weapon")]
+target_locator_ray = NodePath("../TargetLocatorRay")
+weapon = NodePath("../EnemyShooter")
+
+[node name="Wander" parent="StateMachine" index="1" unique_id=557251752 instance=ExtResource("2_q8u65")]
+
+[node name="Hunt" parent="StateMachine" index="2" unique_id=1948250037 instance=ExtResource("3_1deni")]
+attacks_buildings = false
+
+[node name="Kite" parent="StateMachine" index="3" unique_id=27324345 instance=ExtResource("2_6b3n6")]
+
+[node name="Attack" parent="StateMachine" index="4" unique_id=831607627 instance=ExtResource("3_6b3n6")]
+next_state = "Kite"
+
+[node name="HealthComponent" parent="." index="2" unique_id=761884021]
+max_health = 2.0
+
+[node name="HitFlashComponent" parent="." index="4" unique_id=77334823]
+hit_flash_material = SubResource("ShaderMaterial_f6u7c")
+
+[node name="DropComponent" parent="." index="6" unique_id=618434561]
+drop_list = ExtResource("5_1yla6")
+
+[node name="Sprite2D" parent="." index="8" unique_id=25887476]
+modulate = Color(0, 1, 0, 1)
+material = SubResource("ShaderMaterial_oeew7")
+texture = ExtResource("8_f6u7c")
+
+[node name="TargetLocatorRay" parent="." index="9" unique_id=165325656 instance=ExtResource("7_odo0u")]
+
+[node name="EnemyShooter" parent="." index="10" unique_id=1938468322 instance=ExtResource("5_s7bt0")]
+
+[node name="Shadow" parent="." index="11" unique_id=2109732505]
+modulate = Color(0, 0, 0, 0.294118)
+z_index = -1
+material = SubResource("ShaderMaterial_oeew7")
+texture = ExtResource("8_f6u7c")
+
+[node name="CollisionShape2D" parent="." index="12" unique_id=651231320]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_odo0u")
+
+[node name="AnimationPlayer" parent="." index="13" unique_id=1461731086]
+libraries/ = SubResource("AnimationLibrary_oeew7")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1380650229) index="0"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_q8u65")
+
+[editable path="Hurtbox"]

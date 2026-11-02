@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://cw7ctomhgalqj"]
 
-[ext_resource type="PackedScene" uid="uid://vswiudpdclwa" path="res://components/weapons/burst_rifle.tscn" id="2_klt3a"]
+[ext_resource type="PackedScene" uid="uid://vswiudpdclwa" path="res://components/weapons/player/burst_rifle.tscn" id="2_klt3a"]
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_lt4il"]
 
 [resource]

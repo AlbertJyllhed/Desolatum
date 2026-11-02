@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://pilwyjays5u2"]
+
+[ext_resource type="PackedScene" uid="uid://b5dskmq7j3isv" path="res://characters/enemy/enemy_entity.tscn" id="1_w460d"]
+[ext_resource type="PackedScene" uid="uid://j5fmpojrs1ek" path="res://states/hunt.tscn" id="2_on16h"]
+[ext_resource type="PackedScene" uid="uid://1dxyq1bqjgtl" path="res://states/wander.tscn" id="3_i6xyo"]
+[ext_resource type="PackedScene" uid="uid://r1gcjlte6h4r" path="res://states/attack.tscn" id="3_x7ofc"]
+[ext_resource type="Resource" uid="uid://crwfn1mp6vq2w" path="res://resources/data/drop_lists/enemy_drop_list.tres" id="4_jldym"]
+[ext_resource type="PackedScene" uid="uid://dbky8wkts6jkq" path="res://particles/explosion.tscn" id="5_7qdpn"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="5_x11qn"]
+[ext_resource type="Shader" uid="uid://mtoxo3au8skm" path="res://resources/shaders/hidden_hit_flash.gdshader" id="6_rc5vf"]
+[ext_resource type="Texture2D" uid="uid://rtls2ky0kogm" path="res://assets/textures/exploder_enemy.png" id="7_hm1ln"]
+[ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="8_y8nl0"]
+[ext_resource type="PackedScene" uid="uid://cvll8o6xr230i" path="res://components/weapons/enemy/explode_attack.tscn" id="9_wr4oe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhpcd"]
+resource_local_to_scene = true
+shader = ExtResource("6_rc5vf")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ap7to"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vvnly"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7ave"]
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_o2ini"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mn20r"]
+resource_name = "attack_right"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_jftu0"]
+resource_name = "idle"
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_udfay"]
+resource_name = "prepare_attack_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_bgx3y"]
+resource_name = "walk_right"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6p0ej"]
+_data = {
+&"RESET": SubResource("Animation_o2ini"),
+&"attack_right": SubResource("Animation_mn20r"),
+&"idle": SubResource("Animation_jftu0"),
+&"prepare_attack_right": SubResource("Animation_udfay"),
+&"walk_right": SubResource("Animation_bgx3y")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p6tbj"]
+radius = 8.0
+
+[node name="Exploder" unique_id=1589800081 instance=ExtResource("1_w460d")]
+base_speed = 60
+
+[node name="StateMachine" parent="." index="1" unique_id=1365531725 node_paths=PackedStringArray("target_locator_ray", "weapon")]
+target_locator_ray = NodePath("../TargetLocatorRay")
+weapon = NodePath("../ExplodeAttack")
+
+[node name="Wander" parent="StateMachine" index="1" unique_id=2059350886 instance=ExtResource("3_i6xyo")]
+
+[node name="Hunt" parent="StateMachine" index="2" unique_id=31052387 instance=ExtResource("2_on16h")]
+min_update_time = 0.25
+max_update_time = 0.5
+run_chance = 1.0
+
+[node name="Attack" parent="StateMachine" index="3" unique_id=1372510325 instance=ExtResource("3_x7ofc")]
+
+[node name="HealthComponent" parent="." index="2" unique_id=761884021]
+blood_particles = ExtResource("5_7qdpn")
+max_health = 1.0
+
+[node name="HitFlashComponent" parent="." index="4" unique_id=77334823]
+hit_flash_material = SubResource("ShaderMaterial_bhpcd")
+
+[node name="DropComponent" parent="." index="6" unique_id=618434561]
+max_drop_amount = 2
+drop_chance = 0.1
+drop_list = ExtResource("4_jldym")
+
+[node name="Sprite2D" parent="." index="8" unique_id=25887476]
+material = SubResource("CanvasItemMaterial_ap7to")
+texture = ExtResource("7_hm1ln")
+hframes = 15
+
+[node name="TargetLocatorRay" parent="." index="9" unique_id=570604574 instance=ExtResource("8_y8nl0")]
+
+[node name="ExplodeAttack" parent="." index="10" unique_id=1348014377 node_paths=PackedStringArray("health_component") instance=ExtResource("9_wr4oe")]
+position = Vector2(0, -6)
+health_component = NodePath("../HealthComponent")
+
+[node name="Shadow" parent="." index="11" unique_id=2109732505]
+modulate = Color(0, 0, 0, 0.294118)
+z_index = -1
+material = SubResource("CanvasItemMaterial_vvnly")
+scale = Vector2(1, 0.25)
+texture = ExtResource("5_x11qn")
+
+[node name="CollisionShape2D" parent="." index="12" unique_id=651231320]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_h7ave")
+
+[node name="AnimationPlayer" parent="." index="13" unique_id=1461731086]
+libraries/ = SubResource("AnimationLibrary_6p0ej")
+autoplay = &"walk_right"
+
+[node name="Hurtbox" parent="." index="14" unique_id=1380650229]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_p6tbj")
+
+[editable path="Hurtbox"]

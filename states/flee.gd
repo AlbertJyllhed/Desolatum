@@ -6,7 +6,7 @@ extends EnemyState
 
 var pathfinding_grid : PathfindingGrid
 var astar_grid : AStarGrid2D
-var tilemap : TileMap
+var tilemap : TileMapLayer
 var target_tile : Vector2i
 var used_tiles : Array[Vector2i]
 
@@ -16,7 +16,7 @@ func _ready():
 	pathfinding_grid = get_tree().get_first_node_in_group("pathfinding")
 	astar_grid = pathfinding_grid.astar_grid
 	tilemap = pathfinding_grid.tilemap
-	used_tiles = tilemap.get_used_cells_by_id(0, 0)
+	used_tiles = tilemap.get_used_cells_by_id(Tiles.Id.GROUND)
 
 
 func timeout():

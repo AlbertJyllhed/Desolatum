@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bgnk2fyi80pec"]
+
+[ext_resource type="PackedScene" uid="uid://chu6wx510d7q7" path="res://components/weapons/enemy/enemy_weapon_base.tscn" id="1_6fmhv"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/weapons/firing/gun_component.tscn" id="2_u0p1t"]
+[ext_resource type="PackedScene" uid="uid://do8m8t61t4wko" path="res://components/projectiles/enemy_bullet.tscn" id="3_7r2qr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5qlys"]
+radius = 80.0
+
+[sub_resource type="Animation" id="Animation_6fmhv"]
+resource_name = "attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u0p1t"]
+_data = {
+&"attack": SubResource("Animation_6fmhv")
+}
+
+[node name="EnemyShooter" unique_id=1938468322 node_paths=PackedStringArray("weapon_component") instance=ExtResource("1_6fmhv")]
+weapon_component = NodePath("Pivot/GunComponent")
+
+[node name="GunComponent" parent="Pivot" parent_id_path=PackedInt32Array(1925312281) index="0" unique_id=663173590 instance=ExtResource("2_u0p1t")]
+bullet_scene = ExtResource("3_7r2qr")
+base_bullet_spread = 0.0
+base_bullet_speed = 10.0
+
+[node name="CollisionShape2D" parent="AttackArea" parent_id_path=PackedInt32Array(2131331540) index="1"]
+shape = SubResource("CircleShape2D_5qlys")
+
+[node name="AnimationPlayer" parent="." index="2" unique_id=188550295]
+libraries/ = SubResource("AnimationLibrary_u0p1t")
+
+[editable path="AttackArea"]

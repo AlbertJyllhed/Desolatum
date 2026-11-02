@@ -1,6 +1,6 @@
 extends Node
 
-var config: PlayerConfig = preload("res://resources/Data/player_config.tres")
+var config: PlayerConfig = preload("uid://ffwhqkje216k")
 var state: RunState
 
 

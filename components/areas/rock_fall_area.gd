@@ -3,7 +3,7 @@ extends Area2D
 @onready var particles : GPUParticles2D = $GPUParticles2D
 @onready var timer : Timer = $Timer
 
-var rock_fall_scene : PackedScene = preload("res://particles/rock_fall.tscn")
+var rock_fall_scene : PackedScene = preload("uid://nrxgr1orcd1l")
 
 
 func _on_body_entered(_body):
