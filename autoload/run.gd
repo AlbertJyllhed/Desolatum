@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func new_run() -> void:
 	_set_state(RunState.new(config))
+	state.start_map(config)
 	GameEvents.reset_stats.emit() # DropList/EnemyList still rebuild on this
 
 

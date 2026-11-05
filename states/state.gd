@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/bot.svg")
 extends Node
 class_name State
 

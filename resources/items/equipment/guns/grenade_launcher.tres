@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://c4au6yw5sn535"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_dweur"]
+[ext_resource type="PackedScene" uid="uid://bx6w1u7ew5ale" path="res://components/projectiles/grenade.tscn" id="gd_projectile"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
+[ext_resource type="AudioStream" uid="uid://wnsap6eg544d" path="res://sounds/grenade.wav" id="gd_sound_0"]
+
+[sub_resource type="Resource" id="GunData_main"]
+script = ExtResource("gd_script")
+cooldown = 0.5
+ammo = 4
+reload_time = 2.0
+projectile = ExtResource("gd_projectile")
+speed = 300.0
+spread = 0.0
+explode_chance = 1.0
+sprite_frame = 4
+muzzle_offset = 11.0
+sounds = Array[AudioStream]([ExtResource("gd_sound_0")])
+recoil = 0.4
+shake_power = 6.0
+
+[resource]
+script = ExtResource("2_dweur")
+gun_data = SubResource("GunData_main")
+id = "launcher"
+name = "Grenade Launcher"
+description = "Shoots powerful explosive shells"

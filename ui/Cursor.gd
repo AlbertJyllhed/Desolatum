@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/control/cursor.svg")
 extends Control
 
 var screen_center : Vector2

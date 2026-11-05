@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/mountains.svg")
 extends Node
 class_name LevelGenerator
 ## Random-walker cave generator.
@@ -110,6 +111,8 @@ const BEDROCK_PADDING := 2
 ## The player spawns on the teleporter, so it is not solid by default. Turn this
 ## on if it has collision that should be kept from blocking a passage.
 @export var teleporter_is_solid: bool = false
+## Does the generator appear in some form in the current mission?
+@export var mission_uses_generator: bool = true
 
 @export_group("Energy")
 ## Energy tiles placed = the combined energy cost of the crate shops * this. Crystal
@@ -192,6 +195,7 @@ var start_room: Room
 var end_room: Room
 var teleporter_rect: Rect2i  # the tiles the teleporter covers (in the start room)
 var generator_rect: Rect2i   # the tiles the generator covers (in the end room)
+var generator: Generator     # the placed generator, for missions that use it
 var rooms: Array[Room] = []
 
 var secret_cells := {}
@@ -226,7 +230,12 @@ class Room extends RefCounted:
 
 func _ready() -> void:
 	assert(tilemap and overlay_layer, "Assign both tile layers on the LevelGenerator")
+	add_to_group("level_generator")
 	overlay_layer.tile_set = tilemap.tile_set
+	# The lists only fill their spawn tables deferred after loading, which is
+	# too late when this scene was loaded in the same frame. Fill them now.
+	prop_list.setup()
+	crate_list.setup()
 	generate(randi() if randomize_seed else level_seed)
 	TileBreaker.register(tilemap, overlay_layer)
 
@@ -1197,8 +1206,10 @@ func _populate_level() -> void:
 	camera.set_limits(limits)
 	
 	create_instance(TELEPORTER_SCENE, start_position)
-
-	create_instance(GENERATOR_SCENE, _rect_to_world(generator_rect))
+	
+	generator = null
+	if mission_uses_generator:
+		generator = create_instance(GENERATOR_SCENE, _rect_to_world(generator_rect)) as Generator
 
 	for anchor in car_positions:
 		create_instance(CAR_SCENE, _rect_to_world(Rect2i(anchor, car_size)))
@@ -1222,6 +1233,12 @@ func _populate_level() -> void:
 	if secret_reward_scene != null:
 		for cell in secret_reward_cells:
 			create_instance(secret_reward_scene, _cell_to_world(cell))
+
+
+func place_objectives(scene: PackedScene, amount: int) -> void:
+	var anchors := _pick_positions("objectives", amount, Vector2i(2, 2), 8, 4, true)
+	for anchor in anchors:
+		create_instance(scene, _rect_to_world(Rect2i(anchor, Vector2i(2, 2))))
 
 
 func create_instance(scene: PackedScene, world_position: Vector2) -> Node2D:

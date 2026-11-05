@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://bgjj0a4uwau5b"]
+
+[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="1_hi4ux"]
+
+[resource]
+default_font = ExtResource("1_hi4ux")

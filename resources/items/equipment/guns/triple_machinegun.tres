@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://bncga8ydr3vn"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_3qg4c"]
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://components/projectiles/bullet.tscn" id="gd_projectile"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
+[ext_resource type="AudioStream" uid="uid://qqour2nnb8tt" path="res://sounds/minigun.ogg" id="gd_sound_0"]
+[ext_resource type="AudioStream" uid="uid://cr6ertvl6ct1l" path="res://sounds/minigun2.ogg" id="gd_sound_1"]
+[ext_resource type="AudioStream" uid="uid://1j7iqgaes5tt" path="res://sounds/minigun3.ogg" id="gd_sound_2"]
+
+[sub_resource type="Resource" id="GunData_main"]
+script = ExtResource("gd_script")
+fire_mode = 1
+cooldown = 0.2
+ammo = 24
+reload_time = 2.0
+projectile = ExtResource("gd_projectile")
+spread = 0.0
+pattern = Array[float]([-20.0, 0.0, 20.0])
+sprite_frame = 15
+sounds = Array[AudioStream]([ExtResource("gd_sound_0"), ExtResource("gd_sound_1"), ExtResource("gd_sound_2")])
+
+[resource]
+script = ExtResource("1_3qg4c")
+gun_data = SubResource("GunData_main")
+id = "triple_machinegun"
+name = "Triple Machinegun"
+description = "Like the machinegun but shoots 3 bullets in a fixed-spread pattern"
+drop_weight = 3

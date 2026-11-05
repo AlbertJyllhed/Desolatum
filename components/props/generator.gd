@@ -26,8 +26,9 @@ func interact():
 	var ui_layer = get_tree().get_first_node_in_group("ui_layer")
 	var time_ui_instance = time_ui_scene.instantiate() as TimeUI
 	ui_layer.add_child(time_ui_instance)
-	time_ui_instance.timer.timeout.connect(unlock_exit)
+	time_ui_instance.timer.timeout.connect(on_survived)
 
 
-func unlock_exit():
-	GameEvents.unlock_exit.emit()
+## The mission decides what finishing means (it unlocks the exit on complete).
+func on_survived():
+	GameEvents.objective_done.emit(self)

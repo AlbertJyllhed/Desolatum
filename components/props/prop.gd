@@ -24,7 +24,7 @@ func _ready():
 func get_covered_tiles() -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 	# top-left corner of the footprint, in tile units
-	var top_left = global_position / 16.0 - Vector2(footprint) / 2.0
+	var top_left = global_position / float(Tiles.CELL_SIZE) - Vector2(footprint) / 2.0
 	var origin = Vector2i(top_left.round())
 	for y in footprint.y:
 		for x in footprint.x:

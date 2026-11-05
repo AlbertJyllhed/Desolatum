@@ -26,9 +26,6 @@ size = Vector2(32, 16)
 [node name="PauseMenu" parent="CanvasLayer" unique_id=2056182640 instance=ExtResource("1_mx2lk")]
 visible = false
 
-[node name="NinePatchRect" parent="CanvasLayer/PauseMenu" index="1"]
-texture = null
-
 [node name="OptionsMenu" parent="CanvasLayer/PauseMenu" index="2" node_paths=PackedStringArray("fps_counter")]
 fps_counter = NodePath("../../FPSCounter")
 

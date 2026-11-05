@@ -8,6 +8,8 @@ signal fade_complete()
 
 func _ready():
 	add_to_group("transition_screen")
+	# Keep fading even if the game is paused (e.g. leaving from a menu).
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	animation_player.animation_finished.connect(fade_completed)
 	fade_to_black(false)
 

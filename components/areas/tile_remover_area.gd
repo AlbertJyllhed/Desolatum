@@ -14,7 +14,7 @@ func _ready():
 		return
 	
 	var circle = collision_shape.shape as CircleShape2D
-	var radius_in_tiles = circle.radius / 16.0 if circle else 1.0
+	var radius_in_tiles = circle.radius / float(Tiles.CELL_SIZE) if circle else 1.0
 	var center = map.local_to_map(map.to_local(global_position))
 	var r = ceili(radius_in_tiles)
 	for x in range(-r, r + 1):

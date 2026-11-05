@@ -32,6 +32,8 @@ func _ready():
 	GameEvents.stats_changed.connect(_on_stats_changed)
 	firing_component.fire_weapon.connect(try_attack)
 	camera = get_viewport().get_camera_2d() as PlayerCamera
+	if weapon_component is GunComponent:
+		weapon_component.aim_source = self
 	
 	if ammo_component:
 		ammo_component.has_ammo.connect(attack)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BiomeData" format=3 uid="uid://c1f48tgakjtfh"]
+
+[ext_resource type="Script" uid="uid://bwumlgw3l5ui7" path="res://resources/data/biome_data/biome_data.gd" id="1_35u0b"]
+[ext_resource type="Texture2D" uid="uid://xadi28i86w54" path="res://assets/textures/energy_ui.png" id="1_q4l30"]
+
+[resource]
+script = ExtResource("1_35u0b")
+name = "Ice"
+icon = ExtResource("1_q4l30")
+metadata/_custom_type_script = "uid://bwumlgw3l5ui7"

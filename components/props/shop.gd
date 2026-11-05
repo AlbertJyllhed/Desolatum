@@ -9,8 +9,7 @@ extends Interactable
 
 
 func _ready():
-	var pos = global_position / 16 - Vector2(0.5, 0.5)
-	GameEvents.navigation_updated.emit(pos, true)
+	GameEvents.navigation_updated.emit(Tiles.world_to_cell(global_position), true)
 
 
 func show_details():

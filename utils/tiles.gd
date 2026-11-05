@@ -13,3 +13,10 @@ enum Id {
 }
 
 const CELL_SIZE := 16
+const HALF := CELL_SIZE / 2.0
+
+static func world_to_cell(pos: Vector2) -> Vector2i:
+	return Vector2i((pos / CELL_SIZE).floor())
+
+static func cell_to_world(cell: Vector2i) -> Vector2:
+	return Vector2(cell) * CELL_SIZE + Vector2(HALF, HALF)

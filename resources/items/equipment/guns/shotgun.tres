@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://dwkvpxwfh0pjj"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_f12h4"]
+[ext_resource type="PackedScene" uid="uid://cw6reupfolow" path="res://components/projectiles/big_bullet.tscn" id="gd_projectile"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
+[ext_resource type="AudioStream" uid="uid://dhit7yl2a8iat" path="res://sounds/shotgun2.ogg" id="gd_sound_0"]
+[ext_resource type="AudioStream" uid="uid://4hyf8sd4of5i" path="res://sounds/shotgun3.ogg" id="gd_sound_1"]
+
+[sub_resource type="Resource" id="GunData_main"]
+script = ExtResource("gd_script")
+ammo = 6
+reload_time = 1.5
+projectile = ExtResource("gd_projectile")
+speed = 200.0
+spread = 0.0
+pattern = Array[float]([-20.0, -10.0, 0.0, 10.0, 20.0])
+sprite_frame = 2
+sounds = Array[AudioStream]([ExtResource("gd_sound_0"), ExtResource("gd_sound_1")])
+recoil = 0.4
+shake_power = 4.0
+
+[resource]
+script = ExtResource("2_f12h4")
+gun_data = SubResource("GunData_main")
+id = "shotgun"
+name = "Shotgun"
+description = "For the big mess"
+drop_weight = 2

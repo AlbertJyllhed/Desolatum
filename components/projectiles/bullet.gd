@@ -17,12 +17,18 @@ signal wall_hit
 
 var base_layer : Node2D
 var direction = Vector2.ZERO
+## Node with get_aim_direction(), used by steering behaviours. May be null.
+var aim_source : Node2D
 
 
-func setup(new_direction, new_speed = 400, new_damage = 1):
-	direction = new_direction
-	speed = new_speed
-	hitbox.damage = new_damage
+func setup(shot : ShotInfo):
+	direction = shot.direction
+	speed = shot.speed
+	hitbox.damage = shot.damage
+	# the scene's own explode_chance is inherent to the projectile,
+	# the shooter's (upgrades, launchers) stacks on top of it
+	explode_chance = clamp(explode_chance + shot.explode_chance, 0, 1)
+	aim_source = shot.aim_source
 	sprite.rotation = direction.angle()
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 

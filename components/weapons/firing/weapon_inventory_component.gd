@@ -104,7 +104,7 @@ func create_pickup(new_item : Item):
 
 func create_equipment_instance(new_item : Item):
 	#instantiate the new weapon and add it as a child of the inventory
-	var weapon = new_item.equipment_scene.instantiate()
+	var weapon = new_item.instantiate_equipment()
 	add_child(weapon)
 	weapon.global_position = global_position
 	return weapon

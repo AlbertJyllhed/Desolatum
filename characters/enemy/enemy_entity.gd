@@ -74,6 +74,7 @@ func _exit_tree() -> void:
 
 
 func on_died():
+	GameEvents.enemy_killed.emit(self)
 	all_enemies.erase(self)
 	remove_from_group("enemies")
 	var camera = get_viewport().get_camera_2d() as PlayerCamera

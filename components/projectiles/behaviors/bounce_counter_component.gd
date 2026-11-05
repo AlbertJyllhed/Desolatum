@@ -13,6 +13,6 @@ func _ready():
 
 
 func on_wall_hit():
-	var size = min(base_size + 1, 3)
-	projectile.sprite.scale = Vector2(size, size)
-	projectile.hitbox.damage = size
+	base_size = min(base_size + 1, 3)
+	projectile.sprite.scale = Vector2(base_size, base_size)
+	projectile.hitbox.damage = int(base_size)

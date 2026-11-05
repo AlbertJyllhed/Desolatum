@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://dy1gbvjht2apg"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_o8i5o"]
+[ext_resource type="PackedScene" uid="uid://bc68l5n4im6qh" path="res://components/projectiles/impact_grenade.tscn" id="gd_projectile"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
+[ext_resource type="AudioStream" uid="uid://wnsap6eg544d" path="res://sounds/grenade.wav" id="gd_sound_0"]
+
+[sub_resource type="Resource" id="GunData_main"]
+script = ExtResource("gd_script")
+fire_mode = 2
+cooldown = 0.5
+burst_interval = 0.1
+ammo = 3
+reload_time = 1.5
+projectile = ExtResource("gd_projectile")
+speed = 300.0
+spread = 0.2
+explode_chance = 1.0
+sprite_frame = 12
+muzzle_offset = 0.0
+sounds = Array[AudioStream]([ExtResource("gd_sound_0")])
+recoil = 0.4
+shake_power = 6.0
+
+[resource]
+script = ExtResource("2_o8i5o")
+gun_data = SubResource("GunData_main")
+id = "grenade_digger"
+name = "Grenade Digger"
+description = "Shoots a burst of grenades, useful for excavating."

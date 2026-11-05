@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dbcyt1n8tliin"]
+
+[ext_resource type="PackedScene" uid="uid://da5tghgostisi" path="res://components/weapons/player/player_weapon_base.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://bqirfa0vxvfa7" path="res://components/weapons/player/gun.gd" id="2_gun"]
+[ext_resource type="PackedScene" uid="uid://i0byawtab21c" path="res://components/weapons/firing/gun_component.tscn" id="3_guncomp"]
+[ext_resource type="PackedScene" uid="uid://dbv2o15wvnxbf" path="res://ui/reload_progress_bar.tscn" id="4_reload"]
+[ext_resource type="Texture2D" uid="uid://d3qqmnx7l4y1j" path="res://assets/textures/weapons.png" id="5_sheet"]
+
+[node name="Gun" unique_id=248928662 instance=ExtResource("1_base")]
+script = ExtResource("2_gun")
+data = null
+
+[node name="ReloadProgressBar" parent="." index="0" unique_id=1227250799 instance=ExtResource("4_reload")]
+
+[node name="GunComponent" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="0" unique_id=911501371 instance=ExtResource("3_guncomp")]
+position = Vector2(12, 0)
+bullet_scene = null
+
+[node name="WeaponSprite" parent="Pivot" parent_id_path=PackedInt32Array(2097998026) index="1" unique_id=995957032]
+texture = ExtResource("5_sheet")
+hframes = 5
+vframes = 5

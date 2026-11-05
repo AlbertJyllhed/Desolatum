@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BiomeData" format=3 uid="uid://bsiukx0klu0n6"]
+
+[ext_resource type="Script" uid="uid://bwumlgw3l5ui7" path="res://resources/data/biome_data/biome_data.gd" id="1_lngkt"]
+[ext_resource type="Texture2D" uid="uid://cvjp84iy1v2iv" path="res://assets/textures/ore_ui.png" id="1_n3ylf"]
+
+[resource]
+script = ExtResource("1_lngkt")
+name = "Cave"
+icon = ExtResource("1_n3ylf")
+metadata/_custom_type_script = "uid://bwumlgw3l5ui7"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionData" format=3 uid="uid://i14kfpsy6os2"]
+
+[ext_resource type="Script" uid="uid://dqjg8syqrmlgj" path="res://resources/data/mission_data/mission_data.gd" id="1_5tgy7"]
+[ext_resource type="Texture2D" uid="uid://dbsypm28nxdbb" path="res://assets/textures/turret_icon.png" id="1_klhim"]
+[ext_resource type="PackedScene" path="res://components/missions/generator_mission.tscn" id="2_2wvbs"]
+[ext_resource type="Resource" uid="uid://wtoq1hamm28h" path="res://resources/items/upgrades/health_up.tres" id="3_716cy"]
+
+[resource]
+script = ExtResource("1_5tgy7")
+title = "Generator"
+mission_scene = ExtResource("2_2wvbs")
+icon = ExtResource("1_klhim")
+reward = ExtResource("3_716cy")
+metadata/_custom_type_script = "uid://dqjg8syqrmlgj"

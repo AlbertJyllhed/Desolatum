@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://components/missions/generator_mission.gd" id="1_genms"]
+
+[node name="GeneratorMission" type="Node"]
+script = ExtResource("1_genms")
+title = "Generator"
+description = "Find and restart the generator, survive the onslaught and finally escape."

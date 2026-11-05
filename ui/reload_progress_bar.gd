@@ -7,9 +7,13 @@ var tween : Tween
 
 func _ready():
 	hide()
-	if not ammo_component:
-		return
-	
+	if ammo_component:
+		bind(ammo_component)
+
+
+## Hooks the bar up to an ammo component (also used for ones created at runtime)
+func bind(new_ammo_component : AmmoComponent) -> void:
+	ammo_component = new_ammo_component
 	ammo_component.reloading.connect(on_reload)
 	ammo_component.cancel_reload.connect(reload_completed)
 

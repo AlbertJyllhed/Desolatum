@@ -17,10 +17,10 @@ func _ready():
 
 
 func set_limits(rect: Rect2i):
-	limit_left = rect.position.x * 16
-	limit_top = rect.position.y * 16
-	limit_right = rect.end.x * 16
-	limit_bottom = rect.end.y * 16
+	limit_left = rect.position.x * Tiles.CELL_SIZE
+	limit_top = rect.position.y * Tiles.CELL_SIZE
+	limit_right = rect.end.x * Tiles.CELL_SIZE
+	limit_bottom = rect.end.y * Tiles.CELL_SIZE
 
 
 func set_target(new_target : Node2D):

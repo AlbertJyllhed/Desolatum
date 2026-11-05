@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://blcgon54sn8fq"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_80m61"]
+[ext_resource type="PackedScene" uid="uid://0245qu8asint" path="res://components/projectiles/piercing_bullet.tscn" id="gd_projectile"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
+[ext_resource type="AudioStream" uid="uid://8bfsa3vjxohg" path="res://sounds/pistol.ogg" id="gd_sound_0"]
+[ext_resource type="AudioStream" uid="uid://bbwuy1eau2vmq" path="res://sounds/pistol2.ogg" id="gd_sound_1"]
+[ext_resource type="AudioStream" uid="uid://b8p1igfjo3naq" path="res://sounds/pistol3.ogg" id="gd_sound_2"]
+
+[sub_resource type="Resource" id="GunData_main"]
+script = ExtResource("gd_script")
+cooldown = 0.4
+ammo = 6
+reload_time = 2.0
+projectile = ExtResource("gd_projectile")
+damage = 4
+speed = 800.0
+spread = 0.0
+sprite_frame = 6
+sounds = Array[AudioStream]([ExtResource("gd_sound_0"), ExtResource("gd_sound_1"), ExtResource("gd_sound_2")])
+recoil = 0.4
+shake_power = 6.0
+
+[resource]
+script = ExtResource("2_80m61")
+gun_data = SubResource("GunData_main")
+id = "sniper"
+name = "Sniper"
+description = "Fast, piercing, high damage"

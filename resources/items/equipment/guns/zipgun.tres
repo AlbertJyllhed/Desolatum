@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://bsgm2l30lw8wq"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_62c3w"]
+[ext_resource type="PackedScene" uid="uid://bqb2g77k27big" path="res://components/projectiles/homing_bullet.tscn" id="gd_projectile"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
+[ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="gd_sound_0"]
+
+[sub_resource type="Resource" id="GunData_main"]
+script = ExtResource("gd_script")
+fire_mode = 1
+cooldown = 0.2
+ammo = 8
+reload_time = 1.5
+projectile = ExtResource("gd_projectile")
+spread = 0.0
+sprite_frame = 10
+muzzle_offset = 10.0
+sounds = Array[AudioStream]([ExtResource("gd_sound_0")])
+
+[resource]
+script = ExtResource("2_62c3w")
+gun_data = SubResource("GunData_main")
+id = "zipgun"
+name = "Zipgun"
+description = "Fires fast homing bullets"

@@ -7,17 +7,12 @@ extends Control
 
 var paused : bool = false
 
-enum Levels {
-	SHIP = 0,
-	CAVE = 1,
-}
-
 
 func _ready():
 	options_menu.menu_closed.connect(set_button_focus)
 	quit_confirmation.menu_closed.connect(set_button_focus)
-	var index := SceneManager.level_index
-	if index == Levels.SHIP:
+	# No point offering "Return to ship" while already on the ship.
+	if owner and owner.scene_file_path == SceneManager.ship_scene.resource_path:
 		return_button.hide()
 
 
@@ -45,7 +40,7 @@ func _on_resume_button_pressed():
 
 func _on_return_button_pressed():
 	pause()
-	SceneManager.change_level_with_fade(Levels.SHIP)
+	SceneManager.travel_to_ship()
 
 
 func _on_settings_button_pressed():

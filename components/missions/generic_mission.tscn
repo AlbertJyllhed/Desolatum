@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cp6rgpj2n0eh3"]
+
+[ext_resource type="Script" uid="uid://cm33a8kwrw88q" path="res://components/missions/generic_mission.gd" id="1_worfd"]
+[ext_resource type="PackedScene" uid="uid://cp2pu6pn5wy7b" path="res://components/props/generator.tscn" id="2_okshr"]
+
+[node name="GenericMission" type="Node" unique_id=2028763577]
+script = ExtResource("1_worfd")
+objective_scene = ExtResource("2_okshr")
+objective_amount = 1
+title = "Generator"
+description = "Find and restart the generator, survive the onslaught and finally escape."
+metadata/_custom_type_script = "uid://65uypn84qx1e"

@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/grid_fine.svg")
 extends Node
 class_name PathfindingGrid
 
@@ -36,7 +37,7 @@ func _ready():
 func setup_navigation():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tilemap.get_used_rect()
-	astar_grid.cell_size = Vector2i(16, 16)
+	astar_grid.cell_size = Vector2i(Tiles.CELL_SIZE, Tiles.CELL_SIZE)
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE
 	astar_grid.jumping_enabled = false
 	astar_grid.update()
@@ -57,7 +58,7 @@ func setup_navigation():
 func create_debug_node(pos : Vector2):
 	var path_debug_instance = path_debug_scene.instantiate()
 	base_layer.call_deferred("add_child", path_debug_instance)
-	path_debug_instance.global_position = pos * 16 + Vector2(8, 8)
+	path_debug_instance.global_position = pos * Tiles.CELL_SIZE + Vector2(Tiles.HALF, Tiles.HALF)
 	return path_debug_instance
 
 

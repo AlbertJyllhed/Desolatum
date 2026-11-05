@@ -1,3 +1,4 @@
+@icon("res://addons/at-icons/node/brain.svg")
 extends Node
 class_name StateMachine
 

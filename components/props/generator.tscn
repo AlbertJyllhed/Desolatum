@@ -10,21 +10,21 @@ size = Vector2(32, 16)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vl3l"]
 light_mode = 1
 
-[node name="Generator" type="StaticBody2D"]
+[node name="Generator" type="StaticBody2D" unique_id=767009559]
 y_sort_enabled = true
 collision_layer = 129
 collision_mask = 512
 script = ExtResource("1_v00vw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1569920266]
 texture = ExtResource("1_khnjn")
 hframes = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1892163706]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_q4jar")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=283884102]
 z_index = 11
 material = SubResource("CanvasItemMaterial_7vl3l")
 anchors_preset = 8

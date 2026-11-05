@@ -2,9 +2,8 @@ extends AmmoComponent
 
 
 func _ready():
-	ammo = max_ammo
 	reload_while_holstered = true
-	GameEvents.ammo_updated.emit(ammo, max_ammo)
+	super._ready()
 
 
 func use_ammo():

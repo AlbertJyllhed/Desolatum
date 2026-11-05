@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://busumql47jgp"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_8sa1b"]
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://components/projectiles/bullet.tscn" id="gd_projectile"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
+[ext_resource type="AudioStream" uid="uid://8bfsa3vjxohg" path="res://sounds/pistol.ogg" id="gd_sound_0"]
+[ext_resource type="AudioStream" uid="uid://bbwuy1eau2vmq" path="res://sounds/pistol2.ogg" id="gd_sound_1"]
+[ext_resource type="AudioStream" uid="uid://b8p1igfjo3naq" path="res://sounds/pistol3.ogg" id="gd_sound_2"]
+
+[sub_resource type="Resource" id="GunData_main"]
+script = ExtResource("gd_script")
+fire_mode = 1
+cooldown = 0.4
+ammo = 12
+projectile = ExtResource("gd_projectile")
+muzzle_offset = 8.0
+sounds = Array[AudioStream]([ExtResource("gd_sound_0"), ExtResource("gd_sound_1"), ExtResource("gd_sound_2")])
+
+[resource]
+script = ExtResource("1_8sa1b")
+gun_data = SubResource("GunData_main")
+id = "pistol"
+name = "Pistol"
+description = "The ol' reliable"

@@ -1,5 +1,7 @@
 extends Line2D
 
+@export var max_length : float = 400.0
+
 @onready var ray : RayCast2D = $RayCast2D
 @onready var hitbox : Hitbox = $Hitbox
 @onready var light : Node2D = $PointLight2D
@@ -9,12 +11,13 @@ var explode_chance : float = 0.0
 var tween : Tween
 
 
-func setup(new_direction, new_length = 1000, new_damage = 1):
+func setup(shot : ShotInfo):
 	base_layer = get_tree().get_first_node_in_group("base_layer")
 	hitbox.area_entered.connect(on_hit)
-	ray.target_position = new_direction * new_length
-	hitbox.damage = new_damage
-	hitbox.knockback_vector = new_direction
+	ray.target_position = shot.direction * max_length
+	hitbox.damage = shot.damage
+	hitbox.knockback_vector = shot.direction
+	explode_chance = shot.explode_chance
 	cast()
 	grow()
 	$Timer.timeout.connect(shrink)
@@ -51,7 +54,7 @@ func shrink():
 
 
 func on_hit(area):
-	if explode_chance > randf():
+	if randf() >= explode_chance:
 		return
 	
 	var explosion_instance = Scenes.EXPLOSION.instantiate() as Node2D
