@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bvsqs301nyjkw"]
+
+[ext_resource type="Script" uid="uid://flbrulakycfk" path="res://ui/low_health_warning.gd" id="1_lhw01"]
+[ext_resource type="Shader" uid="uid://ki4v4fhosjsl" path="res://resources/shaders/low_health_vignette.gdshader" id="2_lhw02"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhw01"]
+shader = ExtResource("2_lhw02")
+shader_parameter/color = Color(0.75, 0, 0.05, 1)
+shader_parameter/intensity = 0.0
+shader_parameter/max_alpha = 0.6
+shader_parameter/steps = 4
+
+[node name="LowHealthWarning" type="ColorRect" unique_id=1067753072]
+material = SubResource("ShaderMaterial_lhw01")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_lhw01")

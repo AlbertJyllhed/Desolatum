@@ -10,12 +10,17 @@ class_name LevelGenerator
 ##      flood fill. If the level got cut apart, steps 1-3 are retried.
 ##   4. The end room is the room farthest from the start by walking distance.
 ##   5. Crates, props and enemy spawners are placed.
-##   6. Ceiling, bedrock and walls are built, then energy and ore are scattered
-##      in the rock. Energy is budgeted from the cost of the shops (see below).
+##   6. Rock only one tile tall is carved away, so every wall has a ceiling
+##      above it. Ceiling, bedrock and walls are built, then energy and ore are
+##      scattered in the rock (energy is budgeted from the cost of the shops,
+##      see below) and decorations are sprinkled on the plain ceiling.
 ##   7. Scenes are instantiated.
 ##
 ## Everything random goes through Godot's global RNG, which generate() seeds,
 ## so the same seed always produces the same level.
+##
+## The level scene (Level) starts generation by calling start() with the seed
+## for the current map node, which comes from the run seed.
 
 const PLAYER_SCENE = preload("uid://oigv3iu1oim1")
 const TELEPORTER_SCENE = preload("uid://bq3lkkalp320y")
@@ -39,10 +44,6 @@ const SMOOTH_ERODE_MAX_NEIGHBORS := 3  # floor with at most this many floor neig
 
 const OVERLAY_NOISE_FREQUENCY := 0.2
 const OVERLAY_NOISE_THRESHOLD := 0.2
-## Column in the ceiling/wall atlases that holds each mineral (tile custom data
-## ore_type 1 = energy, 2 = ore).
-const ENERGY_ATLAS_X := 1
-const ORE_ATLAS_X := 2
 const MIN_RELAXED_SPACING := 2  # placement spacing is never relaxed below this
 const CAR_SPACING := 5          # keep the car this far from the start and end rooms
 
@@ -60,8 +61,10 @@ const BEDROCK_PADDING := 2
 @export var base_layer: Node2D
 
 @export_group("Seed")
+## On: use the seed passed to start() (from the run, or random outside a run).
+## Off: always use level_seed below. Handy for reproducing a bad level.
 @export var randomize_seed: bool = true
-## Only used when randomize_seed is off. Handy for reproducing a bad level.
+## Only used when randomize_seed is off.
 @export var level_seed: int = 0
 
 @export_group("Walker Settings")
@@ -145,6 +148,35 @@ const BEDROCK_PADDING := 2
 ## Ore never spawns closer than this (tiles) to an energy tile.
 @export var ore_energy_clearance: int = 3
 
+@export_group("Decorations")
+## Chance that a plain ceiling tile gets a random decoration overlay (any tile in
+## the ceiling overlay atlas without an ore_type).
+@export_range(0.0, 1.0, 0.01) var decoration_chance: float = 0.05
+
+@export_group("Rock Falls")
+## Patches of floor with loose rock in the ceiling. Breaking a wall or ceiling
+## tile next to one makes the rock fall, spreading through the whole patch.
+## Patches that start close to ore or energy (a hazard while mining).
+@export var rock_fall_ore_amount: int = 2
+## Patches that start in corridors (traps for enemy waves).
+@export var rock_fall_corridor_amount: int = 2
+## Patches that start anywhere. Ore and corridor patches that find no room are
+## placed anywhere too, so the total is always the sum of all three.
+@export var rock_fall_random_amount: int = 0
+## "Close to ore": a mineral tile within this many tiles of the starting tile.
+@export var rock_fall_ore_radius: int = 2
+## "Corridor": at most this many of the 25 tiles in the 5x5 square around the
+## starting tile are floor.
+@export_range(1, 25) var rock_fall_corridor_max_floor: int = 12
+## Tiles per patch. Each starts on floor next to a wall and grows along the noise.
+@export var rock_fall_size := Vector2i(6, 12)
+## Minimum distance (tiles) between patch starting points.
+@export var rock_fall_min_spacing: int = 12
+## Lower = rounder patches. Higher = more ragged.
+@export var rock_fall_noise_frequency: float = 0.2
+## Seconds between each step of a collapse spreading through its patch.
+@export var rock_fall_spread_delay: float = 0.2
+
 @export_group("Room Settings")
 ## Chance that a walker leaves a room behind when it turns.
 @export_range(0.0, 1.0, 0.01) var room_chance: float = 0.5
@@ -202,6 +234,8 @@ var secret_cells := {}
 var secret_reward_cells: Array[Vector2i] = []
 
 var overlay_noise: FastNoiseLite
+## Tiles.OreType -> atlas coords in the ceiling overlay source with that ore_type.
+var ceiling_overlays := {}
 var floor_cells := {}     # Vector2i -> true. Every cell the walkers and rooms carved.
 var reach_distance := {}  # Vector2i -> walking steps from the start room.
 
@@ -216,6 +250,7 @@ var crate_positions: Array[Vector2i] = []
 var crate_items: Array[PropItem] = []     # what stands on each crate position
 var prop_positions: Array[Vector2i] = []
 var spawner_positions: Array[Vector2i] = []
+var rock_fall_areas: Array[Array] = []    # each is an Array[Vector2i] of floor tiles
 
 
 ## A rectangular room. [member center] is the cell the walker was on.
@@ -236,14 +271,22 @@ func _ready() -> void:
 	# too late when this scene was loaded in the same frame. Fill them now.
 	prop_list.setup()
 	crate_list.setup()
-	generate(randi() if randomize_seed else level_seed)
+
+
+## Called by the level scene once everything is ready. [param run_level_seed]
+## is the seed for this level, or -1 for a random one.
+func start(run_level_seed: int) -> void:
+	var chosen_seed: int = level_seed
+	if randomize_seed:
+		chosen_seed = run_level_seed if run_level_seed >= 0 else randi()
+	generate(chosen_seed)
 	TileBreaker.register(tilemap, overlay_layer)
 
 
 func generate(new_seed: int) -> void:
 	current_seed = new_seed
 	seed(current_seed)
-	print("LevelGenerator seed: %d" % current_seed)
+	_log("seed: %d" % current_seed) # also shown in the pause menu
 
 	if base_layer == null:
 		base_layer = get_tree().get_first_node_in_group("base_layer") as Node2D
@@ -274,11 +317,15 @@ func generate(new_seed: int) -> void:
 	_find_tile_positions()
 	_spawn_prefab_objects()
 	_carve_secret_rooms()
+	_remove_thin_rock()
 	_create_ceiling(Tile.CEILING, CEILING_PADDING)
 	_create_ceiling(Tile.BEDROCK, BEDROCK_PADDING)
 	_create_walls(Tile.CEILING, Tile.WALL)
 	_create_walls(Tile.SHIP_CEILING, Tile.SHIP_WALL)
+	_find_ceiling_overlays()
 	_scatter_minerals()
+	_scatter_decorations()
+	_place_rock_falls()
 	_populate_level()
 	GameEvents.level_generated.emit()
 
@@ -306,6 +353,7 @@ func _reset_state(clear_tiles: bool) -> void:
 	crate_items.clear()
 	prop_positions.clear()
 	spawner_positions.clear()
+	rock_fall_areas.clear()
 
 	if clear_tiles:
 		tilemap.clear()
@@ -992,6 +1040,22 @@ func _create_ceiling(tile_type: int, padding: int) -> void:
 			tilemap.set_cell(cell, tile_type, Vector2i.ZERO)
 
 
+## Carves rock that is only one tile tall (walkable floor right above and below)
+## into floor. Such rock would become a wall with nothing above it, and walls
+## always need a ceiling above them. Carving only opens the level up, so it never
+## disconnects anything.
+func _remove_thin_rock() -> void:
+	var rect := tilemap.get_used_rect()
+	for y in range(rect.position.y + 1, rect.end.y - 1):
+		for x in range(rect.position.x, rect.end.x):
+			var cell := Vector2i(x, y)
+			if tilemap.get_cell_source_id(cell) != Tile.NONE:
+				continue
+			if _is_walkable(cell + Vector2i.UP) and _is_walkable(cell + Vector2i.DOWN):
+				_set_floor(cell)
+				_apply_overlay(cell)
+
+
 ## Turns the bottom row of each ceiling mass into a wall tile.
 func _create_walls(ceiling_type: int, wall_type: int) -> void:
 	for tile in tilemap.get_used_cells_by_id(ceiling_type):
@@ -1001,8 +1065,134 @@ func _create_walls(ceiling_type: int, wall_type: int) -> void:
 			continue
 
 		tilemap.set_cell(tile, wall_type, Vector2i.ZERO)
-		overlay_layer.set_cell(tile, ceiling_type, Vector2i(0, 1))
 		overlay_layer.set_cell(below, Tile.SHADOW, Vector2i.ZERO)
+
+
+## Sorts the ceiling overlay tiles by their ore_type, so minerals and
+## decorations can pick a random variant. New variants in the atlas are picked
+## up automatically.
+func _find_ceiling_overlays() -> void:
+	ceiling_overlays.clear()
+	if not tilemap.tile_set.has_source(Tile.CEILING_OVERLAY):
+		push_warning("LevelGenerator: the tileset has no ceiling overlay source (id %d)." % Tile.CEILING_OVERLAY)
+		return
+	var source := tilemap.tile_set.get_source(Tile.CEILING_OVERLAY) as TileSetAtlasSource
+	for i in source.get_tiles_count():
+		var coords := source.get_tile_id(i)
+		var ore_type: int = source.get_tile_data(coords, 0).get_custom_data("ore_type")
+		if not ceiling_overlays.has(ore_type):
+			var variants: Array[Vector2i] = []
+			ceiling_overlays[ore_type] = variants
+		ceiling_overlays[ore_type].append(coords)
+
+
+## Puts a random ceiling overlay with [param ore_type] on [param cell].
+func _set_ceiling_overlay(cell: Vector2i, ore_type: int) -> void:
+	var variants: Array = ceiling_overlays.get(ore_type, [])
+	if variants.is_empty():
+		push_warning("LevelGenerator: no ceiling overlay with ore_type %d." % ore_type)
+		return
+	overlay_layer.set_cell(cell, Tile.CEILING_OVERLAY, variants.pick_random())
+
+
+## Gives some plain ceiling tiles a random decoration. Runs after the minerals,
+## so decorations never cover ore.
+func _scatter_decorations() -> void:
+	if decoration_chance <= 0.0 or ceiling_overlays.get(Tiles.OreType.NONE, []).is_empty():
+		return
+	for cell in tilemap.get_used_cells_by_id(Tile.CEILING):
+		if overlay_layer.get_cell_source_id(cell) == Tile.NONE and randf() < decoration_chance:
+			_set_ceiling_overlay(cell, Tiles.OreType.NONE)
+
+
+## Picks patches of floor with loose rock above. Each starts on a floor tile next
+## to a wall or ceiling and grows across the floor along noise. Patches near ore
+## are picked first, then corridor patches, then the rest anywhere. Patches stay
+## out of the start room and off solid objects, and never touch each other.
+func _place_rock_falls() -> void:
+	rock_fall_areas.clear()
+	var total := rock_fall_ore_amount + rock_fall_corridor_amount + rock_fall_random_amount
+	if total <= 0:
+		return
+
+	var start_area := start_room.rect.grow(1) if start_room else Rect2i()
+	var free_floor := {}
+	for cell in tilemap.get_used_cells_by_id(Tile.GROUND):
+		if not start_area.has_point(cell) and not solid_cells.has(cell):
+			free_floor[cell] = true
+
+	var starts: Array = []
+	for cell: Vector2i in free_floor:
+		for dir in CARDINALS:
+			var id := tilemap.get_cell_source_id(cell + dir)
+			if id == Tile.WALL or id == Tile.CEILING:
+				starts.append(cell)
+				break
+	starts.shuffle()
+	var near_ore := starts.filter(func(cell: Vector2i) -> bool:
+		return _mineral_within(cell, rock_fall_ore_radius))
+	var in_corridor := starts.filter(func(cell: Vector2i) -> bool:
+		return _is_corridor(cell))
+
+	var noise := _make_vein_noise(rock_fall_noise_frequency)
+	var seeds: Array[Vector2i] = []
+	var ore_placed := _grow_rock_falls(near_ore, rock_fall_ore_amount, free_floor, seeds, noise)
+	var corridor_placed := _grow_rock_falls(in_corridor, rock_fall_corridor_amount, free_floor, seeds, noise)
+	# The random ones, plus whatever the ore and corridor passes couldn't place.
+	_grow_rock_falls(starts, total - rock_fall_areas.size(), free_floor, seeds, noise)
+	_log("rock falls: %d/%d (%d near ore, %d in corridors)" % [
+		rock_fall_areas.size(), total, ore_placed, corridor_placed
+	])
+
+
+## Grows up to [param amount] rock fall patches from [param candidates] (tried in
+## order) and adds them to rock_fall_areas. Starting points keep
+## rock_fall_min_spacing from [param seeds], and are added to it. Returns how
+## many patches were placed.
+func _grow_rock_falls(
+	candidates: Array, amount: int, free_floor: Dictionary, seeds: Array[Vector2i], noise: FastNoiseLite
+) -> int:
+	var low := maxi(rock_fall_size.x, 1)
+	var high := maxi(rock_fall_size.y, low)
+	var placed := 0
+	for cell: Vector2i in candidates:
+		if placed >= amount:
+			break
+		if not free_floor.has(cell) or not _far_from_all(cell, seeds, rock_fall_min_spacing):
+			continue
+		seeds.append(cell)
+		var area := _grow_by_noise(cell, randi_range(low, high), free_floor, noise)
+		# A one-tile gap keeps neighbouring patches from merging into one.
+		_block_around(area, 2, free_floor)
+		rock_fall_areas.append(area)
+		placed += 1
+	return placed
+
+
+## True if a wall or ceiling tile holding ore or energy is within [param radius]
+## tiles of [param cell].
+func _mineral_within(cell: Vector2i, radius: int) -> bool:
+	var radius_sq := radius * radius
+	for y in range(-radius, radius + 1):
+		for x in range(-radius, radius + 1):
+			if x * x + y * y > radius_sq:
+				continue
+			var other := cell + Vector2i(x, y)
+			var id := tilemap.get_cell_source_id(other)
+			if (id == Tile.WALL or id == Tile.CEILING) and _has_mineral(other):
+				return true
+	return false
+
+
+## True if few of the tiles in the 5x5 square around [param cell] are floor
+## (at most rock_fall_corridor_max_floor).
+func _is_corridor(cell: Vector2i) -> bool:
+	var floor_count := 0
+	for y in range(-2, 3):
+		for x in range(-2, 3):
+			if tilemap.get_cell_source_id(cell + Vector2i(x, y)) == Tile.GROUND:
+				floor_count += 1
+	return floor_count <= rock_fall_corridor_max_floor
 
 
 ## Energy first, so it gets the pick of the rock and the shop budget is always met.
@@ -1017,7 +1207,7 @@ func _scatter_minerals() -> void:
 	# direction, following the noise. Starting points are random so the energy is
 	# spread evenly over the map instead of bunching up on the noise peaks.
 	var energy_cells := _scatter_in_rock(
-		"energy", energy_target, ENERGY_ATLAS_X, energy_vein_size, energy_min_spacing,
+		"energy", energy_target, Tiles.OreType.ENERGY, energy_vein_size, energy_min_spacing,
 		_rock_candidates(1), _rock_candidates(maxi(energy_max_depth, 1)),
 		_make_vein_noise(energy_noise_frequency), false
 	)
@@ -1027,7 +1217,7 @@ func _scatter_minerals() -> void:
 	var ore_rock := _rock_candidates(ore_max_depth)
 	_block_around(energy_cells, ore_energy_clearance, ore_rock)
 	_scatter_in_rock(
-		"ore", ore_amount, ORE_ATLAS_X, ore_vein_size, ore_min_spacing,
+		"ore", ore_amount, Tiles.OreType.ORE, ore_vein_size, ore_min_spacing,
 		ore_rock, ore_rock, _make_vein_noise(ore_noise_frequency), true
 	)
 
@@ -1060,7 +1250,7 @@ func _shop_energy_cost() -> int:
 ## values are tried first as starting points, otherwise they are random.
 ## Placed tiles are removed from [param free_rock]. Returns the tiles placed.
 func _scatter_in_rock(
-	label: String, target: int, atlas_x: int, vein_size: Vector2i, min_spacing: int,
+	label: String, target: int, ore_type: int, vein_size: Vector2i, min_spacing: int,
 	starts: Dictionary, free_rock: Dictionary, noise: FastNoiseLite, starts_follow_noise: bool
 ) -> Array[Vector2i]:
 	var placed: Array[Vector2i] = []
@@ -1086,7 +1276,7 @@ func _scatter_in_rock(
 				continue
 			seeds.append(cell)
 			var wanted := mini(randi_range(low, high), target - placed.size())
-			placed.append_array(_grow_vein(cell, wanted, atlas_x, free_rock, noise))
+			placed.append_array(_grow_vein(cell, wanted, ore_type, free_rock, noise))
 		spacing -= 1
 
 	if placed.size() < target:
@@ -1125,10 +1315,17 @@ func _rock_candidates(max_depth: int) -> Dictionary:
 
 	var result := {}
 	for cell in depth:
-		# Atlas column 0 is plain rock. Anything else already holds a mineral.
-		if depth[cell] > 0 and tilemap.get_cell_atlas_coords(cell).x == 0:
+		if depth[cell] > 0 and not _has_mineral(cell):
 			result[cell] = true
 	return result
+
+
+## Walls hold their mineral in the atlas column (0 = plain rock), ceilings on
+## the overlay layer.
+func _has_mineral(cell: Vector2i) -> bool:
+	if tilemap.get_cell_source_id(cell) == Tile.WALL:
+		return tilemap.get_cell_atlas_coords(cell).x != Tiles.OreType.NONE
+	return overlay_layer.get_cell_source_id(cell) == Tile.CEILING_OVERLAY
 
 
 ## Removes every rock tile closer than [param radius] tiles to one of [param cells].
@@ -1144,16 +1341,27 @@ func _block_around(cells: Array[Vector2i], radius: int, free_rock: Dictionary) -
 					free_rock.erase(cell + Vector2i(x, y))
 
 
-## Grows up to [param size] connected rock tiles from [param start]. Best-first:
-## it always claims the neighbouring tile with the highest noise value next, so
-## the vein follows the shape of the noise instead of a circle, in any direction.
-## Placed tiles are removed from [param free_rock]. Returns them.
+## Grows a mineral vein of up to [param size] rock tiles from [param start] (see
+## _grow_by_noise). Placed tiles are removed from [param free_rock]. Returns them.
 func _grow_vein(
-	start: Vector2i, size: int, atlas_x: int, free_rock: Dictionary, noise: FastNoiseLite
+	start: Vector2i, size: int, ore_type: int, free_rock: Dictionary, noise: FastNoiseLite
 ) -> Array[Vector2i]:
-	var vein: Array[Vector2i] = []
+	var vein := _grow_by_noise(start, size, free_rock, noise)
+	for cell in vein:
+		_set_mineral(cell, ore_type)
+	return vein
+
+
+## Grows up to [param size] connected tiles out of [param free] from [param start].
+## Best-first: it always claims the neighbouring tile with the highest noise value
+## next, so the shape follows the noise instead of a circle, in any direction.
+## Claimed tiles are removed from [param free]. Returns them.
+func _grow_by_noise(
+	start: Vector2i, size: int, free: Dictionary, noise: FastNoiseLite
+) -> Array[Vector2i]:
+	var grown: Array[Vector2i] = []
 	var frontier := {start: true}
-	while vein.size() < size and not frontier.is_empty():
+	while grown.size() < size and not frontier.is_empty():
 		var best: Vector2i = start
 		var best_value := -INF
 		for cell in frontier:
@@ -1163,14 +1371,13 @@ func _grow_vein(
 				best = cell
 
 		frontier.erase(best)
-		_set_mineral(best, atlas_x)
-		free_rock.erase(best)
-		vein.append(best)
+		free.erase(best)
+		grown.append(best)
 		for dir in CARDINALS:
 			var next: Vector2i = best + dir
-			if free_rock.has(next):
+			if free.has(next):
 				frontier[next] = true
-	return vein
+	return grown
 
 
 func _far_from_all(cell: Vector2i, points: Array[Vector2i], spacing: int) -> bool:
@@ -1181,15 +1388,14 @@ func _far_from_all(cell: Vector2i, points: Array[Vector2i], spacing: int) -> boo
 	return true
 
 
-## Ceilings swap to the mineral's atlas column. Walls do too, plus the matching cap
-## on the overlay layer (row 1) so the top of the wall looks right.
-func _set_mineral(cell: Vector2i, atlas_x: int) -> void:
+## Ceilings get a random overlay variant of the mineral. Walls swap to the
+## mineral's column in the wall atlas (the column is the ore_type).
+func _set_mineral(cell: Vector2i, ore_type: int) -> void:
 	match tilemap.get_cell_source_id(cell):
 		Tile.CEILING:
-			tilemap.set_cell(cell, Tile.CEILING, Vector2i(atlas_x, 0))
+			_set_ceiling_overlay(cell, ore_type)
 		Tile.WALL:
-			tilemap.set_cell(cell, Tile.WALL, Vector2i(atlas_x, 0))
-			overlay_layer.set_cell(cell, Tile.CEILING, Vector2i(atlas_x, 1))
+			tilemap.set_cell(cell, Tile.WALL, Vector2i(ore_type, 0))
 
 
 # ---------------------------------------------------------------------------
@@ -1230,6 +1436,14 @@ func _populate_level() -> void:
 	for anchor in prop_positions:
 		create_instance(prop_list.spawn_table.pick_item(), _rect_to_world(Rect2i(anchor, prop_size)))
 	
+	for area: Array in rock_fall_areas:
+		var cells := {}
+		for cell: Vector2i in area:
+			cells[cell] = _cell_to_world(cell)
+		var cluster := RockFallCluster.new()
+		base_layer.add_child(cluster)
+		cluster.setup(cells, rock_fall_spread_delay)
+
 	if secret_reward_scene != null:
 		for cell in secret_reward_cells:
 			create_instance(secret_reward_scene, _cell_to_world(cell))

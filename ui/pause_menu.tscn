@@ -1,13 +1,38 @@
 [gd_scene format=3 uid="uid://dhyexrog6bcbm"]
 
-[ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_jsj51"]
 [ext_resource type="Script" uid="uid://b50wh2qgxkg15" path="res://ui/pause_menu.gd" id="1_nfb08"]
+[ext_resource type="Theme" uid="uid://bgjj0a4uwau5b" path="res://resources/styles/ui_theme.tres" id="2_j3kxr"]
 [ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_k8h5x"]
 [ext_resource type="PackedScene" uid="uid://d3cqb2wgvjy5a" path="res://ui/options_menu.tscn" id="5_edee6"]
+[ext_resource type="Shader" uid="uid://dtqe03lhsw6fr" path="res://resources/shaders/crt_overlay.gdshader" id="6_vovkw"]
 [ext_resource type="PackedScene" uid="uid://41n4kltx64wg" path="res://ui/quit_confirmation.tscn" id="7_0cefe"]
 [ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="7_dqpg8"]
+[ext_resource type="PackedScene" uid="uid://blhvfwq1pfxm4" path="res://ui/upgrades_menu.tscn" id="7_vovkw"]
 
-[node name="PauseMenu" type="Control"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3kxr"]
+shader = ExtResource("6_vovkw")
+shader_parameter/menu_in_texture = true
+shader_parameter/tint = Color(1.3837591e-07, 0.24009162, 0.09185002, 1)
+shader_parameter/menu_tint_amount = 0.10000000475
+shader_parameter/opacity = 0.90000004275
+shader_parameter/black_level = 0.05
+shader_parameter/brightness = 1.2
+shader_parameter/scanline_spacing = 2
+shader_parameter/scanline_thickness = 1
+shader_parameter/scanline_darkness = 0.150000007125
+shader_parameter/flicker_enabled = true
+shader_parameter/flicker_amount = 0.04
+shader_parameter/flicker_speed = 20.0
+shader_parameter/band_enabled = true
+shader_parameter/band_strength = 0.15
+shader_parameter/band_height = 12.0
+shader_parameter/band_speed = 30.0
+shader_parameter/band_gap = 60.0
+shader_parameter/vignette_enabled = true
+shader_parameter/vignette_strength = 0.4
+shader_parameter/vignette_width = 10.0
+
+[node name="PauseMenu" type="Control" unique_id=1917236747 node_paths=PackedStringArray("first_button", "content")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -17,86 +42,90 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_nfb08")
+first_button = NodePath("SubViewportContainer/SubViewport/PauseContent/ResumeButton")
+content = NodePath("SubViewportContainer/SubViewport/PauseContent")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=961049881]
+material = SubResource("ShaderMaterial_j3kxr")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.294118)
+stretch = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1167539369]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="SeedLabel" type="Label" parent="SubViewportContainer/SubViewport" unique_id=939108740]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -83.0
+offset_top = -4.0
+offset_bottom = 11.0
+grow_horizontal = 0
+theme = ExtResource("2_j3kxr")
+text = "Seed Goes Here"
+
+[node name="PauseContent" type="VBoxContainer" parent="SubViewportContainer/SubViewport" unique_id=1118255542]
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -80.0
-offset_right = 70.0
-offset_bottom = 80.0
-grow_horizontal = 2
+offset_top = -75.0
+offset_right = 82.0
+offset_bottom = 75.0
 grow_vertical = 2
-texture = ExtResource("1_jsj51")
-region_rect = Rect2(0, 0, 16, 16)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+offset_transform_enabled = true
+offset_transform_position = Vector2(8, 0)
 
-[node name="CenterContainer" type="CenterContainer" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/CenterContainer"]
-layout_mode = 2
-theme_override_constants/separation = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="NinePatchRect/CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/PauseContent" unique_id=1712569585]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.054902, 1, 0.4, 1)
 theme_override_fonts/font = ExtResource("2_k8h5x")
 text = "Paused"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="ResumeButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
+[node name="ResumeButton" parent="SubViewportContainer/SubViewport/PauseContent" unique_id=922997506 instance=ExtResource("7_dqpg8")]
 layout_mode = 2
 text = "Resume"
-focus_button = true
 
-[node name="ReturnButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
+[node name="UpgradesButton" parent="SubViewportContainer/SubViewport/PauseContent" unique_id=759153984 instance=ExtResource("7_dqpg8")]
+layout_mode = 2
+text = "Upgrades"
+
+[node name="ReturnButton" parent="SubViewportContainer/SubViewport/PauseContent" unique_id=1227405187 instance=ExtResource("7_dqpg8")]
 layout_mode = 2
 text = "Return to ship"
 
-[node name="SettingsButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
+[node name="SettingsButton" parent="SubViewportContainer/SubViewport/PauseContent" unique_id=491880181 instance=ExtResource("7_dqpg8")]
 layout_mode = 2
 text = "Settings"
 
-[node name="QuitButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("7_dqpg8")]
+[node name="QuitButton" parent="SubViewportContainer/SubViewport/PauseContent" unique_id=1825849566 instance=ExtResource("7_dqpg8")]
 layout_mode = 2
 text = "Quit game"
 
-[node name="OptionsMenu" parent="." instance=ExtResource("5_edee6")]
+[node name="OptionsMenu" parent="SubViewportContainer/SubViewport" unique_id=1006659995 instance=ExtResource("5_edee6")]
 visible = false
-layout_mode = 1
+offset_top = -61.5
+offset_right = 64.0
+offset_bottom = 61.5
 
-[node name="QuitConfirmation" parent="." instance=ExtResource("7_0cefe")]
+[node name="UpgradesMenu" parent="SubViewportContainer/SubViewport" unique_id=1716168980 instance=ExtResource("7_vovkw")]
 visible = false
-layout_mode = 1
 
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="QuitConfirmation" parent="SubViewportContainer/SubViewport" unique_id=1741793711 instance=ExtResource("7_0cefe")]
+visible = false
+offset_top = -61.5
+offset_right = 103.0
+offset_bottom = 61.5
+
+[connection signal="pressed" from="SubViewportContainer/SubViewport/PauseContent/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/PauseContent/UpgradesButton" to="." method="_on_upgrades_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/PauseContent/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/PauseContent/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/PauseContent/QuitButton" to="." method="_on_quit_button_pressed"]

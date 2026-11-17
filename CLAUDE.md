@@ -6,6 +6,7 @@ Instructions for Claude when working in this project. Claude reads this file at 
 
 - **Desolatum** — a Godot 4.7 game written in GDScript (Mobile renderer).
 - Main folders: `autoload/` (singletons), `characters/`, `components/`, `levels/`, `managers/`, `resources/`, `states/`, `systems/`, `ui/`, `utils/`.
+- Music and music-style sound effects are generated as LMMS projects by Python scripts in `music/`. Before making or changing any, read `music/MUSIC_STYLE.md`.
 
 ## Rules
 
@@ -47,7 +48,8 @@ Keep cards in sync with the work, without being asked:
 
 ### Focus: three cards at a time
 
-- **Doing holds at most 3 cards.** That's our current focus. Don't start a fourth until one of them moves to Testing.
+- **Work on one card at a time.** Every code change must belong to the single card we're currently working on. Say which card that is when you start. Finish it (move it to Testing) before writing code for another card. If you spot something outside the current card, make a card for it instead of fixing it.
+- **Doing holds at most 3 cards.** That's our current focus: the one we're working on plus up to two that come next. Don't add a fourth until one of them moves to Testing.
 - **Suggest what's next** whenever a slot in Doing opens up, or when I ask. Pick from **Bugs** and **Todo**, and give one line per card saying why it should go next. Prefer, in order:
   1. crashes and bugs that affect gameplay
   2. cards that other cards depend on (e.g. seeding before tests)
@@ -65,10 +67,7 @@ Keep cards in sync with the work, without being asked:
 - Tell me in chat whenever you create or move a card, and which labels you added.
 - If Trello can't be reached, say so and keep working, then update the card once it's reachable again.
 
-<!-- Add your rules below, one per line. Examples:
 - Use static typing in all GDScript (`var speed: float = 10.0`).
 - Don't edit .tscn files by hand; tell me what to change in the editor instead.
 - Don't commit or push unless I ask.
 - Keep changes small and explain what you changed.
--->
-

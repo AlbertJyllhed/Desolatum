@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c45u5l376y26q"]
+
+[ext_resource type="Script" uid="uid://c5vgxmmkvnt5d" path="res://components/core/walk_dust_component.gd" id="1_byx8x"]
+[ext_resource type="PackedScene" uid="uid://ggev08l2b7" path="res://particles/walk_dust.tscn" id="2_u8f20"]
+
+[node name="WalkDustComponent" type="Node" unique_id=1547235401]
+script = ExtResource("1_byx8x")
+dust_scene = ExtResource("2_u8f20")

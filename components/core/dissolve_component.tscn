@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bvhlstx6qeul8"]
+
+[ext_resource type="Script" uid="uid://cqnt6nnmrub6l" path="res://components/core/dissolve_component.gd" id="1_gckyv"]
+
+[node name="DissolveComponent" type="Node" unique_id=165627635]
+script = ExtResource("1_gckyv")

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://on2etebvaeew"]
+
+[ext_resource type="PackedScene" uid="uid://bcu0gw0ngmmc5" path="res://components/projectiles/shell_casing.tscn" id="1_cw30q"]
+[ext_resource type="PackedScene" uid="uid://cw6reupfolow" path="res://components/projectiles/big_bullet.tscn" id="1_jsrct"]
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_pp2mv"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="2_cw30q"]
+[ext_resource type="AudioStream" uid="uid://dhit7yl2a8iat" path="res://sounds/shotgun2.ogg" id="4_wxbyv"]
+[ext_resource type="AudioStream" uid="uid://4hyf8sd4of5i" path="res://sounds/shotgun3.ogg" id="5_snc4l"]
+
+[sub_resource type="Resource" id="Resource_qgtp8"]
+script = ExtResource("2_cw30q")
+cooldown = 1.5
+ammo = 4
+reload_time = 1.5
+projectile = ExtResource("1_jsrct")
+speed = 200.0
+spread = 0.0
+projectile_count = 3
+projectile_spacing = 10.0
+sprite_frame = 20
+sounds = Array[AudioStream]([ExtResource("4_wxbyv"), ExtResource("5_snc4l")])
+recoil = 4.0
+shake_power = 0.1
+casing_scene = ExtResource("1_cw30q")
+metadata/_custom_type_script = "uid://ctngv7nkfwl86"
+
+[resource]
+script = ExtResource("1_pp2mv")
+gun_data = SubResource("Resource_qgtp8")
+id = "broadsider"
+name = "Broadsider"
+description = "Fires 3 bullets in a line"
+drop_weight = 2
+metadata/_custom_type_script = "uid://l72i0hdxgc5i"

@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://buwfd3d6d7gru"]
+
+[ext_resource type="Script" uid="uid://dw6r0w4kpn3mw" path="res://ui/gui.gd" id="1_fr2ss"]
+[ext_resource type="PackedScene" uid="uid://bbwms5jmwtqvg" path="res://ui/weapon_inventory_ui.tscn" id="2_1krvk"]
+[ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="2_juqqw"]
+[ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="3_02e3h"]
+[ext_resource type="PackedScene" uid="uid://c66muf3s83t44" path="res://ui/health_ui.tscn" id="3_nn20f"]
+[ext_resource type="PackedScene" uid="uid://fd0y7pt4y18o" path="res://ui/transition_screen.tscn" id="4_s5xys"]
+[ext_resource type="PackedScene" uid="uid://lvds6lc4b1aw" path="res://ui/ammo_ui.tscn" id="4_wtcyp"]
+[ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="5_d8lyu"]
+[ext_resource type="PackedScene" uid="uid://dinoa4adlhusc" path="res://ui/energy_ui.tscn" id="5_tcnv1"]
+[ext_resource type="PackedScene" uid="uid://pk28yt3g4cec" path="res://ui/build_ui.tscn" id="6_mkrsb"]
+[ext_resource type="PackedScene" uid="uid://blhvfwq1pfxm4" path="res://ui/upgrades_menu.tscn" id="7_rnckv"]
+[ext_resource type="PackedScene" uid="uid://ie26y2womcw5" path="res://ui/danger_sign.tscn" id="8_7r1jj"]
+[ext_resource type="PackedScene" path="res://ui/low_health_warning.tscn" id="9_lhw01"]
+
+[node name="GUI" type="Control" unique_id=1534049060]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_fr2ss")
+level_hud_scenes = Array[PackedScene]([ExtResource("9_lhw01"), ExtResource("2_1krvk"), ExtResource("3_nn20f"), ExtResource("4_wtcyp"), ExtResource("5_tcnv1"), ExtResource("6_mkrsb"), ExtResource("7_rnckv"), ExtResource("8_7r1jj")])
+
+[node name="MainUI" type="CanvasLayer" parent="." unique_id=257809576]
+
+[node name="OverlayUI" type="CanvasLayer" parent="." unique_id=1566792086]
+layer = 2
+
+[node name="PauseMenu" parent="OverlayUI" unique_id=1917236747 instance=ExtResource("2_juqqw")]
+visible = false
+
+[node name="SubViewport" parent="OverlayUI/PauseMenu/SubViewportContainer" parent_id_path=PackedInt32Array(1917236747, 961049881) index="0" unique_id=1167539369]
+render_target_update_mode = 0
+
+[node name="OptionsMenu" parent="OverlayUI/PauseMenu/SubViewportContainer/SubViewport" index="2" unique_id=1006659995 node_paths=PackedStringArray("fps_counter")]
+fps_counter = NodePath("../../../../FPSCounter")
+
+[node name="FPSCounter" parent="OverlayUI" unique_id=1789125770 instance=ExtResource("3_02e3h")]
+process_mode = 3
+
+[node name="TransitionScreen" parent="OverlayUI" unique_id=1455925148 instance=ExtResource("4_s5xys")]
+
+[node name="Cursor" parent="OverlayUI" unique_id=1230394935 instance=ExtResource("5_d8lyu")]
+
+[editable path="OverlayUI/PauseMenu"]

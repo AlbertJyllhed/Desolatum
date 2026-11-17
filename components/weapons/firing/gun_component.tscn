@@ -3,11 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://b2c1mhdcquj0t" path="res://components/weapons/firing/weapon_component.tscn" id="1_yqots"]
 [ext_resource type="Script" uid="uid://bawdx4ylv23mg" path="res://components/weapons/firing/gun_component.gd" id="2_sgljh"]
 
-[node name="GunComponent" instance=ExtResource("1_yqots")]
+[node name="GunComponent" unique_id=1963046705 instance=ExtResource("1_yqots")]
 script = ExtResource("2_sgljh")
+bullet_scene = null
 base_bullet_spread = 0.1
 base_bullet_speed = 400.0
 base_damage = 1
 base_crit_chance = 0.0
 base_bullet_explode_chance = 0.0
-projectiles = Array[float]([0.0])
+projectile_count = 1
+fan_angle = 0.0
+projectile_spacing = 0.0

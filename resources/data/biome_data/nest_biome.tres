@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bwumlgw3l5ui7" path="res://resources/data/biome_data/biome_data.gd" id="1_eihp7"]
 [ext_resource type="Texture2D" uid="uid://kvgdc11yxunm" path="res://assets/textures/mine.png" id="1_vcrri"]
+[ext_resource type="AudioStream" uid="uid://ddcr1hhmuthyf" path="res://sounds/music/cave_calm.ogg" id="2_k4mp5"]
 [ext_resource type="TileSet" uid="uid://dvovn2blbggvj" path="res://resources/tilesets/nest_tileset.tres" id="2_tiles"]
+[ext_resource type="AudioStream" uid="uid://skxtaa4eqlv" path="res://sounds/music/cave_combat.ogg" id="3_1yq4m"]
 [ext_resource type="PackedScene" uid="uid://dajmnvscbp2sc" path="res://particles/fireflies.tscn" id="3_fireflies"]
-[ext_resource type="Script" path="res://resources/data/biome_data/generator_settings.gd" id="4_gen"]
+[ext_resource type="Script" uid="uid://dgn01dvjqnqry" path="res://resources/data/biome_data/generator_settings.gd" id="4_gen"]
 
 [sub_resource type="Resource" id="Resource_gen"]
 script = ExtResource("4_gen")
@@ -17,7 +19,9 @@ script = ExtResource("1_eihp7")
 name = "Nest"
 icon = ExtResource("1_vcrri")
 tile_set = ExtResource("2_tiles")
-ambient_color = Color(0.301961, 0.239216, 0.223529, 1)
+ambient_color = Color(0.42823014, 0.13726535, 0.261513, 1)
 ambient_particles = ExtResource("3_fireflies")
+calm_music = ExtResource("2_k4mp5")
+combat_music = ExtResource("3_1yq4m")
 generator_settings = SubResource("Resource_gen")
 metadata/_custom_type_script = "uid://bwumlgw3l5ui7"

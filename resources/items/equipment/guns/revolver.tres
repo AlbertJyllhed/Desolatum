@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://dpnix2pvgil2p"]
 
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_80cg2"]
+[ext_resource type="PackedScene" uid="uid://bcu0gw0ngmmc5" path="res://components/projectiles/shell_casing.tscn" id="1_bp6ao"]
 [ext_resource type="PackedScene" uid="uid://0245qu8asint" path="res://components/projectiles/piercing_bullet.tscn" id="gd_projectile"]
 [ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
 [ext_resource type="AudioStream" uid="uid://8bfsa3vjxohg" path="res://sounds/pistol.ogg" id="gd_sound_0"]
@@ -18,8 +19,9 @@ crit_chance = 0.2
 sprite_frame = 13
 muzzle_offset = 9.0
 sounds = Array[AudioStream]([ExtResource("gd_sound_0"), ExtResource("gd_sound_1"), ExtResource("gd_sound_2")])
-recoil = 0.4
-shake_power = 4.0
+recoil = 4.0
+shake_power = 0.1
+casing_scene = ExtResource("1_bp6ao")
 
 [resource]
 script = ExtResource("1_80cg2")

@@ -48,6 +48,7 @@ _data = {
 radius = 8.0
 
 [node name="Rooter" unique_id=1676764128 instance=ExtResource("1_c1lw4")]
+death_hit_stop = 0.1
 
 [node name="StateMachine" parent="." index="1" unique_id=1365531725 node_paths=PackedStringArray("target_locator_ray", "weapon")]
 target_locator_ray = NodePath("../TargetLocatorRay")

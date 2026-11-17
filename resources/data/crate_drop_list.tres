@@ -17,7 +17,9 @@
 [ext_resource type="Resource" uid="uid://bncga8ydr3vn" path="res://resources/items/equipment/guns/triple_machinegun.tres" id="14_bowve"]
 [ext_resource type="Resource" uid="uid://dy1gbvjht2apg" path="res://resources/items/equipment/guns/grenade_digger.tres" id="14_gqg2u"]
 [ext_resource type="Resource" uid="uid://5aq7mactcic7" path="res://resources/items/equipment/guns/double_shotgun.tres" id="15_dkt8p"]
+[ext_resource type="Resource" uid="uid://on2etebvaeew" path="res://resources/items/equipment/guns/broadsider.tres" id="17_0tliy"]
+[ext_resource type="Resource" uid="uid://im57fntsegkt" path="res://resources/items/equipment/guns/minigun.tres" id="18_nd1y5"]
 
 [resource]
 script = ExtResource("1_vvg13")
-items = Array[ExtResource("1_p5ujb")]([ExtResource("3_q6r8c"), ExtResource("4_fhd03"), ExtResource("5_gpgy0"), ExtResource("6_4v5yj"), ExtResource("8_5ynx4"), ExtResource("9_ry41c"), ExtResource("10_5jjed"), ExtResource("11_4ol2s"), ExtResource("12_d08k2"), ExtResource("13_awdlr"), ExtResource("14_gqg2u"), ExtResource("12_8ninj"), ExtResource("13_ts0ev"), ExtResource("14_bowve"), ExtResource("15_dkt8p")])
+items = Array[ExtResource("1_p5ujb")]([ExtResource("3_q6r8c"), ExtResource("4_fhd03"), ExtResource("5_gpgy0"), ExtResource("6_4v5yj"), ExtResource("8_5ynx4"), ExtResource("9_ry41c"), ExtResource("10_5jjed"), ExtResource("11_4ol2s"), ExtResource("12_d08k2"), ExtResource("13_awdlr"), ExtResource("14_gqg2u"), ExtResource("12_8ninj"), ExtResource("13_ts0ev"), ExtResource("14_bowve"), ExtResource("15_dkt8p"), ExtResource("17_0tliy"), ExtResource("18_nd1y5")])

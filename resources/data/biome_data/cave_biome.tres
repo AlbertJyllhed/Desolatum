@@ -2,9 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bwumlgw3l5ui7" path="res://resources/data/biome_data/biome_data.gd" id="1_lngkt"]
 [ext_resource type="Texture2D" uid="uid://cvjp84iy1v2iv" path="res://assets/textures/ore_ui.png" id="1_n3ylf"]
+[ext_resource type="PackedScene" uid="uid://7fdjb35st2hb" path="res://particles/dust.tscn" id="1_xfbv2"]
+[ext_resource type="AudioStream" uid="uid://ddcr1hhmuthyf" path="res://sounds/music/cave_calm.ogg" id="2_6ljbl"]
+[ext_resource type="AudioStream" uid="uid://skxtaa4eqlv" path="res://sounds/music/cave_combat.ogg" id="3_7j6ey"]
 
 [resource]
 script = ExtResource("1_lngkt")
 name = "Cave"
 icon = ExtResource("1_n3ylf")
+ambient_color = Color(0.3224134, 0.19075045, 0.09436967, 1)
+ambient_particles = ExtResource("1_xfbv2")
+calm_music = ExtResource("2_6ljbl")
+combat_music = ExtResource("3_7j6ey")
 metadata/_custom_type_script = "uid://bwumlgw3l5ui7"

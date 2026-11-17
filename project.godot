@@ -32,6 +32,8 @@ DialogueManager="*res://autoload/dialogue_manager.gd"
 GamepadManager="*res://autoload/gamepad_manager.gd"
 SaveManager="*uid://oi6t2y1igf7x"
 Run="*uid://bi4jbw6h1vu6n"
+Pool="*res://autoload/pool.gd"
+MusicPlayer="*uid://dopdpfwp8vb5l"
 
 [display]
 
@@ -72,6 +74,7 @@ import/fbx/enabled=false
 
 tile_overlay=""
 tilemap_layer=""
+ui_layer=""
 
 [input]
 
@@ -232,3 +235,38 @@ lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 lights_and_shadows/positional_shadow/atlas_size=512
 lights_and_shadows/positional_shadow/atlas_size.mobile=512
+
+[shader_globals]
+
+light_bands={
+"type": "int",
+"value": 3
+}
+light_dither_width={
+"type": "float",
+"value": 0.5
+}
+light_solid_radius={
+"type": "float",
+"value": 0.6
+}
+light_ambient_color={
+"type": "color",
+"value": Color(0.10980392, 0.14117648, 0.1764706, 1)
+}
+light_color={
+"type": "color",
+"value": Color(1, 1, 1, 1)
+}
+light_dark_shades={
+"type": "int",
+"value": 8
+}
+light_dark_curve={
+"type": "float",
+"value": 0.5
+}
+light_map={
+"type": "sampler2D",
+"value": ""
+}

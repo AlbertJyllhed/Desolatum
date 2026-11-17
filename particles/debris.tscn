@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://nifrx1inco4m"]
+[gd_scene format=3 uid="uid://nifrx1inco4m"]
 
 [ext_resource type="Texture2D" uid="uid://b8u3tcn0s8w22" path="res://assets/textures/debris.png" id="1_nb1e2"]
+[ext_resource type="PackedScene" uid="uid://don0kd5u8fubn" path="res://components/core/pooled_effect.tscn" id="2_e3ne8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p1cxr"]
 particles_animation = true
@@ -60,35 +61,35 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("PooledEffect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.1),
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"release"
 }]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_82tb1"]
 _data = {
-"RESET": SubResource("Animation_bv8lw"),
-"default": SubResource("Animation_h01e8")
+&"RESET": SubResource("Animation_bv8lw"),
+&"default": SubResource("Animation_h01e8")
 }
 
-[node name="Debris" type="GPUParticles2D"]
+[node name="Debris" type="GPUParticles2D" unique_id=459180950]
 material = SubResource("CanvasItemMaterial_p1cxr")
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_abdwt")
 texture = ExtResource("1_nb1e2")
 lifetime = 0.4
 one_shot = true
 explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_abdwt")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_82tb1")
-}
-autoplay = "default"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=250719800]
+libraries/ = SubResource("AnimationLibrary_82tb1")
+autoplay = &"default"
+
+[node name="PooledEffect" parent="." unique_id=880019700 instance=ExtResource("2_e3ne8")]

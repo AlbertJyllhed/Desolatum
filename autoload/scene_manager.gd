@@ -22,6 +22,16 @@ func _ready():
 	layer.layer = 50
 	add_child(layer)
 	layer.add_child(map_screen_scene.instantiate())
+	GameEvents.player_died.connect(_on_player_died)
+
+
+## Shows the game over screen in the current scene's GUI, in any scene the player can die in.
+func _on_player_died() -> void:
+	var gui := get_tree().get_first_node_in_group("ui_layer") as GUI
+	if gui == null:
+		push_error("SceneManager: no GUI (ui_layer group) to show the game over screen in")
+		return
+	gui.show_game_over()
 
 
 ## Every scene change goes through here or travel_to_node(), and both fade

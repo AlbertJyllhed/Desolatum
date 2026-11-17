@@ -1,24 +1,15 @@
 [gd_scene format=3 uid="uid://cig1m1a15gbdi"]
 
-[ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_7vgrc"]
-[ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_4jrri"]
-[ext_resource type="PackedScene" uid="uid://bbwms5jmwtqvg" path="res://ui/weapon_inventory_ui.tscn" id="3_3ohvm"]
-[ext_resource type="PackedScene" uid="uid://c66muf3s83t44" path="res://ui/health_ui.tscn" id="4_j4v5e"]
-[ext_resource type="PackedScene" uid="uid://lvds6lc4b1aw" path="res://ui/ammo_ui.tscn" id="5_r8ks5"]
-[ext_resource type="PackedScene" uid="uid://dinoa4adlhusc" path="res://ui/energy_ui.tscn" id="6_4fu6g"]
-[ext_resource type="PackedScene" uid="uid://pk28yt3g4cec" path="res://ui/build_ui.tscn" id="7_21ko3"]
-[ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="7_a3i5o"]
-[ext_resource type="PackedScene" uid="uid://blhvfwq1pfxm4" path="res://ui/upgrade_container_ui.tscn" id="8_fnyi5"]
-[ext_resource type="PackedScene" uid="uid://fd0y7pt4y18o" path="res://ui/transition_screen.tscn" id="8_hc4qn"]
-[ext_resource type="PackedScene" uid="uid://ie26y2womcw5" path="res://ui/danger_sign.tscn" id="9_awiln"]
+[ext_resource type="PackedScene" uid="uid://buwfd3d6d7gru" path="res://ui/gui.tscn" id="4_jw1n3"]
 [ext_resource type="PackedScene" uid="uid://cd6xh5dojbq0o" path="res://systems/level_generation/level_generator.tscn" id="10_h0ktf"]
+[ext_resource type="Script" uid="uid://dhpmeprfaj66e" path="res://systems/lighting/light_map.gd" id="11_xdh4e"]
 [ext_resource type="PackedScene" uid="uid://b4gv7qo8wn3yq" path="res://systems/navigation/pathfinding_grid.tscn" id="12_s3jgr"]
 [ext_resource type="PackedScene" uid="uid://jpwvtwbpum65" path="res://managers/enemy_manager.tscn" id="13_47pbc"]
 [ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://characters/player/player_camera.tscn" id="14_k4cxe"]
 [ext_resource type="PackedScene" uid="uid://bq87ij4ablqce" path="res://components/props/crate.tscn" id="14_s07ge"]
 [ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tilesets/tileset.tres" id="15_ukhfq"]
 [ext_resource type="Script" uid="uid://b2vd6kch64eui" path="res://components/missions/mission_manager.gd" id="16_mission"]
-[ext_resource type="Script" path="res://levels/level.gd" id="17_level"]
+[ext_resource type="Script" uid="uid://dty7hktrqljgq" path="res://levels/level.gd" id="17_level"]
 [ext_resource type="Resource" uid="uid://bsiukx0klu0n6" path="res://resources/data/biome_data/cave_biome.tres" id="18_cave"]
 
 [node name="Main" type="Node" unique_id=993354542 node_paths=PackedStringArray("level_generator", "ground_layer", "overlay_layer", "canvas_modulate")]
@@ -29,37 +20,10 @@ ground_layer = NodePath("TileMap/GroundLayer")
 overlay_layer = NodePath("TileMap/OverlayLayer")
 canvas_modulate = NodePath("CanvasModulate")
 
-[node name="MissionManager" type="Node" parent="."]
+[node name="MissionManager" type="Node" parent="." unique_id=522658307]
 script = ExtResource("16_mission")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1801392090 groups=["ui_layer"]]
-
-[node name="PauseMenu" parent="CanvasLayer" unique_id=313310532 instance=ExtResource("1_7vgrc")]
-visible = false
-
-[node name="OptionsMenu" parent="CanvasLayer/PauseMenu" index="2" node_paths=PackedStringArray("fps_counter")]
-fps_counter = NodePath("../../FPSCounter")
-
-[node name="FPSCounter" parent="CanvasLayer" unique_id=69601674 instance=ExtResource("2_4jrri")]
-process_mode = 3
-
-[node name="WeaponInventoryUI" parent="CanvasLayer" unique_id=1258743420 instance=ExtResource("3_3ohvm")]
-
-[node name="HealthUI" parent="CanvasLayer" unique_id=2102431913 instance=ExtResource("4_j4v5e")]
-
-[node name="AmmoUI" parent="CanvasLayer" unique_id=859448541 instance=ExtResource("5_r8ks5")]
-
-[node name="EnergyUI" parent="CanvasLayer" unique_id=1980526584 instance=ExtResource("6_4fu6g")]
-
-[node name="BuildUI" parent="CanvasLayer" unique_id=235107328 instance=ExtResource("7_21ko3")]
-
-[node name="UpgradeContainerUI" parent="CanvasLayer" unique_id=1639043525 instance=ExtResource("8_fnyi5")]
-
-[node name="DangerSign" parent="CanvasLayer" unique_id=1039785935 instance=ExtResource("9_awiln")]
-
-[node name="Cursor" parent="CanvasLayer" unique_id=1236815725 instance=ExtResource("7_a3i5o")]
-
-[node name="TransitionScreen" parent="CanvasLayer" unique_id=478338291 instance=ExtResource("8_hc4qn")]
+[node name="GUI" parent="." unique_id=1534049060 instance=ExtResource("4_jw1n3")]
 
 [node name="PathfindingGrid" parent="." unique_id=1950735315 node_paths=PackedStringArray("tilemap") instance=ExtResource("12_s3jgr")]
 tilemap = NodePath("../TileMap/GroundLayer")
@@ -69,6 +33,11 @@ tilemap = NodePath("../TileMap/GroundLayer")
 overlay_layer = NodePath("../TileMap/OverlayLayer")
 enemy_manager = NodePath("../EnemyManager")
 base_layer = NodePath("../BaseLayer")
+rock_fall_ore_amount = 4
+rock_fall_corridor_amount = 4
+rock_fall_ore_radius = 6
+rock_fall_corridor_max_floor = 25
+rock_fall_size = Vector2i(12, 12)
 secret_reward_scene = ExtResource("14_s07ge")
 
 [node name="EnemyManager" parent="." unique_id=695355371 instance=ExtResource("13_47pbc")]
@@ -97,4 +66,7 @@ y_sort_enabled = true
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=863104168]
 color = Color(0.266667, 0.254902, 0.223529, 1)
 
-[editable path="CanvasLayer/PauseMenu"]
+[node name="LightMap" type="Node2D" parent="." unique_id=1416082652 node_paths=PackedStringArray("canvas_modulate")]
+script = ExtResource("11_xdh4e")
+canvas_modulate = NodePath("../CanvasModulate")
+metadata/_custom_type_script = "uid://dhpmeprfaj66e"

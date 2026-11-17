@@ -15,7 +15,7 @@ spread = 0.2
 sprite_frame = 3
 muzzle_offset = 8.0
 sounds = Array[AudioStream]([ExtResource("gd_sound_0")])
-recoil = 0.2
+recoil = 2.0
 
 [resource]
 script = ExtResource("2_beloa")

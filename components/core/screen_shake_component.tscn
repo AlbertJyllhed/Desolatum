@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://csxde8vru4ii0"]
+
+[ext_resource type="Script" uid="uid://dmvin2xj0aqbf" path="res://components/core/screen_shake_component.gd" id="1_qpov6"]
+
+[node name="ScreenShakeComponent" type="Node2D" unique_id=300679761]
+script = ExtResource("1_qpov6")

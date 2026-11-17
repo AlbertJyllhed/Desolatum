@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://byb4u8pnhh4j4" path="res://assets/textures/mining_light.png" id="1_a4hx5"]
 [ext_resource type="Script" uid="uid://buhijdvcks7eq" path="res://components/buildings/building.gd" id="1_b8o2s"]
-[ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="2_0dfyv"]
+[ext_resource type="Texture2D" uid="uid://ba3dtrpai7swq" path="res://assets/materials/light_falloff.tres" id="2_0dfyv"]
 [ext_resource type="Script" uid="uid://hrui4805k8ng" path="res://components/core/light_flicker_component.gd" id="3_s4rwa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f8p0d"]

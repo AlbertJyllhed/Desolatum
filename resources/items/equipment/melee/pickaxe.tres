@@ -1,15 +1,36 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://bh346hr4ji17d"]
 
-[ext_resource type="PackedScene" uid="uid://dawp4moicrfor" path="res://components/weapons/player/pickaxe.tscn" id="2_8uel7"]
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="2_85guu"]
+[ext_resource type="PackedScene" uid="uid://v3qjp84twehk" path="res://components/projectiles/melee_slash.tscn" id="gd_projectile"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
+[ext_resource type="AudioStream" uid="uid://b1no86fo8mucp" path="res://sounds/pickaxe/swish-1.wav" id="gd_sound_0"]
+[ext_resource type="AudioStream" uid="uid://bi6vejoa5pywu" path="res://sounds/pickaxe/swish-2.wav" id="gd_sound_1"]
+[ext_resource type="AudioStream" uid="uid://beh6unceatsxf" path="res://sounds/pickaxe/swish-3.wav" id="gd_sound_2"]
+[ext_resource type="AudioStream" uid="uid://um5a4c6t4s7b" path="res://sounds/pickaxe/swish-4.wav" id="gd_sound_3"]
+[ext_resource type="AudioStream" uid="uid://d0ncw55h4lkgs" path="res://sounds/pickaxe/swish-5.wav" id="gd_sound_4"]
+[ext_resource type="AudioStream" uid="uid://dn5y3w5qh8nlo" path="res://sounds/pickaxe/swish-6.wav" id="gd_sound_5"]
+[ext_resource type="Animation" path="res://resources/items/equipment/melee/pickaxe_swing.tres" id="gd_swing"]
+
+[sub_resource type="Resource" id="GunData_main"]
+script = ExtResource("gd_script")
+fire_mode = 1
+cooldown = 0.5
+attack_move_speed_multiplier = 0.5
+ammo_mode = 2
+projectile = ExtResource("gd_projectile")
+damage = 2
+speed = 0.0
+spread = 0.0
+use_projectile_upgrades = false
+sprite_frame = 5
+muzzle_offset = 0.0
+sounds = Array[AudioStream]([ExtResource("gd_sound_0"), ExtResource("gd_sound_1"), ExtResource("gd_sound_2"), ExtResource("gd_sound_3"), ExtResource("gd_sound_4"), ExtResource("gd_sound_5")])
+attack_animation = ExtResource("gd_swing")
 
 [resource]
 script = ExtResource("2_85guu")
 type = 1
-equipment_scene = ExtResource("2_8uel7")
+gun_data = SubResource("GunData_main")
 id = "pickaxe"
 name = "Pickaxe"
 description = "Great for mining, also useful when ammo is low"
-amount = 1
-pickup_type = 0
-drop_weight = 1

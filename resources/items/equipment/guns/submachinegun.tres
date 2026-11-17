@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://h1ue3yjruk72"]
 
 [ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_8ssxk"]
+[ext_resource type="PackedScene" uid="uid://bcu0gw0ngmmc5" path="res://components/projectiles/shell_casing.tscn" id="1_o6lok"]
 [ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://components/projectiles/bullet.tscn" id="gd_projectile"]
 [ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="gd_script"]
 [ext_resource type="AudioStream" uid="uid://qqour2nnb8tt" path="res://sounds/minigun.ogg" id="gd_sound_0"]
@@ -18,6 +19,7 @@ spread = 0.4
 sprite_frame = 14
 muzzle_offset = 10.0
 sounds = Array[AudioStream]([ExtResource("gd_sound_0"), ExtResource("gd_sound_1"), ExtResource("gd_sound_2")])
+casing_scene = ExtResource("1_o6lok")
 
 [resource]
 script = ExtResource("1_8ssxk")

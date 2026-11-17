@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://brnyy8gqch7b0"]
+
+[ext_resource type="Script" uid="uid://dvw2ahrcvvi1b" path="res://systems/audio/music_cue.gd" id="1_268bg"]
+
+[node name="MusicCue" type="Node" unique_id=1380705660]
+script = ExtResource("1_268bg")

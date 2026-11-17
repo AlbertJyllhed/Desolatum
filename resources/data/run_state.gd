@@ -30,6 +30,9 @@ var current_mission: MissionData
 var current_biome: BiomeData # what the shared level scene dresses up as
 var next_choices: Array[LevelOption] = []
 
+## Seeds the map and every level of this run, so one number reproduces it all
+var run_seed: int = 0
+
 var map_layers: Array = []
 var current_layer: int = -1
 var current_index: int = -1
@@ -40,6 +43,7 @@ func _init(config: PlayerConfig) -> void:
 	health = max_health
 	equipment = config.starter_equipment.duplicate()
 	buildings = config.starter_buildings.duplicate()
+	run_seed = randi()
 	for stat in STAT_LIST:
 		modifiers[stat] = Modifier.new()
 
@@ -84,7 +88,10 @@ func spend_ore(amount: int) -> bool:
 # --- Missions ------------------------------------------------------------
 
 func start_map(config: PlayerConfig) -> void:
-	map_layers = MapGenerator.generate(config)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = run_seed
+	map_layers = MapGenerator.generate(config, rng)
+	print("Run seed: %d" % run_seed)
 	current_layer = -1
 	current_index = -1
 
@@ -109,6 +116,14 @@ func get_available_nodes() -> Array[MapNode]:
 	for i in current.next:
 		result.append(map_layers[current_layer + 1][i])
 	return result
+
+
+## Seed for the level at the current map node. Same run seed + node = same level.
+## Returns -1 when no node is active (e.g. a level run straight from the editor).
+func get_level_seed() -> int:
+	if current_layer < 0:
+		return -1
+	return hash([run_seed, current_layer, current_index]) & 0x7FFFFFFF
 
 
 func travel_to(node : MapNode) -> void:
@@ -149,6 +164,7 @@ func to_dict() -> Dictionary:
 			"biome": n.option.biome.resource_path if n.option and n.option.biome else "",
 			"mission": n.option.mission.resource_path if n.option and n.option.mission else "",
 		})),
+		"run_seed": run_seed,
 		"current_layer": current_layer,
 		"current_index": current_index,
 	}
@@ -176,6 +192,8 @@ static func from_dict(config: PlayerConfig, data: Dictionary) -> RunState:
 	state.consumable = _load_resource(data.get("consumable", ""))
 	
 	state.depth = int(data.get("depth", 0))
+	# saves from before seeding keep the random seed picked in _init
+	state.run_seed = int(data.get("run_seed", state.run_seed))
 	
 	if data.has("choices"):
 		state.next_choices.clear()

@@ -13,8 +13,37 @@ enum Phase { CALM, CHAOS }
 @export_range(0.0, 1.0) var peak_intensity: float = 0.8
 @export_range(0.0, 1.0) var relax_intensity: float = 0.3
 
+@export_group("Chaos warning")
+## How many seconds before calm ends the warning starts (HUD, camera, sound and music build up).
+@export var warning_time: float = 10.0
+## Played once when the warning starts.
+@export var warning_howl: AudioStream = preload("res://sounds/monster_howl.wav")
+@export var warning_howl_volume_db: float = -6.0
+## Builds up over the warning. Made to be warning_time long.
+@export var warning_rumble: AudioStream = preload("res://sounds/chaos_rumble.ogg")
+@export var warning_rumble_volume_db: float = -2.0
+
+@export_group("Horde burst")
+## Screen shake when a phase's burst starts (0 to 1).
+@export var burst_shake: float = 0.6
+## Played when a phase's burst starts.
+@export var burst_roar: AudioStream = preload("res://sounds/monster_roar_1.wav")
+@export var burst_roar_volume_db: float = -4.0
+
+@export_group("Spawner relocation")
+## Random ground cells tried when a lit spawner looks for a new dark spot.
+@export var relocate_attempts: int = 40
+## Seconds before a spawner tries again when no dark spot was found.
+@export var relocate_retry_time: float = 5.0
+
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var wave_timer: Timer = $WaveTimer
+var warning_timer := Timer.new()
+var howl_player := AudioStreamPlayer.new()
+var rumble_player := AudioStreamPlayer.new()
+var roar_player := AudioStreamPlayer.new()
+var burst_timer := Timer.new()
+var burst_left: int = 0
 
 var phase: Phase
 var current: DirectorPhase
@@ -30,18 +59,40 @@ var spawners : Array[EnemySpawner]
 const SPAWNER_SCENE := preload("uid://bsu0qwh6vyytv")
 const LIGHT_MASK := 2048
 const MIN_PLAYER_DISTANCE := 96.0
+const LIGHT_PROBE_RADIUS := 8.0
 
 var light_probe := CircleShape2D.new()
 var light_query := PhysicsPointQueryParameters2D.new()
+var light_shape_query := PhysicsShapeQueryParameters2D.new()
+## Every ground cell in the level, for picking spawner spots. Filled after the
+## level is generated and kept up to date as walls are broken.
+var ground_cells: Array[Vector2i] = []
 
 
 func _ready():
 	GameEvents.start_wave.connect(func(_index): enter_phase(Phase.CHAOS))
 	GameEvents.health_updated.connect(on_health_updated)
 	GameEvents.energy_updated.connect(on_energy_updated)
+	GameEvents.level_generated.connect(cache_ground_cells)
+	GameEvents.tile_broken.connect(on_tile_broken)
 	spawn_timer.timeout.connect(spawn)
 	wave_timer.timeout.connect(on_phase_timeout)
-	
+
+	warning_timer.one_shot = true
+	warning_timer.timeout.connect(on_warning)
+	add_child(warning_timer)
+	howl_player.stream = warning_howl
+	howl_player.volume_db = warning_howl_volume_db
+	add_child(howl_player)
+	rumble_player.stream = warning_rumble
+	rumble_player.volume_db = warning_rumble_volume_db
+	add_child(rumble_player)
+	roar_player.stream = burst_roar
+	roar_player.volume_db = burst_roar_volume_db
+	add_child(roar_player)
+	burst_timer.timeout.connect(on_burst_tick)
+	add_child(burst_timer)
+
 	enemy_list.setup()
 	enter_phase(Phase.CALM)
 	spawn_timer.start(get_spawn_time())
@@ -50,19 +101,72 @@ func _ready():
 	light_query.collide_with_bodies = false
 	light_query.collision_mask = LIGHT_MASK
 
+	light_probe.radius = LIGHT_PROBE_RADIUS
+	light_shape_query.shape = light_probe
+	light_shape_query.collide_with_areas = true
+	light_shape_query.collide_with_bodies = false
+	light_shape_query.collision_mask = LIGHT_MASK
+
 
 func enter_phase(new_phase: Phase):
 	phase = new_phase
 	current = calm_phase if phase == Phase.CALM else chaos_phase
 	peaked = false
-	wave_timer.start(randf_range(current.min_duration, current.max_duration))
-	
+	var duration: float = randf_range(current.min_duration, current.max_duration)
+	wave_timer.start(duration)
+	# Calm warns before it runs out. Chaos started some other way (the generator) comes without one.
+	if phase == Phase.CALM:
+		warning_timer.start(maxf(duration - warning_time, 0.05))
+	else:
+		warning_timer.stop()
+
 	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
 	remove_excess_enemies(enemies)
 	for enemy in enemies:
 		enemy.aggressive = current.aggressive
-	
+
+	start_burst()
 	GameEvents.wave_updated.emit(phase)
+
+
+func on_warning():
+	if phase != Phase.CALM:
+		return
+	GameEvents.chaos_warning.emit(minf(warning_time, wave_timer.time_left))
+	if warning_howl:
+		howl_player.play()
+	if warning_rumble:
+		rumble_player.play()
+
+
+## Pours the phase's burst out of the dark over burst_duration, with a shake and a roar.
+func start_burst():
+	burst_timer.stop()
+	var depth: int = Run.state.depth if Run.state else 1
+	burst_left = current.get_burst_size(depth)
+	if burst_left <= 0:
+		return
+	burst_timer.start(current.burst_duration / burst_left)
+
+	var camera := get_viewport().get_camera_2d() as PlayerCamera
+	if camera:
+		camera.add_shake(burst_shake)
+	if burst_roar:
+		roar_player.play()
+
+
+func on_burst_tick():
+	if burst_left <= 0 or EnemyEntity.all_enemies.size() >= get_max_enemies():
+		burst_left = 0
+		burst_timer.stop()
+		return
+	burst_left -= 1
+
+	var dark := spawners.filter(func(s: EnemySpawner): return s.lights.is_empty())
+	if dark.is_empty():
+		return
+	var spawner := dark.pick_random() as EnemySpawner
+	spawner.spawn_enemy(enemy_list.spawn_table.pick_item(), current.aggressive)
 
 
 func on_phase_timeout():
@@ -96,7 +200,7 @@ func add_spawner(spawner : EnemySpawner):
 func relocate_spawner(old: EnemySpawner):
 	var pos = find_dark_position()
 	if pos == null:
-		old.blocked_timer.start(5.0) # nothing free right now, try again soon
+		old.blocked_timer.start(relocate_retry_time) # nothing free right now, try again soon
 		return
 	
 	spawners.erase(old)
@@ -108,25 +212,34 @@ func relocate_spawner(old: EnemySpawner):
 	add_spawner(new_spawner)
 
 
+## Remembers every ground cell once the level exists, so relocating a spawner
+## doesn't have to scan the whole tilemap each time.
+func cache_ground_cells():
+	var tilemap := get_tree().get_first_node_in_group("tilemap_layer") as TileMapLayer
+	if tilemap:
+		ground_cells = tilemap.get_used_cells_by_id(Tiles.Id.GROUND)
+
+
+## A broken wall or ceiling becomes floor, so it's a new spot a spawner could use.
+func on_tile_broken(tile_position: Vector2i):
+	if not ground_cells.is_empty():
+		ground_cells.append(tile_position)
+
+
 func find_dark_position() -> Variant:
 	var tilemap := get_tree().get_first_node_in_group("tilemap_layer") as TileMapLayer
 	var grid := get_tree().get_first_node_in_group("pathfinding") as PathfindingGrid
 	var player := get_tree().get_first_node_in_group("player") as Node2D
 	if not player:
 		return null
-	
-	var cells := tilemap.get_used_cells_by_id(Tiles.Id.GROUND)
-	cells.shuffle()
-	
-	light_probe.radius = 8.0
-	var query := PhysicsShapeQueryParameters2D.new()
-	query.shape = light_probe
-	query.collide_with_areas = true
-	query.collide_with_bodies = false
-	query.collision_mask = LIGHT_MASK
-	
+	if ground_cells.is_empty():
+		cache_ground_cells() # in case the level was generated before this listened
+	if ground_cells.is_empty():
+		return null
+
 	var space := get_viewport().world_2d.direct_space_state
-	for cell in cells.slice(0, 40): # cap attempts
+	for i in relocate_attempts:
+		var cell: Vector2i = ground_cells.pick_random()
 		if Building.occupied.has(cell):
 			continue
 		if grid.astar_grid.is_in_boundsv(cell) and grid.astar_grid.is_point_solid(cell):
@@ -136,8 +249,8 @@ func find_dark_position() -> Variant:
 		if pos.distance_to(player.global_position) < MIN_PLAYER_DISTANCE:
 			continue
 		
-		query.transform = Transform2D(0, pos)
-		if space.intersect_shape(query, 1).is_empty(): # not inside any light
+		light_shape_query.transform = Transform2D(0, pos)
+		if space.intersect_shape(light_shape_query, 1).is_empty(): # not inside any light
 			return pos
 	return null
 
@@ -162,12 +275,8 @@ func remove_excess_enemies(enemies : Array[Node]):
 		func(e: Node2D): return not is_in_light(e.global_position))
 	removable.shuffle()
 	
-	var removed_amount := 0
 	for enemy in removable.slice(0, excess):
 		enemy.queue_free()
-		removed_amount += 1
-	
-	print("removed %s enemies" % removed_amount)
 
 
 func on_health_updated(health, max_health):
@@ -200,13 +309,13 @@ func get_spawn_time() -> float:
 
 
 func spawn():
-	var total_enemies = get_tree().get_nodes_in_group("enemies").size()
-	var spawn_chance = 0.3
+	# EnemyEntity keeps this list up to date itself (added on ready, removed on death).
+	var total_enemies := EnemyEntity.all_enemies.size()
 	for spawner in spawners:
 		if total_enemies >= get_max_enemies():
 			break
-		
-		if randf() > spawn_chance:
+
+		if randf() > current.spawn_chance:
 			continue
 		
 		var enemy_scene = enemy_list.spawn_table.pick_item()

@@ -4,7 +4,10 @@
 
 [resource]
 script = ExtResource("1_nmb7j")
-max_enemies = 24
-spawn_time = 4.0
+max_enemies = 32
+spawn_time = 2.5
+spawn_chance = 0.5
 aggressive = true
+burst_size = 8
+burst_per_depth = 2
 metadata/_custom_type_script = "uid://crbhyo4k7ctr2"

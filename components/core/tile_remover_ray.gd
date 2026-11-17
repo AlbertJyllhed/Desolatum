@@ -1,6 +1,9 @@
 extends RayCast2D
 class_name TileRemoverRay
 
+## Tile damage per hit (tiles need TileBreaker.TILE_HEALTH hits to break).
+@export var tile_damage : int = 1
+
 @onready var audio_player_component : AudioPlayerComponent = $AudioPlayerComponent
 
 
@@ -15,5 +18,5 @@ func _physics_process(_delta):
 	var hit_position := get_collision_point() - get_collision_normal()
 	var coord := tilemap.local_to_map(tilemap.to_local(hit_position))
 	audio_player_component.play_random_sound()
-	TileBreaker.break_tile(coord)
+	TileBreaker.damage_tile(coord, tile_damage, get_collision_normal())
 	enabled = false

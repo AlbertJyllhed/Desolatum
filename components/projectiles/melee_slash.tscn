@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://v3qjp84twehk"]
+
+[ext_resource type="Script" uid="uid://c3qx13a6yepbd" path="res://components/projectiles/melee_slash.gd" id="1_272s3"]
+[ext_resource type="Texture2D" uid="uid://dla1lpsrtarep" path="res://assets/textures/melee_swing.png" id="2_pbj0k"]
+[ext_resource type="PackedScene" uid="uid://bygbrw7i4hp0m" path="res://components/areas/hitbox.tscn" id="3_elotv"]
+[ext_resource type="PackedScene" uid="uid://jmqh7mkm5qki" path="res://components/core/tile_remover_ray.tscn" id="4_d2nbl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d2nbl"]
+radius = 6.0
+height = 32.0
+
+[node name="MeleeSlash" type="Node2D" unique_id=175025679]
+script = ExtResource("1_272s3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=536181835]
+z_index = 1
+texture = ExtResource("2_pbj0k")
+offset = Vector2(16, 0)
+hframes = 3
+
+[node name="Hitbox" parent="." unique_id=1637890346 instance=ExtResource("3_elotv")]
+position = Vector2(16, 0)
+rotation = 1.5708
+collision_layer = 40
+collision_mask = 16
+damage = 2
+hit_stop = 0.05
+hit_once = true
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_d2nbl")
+disabled = true
+
+[node name="TileRemoverRay" parent="." unique_id=1103657387 instance=ExtResource("4_d2nbl")]
+enabled = false
+hit_from_inside = true
+
+[editable path="Hitbox"]

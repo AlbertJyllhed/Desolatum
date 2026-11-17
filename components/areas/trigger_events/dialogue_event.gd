@@ -11,7 +11,7 @@ func setup(handler : EventHandlerComponent, new_target_node : Node2D):
 func trigger(new_player : Player):
 	super.trigger(new_player)
 	if not dialogue:
-		print("error: no dialogue assigned!")
+		push_error("DialogueEvent '%s': no dialogue assigned" % get_path())
 		return
 	
 	DialogueManager.start_dialogue(target_node.global_position, dialogue.text)

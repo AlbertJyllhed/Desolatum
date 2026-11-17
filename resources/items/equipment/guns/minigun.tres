@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3 uid="uid://im57fntsegkt"]
+
+[ext_resource type="Script" uid="uid://l72i0hdxgc5i" path="res://resources/items/equipment/equipment_item.gd" id="1_cjyqo"]
+[ext_resource type="PackedScene" uid="uid://c6ufte2a8nymb" path="res://components/projectiles/bullet.tscn" id="1_prjcm"]
+[ext_resource type="PackedScene" uid="uid://bcu0gw0ngmmc5" path="res://components/projectiles/shell_casing.tscn" id="1_xki8o"]
+[ext_resource type="Script" uid="uid://ctngv7nkfwl86" path="res://resources/items/equipment/gun_data.gd" id="2_xki8o"]
+[ext_resource type="AudioStream" uid="uid://qqour2nnb8tt" path="res://sounds/minigun.ogg" id="3_plnqt"]
+[ext_resource type="AudioStream" uid="uid://cr6ertvl6ct1l" path="res://sounds/minigun2.ogg" id="4_u2tiq"]
+[ext_resource type="AudioStream" uid="uid://1j7iqgaes5tt" path="res://sounds/minigun3.ogg" id="5_rskyj"]
+
+[sub_resource type="Resource" id="Resource_gjn0g"]
+script = ExtResource("2_xki8o")
+fire_mode = 1
+cooldown = 0.1
+limit_turn_while_firing = true
+firing_turn_speed = 65.0
+attack_move_speed_multiplier = 0.1
+attack_slow_duration = 0.15
+ammo = 100
+reload_time = 6.0
+projectile = ExtResource("1_prjcm")
+spread = 0.2
+sprite_frame = 16
+sounds = Array[AudioStream]([ExtResource("3_plnqt"), ExtResource("4_u2tiq"), ExtResource("5_rskyj")])
+recoil = 4.0
+shake_power = 0.1
+casing_scene = ExtResource("1_xki8o")
+metadata/_custom_type_script = "uid://ctngv7nkfwl86"
+
+[resource]
+script = ExtResource("1_cjyqo")
+gun_data = SubResource("Resource_gjn0g")
+id = "minigun"
+name = "Minigun"
+description = "There's nothing mini about this gun."
+metadata/_custom_type_script = "uid://l72i0hdxgc5i"

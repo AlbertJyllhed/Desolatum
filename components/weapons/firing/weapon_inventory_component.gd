@@ -107,6 +107,9 @@ func create_equipment_instance(new_item : Item):
 	var weapon = new_item.instantiate_equipment()
 	add_child(weapon)
 	weapon.global_position = global_position
+	var player := get_parent() as Player
+	if weapon is PlayerWeaponBase and player:
+		weapon.attacked.connect(player.slow_from_attack)
 	return weapon
 
 

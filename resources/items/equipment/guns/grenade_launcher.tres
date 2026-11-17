@@ -17,8 +17,8 @@ explode_chance = 1.0
 sprite_frame = 4
 muzzle_offset = 11.0
 sounds = Array[AudioStream]([ExtResource("gd_sound_0")])
-recoil = 0.4
-shake_power = 6.0
+recoil = 4.0
+shake_power = 0.2
 
 [resource]
 script = ExtResource("2_dweur")

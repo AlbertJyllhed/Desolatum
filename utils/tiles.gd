@@ -10,6 +10,16 @@ enum Id {
 	SHIP_WALL = 6,
 	SHIP_CEILING = 7,
 	SHADOW = 14,
+	## Ore, energy and decorations drawn over ceiling tiles (overlay layer).
+	CEILING_OVERLAY = 15,
+}
+
+## Tile custom data "ore_type": what a wall or ceiling overlay tile holds.
+## For walls it is also the atlas column in the wall texture.
+enum OreType {
+	NONE = 0,
+	ENERGY = 1,
+	ORE = 2,
 }
 
 const CELL_SIZE := 16

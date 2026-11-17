@@ -23,9 +23,9 @@ func interact():
 	hide_details()
 	GameEvents.start_wave.emit(1)
 	
-	var ui_layer = get_tree().get_first_node_in_group("ui_layer")
+	var gui := get_tree().get_first_node_in_group("ui_layer") as GUI
 	var time_ui_instance = time_ui_scene.instantiate() as TimeUI
-	ui_layer.add_child(time_ui_instance)
+	gui.add_to_hud(time_ui_instance)
 	time_ui_instance.timer.timeout.connect(on_survived)
 
 

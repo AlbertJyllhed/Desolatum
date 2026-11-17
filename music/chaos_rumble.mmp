@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project version="1.0" creator="LMMS" creatorversion="1.2.2" type="song">
+  <head timesig_numerator="4" mastervol="100" timesig_denominator="4" bpm="96" masterpitch="0"/>
+  <song>
+    <trackcontainer width="600" x="5" y="5" maximized="0" height="300" visible="1" type="song" minimized="0">
+      <track muted="0" type="0" name="Rumble Noise" solo="0">
+        <instrumenttrack pan="0" fxch="0" pitchrange="1" pitch="0" basenote="57" vol="70">
+          <instrument name="tripleoscillator"><tripleoscillator modalgo1="2" modalgo2="2" modalgo3="2" wavetype0="6" vol0="70" coarse0="0" finel0="0" finer0="0" pan0="0" phoffset0="0" stphdetun0="0" userwavefile0="" wavetype1="6" vol1="0" coarse1="0" finel1="0" finer1="0" pan1="0" phoffset1="0" stphdetun1="0" userwavefile1="" wavetype2="0" vol2="0" coarse2="0" finel2="0" finer2="0" pan2="0" phoffset2="0" stphdetun2="0" userwavefile2=""/></instrument>
+          <eldata fres="0.6" ftype="0" fcut="140" fwet="1"><elvol pdel="0" att="1.25" hold="0" dec="0.0" sus="0.0" rel="0.4" amt="1" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/><elcut pdel="0" att="1.3" hold="0" dec="0.0" sus="0" rel="0.1" amt="0.35" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/><elres pdel="0" att="0.0" hold="0" dec="0.0" sus="0.0" rel="0.1" amt="0.0" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/></eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arptime="100" arprange="1" arpmode="0" arp-enabled="0" arp="0" arpdir="0" arpgate="100" syncmode="0"/>
+          <midiport inputcontroller="0" fixedoutputvelocity="-1" inputchannel="0" outputcontroller="0" writable="0" outputchannel="1" fixedinputvelocity="-1" fixedoutputnote="-1" outputprogram="1" basevelocity="63" readable="0"/>
+          <fxchain numofeffects="2" enabled="1"><effect name="bitcrush" on="1" wet="0.7" gate="0" autoquit="8000" autoquit_numerator="4" autoquit_denominator="4" syncmode="0"><bitcrushcontrols ingain="0" innoise="0" outgain="0" outclip="0" rate="8000" stereodiff="0" levels="128" rateon="1" depthon="1"/><BitcrushControls ingain="0" innoise="0" outgain="0" outclip="0" rate="8000" stereodiff="0" levels="128" rateon="1" depthon="1"/><key/></effect><effect name="reverbsc" on="1" wet="0.4" gate="0" autoquit="8000" autoquit_numerator="4" autoquit_denominator="4" syncmode="0"><ReverbSCControls input_gain="0" size="0.9" color="2000" output_gain="0"/><reverbsccontrols input_gain="0" size="0.9" color="2000" output_gain="0"/><key/></effect></fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" name="Rumble Noise" pos="0" len="768" type="1">
+          <note pan="0" key="45" vol="100" pos="0" len="768"/>
+        </pattern>
+      </track>
+      <track muted="0" type="0" name="Sub Swell" solo="0">
+        <instrumenttrack pan="0" fxch="0" pitchrange="1" pitch="0" basenote="57" vol="40">
+          <instrument name="tripleoscillator"><tripleoscillator modalgo1="2" modalgo2="2" modalgo3="2" wavetype0="0" vol0="60" coarse0="-12" finel0="-5" finer0="5" pan0="0" phoffset0="0" stphdetun0="0" userwavefile0="" wavetype1="1" vol1="20" coarse1="0" finel1="0" finer1="0" pan1="0" phoffset1="0" stphdetun1="0" userwavefile1="" wavetype2="0" vol2="0" coarse2="0" finel2="0" finer2="0" pan2="0" phoffset2="0" stphdetun2="0" userwavefile2=""/></instrument>
+          <eldata fres="0.5" ftype="0" fcut="300" fwet="1"><elvol pdel="0" att="1.2" hold="0" dec="0.0" sus="0.0" rel="0.4" amt="1" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/><elcut pdel="0" att="0.0" hold="0" dec="0.0" sus="0.0" rel="0.1" amt="0.0" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/><elres pdel="0" att="0.0" hold="0" dec="0.0" sus="0.0" rel="0.1" amt="0.0" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/></eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arptime="100" arprange="1" arpmode="0" arp-enabled="0" arp="0" arpdir="0" arpgate="100" syncmode="0"/>
+          <midiport inputcontroller="0" fixedoutputvelocity="-1" inputchannel="0" outputcontroller="0" writable="0" outputchannel="1" fixedinputvelocity="-1" fixedoutputnote="-1" outputprogram="1" basevelocity="63" readable="0"/>
+          <fxchain numofeffects="0" enabled="0"></fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" name="Sub Swell" pos="0" len="768" type="1">
+          <note pan="0" key="28" vol="100" pos="0" len="768"/>
+        </pattern>
+      </track>
+      <track muted="0" type="0" name="Footfalls" solo="0">
+        <instrumenttrack pan="0" fxch="0" pitchrange="1" pitch="0" basenote="57" vol="80">
+          <instrument name="kicker"><kicker version="1" startfreq="90" endfreq="32" decay="380" decay_numerator="4" decay_denominator="4" syncmode="0" dist="0.7" distend="0.3" noise="0.15" click="0.1" slope="0.25" env="0.3" gain="1" startnote="0" endnote="0"/></instrument>
+          <eldata fres="0.6" ftype="0" fcut="500" fwet="1"><elvol pdel="0" att="0.0" hold="0" dec="0.0" sus="0.0" rel="0.1" amt="0.0" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/><elcut pdel="0" att="0.0" hold="0" dec="0.0" sus="0.0" rel="0.1" amt="0.0" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/><elres pdel="0" att="0.0" hold="0" dec="0.0" sus="0.0" rel="0.1" amt="0.0" lpdel="0" latt="0" lspd="0.1" lamt="0.0" lshp="0" x100="0" ctlenvamt="0" userwavefile="" lfosyncmode="0"/></eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arptime="100" arprange="1" arpmode="0" arp-enabled="0" arp="0" arpdir="0" arpgate="100" syncmode="0"/>
+          <midiport inputcontroller="0" fixedoutputvelocity="-1" inputchannel="0" outputcontroller="0" writable="0" outputchannel="1" fixedinputvelocity="-1" fixedoutputnote="-1" outputprogram="1" basevelocity="63" readable="0"/>
+          <fxchain numofeffects="2" enabled="1"><effect name="bitcrush" on="1" wet="0.8" gate="0" autoquit="8000" autoquit_numerator="4" autoquit_denominator="4" syncmode="0"><bitcrushcontrols ingain="0" innoise="0" outgain="0" outclip="0" rate="6000" stereodiff="0" levels="96" rateon="1" depthon="1"/><BitcrushControls ingain="0" innoise="0" outgain="0" outclip="0" rate="6000" stereodiff="0" levels="96" rateon="1" depthon="1"/><key/></effect><effect name="reverbsc" on="1" wet="0.5" gate="0" autoquit="8000" autoquit_numerator="4" autoquit_denominator="4" syncmode="0"><ReverbSCControls input_gain="0" size="0.94" color="2500" output_gain="0"/><reverbsccontrols input_gain="0" size="0.94" color="2500" output_gain="0"/><key/></effect></fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" name="Footfalls" pos="0" len="768" type="1">
+          <note pan="0" key="21" vol="40" pos="0" len="24"/>
+          <note pan="0" key="21" vol="58" pos="192" len="24"/>
+          <note pan="0" key="21" vol="60" pos="288" len="24"/>
+          <note pan="0" key="21" vol="76" pos="384" len="24"/>
+          <note pan="0" key="21" vol="78" pos="432" len="24"/>
+          <note pan="0" key="21" vol="80" pos="480" len="24"/>
+          <note pan="0" key="21" vol="82" pos="528" len="24"/>
+          <note pan="0" key="21" vol="94" pos="576" len="24"/>
+          <note pan="0" key="21" vol="96" pos="600" len="24"/>
+          <note pan="0" key="21" vol="98" pos="624" len="24"/>
+          <note pan="0" key="21" vol="100" pos="648" len="24"/>
+          <note pan="0" key="21" vol="102" pos="672" len="24"/>
+          <note pan="0" key="21" vol="104" pos="696" len="24"/>
+          <note pan="0" key="21" vol="106" pos="720" len="24"/>
+          <note pan="0" key="21" vol="108" pos="744" len="24"/>
+        </pattern>
+      </track>
+    </trackcontainer>
+    <fxmixer width="543" x="5" y="310" maximized="0" height="333" visible="1" minimized="0">
+      <fxchannel soloed="0" num="0" muted="0" volume="1" name="Master">
+        <fxchain numofeffects="2" enabled="1"><effect name="bitcrush" on="1" wet="0.75" gate="0" autoquit="8000" autoquit_numerator="4" autoquit_denominator="4" syncmode="0"><bitcrushcontrols ingain="0" innoise="0" outgain="0" outclip="0" rate="16000" stereodiff="0" levels="256" rateon="1" depthon="1"/><BitcrushControls ingain="0" innoise="0" outgain="0" outclip="0" rate="16000" stereodiff="0" levels="256" rateon="1" depthon="1"/><key/></effect><effect name="ladspaeffect" on="1" wet="1" gate="0" autoquit="8000" autoquit_numerator="4" autoquit_denominator="4" syncmode="0"><ladspacontrols ports="3"><port00 data="4"/><port01 data="-0.5"/><port02 data="50"/></ladspacontrols><key><attribute value="fast_lookahead_limiter_1913.so" name="file"/><attribute value="fastLookaheadLimiter" name="plugin"/></key></effect></fxchain>
+      </fxchannel>
+    </fxmixer>
+    <controllers/>
+    <timeline lp0pos="0" lp1pos="768" lpstate="1"/>
+    <projectnotes width="400" x="700" y="10" maximized="0" height="300" visible="0" minimized="0"><![CDATA[Desolatum - chaos warning rumble (sound effect, 10 s). Low rumble swelling over distant footfalls that speed up. Export without looping: the tail should ring out. Loop markers cover the whole song; export with "Export between loop markers" for a seamless game loop.]]></projectnotes>
+  </song>
+</lmms-project>

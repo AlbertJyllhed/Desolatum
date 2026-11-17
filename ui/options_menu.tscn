@@ -1,92 +1,61 @@
 [gd_scene format=3 uid="uid://d3cqb2wgvjy5a"]
 
-[ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_a15o4"]
 [ext_resource type="Script" uid="uid://ba3p2p0sd5isl" path="res://ui/options_menu.gd" id="1_q5462"]
 [ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_j5bdn"]
-[ext_resource type="PackedScene" uid="uid://ca1yr76wl3rdy" path="res://ui/close_button.tscn" id="3_nwhrd"]
 [ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="3_vlhdk"]
 
-[node name="OptionsMenu" type="Control"]
+[node name="OptionsMenu" type="Control" unique_id=226257458 node_paths=PackedStringArray("first_button", "content")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(8, 0)
 script = ExtResource("1_q5462")
+first_button = NodePath("VBoxContainer/ResolutionButton")
+content = NodePath("VBoxContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1021128982]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -80.0
-offset_right = 70.0
-offset_bottom = 80.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_a15o4")
-region_rect = Rect2(0, 0, 16, 16)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="CloseButton" parent="NinePatchRect" instance=ExtResource("3_nwhrd")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 1.0
-offset_right = 17.0
-grow_horizontal = 0
-
-[node name="CenterContainer" type="CenterContainer" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+offset_top = -73.5
+offset_right = 62.0
+offset_bottom = 73.5
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/CenterContainer"]
-layout_mode = 2
-theme_override_constants/separation = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="NinePatchRect/CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1245326378]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.054902, 1, 0.4, 1)
 theme_override_fonts/font = ExtResource("2_j5bdn")
 text = "Options"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="ResolutionButton" type="OptionButton" parent="NinePatchRect/CenterContainer/VBoxContainer"]
+[node name="ResolutionButton" type="OptionButton" parent="VBoxContainer" unique_id=1663890268]
 layout_mode = 2
 
-[node name="FullscreenButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("3_vlhdk")]
+[node name="FullscreenButton" parent="VBoxContainer" unique_id=759153984 instance=ExtResource("3_vlhdk")]
 layout_mode = 2
 text = "Fullscreen"
-focus_button = true
 
-[node name="WindowedButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("3_vlhdk")]
+[node name="WindowedButton" parent="VBoxContainer" unique_id=1810656758 instance=ExtResource("3_vlhdk")]
 layout_mode = 2
 text = "Windowed"
 
-[node name="DisplayFPSButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("3_vlhdk")]
+[node name="DisplayFPSButton" parent="VBoxContainer" unique_id=1671980590 instance=ExtResource("3_vlhdk")]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
 text = "Show FPS"
 
-[connection signal="pressed" from="NinePatchRect/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="item_selected" from="NinePatchRect/CenterContainer/VBoxContainer/ResolutionButton" to="." method="_on_resolution_button_item_selected"]
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/WindowedButton" to="." method="_on_windowed_button_pressed"]
-[connection signal="toggled" from="NinePatchRect/CenterContainer/VBoxContainer/DisplayFPSButton" to="." method="_on_display_fps_button_toggled"]
+[node name="CloseButton" parent="VBoxContainer" unique_id=284586072 instance=ExtResource("3_vlhdk")]
+layout_mode = 2
+text = "Return"
+
+[connection signal="item_selected" from="VBoxContainer/ResolutionButton" to="." method="_on_resolution_button_item_selected"]
+[connection signal="pressed" from="VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/WindowedButton" to="." method="_on_windowed_button_pressed"]
+[connection signal="toggled" from="VBoxContainer/DisplayFPSButton" to="." method="_on_display_fps_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

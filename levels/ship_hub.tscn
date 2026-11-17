@@ -1,9 +1,6 @@
 [gd_scene format=4 uid="uid://bhktsvbmclxqc"]
 
-[ext_resource type="PackedScene" uid="uid://dhyexrog6bcbm" path="res://ui/pause_menu.tscn" id="1_mx2lk"]
-[ext_resource type="PackedScene" uid="uid://hm3wwqimeisn" path="res://ui/fps_counter.tscn" id="2_m3r7t"]
-[ext_resource type="PackedScene" uid="uid://c11eblksds3j" path="res://ui/cursor.tscn" id="3_70tg6"]
-[ext_resource type="PackedScene" uid="uid://fd0y7pt4y18o" path="res://ui/transition_screen.tscn" id="4_b8htk"]
+[ext_resource type="PackedScene" uid="uid://buwfd3d6d7gru" path="res://ui/gui.tscn" id="1_icrui"]
 [ext_resource type="PackedScene" uid="uid://dl7543ccfg1vq" path="res://characters/player/player_camera.tscn" id="5_258ul"]
 [ext_resource type="TileSet" uid="uid://deia6nuosvlmu" path="res://resources/tilesets/tileset.tres" id="6_8auh1"]
 [ext_resource type="PackedScene" uid="uid://oigv3iu1oim1" path="res://characters/player/player.tscn" id="7_rnirf"]
@@ -12,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://bije8lxlem0jr" path="res://components/props/bed.tscn" id="10_0ukhy"]
 [ext_resource type="PackedScene" uid="uid://bcnbiriaw2jbb" path="res://components/props/upgrade_store.tscn" id="11_7q3c8"]
 [ext_resource type="PackedScene" uid="uid://loyfc1ludqk" path="res://components/props/carpet.tscn" id="12_rbndn"]
+[ext_resource type="Script" uid="uid://dhpmeprfaj66e" path="res://systems/lighting/light_map.gd" id="13_aaaqk"]
 [ext_resource type="PackedScene" uid="uid://bmr5vnavj25es" path="res://components/areas/trigger_area.tscn" id="13_rsxer"]
 [ext_resource type="PackedScene" uid="uid://bipw1kkx5togr" path="res://components/areas/trigger_events/camera_move_event.tscn" id="14_8iadp"]
+[ext_resource type="PackedScene" uid="uid://brnyy8gqch7b0" path="res://systems/audio/music_cue.tscn" id="14_pdktu"]
+[ext_resource type="AudioStream" uid="uid://ba2mc8m5j82o4" path="res://sounds/music/ship_hub_theme.ogg" id="15_6q013"]
 [ext_resource type="PackedScene" uid="uid://djul6rjnpm0n4" path="res://components/areas/trigger_events/reset_event_timer.tscn" id="18_wm1cj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_che76"]
@@ -21,20 +21,7 @@ size = Vector2(32, 16)
 
 [node name="ShipHub" type="Node" unique_id=1604539790]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1535023920 groups=["ui_layer"]]
-
-[node name="PauseMenu" parent="CanvasLayer" unique_id=2056182640 instance=ExtResource("1_mx2lk")]
-visible = false
-
-[node name="OptionsMenu" parent="CanvasLayer/PauseMenu" index="2" node_paths=PackedStringArray("fps_counter")]
-fps_counter = NodePath("../../FPSCounter")
-
-[node name="FPSCounter" parent="CanvasLayer" unique_id=2041479287 instance=ExtResource("2_m3r7t")]
-process_mode = 3
-
-[node name="Cursor" parent="CanvasLayer" unique_id=2140494531 instance=ExtResource("3_70tg6")]
-
-[node name="TransitionScreen" parent="CanvasLayer" unique_id=556673 instance=ExtResource("4_b8htk")]
+[node name="GUI" parent="." unique_id=1534049060 instance=ExtResource("1_icrui")]
 
 [node name="GameCamera" parent="." unique_id=392089646 instance=ExtResource("5_258ul")]
 
@@ -105,7 +92,7 @@ rotation = 0.349066
 [node name="ForegroundLayer" type="Node2D" parent="." unique_id=561829377 groups=["foreground_layer"]]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1121277683]
-color = Color(0.568627, 0.705882, 0.784314, 1)
+color = Color(0.1292811, 0.36350986, 0.36640084, 1)
 
 [node name="TriggerArea" parent="." unique_id=1811119794 instance=ExtResource("13_rsxer")]
 position = Vector2(0, -200)
@@ -122,5 +109,12 @@ keep_on_trigger = true
 [node name="ResetEventTimer" parent="TriggerArea/EventHandlerComponent" index="1" unique_id=1942029322 instance=ExtResource("18_wm1cj")]
 reset_time = 2.0
 
-[editable path="CanvasLayer/PauseMenu"]
+[node name="LightMap" type="Node2D" parent="." unique_id=538246501 node_paths=PackedStringArray("canvas_modulate")]
+script = ExtResource("13_aaaqk")
+canvas_modulate = NodePath("../CanvasModulate")
+metadata/_custom_type_script = "uid://dhpmeprfaj66e"
+
+[node name="MusicCue" parent="." unique_id=1380705660 instance=ExtResource("14_pdktu")]
+calm_music = ExtResource("15_6q013")
+
 [editable path="TriggerArea"]

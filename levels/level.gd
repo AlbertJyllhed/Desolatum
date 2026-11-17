@@ -7,6 +7,9 @@ class_name Level
 ## Used when the level wasn't entered from the map, e.g. when you run this
 ## scene straight from the editor. Swap it to test another biome.
 @export var preview_biome : BiomeData
+## Use preview_biome even inside a run. Together with a fixed seed on the
+## LevelGenerator (Randomize Seed off) this reproduces a level exactly.
+@export var force_preview_biome : bool = false
 
 @export var level_generator : LevelGenerator
 @export var ground_layer : TileMapLayer
@@ -22,11 +25,22 @@ func _enter_tree() -> void:
 	if biome != null:
 		return # already applied (the node re-entered the tree)
 
-	biome = Run.state.current_biome if Run.state and Run.state.current_biome else preview_biome
+	if force_preview_biome and preview_biome:
+		biome = preview_biome
+	elif Run.state and Run.state.current_biome:
+		biome = Run.state.current_biome
+	else:
+		biome = preview_biome
 	if biome == null:
 		push_warning("Level: no biome to apply, using the scene as it is")
 		return
 	_apply(biome)
+
+
+## Runs after every child is ready, so all level_generated listeners are connected.
+func _ready() -> void:
+	var level_seed : int = Run.state.get_level_seed() if Run.state else -1
+	level_generator.start(level_seed)
 
 
 func _apply(data : BiomeData) -> void:
@@ -38,3 +52,5 @@ func _apply(data : BiomeData) -> void:
 		level_generator.dust_scene = data.ambient_particles
 	if data.generator_settings:
 		data.generator_settings.apply_to(level_generator)
+	if data.calm_music:
+		MusicPlayer.play(data.calm_music, data.combat_music)

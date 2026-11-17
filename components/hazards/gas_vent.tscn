@@ -3,6 +3,46 @@
 [ext_resource type="Script" uid="uid://d3rjarwk142h8" path="res://components/hazards/gas_vent.gd" id="1_ujdbc"]
 [ext_resource type="PackedScene" uid="uid://bygbrw7i4hp0m" path="res://components/areas/hitbox.tscn" id="2_7wlce"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="2_ntt25"]
+[ext_resource type="Texture2D" uid="uid://ba3dtrpai7swq" path="res://assets/materials/light_falloff.tres" id="3_gasfx"]
+[ext_resource type="Shader" uid="uid://idgi8qocc3mg" path="res://resources/shaders/gas_cloud.gdshader" id="4_gasfx"]
+[ext_resource type="Script" uid="uid://bod3ffbtr2n8s" path="res://components/hazards/gas_puffs.gd" id="5_gaspuffs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_warn"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_warn"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.7)
+colors = PackedColorArray(0.6, 0.95, 0.5, 1, 0.6, 0.95, 0.5, 0.5)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_warn"]
+gradient = SubResource("Gradient_warn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_warn"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(32, 32, 1)
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 8.0
+initial_velocity_max = 14.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_warn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gasv3"]
+shader = ExtResource("4_gasfx")
+shader_parameter/outline_color = Color(0.05, 0.22, 0.08, 0.85)
+shader_parameter/edge_color = Color(0.16, 0.5, 0.2, 0.55)
+shader_parameter/core_color = Color(0.42, 0.8, 0.32, 0.7)
+shader_parameter/edge_threshold = 0.15
+shader_parameter/core_threshold = 0.5
+shader_parameter/show_outline = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gasfx"]
+viewport_path = NodePath("GasViewport")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wtsdy"]
+radius = 64.0
 
 [node name="GasVent" type="Node2D" unique_id=358596030]
 script = ExtResource("1_ujdbc")
@@ -11,11 +51,36 @@ script = ExtResource("1_ujdbc")
 modulate = Color(0, 1, 0, 1)
 texture = ExtResource("2_ntt25")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=343958664]
+[node name="WarningParticles" type="GPUParticles2D" parent="." unique_id=1288410677]
+material = SubResource("CanvasItemMaterial_warn")
+emitting = false
+amount = 10
+lifetime = 0.8
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_warn")
+
+[node name="GasViewport" type="SubViewport" parent="." unique_id=1730245119]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(136, 136)
+render_target_update_mode = 4
+
+[node name="GasPuffs" type="Node2D" parent="GasViewport" unique_id=1495023817]
+texture_filter = 2
+position = Vector2(68, 68)
+script = ExtResource("5_gaspuffs")
+texture = ExtResource("3_gasfx")
+
+[node name="GasCloud" type="Sprite2D" parent="." unique_id=902617453]
+material = SubResource("ShaderMaterial_gasv3")
+texture = SubResource("ViewportTexture_gasfx")
 
 [node name="Hitbox" parent="." unique_id=889807776 instance=ExtResource("2_7wlce")]
 collision_layer = 64
 collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_wtsdy")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1546240441]
 

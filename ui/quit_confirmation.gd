@@ -1,11 +1,8 @@
-extends Control
-
-signal menu_closed
+extends Menu
 
 
 func _on_return_button_pressed():
-	menu_closed.emit()
-	hide()
+	close()
 
 
 func _on_quit_button_pressed():

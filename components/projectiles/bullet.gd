@@ -60,10 +60,7 @@ func _physics_process(delta):
 
 func hit_wall(collision_result):
 	wall_hit.emit()
-	var impact_instance = impact_scene.instantiate() as Node2D
-	base_layer.add_child(impact_instance)
-	impact_instance.global_position = collision_result.get_position()
-	impact_instance.rotation = collision_result.get_normal().angle()
+	Pool.spawn(impact_scene, base_layer, collision_result.get_position(), collision_result.get_normal().angle())
 
 
 func _on_hitbox_area_entered(_area):

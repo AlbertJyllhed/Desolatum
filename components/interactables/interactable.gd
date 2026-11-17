@@ -12,5 +12,6 @@ func hide_details():
 	label.text = ""
 
 
+## Called when the player interacts. Override in each interactable.
 func interact():
-	print("interacted")
+	pass

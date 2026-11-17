@@ -9,10 +9,10 @@ var player : Player
 
 func apply_upgrade(upgrade_node : Node2D):
 	player = upgrade_node as Player
-	player.health_component.health_changed.connect(on_health_changed)
+	player.health_component.damaged.connect(on_damaged)
 
 
-func on_health_changed(_current_health : int):
+func on_damaged(_amount : float) -> void:
 	if not timer.is_stopped():
 		timer.start(time_to_reset)
 		return

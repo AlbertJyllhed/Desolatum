@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://b1no0ih8wftu2" path="res://resources/data/drop_lists/crystal_drop_list.tres" id="6_mjiww"]
 [ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="7_2gmy8"]
 [ext_resource type="Texture2D" uid="uid://dpf64uklusfx1" path="res://assets/textures/rocks.png" id="7_tbf51"]
-[ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="11_q6mtn"]
+[ext_resource type="Texture2D" uid="uid://ba3dtrpai7swq" path="res://assets/materials/light_falloff.tres" id="11_q6mtn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5m5it"]
 resource_local_to_scene = true
@@ -74,6 +74,7 @@ shape = SubResource("CircleShape2D_3rcse")
 scale = Vector2(0.1, 0.1)
 blend_mode = 2
 texture = ExtResource("11_q6mtn")
+texture_scale = 2.0
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 

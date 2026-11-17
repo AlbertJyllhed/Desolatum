@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cwyg1eimxsk8t" path="res://assets/textures/teleporter.png" id="1_as2ex"]
 [ext_resource type="Script" uid="uid://co5ydbvhkayid" path="res://components/props/teleport_platform.gd" id="1_qb2ld"]
 [ext_resource type="Texture2D" uid="uid://buki388m3x6sn" path="res://assets/textures/teleport_orb.png" id="2_n6610"]
-[ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="4_2qrbl"]
+[ext_resource type="Texture2D" uid="uid://ba3dtrpai7swq" path="res://assets/materials/light_falloff.tres" id="4_2qrbl"]
 
 [sub_resource type="Animation" id="Animation_3g8d8"]
 length = 0.001

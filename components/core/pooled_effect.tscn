@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://don0kd5u8fubn"]
+
+[ext_resource type="Script" uid="uid://dbefgeuqhrkh2" path="res://components/core/pooled_effect.gd" id="1_hbrj7"]
+
+[node name="PooledEffect" type="Node" unique_id=880019700]
+script = ExtResource("1_hbrj7")

@@ -11,11 +11,11 @@ func _ready():
 	if not sprite:
 		return
 	
-	health_component.health_changed.connect(on_health_changed)
+	health_component.damaged.connect(on_damaged)
 	sprite.material = hit_flash_material
 
 
-func on_health_changed(_health):
+func on_damaged(_amount : float) -> void:
 	(sprite.material as ShaderMaterial).set_shader_parameter("lerp_percent", 1.0)
 	timer.start()
 

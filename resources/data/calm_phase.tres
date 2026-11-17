@@ -6,6 +6,6 @@
 script = ExtResource("1_0at3f")
 max_enemies = 4
 spawn_time = 12.0
-min_duration = 20.0
-max_duration = 40.0
+min_duration = 90.0
+max_duration = 150.0
 metadata/_custom_type_script = "uid://crbhyo4k7ctr2"

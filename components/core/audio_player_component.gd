@@ -10,7 +10,7 @@ var audio_players = []
 
 func _ready():
 	if get_child_count() == 0:
-		print_debug("no children found")
+		push_warning("AudioPlayerComponent '%s': no audio players added as children" % get_path())
 		return
 	
 	audio_players = get_children()

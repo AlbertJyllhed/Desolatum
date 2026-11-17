@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bcu0gw0ngmmc5"]
+
+[ext_resource type="Script" uid="uid://cvowo84p3af4" path="res://components/projectiles/shell_casing.gd" id="1_72ahv"]
+[ext_resource type="Texture2D" uid="uid://clbleh0cklrnq" path="res://assets/textures/shell_casing.png" id="1_5615k"]
+[ext_resource type="PackedScene" uid="uid://don0kd5u8fubn" path="res://components/core/pooled_effect.tscn" id="2_qo38e"]
+
+[node name="ShellCasing" type="Sprite2D" unique_id=2087626689]
+texture = ExtResource("1_5615k")
+script = ExtResource("1_72ahv")
+
+[node name="PooledEffect" parent="." unique_id=880019700 instance=ExtResource("2_qo38e")]

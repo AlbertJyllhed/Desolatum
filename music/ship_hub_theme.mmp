@@ -1,0 +1,313 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project creator="LMMS" creatorversion="1.2.2" version="1.0" type="song">
+  <head mastervol="100" masterpitch="0" bpm="60" timesig_denominator="4" timesig_numerator="4"/>
+  <song>
+    <trackcontainer x="5" minimized="0" visible="1" maximized="1" width="600" y="5" type="song" height="300">
+      <track muted="0" solo="0" type="0" name="Hull Drone">
+        <instrumenttrack usemasterpitch="1" fxch="0" pitch="0" basenote="57" vol="34" pan="0" pitchrange="1">
+          <instrument name="tripleoscillator">
+            <tripleoscillator vol1="18" userwavefile0="" pan0="0" vol2="28" stphdetun0="0" pan1="0" coarse1="0" finel0="-11" finel1="7" vol0="30" userwavefile2="" wavetype0="2" userwavefile1="" finer1="-7" phoffset1="90" finel2="4" wavetype2="2" stphdetun1="0" phoffset0="0" coarse0="0" modalgo1="2" pan2="0" wavetype1="3" coarse2="-12" stphdetun2="0" finer0="11" modalgo3="2" modalgo2="2" phoffset2="0" finer2="-4"/>
+          </instrument>
+          <eldata fwet="1" fcut="700" ftype="0" fres="0.8">
+            <elvol amt="1" lspd_syncmode="0" pdel="0" rel="0.75" dec="0" lspd_numerator="4" latt="0" att="0.35" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+            <elcut amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.025" userwavefile="" lamt="0.18" sustain="1" lshp="0" hold="0"/>
+            <elres amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+          </eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arpskip="0" arptime_denominator="4" arpdir="0" arp="0" arprange="1" arpgate="100" arp-enabled="0" arpcycle="0" arptime="100" arpmode="0" arpmiss="0" arptime_syncmode="0" arptime_numerator="4"/>
+          <midiport inputchannel="0" readable="0" basevelocity="63" outputcontroller="0" fixedinputvelocity="-1" fixedoutputnote="-1" outputchannel="1" outputprogram="1" inputcontroller="0" writable="0" fixedoutputvelocity="-1"/>
+          <fxchain enabled="1" numofeffects="1">
+            <effect on="1" gate="0" wet="0.5" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="reverbsc" autoquit="8000">
+              <ReverbSCControls input_gain="0" color="6000" output_gain="0" size="0.9"/>
+              <key/>
+            </effect>
+          </fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" type="1" name="Hull Drone" pos="0">
+          <note len="768" key="38" vol="80" pan="-35" pos="0"/>
+          <note len="768" key="42" vol="80" pan="-12" pos="0"/>
+          <note len="768" key="45" vol="80" pan="12" pos="0"/>
+          <note len="768" key="49" vol="80" pan="35" pos="0"/>
+          <note len="768" key="36" vol="80" pan="-35" pos="768"/>
+          <note len="768" key="43" vol="80" pan="-12" pos="768"/>
+          <note len="768" key="47" vol="80" pan="12" pos="768"/>
+          <note len="768" key="52" vol="80" pan="35" pos="768"/>
+          <note len="768" key="40" vol="80" pan="-35" pos="1536"/>
+          <note len="768" key="43" vol="80" pan="-12" pos="1536"/>
+          <note len="768" key="47" vol="80" pan="12" pos="1536"/>
+          <note len="768" key="54" vol="80" pan="35" pos="1536"/>
+          <note len="768" key="38" vol="80" pan="-35" pos="2304"/>
+          <note len="768" key="42" vol="80" pan="-12" pos="2304"/>
+          <note len="768" key="45" vol="80" pan="12" pos="2304"/>
+          <note len="768" key="49" vol="80" pan="35" pos="2304"/>
+          <note len="768" key="38" vol="80" pan="-35" pos="3072"/>
+          <note len="768" key="42" vol="80" pan="-12" pos="3072"/>
+          <note len="768" key="45" vol="80" pan="12" pos="3072"/>
+          <note len="768" key="49" vol="80" pan="35" pos="3072"/>
+          <note len="768" key="36" vol="80" pan="-35" pos="3840"/>
+          <note len="768" key="43" vol="80" pan="-12" pos="3840"/>
+          <note len="768" key="47" vol="80" pan="12" pos="3840"/>
+          <note len="768" key="52" vol="80" pan="35" pos="3840"/>
+          <note len="768" key="38" vol="80" pan="-35" pos="4608"/>
+          <note len="768" key="43" vol="80" pan="-12" pos="4608"/>
+          <note len="768" key="47" vol="80" pan="12" pos="4608"/>
+          <note len="768" key="54" vol="80" pan="35" pos="4608"/>
+          <note len="768" key="42" vol="80" pan="-35" pos="5376"/>
+          <note len="768" key="47" vol="80" pan="-12" pos="5376"/>
+          <note len="768" key="49" vol="80" pan="12" pos="5376"/>
+          <note len="768" key="54" vol="80" pan="35" pos="5376"/>
+        </pattern>
+      </track>
+      <track muted="0" solo="0" type="0" name="Sub Pedal">
+        <instrumenttrack usemasterpitch="1" fxch="0" pitch="0" basenote="57" vol="15" pan="0" pitchrange="1">
+          <instrument name="tripleoscillator">
+            <tripleoscillator vol1="30" userwavefile0="" pan0="0" vol2="6" stphdetun0="0" pan1="0" coarse1="0" finel0="0" finel1="0" vol0="60" userwavefile2="" wavetype0="0" userwavefile1="" finer1="0" phoffset1="0" finel2="5" wavetype2="2" stphdetun1="0" phoffset0="0" coarse0="-12" modalgo1="2" pan2="0" wavetype1="1" coarse2="0" stphdetun2="0" finer0="0" modalgo3="2" modalgo2="2" phoffset2="0" finer2="-5"/>
+          </instrument>
+          <eldata fwet="1" fcut="400" ftype="0" fres="0.8">
+            <elvol amt="1" lspd_syncmode="0" pdel="0" rel="0.5" dec="0" lspd_numerator="4" latt="0" att="0.2" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+            <elcut amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+            <elres amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+          </eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arpskip="0" arptime_denominator="4" arpdir="0" arp="0" arprange="1" arpgate="100" arp-enabled="0" arpcycle="0" arptime="100" arpmode="0" arpmiss="0" arptime_syncmode="0" arptime_numerator="4"/>
+          <midiport inputchannel="0" readable="0" basevelocity="63" outputcontroller="0" fixedinputvelocity="-1" fixedoutputnote="-1" outputchannel="1" outputprogram="1" inputcontroller="0" writable="0" fixedoutputvelocity="-1"/>
+          <fxchain enabled="0" numofeffects="0"/>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" type="1" name="Sub Pedal" pos="0">
+          <note len="768" key="35" vol="90" pan="0" pos="0"/>
+          <note len="768" key="35" vol="90" pan="0" pos="768"/>
+          <note len="768" key="35" vol="90" pan="0" pos="1536"/>
+          <note len="768" key="35" vol="90" pan="0" pos="2304"/>
+          <note len="768" key="35" vol="90" pan="0" pos="3072"/>
+          <note len="768" key="35" vol="90" pan="0" pos="3840"/>
+          <note len="768" key="31" vol="90" pan="0" pos="4608"/>
+          <note len="768" key="30" vol="90" pan="0" pos="5376"/>
+        </pattern>
+      </track>
+      <track muted="0" solo="0" type="0" name="Air Vents">
+        <instrumenttrack usemasterpitch="1" fxch="0" pitch="0" basenote="57" vol="22.2" pan="0" pitchrange="1">
+          <instrument name="tripleoscillator">
+            <tripleoscillator vol1="0" userwavefile0="" pan0="0" vol2="0" stphdetun0="0" pan1="0" coarse1="0" finel0="0" finel1="0" vol0="60" userwavefile2="" wavetype0="6" userwavefile1="" finer1="0" phoffset1="0" finel2="0" wavetype2="0" stphdetun1="0" phoffset0="0" coarse0="0" modalgo1="2" pan2="0" wavetype1="6" coarse2="0" stphdetun2="0" finer0="0" modalgo3="2" modalgo2="2" phoffset2="0" finer2="0"/>
+          </instrument>
+          <eldata fwet="1" fcut="800" ftype="0" fres="2">
+            <elvol amt="1" lspd_syncmode="0" pdel="0" rel="0.5" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+            <elcut amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.015" userwavefile="" lamt="0.3" sustain="1" lshp="0" hold="0"/>
+            <elres amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+          </eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arpskip="0" arptime_denominator="4" arpdir="0" arp="0" arprange="1" arpgate="100" arp-enabled="0" arpcycle="0" arptime="100" arpmode="0" arpmiss="0" arptime_syncmode="0" arptime_numerator="4"/>
+          <midiport inputchannel="0" readable="0" basevelocity="63" outputcontroller="0" fixedinputvelocity="-1" fixedoutputnote="-1" outputchannel="1" outputprogram="1" inputcontroller="0" writable="0" fixedoutputvelocity="-1"/>
+          <fxchain enabled="1" numofeffects="1">
+            <effect on="1" gate="0" wet="0.35" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="reverbsc" autoquit="8000">
+              <ReverbSCControls input_gain="0" color="4000" output_gain="0" size="0.8"/>
+              <key/>
+            </effect>
+          </fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" type="1" name="Air Vents" pos="0">
+          <note len="6144" key="45" vol="100" pan="0" pos="0"/>
+        </pattern>
+      </track>
+      <track muted="0" solo="0" type="0" name="Machine Pulse">
+        <instrumenttrack usemasterpitch="1" fxch="0" pitch="0" basenote="57" vol="83" pan="0" pitchrange="1">
+          <instrument name="tripleoscillator">
+            <tripleoscillator vol1="20" userwavefile0="" pan0="0" vol2="6" stphdetun0="0" pan1="0" coarse1="-12" finel0="0" finel1="0" vol0="70" userwavefile2="" wavetype0="0" userwavefile1="" finer1="0" phoffset1="0" finel2="0" wavetype2="6" stphdetun1="0" phoffset0="0" coarse0="0" modalgo1="2" pan2="0" wavetype1="3" coarse2="0" stphdetun2="0" finer0="0" modalgo3="2" modalgo2="2" phoffset2="0" finer2="0"/>
+          </instrument>
+          <eldata fwet="1" fcut="260" ftype="0" fres="1">
+            <elvol amt="1" lspd_syncmode="0" pdel="0" rel="0.3" dec="0.35" lspd_numerator="4" latt="0" att="0.02" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="0" lshp="0" hold="0"/>
+            <elcut amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+            <elres amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+          </eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arpskip="0" arptime_denominator="4" arpdir="0" arp="0" arprange="1" arpgate="100" arp-enabled="0" arpcycle="0" arptime="100" arpmode="0" arpmiss="0" arptime_syncmode="0" arptime_numerator="4"/>
+          <midiport inputchannel="0" readable="0" basevelocity="63" outputcontroller="0" fixedinputvelocity="-1" fixedoutputnote="-1" outputchannel="1" outputprogram="1" inputcontroller="0" writable="0" fixedoutputvelocity="-1"/>
+          <fxchain enabled="1" numofeffects="2">
+            <effect on="1" gate="0" wet="0.6" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="bitcrush" autoquit="8000">
+              <bitcrushcontrols rate="6000" stereodiff="0" rateon="1" outclip="0" depthon="1" levels="64" ingain="0" innoise="0" outgain="0"/>
+              <key/>
+            </effect>
+            <effect on="1" gate="0" wet="0.55" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="reverbsc" autoquit="8000">
+              <ReverbSCControls input_gain="0" color="3000" output_gain="0" size="0.92"/>
+              <key/>
+            </effect>
+          </fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" type="1" name="Machine Pulse" pos="0">
+          <note len="24" key="23" vol="90" pan="0" pos="0"/>
+          <note len="24" key="23" vol="60" pan="0" pos="36"/>
+          <note len="24" key="23" vol="90" pan="0" pos="384"/>
+          <note len="24" key="23" vol="60" pan="0" pos="420"/>
+          <note len="24" key="23" vol="90" pan="0" pos="768"/>
+          <note len="24" key="23" vol="60" pan="0" pos="804"/>
+          <note len="24" key="23" vol="90" pan="0" pos="1152"/>
+          <note len="24" key="23" vol="60" pan="0" pos="1188"/>
+          <note len="24" key="23" vol="90" pan="0" pos="1536"/>
+          <note len="24" key="23" vol="60" pan="0" pos="1572"/>
+          <note len="24" key="23" vol="90" pan="0" pos="1920"/>
+          <note len="24" key="23" vol="60" pan="0" pos="1956"/>
+          <note len="24" key="23" vol="90" pan="0" pos="2304"/>
+          <note len="24" key="23" vol="60" pan="0" pos="2340"/>
+          <note len="24" key="23" vol="90" pan="0" pos="2688"/>
+          <note len="24" key="23" vol="60" pan="0" pos="2724"/>
+          <note len="24" key="23" vol="90" pan="0" pos="3072"/>
+          <note len="24" key="23" vol="60" pan="0" pos="3108"/>
+          <note len="24" key="23" vol="90" pan="0" pos="3456"/>
+          <note len="24" key="23" vol="60" pan="0" pos="3492"/>
+          <note len="24" key="23" vol="90" pan="0" pos="3840"/>
+          <note len="24" key="23" vol="60" pan="0" pos="3876"/>
+          <note len="24" key="23" vol="90" pan="0" pos="4224"/>
+          <note len="24" key="23" vol="60" pan="0" pos="4260"/>
+          <note len="24" key="23" vol="90" pan="0" pos="5376"/>
+          <note len="24" key="23" vol="60" pan="0" pos="5412"/>
+          <note len="24" key="23" vol="90" pan="0" pos="5760"/>
+          <note len="24" key="23" vol="60" pan="0" pos="5796"/>
+        </pattern>
+      </track>
+      <track muted="0" solo="0" type="0" name="Metal Clanks">
+        <instrumenttrack usemasterpitch="1" fxch="0" pitch="0" basenote="57" vol="112" pan="0" pitchrange="1">
+          <instrument name="tripleoscillator">
+            <tripleoscillator vol1="60" userwavefile0="" pan0="0" vol2="50" stphdetun0="0" pan1="0" coarse1="7" finel0="0" finel1="13" vol0="80" userwavefile2="" wavetype0="3" userwavefile1="" finer1="-17" phoffset1="0" finel2="0" wavetype2="6" stphdetun1="0" phoffset0="0" coarse0="0" modalgo1="2" pan2="0" wavetype1="3" coarse2="0" stphdetun2="0" finer0="0" modalgo3="2" modalgo2="2" phoffset2="0" finer2="0"/>
+          </instrument>
+          <eldata fwet="1" fcut="2500" ftype="2" fres="2">
+            <elvol amt="1" lspd_syncmode="0" pdel="0" rel="0.2" dec="0.25" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="0" lshp="0" hold="0"/>
+            <elcut amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+            <elres amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+          </eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arpskip="0" arptime_denominator="4" arpdir="0" arp="0" arprange="1" arpgate="100" arp-enabled="0" arpcycle="0" arptime="100" arpmode="0" arpmiss="0" arptime_syncmode="0" arptime_numerator="4"/>
+          <midiport inputchannel="0" readable="0" basevelocity="63" outputcontroller="0" fixedinputvelocity="-1" fixedoutputnote="-1" outputchannel="1" outputprogram="1" inputcontroller="0" writable="0" fixedoutputvelocity="-1"/>
+          <fxchain enabled="1" numofeffects="3">
+            <effect on="1" gate="0" wet="1" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="bitcrush" autoquit="8000">
+              <bitcrushcontrols rate="8000" stereodiff="0" rateon="1" outclip="0" depthon="1" levels="32" ingain="0" innoise="0" outgain="0"/>
+              <key/>
+            </effect>
+            <effect on="1" gate="0" wet="0.35" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="delay" autoquit="8000">
+              <Delay LfoAmount="0" LfoAmount_denominator="4" FeebackAmount="0.45" LfoFrequency_syncmode="0" LfoFrequency_numerator="4" LfoAmount_numerator="4" LfoAmount_syncmode="0" DelayTimeSamples_syncmode="0" DelayTimeSamples_numerator="4" DelayTimeSamples="0.75" LfoFrequency_denominator="4" DelayTimeSamples_denominator="4" OutGain="0" LfoFrequency="2"/>
+              <key/>
+            </effect>
+            <effect on="1" gate="0" wet="0.7" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="reverbsc" autoquit="8000">
+              <ReverbSCControls input_gain="0" color="5000" output_gain="0" size="0.95"/>
+              <key/>
+            </effect>
+          </fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" type="1" name="Metal Clanks" pos="0">
+          <note len="12" key="66" vol="70" pan="-50" pos="504"/>
+          <note len="12" key="61" vol="55" pan="40" pos="1200"/>
+          <note len="12" key="68" vol="65" pan="60" pos="2076"/>
+          <note len="12" key="59" vol="50" pan="-30" pos="2520"/>
+          <note len="12" key="64" vol="70" pan="50" pos="3552"/>
+          <note len="12" key="62" vol="55" pan="-60" pos="4392"/>
+          <note len="12" key="67" vol="60" pan="30" pos="5628"/>
+        </pattern>
+      </track>
+      <track muted="0" solo="0" type="0" name="Beacon">
+        <instrumenttrack usemasterpitch="1" fxch="0" pitch="0" basenote="57" vol="33" pan="0" pitchrange="1">
+          <instrument name="tripleoscillator">
+            <tripleoscillator vol1="10" userwavefile0="" pan0="0" vol2="0" stphdetun0="0" pan1="0" coarse1="12" finel0="0" finel1="0" vol0="70" userwavefile2="" wavetype0="0" userwavefile1="" finer1="0" phoffset1="0" finel2="0" wavetype2="1" stphdetun1="0" phoffset0="0" coarse0="0" modalgo1="2" pan2="0" wavetype1="3" coarse2="0" stphdetun2="0" finer0="0" modalgo3="2" modalgo2="2" phoffset2="0" finer2="0"/>
+          </instrument>
+          <eldata fwet="1" fcut="1800" ftype="0" fres="0.7">
+            <elvol amt="1" lspd_syncmode="0" pdel="0" rel="0.6" dec="0.65" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="0" lshp="0" hold="0"/>
+            <elcut amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+            <elres amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+          </eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arpskip="0" arptime_denominator="4" arpdir="0" arp="0" arprange="1" arpgate="100" arp-enabled="0" arpcycle="0" arptime="100" arpmode="0" arpmiss="0" arptime_syncmode="0" arptime_numerator="4"/>
+          <midiport inputchannel="0" readable="0" basevelocity="63" outputcontroller="0" fixedinputvelocity="-1" fixedoutputnote="-1" outputchannel="1" outputprogram="1" inputcontroller="0" writable="0" fixedoutputvelocity="-1"/>
+          <fxchain enabled="1" numofeffects="3">
+            <effect on="1" gate="0" wet="1" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="bitcrush" autoquit="8000">
+              <bitcrushcontrols rate="9000" stereodiff="0" rateon="1" outclip="0" depthon="1" levels="32" ingain="0" innoise="0" outgain="0"/>
+              <key/>
+            </effect>
+            <effect on="1" gate="0" wet="0.35" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="delay" autoquit="8000">
+              <Delay LfoAmount="0" LfoAmount_denominator="4" FeebackAmount="0.5" LfoFrequency_syncmode="0" LfoFrequency_numerator="4" LfoAmount_numerator="4" LfoAmount_syncmode="0" DelayTimeSamples_syncmode="0" DelayTimeSamples_numerator="4" DelayTimeSamples="1.5" LfoFrequency_denominator="4" DelayTimeSamples_denominator="4" OutGain="0" LfoFrequency="2"/>
+              <key/>
+            </effect>
+            <effect on="1" gate="0" wet="0.65" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="reverbsc" autoquit="8000">
+              <ReverbSCControls input_gain="0" color="5000" output_gain="0" size="0.95"/>
+              <key/>
+            </effect>
+          </fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" type="1" name="Beacon" pos="0">
+          <note len="48" key="54" vol="70" pan="0" pos="1440"/>
+          <note len="48" key="47" vol="70" pan="0" pos="4512"/>
+        </pattern>
+      </track>
+      <track muted="0" solo="0" type="0" name="Echo Tone">
+        <instrumenttrack usemasterpitch="1" fxch="0" pitch="0" basenote="57" vol="36" pan="0" pitchrange="1">
+          <instrument name="tripleoscillator">
+            <tripleoscillator vol1="12" userwavefile0="" pan0="0" vol2="25" stphdetun0="0" pan1="0" coarse1="0" finel0="0" finel1="6" vol0="50" userwavefile2="" wavetype0="1" userwavefile1="" finer1="-6" phoffset1="0" finel2="0" wavetype2="0" stphdetun1="0" phoffset0="0" coarse0="0" modalgo1="2" pan2="0" wavetype1="3" coarse2="-12" stphdetun2="0" finer0="0" modalgo3="2" modalgo2="2" phoffset2="0" finer2="0"/>
+          </instrument>
+          <eldata fwet="1" fcut="900" ftype="0" fres="0.6">
+            <elvol amt="1" lspd_syncmode="0" pdel="0" rel="0.7" dec="0.6" lspd_numerator="4" latt="0" att="0.4" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="0.9" lshp="0" hold="0"/>
+            <elcut amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+            <elres amt="0" lspd_syncmode="0" pdel="0" rel="0.1" dec="0" lspd_numerator="4" latt="0" att="0" lspd_denominator="4" x100="0" ctlenvamt="0" lpdel="0" lspd="0.1" userwavefile="" lamt="0" sustain="1" lshp="0" hold="0"/>
+          </eldata>
+          <chordcreator chord="0" chordrange="1" chord-enabled="0"/>
+          <arpeggiator arpskip="0" arptime_denominator="4" arpdir="0" arp="0" arprange="1" arpgate="100" arp-enabled="0" arpcycle="0" arptime="100" arpmode="0" arpmiss="0" arptime_syncmode="0" arptime_numerator="4"/>
+          <midiport inputchannel="0" readable="0" basevelocity="63" outputcontroller="0" fixedinputvelocity="-1" fixedoutputnote="-1" outputchannel="1" outputprogram="1" inputcontroller="0" writable="0" fixedoutputvelocity="-1"/>
+          <fxchain enabled="1" numofeffects="2">
+            <effect on="1" gate="0" wet="0.25" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="delay" autoquit="8000">
+              <Delay LfoAmount="0" LfoAmount_denominator="4" FeebackAmount="0.4" LfoFrequency_syncmode="0" LfoFrequency_numerator="4" LfoAmount_numerator="4" LfoAmount_syncmode="0" DelayTimeSamples_syncmode="0" DelayTimeSamples_numerator="4" DelayTimeSamples="0.75" LfoFrequency_denominator="4" DelayTimeSamples_denominator="4" OutGain="0" LfoFrequency="2"/>
+              <key/>
+            </effect>
+            <effect on="1" gate="0" wet="0.6" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="reverbsc" autoquit="8000">
+              <ReverbSCControls input_gain="0" color="6000" output_gain="0" size="0.92"/>
+              <key/>
+            </effect>
+          </fxchain>
+        </instrumenttrack>
+        <pattern muted="0" steps="16" type="1" name="Echo Tone" pos="0">
+          <note len="192" key="54" vol="75" pan="0" pos="3264"/>
+          <note len="96" key="52" vol="75" pan="0" pos="3456"/>
+          <note len="288" key="50" vol="75" pan="0" pos="3552"/>
+          <note len="144" key="50" vol="75" pan="0" pos="4800"/>
+          <note len="48" key="54" vol="75" pan="0" pos="4944"/>
+          <note len="384" key="57" vol="75" pan="0" pos="4992"/>
+          <note len="192" key="47" vol="75" pan="0" pos="5568"/>
+          <note len="336" key="49" vol="75" pan="0" pos="5760"/>
+        </pattern>
+      </track>
+    </trackcontainer>
+    <track muted="0" solo="0" type="6" name="Automation track">
+      <automationtrack/>
+      <automationpattern len="0" tens="1" mute="0" name="Numerator" pos="0" prog="0">
+        <object id="4589"/>
+      </automationpattern>
+      <automationpattern len="0" tens="1" mute="0" name="Denominator" pos="0" prog="0">
+        <object id="31013"/>
+      </automationpattern>
+      <automationpattern len="0" tens="1" mute="0" name="Tempo" pos="0" prog="0">
+        <object id="11937"/>
+      </automationpattern>
+      <automationpattern len="0" tens="1" mute="0" name="Master volume" pos="0" prog="0">
+        <object id="5400"/>
+      </automationpattern>
+      <automationpattern len="0" tens="1" mute="0" name="Master pitch" pos="0" prog="0">
+        <object id="32158"/>
+      </automationpattern>
+    </track>
+    <fxmixer x="5" minimized="0" visible="1" maximized="0" width="543" y="310" height="333">
+      <fxchannel muted="0" num="0" soloed="0" name="Master" volume="1">
+        <fxchain enabled="1" numofeffects="1">
+          <effect on="1" gate="0" wet="0.75" autoquit_syncmode="0" autoquit_numerator="4" autoquit_denominator="4" name="bitcrush" autoquit="8000">
+            <bitcrushcontrols rate="16000" stereodiff="0" rateon="1" outclip="0" depthon="1" levels="256" ingain="0" innoise="0" outgain="0"/>
+            <key/>
+          </effect>
+        </fxchain>
+      </fxchannel>
+    </fxmixer>
+    <ControllerRackView x="680" minimized="0" visible="1" maximized="0" width="350" y="310" height="200"/>
+    <pianoroll x="5" minimized="0" visible="0" maximized="0" width="860" y="5" height="480"/>
+    <automationeditor x="391" minimized="0" visible="0" maximized="0" width="860" y="0" height="480"/>
+    <projectnotes x="700" minimized="0" visible="0" maximized="0" width="686" y="10" height="300"><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Desolatum - Ship Hub theme (draft 2). Dark lo-fi industrial ambience. B minor, 60 BPM, 32 bars. Master channel has a Bitcrush (16 kHz, 8-bit, 75% wet) for the gritty sound. Loop markers cover the whole song; export with &quot;Export between loop markers&quot; for a seamless game loop.</p></body></html>]]></projectnotes>
+    <timeline lpstate="1" lp1pos="6144" lp0pos="0"/>
+    <controllers/>
+  </song>
+</lmms-project>

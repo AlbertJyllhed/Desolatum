@@ -3,7 +3,44 @@ extends Node2D
 
 @onready var attract_area : Area2D = $AttractArea
 
+@export_group("Collect Sound")
+## Played for every auto pickup collected (ore, energy).
+@export var collect_sound : AudioStream = preload("res://sounds/retro_beep_03.ogg")
+@export var collect_volume_db : float = -6.0
+## Pickups collected within this many seconds of each other raise the pitch.
+@export var chain_window : float = 0.5
+## Pitch goes up one semitone per chained pickup, up to this many.
+@export var max_chain_steps : int = 12
+
 var focused_interactables : Array[Interactable]
+
+var _collect_player : AudioStreamPlayer
+var _chain : int = 0
+var _last_collect_msec : int = -100000
+
+
+func _ready() -> void:
+	_collect_player = AudioStreamPlayer.new()
+	_collect_player.max_polyphony = 4
+	add_child(_collect_player)
+
+
+## Plays the collect sound; quick pickups in a row climb in pitch, and the
+## chain resets after a short pause.
+func play_collect_sound() -> void:
+	if not collect_sound:
+		return
+	var now := Time.get_ticks_msec()
+	if now - _last_collect_msec <= int(chain_window * 1000.0):
+		_chain = mini(_chain + 1, max_chain_steps)
+	else:
+		_chain = 0
+	_last_collect_msec = now
+
+	_collect_player.stream = collect_sound
+	_collect_player.volume_db = collect_volume_db
+	_collect_player.pitch_scale = pow(1.0594631, _chain)
+	_collect_player.play()
 
 
 func _physics_process(_delta):
@@ -29,7 +66,8 @@ func _physics_process(_delta):
 func _on_pickup_area_body_entered(body):
 	if body is AutoPickup:
 		var pickup = body as AutoPickup
-		pickup.pick_up()
+		if pickup.pick_up(self):
+			play_collect_sound()
 	
 	if body is Interactable:
 		focused_interactables.append(body)

@@ -21,10 +21,11 @@
 [ext_resource type="AudioStream" uid="uid://uq4stmgow63o" path="res://sounds/footsteps/stone_footstep_5.wav" id="13_wsrik"]
 [ext_resource type="AudioStream" uid="uid://wst7gi54ypoe" path="res://sounds/footsteps/stone_footstep_6.wav" id="14_e2unt"]
 [ext_resource type="PackedScene" uid="uid://dkhd4d2ekkpur" path="res://components/core/upgrade_handler_component.tscn" id="15_ng408"]
+[ext_resource type="PackedScene" uid="uid://c45u5l376y26q" path="res://components/core/walk_dust_component.tscn" id="17_jgd8i"]
 [ext_resource type="Texture2D" uid="uid://dluocsfglcbsl" path="res://assets/textures/player_update.png" id="18_t0tkd"]
 [ext_resource type="PackedScene" uid="uid://5bacej3p66u8" path="res://characters/player/build_manager.tscn" id="23_hsn1j"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lv4bx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgd8i"]
 resource_local_to_scene = true
 shader = ExtResource("4_tihgs")
 shader_parameter/lerp_percent = 0.0
@@ -282,6 +283,7 @@ script = ExtResource("1_qc1vg")
 
 [node name="HealthComponent" parent="." unique_id=2104741212 instance=ExtResource("2_g1c5e")]
 script = ExtResource("5_o3i63")
+hit_shake = 0.4
 blood_particles = ExtResource("4_hmhsu")
 max_health = 6.0
 
@@ -292,7 +294,7 @@ blood_color = Color(0.760784, 0.113725, 0.27451, 1)
 [node name="HitFlashComponent" parent="." unique_id=40161311 node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("3_qbagp")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_lv4bx")
+hit_flash_material = SubResource("ShaderMaterial_jgd8i")
 
 [node name="HitEffectComponent" parent="." unique_id=1531550825 node_paths=PackedStringArray("hurtbox") instance=ExtResource("8_ks53g")]
 hurtbox = NodePath("../Hurtbox")
@@ -318,6 +320,8 @@ stream = ExtResource("13_wsrik")
 
 [node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="FootstepComponent/AudioPlayerComponent" index="5" unique_id=1801485712]
 stream = ExtResource("14_e2unt")
+
+[node name="WalkDustComponent" parent="." unique_id=1547235401 instance=ExtResource("17_jgd8i")]
 
 [node name="UpgradeHandlerComponent" parent="." unique_id=1725722516 node_paths=PackedStringArray("upgrade_node") instance=ExtResource("15_ng408")]
 allowed_upgrades = Array[String](["adrenaline", "panic", "death_mark", "crit", "big_mag", "fire_and_forget", "explosive_bullets", "no_pain_no_gain", "health_up"])

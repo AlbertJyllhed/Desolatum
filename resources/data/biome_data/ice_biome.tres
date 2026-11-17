@@ -1,10 +1,30 @@
 [gd_resource type="Resource" script_class="BiomeData" format=3 uid="uid://c1f48tgakjtfh"]
 
 [ext_resource type="Script" uid="uid://bwumlgw3l5ui7" path="res://resources/data/biome_data/biome_data.gd" id="1_35u0b"]
+[ext_resource type="PackedScene" uid="uid://7fdjb35st2hb" path="res://particles/dust.tscn" id="1_i6ktk"]
 [ext_resource type="Texture2D" uid="uid://xadi28i86w54" path="res://assets/textures/energy_ui.png" id="1_q4l30"]
+[ext_resource type="Script" uid="uid://dgn01dvjqnqry" path="res://resources/data/biome_data/generator_settings.gd" id="2_0y4xq"]
+[ext_resource type="AudioStream" uid="uid://ddcr1hhmuthyf" path="res://sounds/music/cave_calm.ogg" id="2_rlna2"]
+[ext_resource type="AudioStream" uid="uid://skxtaa4eqlv" path="res://sounds/music/cave_combat.ogg" id="3_yvcrt"]
+[ext_resource type="TileSet" uid="uid://bhj5dobjuhwqa" path="res://resources/tilesets/ice_tileset.tres" id="4_0y4xq"]
+
+[sub_resource type="Resource" id="Resource_gsinr"]
+script = ExtResource("2_0y4xq")
+walkers_can_u_turn = false
+path_width = 1
+max_room_size_x = 4
+max_room_size_y = 4
+min_room_spacing = 6
+metadata/_custom_type_script = "uid://dgn01dvjqnqry"
 
 [resource]
 script = ExtResource("1_35u0b")
 name = "Ice"
 icon = ExtResource("1_q4l30")
+tile_set = ExtResource("4_0y4xq")
+ambient_color = Color(0.1292811, 0.36350986, 0.36640084, 1)
+ambient_particles = ExtResource("1_i6ktk")
+calm_music = ExtResource("2_rlna2")
+combat_music = ExtResource("3_yvcrt")
+generator_settings = SubResource("Resource_gsinr")
 metadata/_custom_type_script = "uid://bwumlgw3l5ui7"

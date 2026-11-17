@@ -1,10 +1,8 @@
-extends Control
-
-signal menu_closed
+extends Menu
 
 @export var fps_counter : Control
 
-@onready var resolution_button : OptionButton = $NinePatchRect/CenterContainer/VBoxContainer/ResolutionButton
+@onready var resolution_button : OptionButton = $VBoxContainer/ResolutionButton
 
 var resolutions : Dictionary = {
 	"16:9" : [Vector2i(320, 180), Vector2i(1280, 720)],
@@ -16,6 +14,7 @@ var current_resolution : Vector2i
 
 
 func _ready():
+	super._ready()
 	current_resolution = get_window().get_size()
 	setup_resolutions()
 
@@ -38,8 +37,7 @@ func center_window():
 
 
 func _on_close_button_pressed():
-	menu_closed.emit()
-	hide()
+	close()
 
 
 func _on_resolution_button_item_selected(index):

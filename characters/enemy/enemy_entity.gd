@@ -14,6 +14,12 @@ var blocker_time: int = 0
 
 const BLOCKER_MEMORY_MSEC := 400
 
+## Camera shake when this enemy dies (0 to 1), weaker the further away it is.
+@export var death_shake : float = 0.3
+## Freezes the game this many seconds when this enemy dies (for stronger
+## enemies, e.g. 0.1). 0 = no hit stop.
+@export_range(0.0, 0.3, 0.01) var death_hit_stop : float = 0.0
+
 static var all_enemies: Array[EnemyEntity] = []
 
 
@@ -79,4 +85,5 @@ func on_died():
 	remove_from_group("enemies")
 	var camera = get_viewport().get_camera_2d() as PlayerCamera
 	if camera:
-		camera.random_shake(4, 4)
+		camera.add_shake_at(death_shake, global_position)
+	HitStop.trigger(death_hit_stop)

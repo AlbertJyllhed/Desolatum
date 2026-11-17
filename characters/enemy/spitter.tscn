@@ -62,6 +62,7 @@ attacks_buildings = false
 
 [node name="Attack" parent="StateMachine" index="4" unique_id=831607627 instance=ExtResource("3_6b3n6")]
 next_state = "Kite"
+track_target = true
 
 [node name="HealthComponent" parent="." index="2" unique_id=761884021]
 max_health = 2.0

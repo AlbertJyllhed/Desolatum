@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bhoelwsp2sndg" path="res://components/areas/target_locator_area.tscn" id="4_4teee"]
 [ext_resource type="AudioStream" uid="uid://cm28sr5io6yk" path="res://sounds/pistol_shot.wav" id="5_1ce5n"]
 [ext_resource type="PackedScene" uid="uid://30002xkex476" path="res://components/areas/target_locator_ray.tscn" id="7_f3brc"]
-[ext_resource type="Texture2D" uid="uid://dj2hfqei1m80x" path="res://assets/textures/Light.png" id="8_a1p7d"]
+[ext_resource type="Texture2D" uid="uid://ba3dtrpai7swq" path="res://assets/materials/light_falloff.tres" id="8_a1p7d"]
 [ext_resource type="Script" uid="uid://hrui4805k8ng" path="res://components/core/light_flicker_component.gd" id="9_jwuan"]
 [ext_resource type="PackedScene" uid="uid://cyprq52yeqpvf" path="res://components/core/health_component.tscn" id="10_tv3lr"]
 [ext_resource type="PackedScene" uid="uid://cgc1seonqqns3" path="res://components/areas/hurtbox.tscn" id="11_vlfcf"]

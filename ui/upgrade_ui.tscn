@@ -2,40 +2,38 @@
 
 [ext_resource type="Script" uid="uid://coaea3l5t6mxr" path="res://ui/upgrade_ui.gd" id="1_vk2qj"]
 [ext_resource type="Texture2D" uid="uid://bhmnjlilgp774" path="res://assets/textures/pistol_icon.png" id="2_hu442"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="3_kcxq7"]
-[ext_resource type="Texture2D" uid="uid://c85f4lbrtkmlc" path="res://assets/textures/bar_overlay.png" id="4_s17ko"]
+[ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="2_u1j0f"]
+[ext_resource type="Theme" uid="uid://bgjj0a4uwau5b" path="res://resources/styles/ui_theme.tres" id="4_u1j0f"]
 
-[node name="UpgradeUI" type="MarginContainer"]
+[node name="UpgradeUI" type="MarginContainer" unique_id=1717345178]
 custom_minimum_size = Vector2(0, 24)
-offset_right = 97.0
+offset_right = 88.0
 offset_bottom = 24.0
 script = ExtResource("1_vk2qj")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=104892539]
 layout_mode = 2
-texture = ExtResource("4_s17ko")
+texture = ExtResource("2_u1j0f")
 draw_center = false
-patch_margin_left = 3
-patch_margin_top = 3
-patch_margin_right = 3
-patch_margin_bottom = 3
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1466910109]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 1
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="HBoxContainer" unique_id=1082037045]
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("2_hu442")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=936796023]
 process_mode = 3
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("3_kcxq7")
+theme = ExtResource("4_u1j0f")
 text = "Upgrade Name"

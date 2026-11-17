@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://nrxgr1orcd1l"]
+[gd_scene format=3 uid="uid://nrxgr1orcd1l"]
 
-[ext_resource type="PackedScene" path="res://components/areas/hitbox.tscn" id="1_ltv74"]
+[ext_resource type="PackedScene" uid="uid://bygbrw7i4hp0m" path="res://components/areas/hitbox.tscn" id="1_ltv74"]
 [ext_resource type="Texture2D" uid="uid://brm7grfqtdiee" path="res://assets/textures/cave_in.png" id="1_q8ycc"]
 [ext_resource type="Texture2D" uid="uid://d37pf3sg0hal0" path="res://assets/textures/Placeholder.png" id="1_vea4a"]
 [ext_resource type="Texture2D" uid="uid://bjos6a7nm4ipd" path="res://assets/textures/particles.png" id="4_fiyrj"]
 [ext_resource type="AudioStream" uid="uid://c3s650kcs1r0n" path="res://sounds/rock_destroy.wav" id="5_h51bd"]
+[ext_resource type="PackedScene" uid="uid://bvhlstx6qeul8" path="res://components/core/dissolve_component.tscn" id="6_mgk82"]
 
 [sub_resource type="Animation" id="Animation_d68qc"]
 length = 0.001
@@ -84,63 +85,49 @@ tracks/0/keys = {
 "update": 1,
 "values": [true, false, true]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(2.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GPUParticles2D:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Shadow:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shadow:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D:z_index")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -149,8 +136,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hxdui"]
 _data = {
-"RESET": SubResource("Animation_d68qc"),
-"default": SubResource("Animation_tc7lr")
+&"RESET": SubResource("Animation_d68qc"),
+&"default": SubResource("Animation_tc7lr")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ck805"]
@@ -183,26 +170,24 @@ damping_max = 100.0
 color_ramp = SubResource("GradientTexture1D_1lpga")
 anim_offset_max = 1.0
 
-[node name="RockFall" type="Node2D"]
+[node name="RockFall" type="Node2D" unique_id=1463985545]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_hxdui")
-}
-autoplay = "default"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=539960997]
+libraries/ = SubResource("AnimationLibrary_hxdui")
+autoplay = &"default"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1189739217]
 z_index = 10
 position = Vector2(0, -8)
 texture = ExtResource("1_q8ycc")
 hframes = 6
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=757025405]
 modulate = Color(0, 0, 0, 0.294118)
 z_index = -1
 texture = ExtResource("1_vea4a")
 
-[node name="Hitbox" parent="." instance=ExtResource("1_ltv74")]
+[node name="Hitbox" parent="." unique_id=1720769329 instance=ExtResource("1_ltv74")]
 scale = Vector2(4, 4)
 collision_layer = 96
 collision_mask = 24
@@ -212,19 +197,22 @@ damage = 3
 shape = SubResource("CircleShape2D_ck805")
 disabled = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=535125997]
 modulate = Color(0.188235, 0.152941, 0.14902, 1)
 material = SubResource("CanvasItemMaterial_hoeal")
 emitting = false
 amount = 16
-process_material = SubResource("ParticleProcessMaterial_rsij1")
 texture = ExtResource("4_fiyrj")
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_rsij1")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=860736345]
 stream = ExtResource("5_h51bd")
 autoplay = true
+
+[node name="DissolveComponent" parent="." unique_id=165627635 node_paths=PackedStringArray("sprite") instance=ExtResource("6_mgk82")]
+sprite = NodePath("../Sprite2D")
 
 [editable path="Hitbox"]

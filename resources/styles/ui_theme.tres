@@ -2,5 +2,11 @@
 
 [ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="1_hi4ux"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hi4ux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_usbxe"]
+
 [resource]
 default_font = ExtResource("1_hi4ux")
+Button/styles/focus = SubResource("StyleBoxEmpty_hi4ux")
+FlatButton/styles/focus = SubResource("StyleBoxEmpty_usbxe")

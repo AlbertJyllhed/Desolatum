@@ -15,6 +15,13 @@ class_name BiomeData
 ## keep the LevelGenerator's default.
 @export var ambient_particles : PackedScene
 
+@export_group("Music")
+## Played on loop in this biome's levels. Leave empty to keep whatever is playing.
+@export var calm_music : AudioStream
+## Optional. Plays in sync with calm_music; enemy waves crossfade to it.
+## Must be the same length as calm_music.
+@export var combat_music : AudioStream
+
 @export_group("Generation")
 ## Leave empty to use the LevelGenerator's own values.
 @export var generator_settings : GeneratorSettings

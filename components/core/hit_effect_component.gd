@@ -11,7 +11,4 @@ func _ready():
 
 func on_hit(knockback_vector : Vector2, _knockback_time : float):
 	var owner_node = owner as Node2D
-	var hit_effect_instance = hit_effect_scene.instantiate() as Node2D
-	owner_node.add_child(hit_effect_instance)
-	hit_effect_instance.global_position = owner_node.global_position + offset
-	hit_effect_instance.rotation = knockback_vector.angle()
+	Pool.spawn(hit_effect_scene, owner_node, owner_node.global_position + offset, knockback_vector.angle())

@@ -1,12 +1,35 @@
 [gd_scene format=3 uid="uid://by6qfdacpxedr"]
 
-[ext_resource type="Texture2D" uid="uid://cbmxf3tvn7p1o" path="res://assets/textures/ui_screen.png" id="1_1i6xa"]
 [ext_resource type="Script" uid="uid://bjicllyxufnpw" path="res://ui/game_over_screen.gd" id="1_3cj0s"]
+[ext_resource type="Shader" uid="uid://dtqe03lhsw6fr" path="res://resources/shaders/crt_overlay.gdshader" id="2_0dv5y"]
 [ext_resource type="PackedScene" uid="uid://ltk0r5nwd7pa" path="res://ui/button.tscn" id="2_6xqgq"]
-[ext_resource type="FontFile" uid="uid://bwad8qafhdmdx" path="res://assets/fonts/galactic_memesbruh03.ttf" id="2_cy7e1"]
+[ext_resource type="Theme" uid="uid://bgjj0a4uwau5b" path="res://resources/styles/ui_theme.tres" id="3_sq8h3"]
 [ext_resource type="PackedScene" uid="uid://41n4kltx64wg" path="res://ui/quit_confirmation.tscn" id="5_ah68u"]
 
-[node name="GameOverScreen" type="Control"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0dv5y"]
+shader = ExtResource("2_0dv5y")
+shader_parameter/menu_in_texture = true
+shader_parameter/tint = Color(0.6031205, 0, 0.17577657, 1)
+shader_parameter/menu_tint_amount = 0.10000000475
+shader_parameter/opacity = 0.90000004275
+shader_parameter/black_level = 0.05
+shader_parameter/brightness = 1.2
+shader_parameter/scanline_spacing = 2
+shader_parameter/scanline_thickness = 1
+shader_parameter/scanline_darkness = 0.150000007125
+shader_parameter/flicker_enabled = true
+shader_parameter/flicker_amount = 0.04
+shader_parameter/flicker_speed = 20.0
+shader_parameter/band_enabled = true
+shader_parameter/band_strength = 0.15
+shader_parameter/band_height = 12.0
+shader_parameter/band_speed = 30.0
+shader_parameter/band_gap = 60.0
+shader_parameter/vignette_enabled = true
+shader_parameter/vignette_strength = 0.4
+shader_parameter/vignette_width = 10.0
+
+[node name="GameOverScreen" type="Control" unique_id=1636418264 node_paths=PackedStringArray("first_button", "content")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,77 +37,63 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3cj0s")
+first_button = NodePath("SubViewportContainer/SubViewport/GameOverContent/RestartButton")
+content = NodePath("SubViewportContainer/SubViewport/GameOverContent")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1614060680]
+material = SubResource("ShaderMaterial_0dv5y")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0)
+stretch = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=829405139]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="GameOverContent" type="VBoxContainer" parent="SubViewportContainer/SubViewport" unique_id=669510012]
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -60.0
-offset_right = 70.0
-offset_bottom = 60.0
-grow_horizontal = 2
+offset_top = -45.0
+offset_right = 82.0
+offset_bottom = 45.0
 grow_vertical = 2
-texture = ExtResource("1_1i6xa")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/CenterContainer"]
-layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(8, 0)
 mouse_filter = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="NinePatchRect/CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/GameOverContent" unique_id=18594340]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.054902, 1, 0.4, 1)
-theme_override_fonts/font = ExtResource("2_cy7e1")
+theme = ExtResource("3_sq8h3")
+theme_override_colors/font_color = Color(1, 0.05490196, 0.25490198, 1)
 text = "Vital signs lost"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RestartButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("2_6xqgq")]
+[node name="RestartButton" parent="SubViewportContainer/SubViewport/GameOverContent" unique_id=1292139120 instance=ExtResource("2_6xqgq")]
 layout_mode = 2
 text = "Restart run"
-focus_button = true
 
-[node name="ReturnButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("2_6xqgq")]
+[node name="ReturnButton" parent="SubViewportContainer/SubViewport/GameOverContent" unique_id=1852850501 instance=ExtResource("2_6xqgq")]
 layout_mode = 2
 text = "Return to ship"
 
-[node name="QuitButton" parent="NinePatchRect/CenterContainer/VBoxContainer" instance=ExtResource("2_6xqgq")]
+[node name="QuitButton" parent="SubViewportContainer/SubViewport/GameOverContent" unique_id=1816704713 instance=ExtResource("2_6xqgq")]
 layout_mode = 2
 text = "Quit game"
 
-[node name="QuitConfirmation" parent="." instance=ExtResource("5_ah68u")]
+[node name="QuitConfirmation" parent="." unique_id=348040832 instance=ExtResource("5_ah68u")]
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/GameOverContent/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/GameOverContent/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/GameOverContent/QuitButton" to="." method="_on_quit_button_pressed"]
